@@ -1,0 +1,109 @@
+.nav h2 {
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 900;
+    font-size: 40px;
+    margin: 0;
+    left: 20px;
+    position: fixed;
+    z-index: 5000;
+}
+
+.nav h4 {
+    margin: 0;
+    top: 26px;
+    font-weight: 700;
+    font-size: 16px;
+    position: fixed;
+    color: rgba(255, 255, 255, 0.75);
+    cursor: pointer;
+    transition: 0.2s;
+}
+.nav h4:hover {
+    color: white;
+}
+
+
+#code-blocks {
+    right: 359px;
+}
+#packages {
+    right: 262px;
+}
+#pricing {
+    right: 175px;
+}
+#about {
+    right: 107px;
+}
+#account {
+    right: 20px;
+}
+
+
+#hamburger {
+    visibility: hidden;
+    position: fixed;
+    cursor: pointer;
+    font-size: 28px;
+    right: 20px;
+    margin: 0;
+    top: 16px;
+    font-weight: 700;
+    z-index: 5000;
+}
+
+#full-nav {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3000;
+    transition: left 0.3s ease-in-out;
+    background-color: #080D2B;
+}
+#full-nav ul {
+    list-style-type: none;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: fit-content;
+    margin: 0;
+    padding-left: 0;
+    padding-top: calc((100vh / 2) - (390px / 2))
+}
+#full-nav ul li {
+    font-weight: 700;
+    font-size: 28px;
+    text-align: center;
+}
+#full-nav ul li:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+
+@media screen and (max-width: 670px) {
+    #about {
+        visibility: hidden;
+    }
+    #pricing {
+        right: 107px;
+    }
+    #packages {
+        right: 194px;
+    }
+    #code-blocks {
+        right: 291px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #code-blocks, #packages, #pricing, #about, #account {
+        visibility: hidden;
+    }
+    #hamburger {
+        visibility: visible;
+    }
+}
