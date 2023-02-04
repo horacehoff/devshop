@@ -1,0 +1,77 @@
+.signup-title {
+    font-size: 50px;
+    text-align: center;
+}
+
+.signup-input {
+    border: solid 3px transparent;
+    width: 300px;
+    outline: 0;
+    height: 30px;
+    font-family: 'JetBrains Mono', monospace;
+    border-radius: 4px;
+    transition: 0.2s;
+    background-color: ghostwhite;
+    color: black;
+    padding-left: 15px;
+    position: absolute;
+    margin: 0 0 0 calc(50% - 170px);
+}
+
+.signup-input::placeholder {
+    color: black;
+}
+
+.signup-input:focus {
+    border: solid 3px dodgerblue;
+}
+
+.signup-button {
+    width: 325px;
+    height: 40px;
+    background-color: #282828;
+    border: 0;
+    outline: 0;
+    border-radius: 5px;
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 800;
+    font-size: 14px;
+    position: absolute;
+    top: 440px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    margin: 0 0 0 calc(50% - 170px);
+}
+
+.signup-button:hover {
+    background-color: #ffffff;
+    color: black;
+}
+
+.signup-signin {
+    left: 50%;
+    transform: translate(-50%);
+    position: relative;
+    top: -30px;
+    color: dodgerblue;
+    width: fit-content;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.signup-signin:hover {
+    color: white;
+}
+
+.signup-error {
+    left: 50%;
+    transform: translate(-50%);
+    position: relative;
+    top: -30px;
+    color: #ef0000;
+    width: fit-content;
+    cursor: pointer;
+    transition: 0.2s;
+    visibility: hidden;
+}
