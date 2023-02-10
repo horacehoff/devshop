@@ -72,6 +72,20 @@
     color: #ef0000;
     width: fit-content;
     cursor: pointer;
-    transition: 0.2s;
     visibility: hidden;
+}
+
+.signup-forgot {
+    left: 50%;
+    transform: translate(-50%);
+    position: relative;
+    width: fit-content;
+    top: 34px;
+    color: #ff4500;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.signup-forgot:hover {
+    color: white;
 }

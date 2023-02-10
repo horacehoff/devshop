@@ -10,6 +10,10 @@ export default function Navbar() {
             document.getElementById("account").innerHTML = "ACCOUNT"
             document.getElementById("nav-account").innerHTML = "ACCOUNT"
             document.getElementById("account").onclick = () => {
+                -navigate("/sign-up");
+
+            }
+            document.getElementById("nav-account").onclick = () => {
                 navigate("/sign-up")
             }
 
@@ -17,6 +21,10 @@ export default function Navbar() {
             document.getElementById("account").innerHTML = "SIGN_UP"
             document.getElementById("nav-account").innerHTML = "SIGN_UP"
             document.getElementById("account").onclick = () => {
+
+                navigate("/sign-up")
+            }
+            document.getElementById("nav-account").onclick = () => {
                 navigate("/sign-up")
             }
         }
