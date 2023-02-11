@@ -59,6 +59,10 @@
         scrollbar-width: none;
     }
 
+    .packages-card-list li:not(:last-child) {
+        margin-right: 35px;
+    }
+
     .packages-card-list::-webkit-scrollbar {
         display: none;
     }
