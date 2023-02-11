@@ -60,6 +60,10 @@
         scroll-snap-type: x mandatory;
     }
 
+    .packages-card-list li {
+        scroll-snap-align: start;
+    }
+
     .packages-card-list li:not(:last-child) {
         margin-right: 35px;
     }
