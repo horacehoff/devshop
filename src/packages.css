@@ -57,6 +57,7 @@
         overflow-x: scroll;
         -ms-overflow-style: none;
         scrollbar-width: none;
+        scroll-snap-type: x mandatory;
     }
 
     .packages-card-list li:not(:last-child) {
