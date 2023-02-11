@@ -83,9 +83,9 @@
     content: '+ READ MORE';
 }
 
-@media screen and (max-width: 690px) {
+@media screen and (max-width: 560px) {
     .card {
-        width: 67.8vw;
+        width: 86vw;
     }
 
     .card-description {
