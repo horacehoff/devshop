@@ -1,15 +1,40 @@
+.packages-title {
+    font-size: 10vw;
+    padding-left: 20px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+
 .packages-card-list {
     list-style-type: none;
     width: available;
-
+    margin: 0;
+    padding: 0 0 0 20px;
 }
 
 .packages-card-list li:not(:last-child) {
-    margin-right: 20px;
+    margin-right: 25px;
 }
 
 .packages-card-list > li {
     display: inline-block;
+}
+
+.category-title {
+    padding-left: 20px;
+}
+
+@media screen and (max-width: 600px) {
+    .packages-title {
+        font-size: 13vw;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .packages-title {
+        font-size: 17vw;
+    }
 }
 
 @media (hover: hover) and (pointer: fine) {

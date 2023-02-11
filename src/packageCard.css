@@ -82,3 +82,13 @@
 .card-read-more:after {
     content: '+ READ MORE';
 }
+
+@media screen and (max-width: 690px) {
+    .card {
+        width: 67.8vw;
+    }
+
+    .card-description {
+        width: calc(67.8vw - 15px)
+    }
+}
