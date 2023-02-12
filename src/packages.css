@@ -22,6 +22,10 @@
     display: inline-block;
 }
 
+.packages-card-list li {
+    height: fit-content;
+}
+
 .category-title {
     padding-left: 20px;
 }
