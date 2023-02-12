@@ -62,6 +62,7 @@
 
     .packages-card-list li {
         scroll-snap-align: start;
+        padding-left: 20px;
     }
 
     .packages-card-list li:not(:last-child) {
