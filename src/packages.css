@@ -43,11 +43,6 @@
     .packages-card-list {
         padding-left: 10px;
     }
-
-    .packages-card-list li {
-        scroll-snap-align: start;
-        padding-left: 10px;
-    }
 }
 
 @media screen and (max-width: 400px) {
@@ -67,7 +62,6 @@
 
     .packages-card-list li {
         scroll-snap-align: start;
-        padding-left: 20px;
     }
 
     .packages-card-list li:not(:last-child) {
