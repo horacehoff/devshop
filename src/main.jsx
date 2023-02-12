@@ -6,6 +6,7 @@ import Home from "./Home.jsx";
 import SignUp from "./signup.jsx";
 import SignIn from "./signin.jsx";
 import Packages from "./packages.jsx";
+import CodeBlocks from "./codeBlocks.jsx";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -13,6 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Routes>
               <Route path="/" element={<Home/>}/>
               <Route path="/packages" element={<Packages/>}/>
+              <Route path="/code-blocks" element={<CodeBlocks/>}/>
               <Route path="/sign-up" element={<SignUp/>}/>
               <Route path="/sign-in" element={<SignIn/>}/>
           </Routes>

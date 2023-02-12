@@ -1,28 +1,27 @@
-.card {
+.code-card {
     height: 334px;
     width: 468px;
     border-radius: 14px;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://brew.sh/assets/img/homebrew-social-card.png") center center;
-    background-size: cover;
+    background-color: rgba(0, 0, 0, 0.5);
     padding: 0;
     position: relative;
     cursor: pointer;
     transition: 0.2s;
 }
 
-.card:hover > .card-read-more {
+.code-card:hover > .code-card-read-more {
     color: rgba(255, 255, 255, 0.5);
 }
 
-.card:hover > .card-title {
+.code-card:hover > .code-card-title {
     color: white;
 }
 
-.card:hover > .card-read-more:after {
+.code-card:hover > .code-card-read-more:after {
     content: '> READ MORE';
 }
 
-.card-title {
+.code-card-title {
     font-size: 32px;
     font-weight: 500;
     position: relative;
@@ -34,7 +33,7 @@
     transition: 0.2s;
 }
 
-.card-author {
+.code-card-author {
     padding: 0;
     position: relative;
     top: 10px;
@@ -45,7 +44,7 @@
     font-weight: 400;
 }
 
-.card-downloads {
+.code-card-downloads {
     font-size: 14px;
     position: absolute;
     right: 10px;
@@ -54,7 +53,7 @@
     padding: 0;
 }
 
-.card-description {
+.code-card-sample {
     font-size: 18px;
     line-height: 22px;
     position: relative;
@@ -62,11 +61,10 @@
     height: 200px;
     left: 15px;
     padding-right: 5px;
-    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
     white-space: normal;
 }
 
-.card-read-more {
+.code-card-read-more {
     color: rgba(255, 255, 255, 0.25);
     font-size: 16px;
     font-weight: 500;
@@ -78,16 +76,16 @@
     transition: 0.2s;
 }
 
-.card-read-more:after {
+.code-card-read-more:after {
     content: '+ READ MORE';
 }
 
 @media screen and (max-width: 560px) {
-    .card {
+    .code-card {
         width: 92vw;
     }
 
-    .card-description {
+    .code-card-sample {
         width: calc(92vw - 15px)
     }
 }
