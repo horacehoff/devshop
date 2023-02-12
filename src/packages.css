@@ -11,6 +11,7 @@
     width: available;
     margin: 0;
     padding: 0 0 0 20px;
+    height: fit-content;
 }
 
 .packages-card-list li:not(:last-child) {
