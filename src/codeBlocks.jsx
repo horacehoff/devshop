@@ -1,6 +1,6 @@
 import "./packages.css"
 import Navbar from "./Navbar.jsx";
-import CodeCard from "./CodeCard.jsx";
+import CodeCard from "./codeCard.jsx";
 
 export default function CodeBlocks() {
     return (
