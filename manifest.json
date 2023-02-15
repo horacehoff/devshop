@@ -1,0 +1,10 @@
+{
+  "name": "DEVSHOP",
+  "description": "An online marketplace for selling code snippets and programs",
+  "start_url": "/",
+  "lang": "en-US",
+  "theme_color": "#161C5B",
+  "display": "standalone",
+  "background_color": "#161C5B",
+  "orientation": "portrait"
+}
