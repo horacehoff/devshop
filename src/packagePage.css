@@ -1,0 +1,103 @@
+.banner {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 334px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.35) 97.4%), url("https://brew.sh/assets/img/homebrew-social-card.png") center center;
+    background-size: cover;
+    z-index: -1;
+    margin: 0;
+    padding: 0;
+}
+
+.package-title {
+    font-weight: 700;
+    font-size: 55px;
+    position: absolute;
+    top: 337px;
+    left: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+.package-author {
+    font-size: 20px;
+    position: absolute;
+    top: 415px;
+    left: 15px;
+    margin: 0;
+    padding: 0;
+    color: #B9B9B9;
+}
+
+.package-description-label {
+    position: absolute;
+    top: 467px;
+    left: 15px;
+    color: #B9B9B9;
+    margin: 0;
+    padding: 0;
+}
+
+.package-description {
+    position: absolute;
+    top: 476px;
+    left: 15px;
+    width: 890px;
+    height: 160px;
+    overflow-y: scroll;
+}
+
+.package-screenshots-label {
+    position: absolute;
+    top: 670px;
+    left: 15px;
+    color: #B9B9B9;
+}
+
+
+.package-screenshots {
+    position: absolute;
+    top: 715px;
+    margin: 0;
+    padding: 0;
+}
+
+.package-img-one {
+    border-radius: 8px;
+    height: 150px;
+    width: 290px;
+}
+
+.package-img-two {
+    border-radius: 8px;
+    height: 150px;
+    width: 290px;
+}
+
+.package-img-three {
+    border-radius: 8px;
+    height: 150px;
+    width: 290px;
+}
+
+@media screen and (max-width: 905px) {
+    .package-description {
+        width: calc(100% - 15px);
+    }
+}
+
+@media screen and (max-width: 587px) {
+    .package-img-one {
+        margin-left: calc(50% - (290px / 2));
+    }
+
+    .package-img-two {
+        margin-left: calc(50% - (290px / 2));
+    }
+
+    .package-img-three {
+        margin-left: calc(50% - (290px / 2));
+    }
+}
