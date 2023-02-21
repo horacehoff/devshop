@@ -71,7 +71,7 @@
 
 .package-img-one {
     border-radius: 8px;
-    height: 250px;
+    height: calc(444px / 16 * 9);
     width: 444px;
     object-fit: cover;
     scroll-snap-align: start;
@@ -79,7 +79,7 @@
 
 .package-img-two {
     border-radius: 8px;
-    height: 250px;
+    height: calc(444px / 16 * 9);
     width: 444px;
     object-fit: cover;
     margin-left: 25px;
@@ -88,7 +88,7 @@
 
 .package-img-three {
     border-radius: 8px;
-    height: 250px;
+    height: calc(444px / 16 * 9);
     width: 444px;
     object-fit: cover;
     margin-left: 25px;
@@ -97,7 +97,7 @@
 
 .package-img-four {
     border-radius: 8px;
-    height: 250px;
+    height: calc(444px / 16 * 9);
     width: 444px;
     object-fit: cover;
     margin-left: 25px;
@@ -145,16 +145,39 @@
     }
 }
 
-@media screen and (max-width: 587px) {
+@media screen and (max-width: 475px) {
     .package-img-one {
-        margin-left: calc(50% - (290px / 2));
+        border-radius: 8px;
+        height: calc((100 - 15px) / 16 * 9);
+        width: calc(100% - 15px);
+        object-fit: cover;
+        scroll-snap-align: start;
     }
 
     .package-img-two {
-        margin-left: calc(50% - (290px / 2));
+        border-radius: 8px;
+        height: 250px;
+        width: calc(100% - 15px);
+        object-fit: cover;
+        scroll-snap-align: start;
+        margin-left: 25px;
     }
 
     .package-img-three {
-        margin-left: calc(50% - (290px / 2));
+        border-radius: 8px;
+        height: 250px;
+        width: calc(100% - 15px);
+        object-fit: cover;
+        scroll-snap-align: start;
+        margin-left: 25px;
+    }
+
+    .package-img-four {
+        border-radius: 8px;
+        height: 250px;
+        width: calc(100% - 15px);
+        object-fit: cover;
+        scroll-snap-align: start;
+        margin-left: 25px;
     }
 }
