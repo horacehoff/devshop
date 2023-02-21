@@ -28,7 +28,7 @@ export default function PackagePage() {
             </div>
             <p className="package-characteristics-label">// 03 - CHARACTERISTICS</p>
             <div className="package-characteristics">
-                <p>TOTAL DOWNLOADS: 1.5M<br/>AVERAGE HAPPINESS: 100%<br/>TOTAL SIZE: 5.8MB</p>
+                <p>TOTAL DOWNLOADS<br/>AVERAGE HAPPINESS: 100%<br/>TOTAL SIZE: 5.8MB</p>
             </div>
         </>
     )
