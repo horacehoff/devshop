@@ -19,14 +19,14 @@ export default function PackagePage() {
                 offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows
                 support is coming sooHomebrew offers a wide variety of packages to download. Its available platforms are
                 macOS and Linux, and Windows support is coming soonnonsoon</p>
-            <p className="package-screenshots-label">// 02 - SCREENSHOTS</p>
+            <p className="package-screenshots-label"></p>
             <div className="package-screenshots">
                 <img src={"https://brew.sh/assets/img/homebrew-social-card.png"} className="package-img-one"/>
                 <img src={"https://brew.sh/assets/img/homebrew-social-card.png"} className="package-img-two"/>
                 <img src={"https://brew.sh/assets/img/homebrew-social-card.png"} className="package-img-three"/>
                 <img src={"https://brew.sh/assets/img/homebrew-social-card.png"} className="package-img-four"/>
             </div>
-            <p className="package-characteristics-label">// 03 - CHARACTERISTICS</p>
+            <p className="package-characteristics-label"></p>
             <div className="package-characteristics">
                 <p>TOTAL DOWNLOADS: 1.45K<br/>AVERAGE HAPPINESS: 100%<br/>TOTAL SIZE: 5.8MB</p>
             </div>
