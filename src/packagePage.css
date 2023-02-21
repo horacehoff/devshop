@@ -44,7 +44,7 @@
     position: absolute;
     top: 476px;
     left: 15px;
-    width: 83.9vw;
+    width: 890px;
     height: 200px;
     overflow-y: scroll;
 }
@@ -92,14 +92,38 @@
     border-radius: 8px;
     height: 150px;
     width: 290px;
-    margin-left: 15px;
+    margin-left: 40px;
 }
 
 .package-characteristics-label {
     position: absolute;
-    top: 880px;
-    left: 15px;
+    top: 467px;
+    left: 925px;
     color: #B9B9B9;
+    margin: 0;
+    padding: 0;
+}
+
+.package-characteristics {
+    position: absolute;
+    top: 476px;
+    left: 925px;
+}
+
+@media screen and (max-width: 1250px) {
+    .package-characteristics-label {
+        left: 15px;
+        top: 935px;
+    }
+
+    .package-characteristics {
+        left: 15px;
+        top: 944px;
+    }
+
+    .package-description {
+        width: 83.9vw;
+    }
 }
 
 @media screen and (max-width: 905px) {
@@ -124,5 +148,4 @@
     .package-img-three {
         margin-left: calc(50% - (290px / 2));
     }
-
 }

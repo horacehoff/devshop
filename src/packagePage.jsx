@@ -27,6 +27,9 @@ export default function PackagePage() {
                 <img src={"https://brew.sh/assets/img/homebrew-social-card.png"} className="package-img-four"/>
             </div>
             <p className="package-characteristics-label">// 03 - CHARACTERISTICS</p>
+            <div className="package-characteristics">
+                <p>TOTAL DOWNLOADS: 1.5M<br/>AVERAGE HAPPINESS: 100%<br/>TOTAL SIZE: 5.8MB</p>
+            </div>
         </>
     )
 }
