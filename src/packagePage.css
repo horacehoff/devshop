@@ -66,33 +66,42 @@
     width: calc(100% - 15px);
     overflow: scroll;
     white-space: nowrap;
+    scroll-snap-type: x mandatory;
 }
 
 .package-img-one {
     border-radius: 8px;
-    height: 150px;
-    width: 290px;
+    height: 250px;
+    width: 444px;
+    object-fit: cover;
+    scroll-snap-align: start;
 }
 
 .package-img-two {
     border-radius: 8px;
-    height: 150px;
-    width: 290px;
-    margin-left: 15px;
+    height: 250px;
+    width: 444px;
+    object-fit: cover;
+    margin-left: 25px;
+    scroll-snap-align: start;
 }
 
 .package-img-three {
     border-radius: 8px;
-    height: 150px;
-    width: 290px;
-    margin-left: 15px;
+    height: 250px;
+    width: 444px;
+    object-fit: cover;
+    margin-left: 25px;
+    scroll-snap-align: start;
 }
 
 .package-img-four {
     border-radius: 8px;
-    height: 150px;
-    width: 290px;
-    margin-left: 40px;
+    height: 250px;
+    width: 444px;
+    object-fit: cover;
+    margin-left: 25px;
+    scroll-snap-align: start;
 }
 
 .package-characteristics-label {
