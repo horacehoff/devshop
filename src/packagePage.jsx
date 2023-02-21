@@ -24,7 +24,9 @@ export default function PackagePage() {
                 <img src={"https://brew.sh/assets/img/homebrew-social-card.png"} className="package-img-one"/>
                 <img src={"https://brew.sh/assets/img/homebrew-social-card.png"} className="package-img-two"/>
                 <img src={"https://brew.sh/assets/img/homebrew-social-card.png"} className="package-img-three"/>
+                <img src={"https://brew.sh/assets/img/homebrew-social-card.png"} className="package-img-four"/>
             </div>
+            <p className="package-characteristics-label">// 03 - CHARACTERISTICS</p>
         </>
     )
 }

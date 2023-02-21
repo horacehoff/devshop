@@ -44,14 +44,14 @@
     position: absolute;
     top: 476px;
     left: 15px;
-    width: 890px;
-    height: 160px;
+    width: 83.9vw;
+    height: 200px;
     overflow-y: scroll;
 }
 
 .package-screenshots-label {
     position: absolute;
-    top: 670px;
+    top: 710px;
     left: 15px;
     color: #B9B9B9;
 }
@@ -59,9 +59,13 @@
 
 .package-screenshots {
     position: absolute;
-    top: 715px;
+    top: 755px;
     margin: 0;
+    left: 15px;
     padding: 0;
+    width: calc(100% - 15px);
+    overflow: scroll;
+    white-space: nowrap;
 }
 
 .package-img-one {
@@ -74,16 +78,36 @@
     border-radius: 8px;
     height: 150px;
     width: 290px;
+    margin-left: 15px;
 }
 
 .package-img-three {
     border-radius: 8px;
     height: 150px;
     width: 290px;
+    margin-left: 15px;
+}
+
+.package-img-four {
+    border-radius: 8px;
+    height: 150px;
+    width: 290px;
+    margin-left: 15px;
+}
+
+.package-characteristics-label {
+    position: absolute;
+    top: 880px;
+    left: 15px;
+    color: #B9B9B9;
 }
 
 @media screen and (max-width: 905px) {
     .package-description {
+        width: calc(100% - 15px);
+    }
+
+    .package-screenshots {
         width: calc(100% - 15px);
     }
 }
@@ -100,4 +124,5 @@
     .package-img-three {
         margin-left: calc(50% - (290px / 2));
     }
+
 }
