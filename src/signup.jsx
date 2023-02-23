@@ -15,7 +15,9 @@ function SignUpUser(email, password, {navigate}) {
             setDoc(doc(db, "users", user.uid), {
                 uid: user.uid,
                 username: ("user" + user.uid),
-                plan: 0
+                plan: 0,
+                owned_packages: [],
+                owned_code_blocks: []
             }).then(r => {
                     console.log("registered+db_created+signed-in");
                     navigate("/");
