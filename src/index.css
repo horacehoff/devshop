@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Code+Pro:wght@900&display=swap');
 
 :root {
-  font-family: 'JetBrains Mono', 'Source Code Pro', monospace;
-  line-height: 1.5;
-  font-weight: 400;
+    font-family: 'JetBrains Mono', 'Source Code Pro', monospace;
+    line-height: 1.5;
+    font-weight: 400;
 
-  color: white;
-  background-color: #161C5B;
+    color: white;
+    background-color: #161C5B;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
 }

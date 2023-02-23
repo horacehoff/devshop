@@ -41,9 +41,11 @@
 #pricing {
     right: 175px;
 }
+
 #about {
     right: 107px;
 }
+
 #account {
     right: 20px;
 }
@@ -72,6 +74,7 @@
     transition: left 0.3s ease-in-out;
     background-color: #080D2B;
 }
+
 #full-nav ul {
     list-style-type: none;
     position: relative;
@@ -83,11 +86,13 @@
     padding-left: 0;
     padding-top: calc((100vh / 2) - (390px / 2))
 }
+
 #full-nav ul li {
     font-weight: 700;
     font-size: 28px;
     text-align: center;
 }
+
 #full-nav ul li:not(:last-child) {
     margin-bottom: 20px;
 }
@@ -97,12 +102,15 @@
     #about {
         visibility: hidden;
     }
+
     #pricing {
         right: 107px;
     }
+
     #packages {
         right: 194px;
     }
+
     #code-blocks {
         right: 291px;
     }
@@ -112,6 +120,7 @@
     #code-blocks, #packages, #pricing, #about, #account {
         visibility: hidden;
     }
+
     #hamburger {
         visibility: visible;
     }

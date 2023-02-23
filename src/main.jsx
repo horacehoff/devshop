@@ -10,16 +10,16 @@ import CodeBlocks from "./codeBlocks.jsx";
 import PackagePage from "./packagePage.jsx";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-      <BrowserRouter>
-          <Routes>
-              <Route path="/" element={<Home/>}/>
-              <Route path="/package-page" element={<PackagePage/>}/>
-              <Route path="/packages" element={<Packages/>}/>
-              <Route path="/code-blocks" element={<CodeBlocks/>}/>
-              <Route path="/sign-up" element={<SignUp/>}/>
-              <Route path="/sign-in" element={<SignIn/>}/>
-          </Routes>
-      </BrowserRouter>
-  </React.StrictMode>,
+    <React.StrictMode>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/package-page" element={<PackagePage/>}/>
+                <Route path="/packages" element={<Packages/>}/>
+                <Route path="/code-blocks" element={<CodeBlocks/>}/>
+                <Route path="/sign-up" element={<SignUp/>}/>
+                <Route path="/sign-in" element={<SignIn/>}/>
+            </Routes>
+        </BrowserRouter>
+    </React.StrictMode>,
 )
