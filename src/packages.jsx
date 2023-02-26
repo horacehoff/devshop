@@ -5,7 +5,7 @@ import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 
 export default function Packages() {
     function handler(e) {
-        const isTouchPad = false;
+        const isTouchPad = e.wheelDeltaY ? e.wheelDeltaY === -3 * e.deltaY : e.deltaMode === 0;
         if (isTouchPad) {
             document.getElementById("packages-card-list").whiteSpace = "nowrap";
             document.getElementById("packages-card-list").style.overflowX = "scroll";
