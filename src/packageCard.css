@@ -58,7 +58,7 @@
     font-size: 18px;
     line-height: 22px;
     position: relative;
-    width: 430px;
+    width: calc(100% - 38px);
     height: 200px;
     left: 15px;
     padding-right: 5px;
