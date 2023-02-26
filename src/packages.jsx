@@ -5,10 +5,7 @@ import PackageCard from "./packageCard.jsx";
 export default function Packages() {
     function handler(e) {
         const isTouchPad = e.wheelDeltaY ? e.wheelDeltaY === -3 * e.deltaY : e.deltaMode === 0;
-        if (isTouchPad) {
-            document.getElementById("packages-card-list").whiteSpace = "nowrap";
-            document.getElementById("packages-card-list").style.overflowX = "scroll";
-        } else {
+        if (!isTouchPad) {
             const mouseRotate = document.getElementsByClassName("packages-card-list-child");
             for (let i = 0; i < mouseRotate.length; i++) {
                 document.getElementsByClassName("packages-card-list-child")[i].style.marginRight = "15px";
@@ -16,6 +13,7 @@ export default function Packages() {
                 document.getElementsByClassName("card")[i].style.width = "calc(100vw / 3 - 50px)";
             }
             document.getElementById("packages-card-list").style.transform = "translateY(-20px)"
+            document.getElementById("packages-card-list").style.whiteSpace = "normal"
         }
         document.removeEventListener("wheel", handler, false);
     }
