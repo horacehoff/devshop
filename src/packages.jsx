@@ -1,7 +1,6 @@
 import "./packages.css"
 import Navbar from "./Navbar.jsx";
 import PackageCard from "./packageCard.jsx";
-import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 
 export default function Packages() {
     function handler(e) {
