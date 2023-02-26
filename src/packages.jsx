@@ -5,8 +5,10 @@ import PackageCard from "./packageCard.jsx";
 export default function Packages() {
     function handler(e) {
         const isTouchPad = e.wheelDeltaY ? e.wheelDeltaY === -3 * e.deltaY : e.deltaMode === 0;
-        // your code
-        document.body.textContent = isTouchPad ? "isTouchPad" : "isMouse";
+        if (isTouchPad) {
+            console.log("touchpad")
+        }
+        document.removeEventListener("wheel", handler, false);
     }
 
     document.addEventListener("wheel", handler, {passive: false});
