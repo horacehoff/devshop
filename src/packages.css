@@ -56,7 +56,7 @@
     }
 }
 
-@supports (-webkit-overflow-scrolling: touch) or (overflow-x: scroll) {
+@media (pointer: coarse), (pointer: fine) {
     .packages-card-list {
         white-space: nowrap;
         overflow-x: scroll;
