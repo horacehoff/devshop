@@ -8,7 +8,9 @@ export default function Packages() {
         if (isTouchPad) {
             console.log("touchpad")
         } else {
+            // implement horizontal scrolling with mouse
             console.log("mouse")
+            document.getElementById("packages-card-list").scrollLeft += e.deltaY;
         }
         document.removeEventListener("wheel", handler, false);
     }
