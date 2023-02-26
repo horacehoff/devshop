@@ -7,6 +7,8 @@ export default function Packages() {
         const isTouchPad = e.wheelDeltaY ? e.wheelDeltaY === -3 * e.deltaY : e.deltaMode === 0;
         if (isTouchPad) {
             console.log("touchpad")
+        } else {
+            console.log("mouse")
         }
         document.removeEventListener("wheel", handler, false);
     }
