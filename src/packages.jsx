@@ -3,6 +3,13 @@ import Navbar from "./Navbar.jsx";
 import PackageCard from "./packageCard.jsx";
 
 export default function Packages() {
+    function handler(e) {
+        const isTouchPad = e.wheelDeltaY ? e.wheelDeltaY === -3 * e.deltaY : e.deltaMode === 0;
+        // your code
+        document.body.textContent = isTouchPad ? "isTouchPad" : "isMouse";
+    }
+
+    document.addEventListener("wheel", handler, {passive: false});
     return (
         <>
             <Navbar/>
