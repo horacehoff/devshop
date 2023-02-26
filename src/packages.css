@@ -77,3 +77,9 @@
         display: none;
     }
 }
+
+@media (hover: hover) and (pointer: fine) {
+    .packages-title {
+        font-size: 17vw;
+    }
+}
