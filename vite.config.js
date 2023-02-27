@@ -11,7 +11,12 @@ export default defineConfig({
             compress: {
                 keep_infinity: true,
                 pure_getters: true,
-                passes: 10,
+                passes: 20,
+            },
+            mangle: {
+                properties: {
+                    regex: /^_/,
+                }
             }
         }
     }
