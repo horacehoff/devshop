@@ -23,25 +23,6 @@ export default defineConfig({
                 unsafe_regexp: true,
                 unsafe_undefined: true,
                 warnings: false,
-              // compress more
-                booleans_as_integers: true,
-                collapse_vars: true,
-                comparisons: true,
-                computed_props: true,
-                hoist_funs: true,
-                hoist_props: true,
-                hoist_vars: true,
-                if_return: true,
-                inline: true,
-                join_vars: true,
-                keep_fargs: false,
-                keep_fnames: false,
-                loops: true,
-                negate_iife: false,
-                properties: true,
-                reduce_funcs: true,
-                reduce_vars: true
-            },
             mangle: {
                 properties: {
                     regex: /^_/,
@@ -54,4 +35,4 @@ export default defineConfig({
             },
         }
     }
-})
+}})
