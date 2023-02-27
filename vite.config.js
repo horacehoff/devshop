@@ -23,10 +23,17 @@ export default defineConfig({
                 unsafe_regexp: true,
                 unsafe_undefined: true,
                 warnings: false,
+            },
+            mangle: {
+                properties: {
+                    regex: /^_/,
+
+                },
+            },
             output: {
                 comments: false,
                 beautify: false,
             },
         }
     }
-}})
+})
