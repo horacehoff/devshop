@@ -23,12 +23,24 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     </Suspense>
                 }/>
                 <Route path="/packages" element={
-                    <Suspense fallback={<Navbar/>}>
+                    <Suspense fallback={
+                        <>
+                            <Navbar/>
+                            <h1 style={{fontSize: "7.5vw", paddingLeft: "20px", marginBottom: "0", paddingBottom: "0"}}>PACKAGES</h1>
+                            <h2 style={{paddingLeft: "20px"}}>// CURRENTLY TRENDING</h2>
+                        </>
+                    }>
                         <Packages/>
                     </Suspense>
                 }/>
                 <Route path="/code-blocks" element={
-                    <Suspense fallback={<Navbar/>}>
+                    <Suspense fallback={
+                        <>
+                        <Navbar/>
+                        <h1 style={{fontSize: "7.5vw", paddingLeft: "20px", marginBottom: "0", paddingBottom: "0"}}>CODE<br/>BLOCKS</h1>
+                        <h2 style={{paddingLeft: "20px"}}>// CURRENTLY TRENDING</h2>
+                        </>
+                    }>
                         <CodeBlocks/>
                     </Suspense>
                 }/>
