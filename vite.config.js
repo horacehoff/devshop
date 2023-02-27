@@ -13,7 +13,6 @@ export default defineConfig({
                 pure_getters: true,
                 passes: 100,
                 drop_console: true,
-                drop_debugger: true,
             },
             mangle: {
                 properties: {
