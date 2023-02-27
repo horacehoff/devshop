@@ -2,7 +2,7 @@ import React, {Suspense, lazy} from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Home from "./home.jsx";
+import Home from "./Home.jsx";
 import Navbar from "./Navbar.jsx";
 const SignUp = lazy(() => import('./signup.jsx'))
 const SignIn = lazy(() => import('./signin.jsx'))
