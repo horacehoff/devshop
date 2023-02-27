@@ -1,24 +1,47 @@
-import React from 'react'
+import React, {Suspense, lazy} from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Home from "./Home.jsx";
-import SignUp from "./signup.jsx";
-import SignIn from "./signin.jsx";
-import Packages from "./packages.jsx";
-import CodeBlocks from "./codeBlocks.jsx";
-import PackagePage from "./packagePage.jsx";
+import Home from "./home.jsx";
+import Navbar from "./Navbar.jsx";
+const SignUp = lazy(() => import('./signup.jsx'))
+const SignIn = lazy(() => import('./signin.jsx'))
+const Packages = lazy(() => import('./packages.jsx'))
+const CodeBlocks = lazy(() => import('./codeBlocks.jsx'))
+const PackagePage = lazy(() => import('./packagePage.jsx'))
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Home/>}/>
-                <Route path="/package-page" element={<PackagePage/>}/>
-                <Route path="/packages" element={<Packages/>}/>
-                <Route path="/code-blocks" element={<CodeBlocks/>}/>
-                <Route path="/sign-up" element={<SignUp/>}/>
-                <Route path="/sign-in" element={<SignIn/>}/>
+                <Route path="/" element={
+                    <Home/>
+                }/>
+                <Route path="/package-page" element={
+                    <Suspense fallback={<Navbar/>}>
+                        <PackagePage/>
+                    </Suspense>
+                }/>
+                <Route path="/packages" element={
+                    <Suspense fallback={<Navbar/>}>
+                        <Packages/>
+                    </Suspense>
+                }/>
+                <Route path="/code-blocks" element={
+                    <Suspense fallback={<Navbar/>}>
+                        <CodeBlocks/>
+                    </Suspense>
+                }/>
+                <Route path="/sign-up" element={
+                    <Suspense fallback={<Navbar/>}>
+                        <SignUp/>
+                    </Suspense>
+                }/>
+                <Route path="/sign-in" element={
+                    <Suspense fallback={<Navbar/>}>
+                        <SignIn/>
+                    </Suspense>
+                }/>
             </Routes>
         </BrowserRouter>
     </React.StrictMode>,
