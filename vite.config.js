@@ -12,6 +12,18 @@ export default defineConfig({
                 keep_infinity: true,
                 pure_getters: true,
                 passes: 100,
+                drop_console: true,
+                drop_debugger: true,
+                unsafe: true,
+                unsafe_arrows: true,
+                unsafe_comps: true,
+                unsafe_Function: true,
+                unsafe_math: true,
+                unsafe_methods: true,
+                unsafe_proto: true,
+                unsafe_regexp: true,
+                unsafe_undefined: true,
+                warnings: false,
             },
             mangle: {
                 properties: {
@@ -24,7 +36,7 @@ export default defineConfig({
                 indent_level: 2,
                 quote_style: 1,
                 wrap_iife: true,
-            }
+            },
         }
     }
 })
