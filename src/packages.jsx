@@ -6,14 +6,17 @@ export default function Packages() {
     function handler(e) {
         const isTouchPad = e.wheelDeltaY ? e.wheelDeltaY === -3 * e.deltaY : e.deltaMode === 0;
         if (!isTouchPad) {
-            const mouseRotate = document.getElementsByClassName("packages-card-list-child");
-            for (let i = 0; i < mouseRotate.length; i++) {
-                document.getElementsByClassName("packages-card-list-child")[i].style.marginRight = "15px";
-                document.getElementsByClassName("packages-card-list-child")[i].style.marginTop = "10px";
+            const packagesCardListChild = document.getElementsByClassName("packages-card-list-child");
+            for (let i = 0; i < packagesCardListChild.length; i++) {
+                packagesCardListChild[i].style.marginRight = "15px";
+                packagesCardListChild[i].style.marginTop = "10px";
                 document.getElementsByClassName("card")[i].style.width = "calc(100vw / 3 - 50px)";
             }
-            document.getElementById("packages-card-list").style.transform = "translateY(-20px)"
-            document.getElementById("packages-card-list").style.whiteSpace = "normal"
+            const packagesCardList = document.getElementsByClassName("packages-card-list");
+            for (let i = 0; i < packagesCardList.length; i++) {
+                packagesCardList[i].style.transform = "translateY(-20px)";
+                packagesCardList[i].style.whiteSpace = "normal";
+            }
         }
         document.removeEventListener("wheel", handler, false);
     }
