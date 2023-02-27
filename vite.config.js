@@ -11,7 +11,7 @@ export default defineConfig({
             compress: {
                 keep_infinity: true,
                 pure_getters: true,
-                passes: 20,
+                passes: 100,
             },
             mangle: {
                 properties: {
