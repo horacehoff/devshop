@@ -6,10 +6,10 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./Home.jsx";
 import Navbar from "./Navbar.jsx";
 import Packages from "./packages.jsx";
+import PackagePage from "./packagePage.jsx";
 const SignUp = lazy(() => import('./signup.jsx'))
 const SignIn = lazy(() => import('./signin.jsx'))
 const CodeBlocks = lazy(() => import('./codeBlocks.jsx'))
-const PackagePage = lazy(() => import('./packagePage.jsx'))
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
@@ -19,9 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     <Home/>
                 }/>
                 <Route path="/package-page" element={
-                    <Suspense fallback={<Navbar/>}>
-                        <PackagePage/>
-                    </Suspense>
+                    <PackagePage/>
                 }/>
                 <Route path="/packages" element={
                     <Packages/>
