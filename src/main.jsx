@@ -1,6 +1,7 @@
 import React, {Suspense, lazy} from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
+import './lazy.css'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./Home.jsx";
 import Navbar from "./Navbar.jsx";
@@ -26,8 +27,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     <Suspense fallback={
                         <>
                             <Navbar/>
-                            <h1 style={{fontSize: "7.5vw", paddingLeft: "20px", marginBottom: "0", paddingBottom: "0"}}>PACKAGES</h1>
-                            <h2 style={{paddingLeft: "20px"}}>// CURRENTLY TRENDING</h2>
+                            <h1 className="packages-title">PACKAGES</h1>
+                            <h2 className="category-title">// CURRENTLY TRENDING</h2>
                         </>
                     }>
                         <Packages/>
@@ -36,9 +37,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Route path="/code-blocks" element={
                     <Suspense fallback={
                         <>
-                        <Navbar/>
-                        <h1 style={{fontSize: "7.5vw", paddingLeft: "20px", marginBottom: "0", paddingBottom: "0"}}>CODE<br/>BLOCKS</h1>
-                        <h2 style={{paddingLeft: "20px"}}>// CURRENTLY TRENDING</h2>
+                            <Navbar/>
+                            <h1 className="packages-title">CODE<br/>BLOCKS</h1>
+                            <h2 className="category-title">// CURRENTLY TRENDING</h2>
                         </>
                     }>
                         <CodeBlocks/>
