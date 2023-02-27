@@ -17,6 +17,13 @@ export default defineConfig({
                 properties: {
                     regex: /^_/,
                 }
+            },
+            output: {
+                comments: false,
+                beautify: false,
+                indent_level: 2,
+                quote_style: 1,
+                wrap_iife: true,
             }
         }
     }
