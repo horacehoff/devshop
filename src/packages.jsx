@@ -1,6 +1,7 @@
 import "./packages.css"
 import Navbar from "./Navbar.jsx";
-import PackageCard from "./packageCard.jsx";
+import {lazy} from "react";
+const PackageCard = lazy(() => import('./packageCard.jsx'))
 
 export default function Packages() {
     function handler(e) {
