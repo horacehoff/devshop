@@ -14,7 +14,6 @@ export default defineConfig({
                 passes: 100,
                 drop_console: true,
                 drop_debugger: true,
-                warnings: false,
             },
             mangle: {
                 properties: {
