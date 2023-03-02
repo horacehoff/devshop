@@ -1,91 +1,78 @@
-.code-card {
-    height: 334px;
-    width: 468px;
-    border-radius: 14px;
-    background-color: #2D2B57;
-    padding: 0;
-    position: relative;
-    cursor: pointer;
-    transition: 0.2s;
+.code-card,.code-card-author,.code-card-title{
+    position:relative;
+    padding:0
 }
-
-.code-card:hover > .code-card-read-more {
-    color: rgba(255, 255, 255, 0.5);
+.code-card{
+    height:334px;
+    width:468px;
+    border-radius:14px;
+    background-color:#2d2b57;
+    cursor:pointer;
+    transition:.2s
 }
-
-.code-card:hover > .code-card-title {
-    color: white;
+.code-card:hover>.code-card-read-more{
+    color:rgba(255,255,255,.5)
 }
-
-.code-card:hover > .code-card-read-more:after {
-    content: '> READ MORE';
+.code-card:hover>.code-card-title{
+    color:#fff
 }
-
-.code-card-title {
-    font-size: 32px;
-    font-weight: 500;
-    position: relative;
-    left: 15px;
-    top: 8px;
-    margin: 0;
-    padding: 0;
-    color: blanchedalmond;
-    transition: 0.2s;
+.code-card:hover>.code-card-read-more:after{
+    content:'> READ MORE'
 }
-
-.code-card-author {
-    padding: 0;
-    position: relative;
-    top: 10px;
-    left: 15px;
-    margin: 0;
-    color: #B9B9B9;
-    font-size: 20px;
-    font-weight: 400;
+.code-card-title{
+    font-size:32px;
+    font-weight:500;
+    left:15px;
+    top:8px;
+    margin:0;
+    color:#ffebcd;
+    transition:.2s
 }
-
-.code-card-downloads {
-    font-size: 14px;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    margin: 0;
-    padding: 0;
+.code-card-author{
+    top:10px;
+    left:15px;
+    margin:0;
+    color:#b9b9b9;
+    font-size:20px;
+    font-weight:400
 }
-
-.code-card-sample {
-    font-size: 18px;
-    line-height: 22px;
-    position: relative;
-    width: 430px;
-    height: 200px;
-    left: 15px;
-    padding-right: 5px;
-    white-space: normal;
+.code-card-downloads{
+    font-size:14px;
+    position:absolute;
+    right:10px;
+    top:10px;
+    margin:0;
+    padding:0
 }
-
-.code-card-read-more {
-    color: rgba(255, 255, 255, 0.25);
-    font-size: 16px;
-    font-weight: 500;
-    padding: 0;
-    margin: 0;
-    position: relative;
-    left: 15px;
-    bottom: 15px;
-    transition: 0.2s;
+.code-card-sample{
+    font-size:18px;
+    line-height:22px;
+    position:relative;
+    width:430px;
+    height:200px;
+    left:15px;
+    padding-right:5px;
+    white-space:normal
 }
-
-.code-card-read-more:after {
-    content: '+ READ MORE';
+.code-card-read-more{
+    color:rgba(255,255,255,.25);
+    font-size:16px;
+    font-weight:500;
+    padding:0;
+    margin:0;
+    position:relative;
+    left:15px;
+    bottom:15px;
+    transition:.2s
 }
-
-@media screen and (max-width: 560px) {
-    .code-card {
-        width: 92vw;
+.code-card-read-more:after{
+    content:'+ READ MORE'
+}
+@media screen and (max-width:560px){
+    .code-card{
+        width:92vw
     }
-
-    .code-card-sample {
-        width: calc(92vw - 15px)
+    .code-card-sample{
+        width:calc(92vw - 15px)
     }
 }

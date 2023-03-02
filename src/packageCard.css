@@ -1,93 +1,79 @@
-.card {
-    height: 334px;
-    width: 468px;
-    border-radius: 14px;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://brew.sh/assets/img/homebrew-social-card.png") center center;
-    background-size: cover;
-    padding: 0;
-    position: relative;
-    cursor: pointer;
-    transition: 0.2s;
+.card,.card-author,.card-title{
+    position:relative;
+    padding:0
 }
-
-.card:hover > .card-read-more {
-    color: rgba(255, 255, 255, 0.5);
+.card{
+    height:334px;
+    width:468px;
+    border-radius:14px;
+    background:linear-gradient(0deg,rgba(0,0,0,.5),rgba(0,0,0,.5)) 0 0/cover,url("https://brew.sh/assets/img/homebrew-social-card.png") center center/cover;
+    cursor:pointer;
+    transition:.2s
 }
-
-.card:hover > .card-title {
-    color: white;
+.card:hover>.card-read-more{
+    color:rgba(255,255,255,.5)
 }
-
-.card:hover > .card-read-more:after {
-    content: '> READ MORE';
+.card:hover>.card-title{
+    color:#fff
 }
-
-.card-title {
-    font-size: 32px;
-    font-weight: 500;
-    position: relative;
-    left: 15px;
-    top: 8px;
-    margin: 0;
-    padding: 0;
-    color: blanchedalmond;
-    transition: 0.2s;
+.card:hover>.card-read-more:after{
+    content:'> READ MORE'
 }
-
-.card-author {
-    padding: 0;
-    position: relative;
-    top: 10px;
-    left: 15px;
-    margin: 0;
-    color: #B9B9B9;
-    font-size: 20px;
-    font-weight: 400;
+.card-title{
+    font-size:32px;
+    font-weight:500;
+    left:15px;
+    top:8px;
+    margin:0;
+    color:#ffebcd;
+    transition:.2s
 }
-
-.card-downloads {
-    font-size: 14px;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    margin: 0;
-    padding: 0;
+.card-author{
+    top:10px;
+    left:15px;
+    margin:0;
+    color:#b9b9b9;
+    font-size:20px;
+    font-weight:400
 }
-
-.card-description {
-    font-size: 18px;
-    line-height: 22px;
-    position: relative;
-    width: calc(100% - 38px);
-    height: 200px;
-    left: 15px;
-    padding-right: 5px;
-    text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-    white-space: normal;
+.card-downloads{
+    font-size:14px;
+    position:absolute;
+    right:10px;
+    top:10px;
+    margin:0;
+    padding:0
 }
-
-.card-read-more {
-    color: rgba(255, 255, 255, 0.25);
-    font-size: 16px;
-    font-weight: 500;
-    padding: 0;
-    margin: 0;
-    position: relative;
-    left: 15px;
-    bottom: 15px;
-    transition: 0.2s;
+.card-description{
+    font-size:18px;
+    line-height:22px;
+    position:relative;
+    width:calc(100% - 38px);
+    height:200px;
+    left:15px;
+    padding-right:5px;
+    text-shadow:0 0 5px rgba(0,0,0,.5);
+    white-space:normal
 }
-
-.card-read-more:after {
-    content: '+ READ MORE';
+.card-read-more{
+    color:rgba(255,255,255,.25);
+    font-size:16px;
+    font-weight:500;
+    padding:0;
+    margin:0;
+    position:relative;
+    left:15px;
+    bottom:15px;
+    transition:.2s
 }
-
-@media screen and (max-width: 560px) {
-    .card {
-        width: 92vw;
+.card-read-more:after{
+    content:'+ READ MORE'
+}
+@media screen and (max-width:560px){
+    .card{
+        width:92vw
     }
-
-    .card-description {
-        width: calc(92vw - 15px)
+    .card-description{
+        width:calc(92vw - 15px)
     }
 }

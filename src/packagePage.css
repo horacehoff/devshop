@@ -1,193 +1,156 @@
-.banner {
-    width: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 334px;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.35) 97.4%), url("https://brew.sh/assets/img/homebrew-social-card.png") center center;
-    background-size: cover;
-    z-index: -1;
-    margin: 0;
-    padding: 0;
+.banner{
+    width:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    height:334px;
+    background:linear-gradient(180deg,rgba(0,0,0,.05) 0,rgba(0,0,0,.35) 97.4%) 0 0/cover,url("https://brew.sh/assets/img/homebrew-social-card.png") center center/cover;
+    z-index:-1;
+    margin:0;
+    padding:0
 }
-
-.package-title {
-    font-weight: 700;
-    font-size: 55px;
-    position: absolute;
-    top: 337px;
-    left: 15px;
-    margin: 0;
-    padding: 0;
+.package-author,.package-description,.package-description-label,.package-screenshots,.package-screenshots-label,.package-title{
+    left:15px;
+    position:absolute
 }
-
-.package-author {
-    font-size: 20px;
-    position: absolute;
-    top: 415px;
-    left: 15px;
-    margin: 0;
-    padding: 0;
-    color: #B9B9B9;
+.package-title{
+    font-weight:700;
+    font-size:55px;
+    top:337px;
+    margin:0;
+    padding:0
 }
-
-.package-description-label {
-    position: absolute;
-    top: 467px;
-    left: 15px;
-    color: #B9B9B9;
-    margin: 0;
-    padding: 0;
+.package-author{
+    font-size:20px;
+    top:415px;
+    margin:0;
+    padding:0;
+    color:#b9b9b9
 }
-
-.package-description {
-    position: absolute;
-    top: 476px;
-    left: 15px;
-    width: calc(100% - 15px - 75px - 220px - 20px);
-    height: 200px;
-    overflow-y: scroll;
+.package-description-label{
+    top:467px;
+    color:#b9b9b9;
+    margin:0;
+    padding:0
 }
-
-.package-screenshots-label {
-    position: absolute;
-    top: 710px;
-    left: 15px;
-    color: #B9B9B9;
+.package-description{
+    top:476px;
+    width:calc(100% - 15px - 75px - 220px - 20px);
+    height:200px;
+    overflow-y:scroll
 }
-
-.package-screenshots-label:after {
-    content: '// 03 - SCREENSHOTS';
+.package-screenshots-label{
+    top:710px;
+    color:#b9b9b9
 }
-
-.package-screenshots {
-    position: absolute;
-    top: 755px;
-    margin: 0;
-    left: 15px;
-    padding: 0;
-    width: calc(100% - 15px);
-    overflow: scroll;
-    white-space: nowrap;
-    scroll-snap-type: x mandatory;
+.package-screenshots-label:after{
+    content:'// 03 - SCREENSHOTS'
 }
-
-.package-img {
-    border-radius: 8px;
-    height: calc(444px / 16 * 9);
-    width: 444px;
-    object-fit: cover;
-    scroll-snap-align: start;
+.package-screenshots{
+    top:755px;
+    margin:0;
+    padding:0;
+    width:calc(100% - 15px);
+    overflow:scroll;
+    white-space:nowrap;
+    scroll-snap-type:x mandatory
 }
-
-.package-characteristics-label {
-    position: absolute;
-    top: 467px;
-    right: 75px;
-    color: #B9B9B9;
-    margin: 0;
-    padding: 0;
+.package-img{
+    border-radius:8px;
+    height:calc(444px / 16 * 9);
+    width:444px;
+    object-fit:cover;
+    scroll-snap-align:start
 }
-
-.package-characteristics-label:after {
-    content: '// 02 - CHARACTERISTICS'
+.package-characteristics-label{
+    position:absolute;
+    top:467px;
+    right:75px;
+    color:#b9b9b9;
+    margin:0;
+    padding:0
 }
-
-.package-characteristics {
-    position: absolute;
-    top: 476px;
-    right: 75px;
+.package-characteristics-label:after{
+    content:'// 02 - CHARACTERISTICS'
 }
-
-.package-download-btn {
-    position: absolute;
-    right: 120px;
-    top: 607px;
-    font-family: 'JetBrains Mono', monospace;
-    background-color: black;
-    color: white;
-    border: 0;
-    outline: 0;
-    padding: 20px;
-    font-weight: 700;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.2s;
-    z-index: 10;
-    transform-origin: center center;
+.package-characteristics{
+    position:absolute;
+    top:476px;
+    right:75px
 }
-
-.package-download-btn:hover {
-    background-color: white;
-    color: black;
-    scale: 1.3;
+.package-download-btn{
+    position:absolute;
+    right:120px;
+    top:607px;
+    font-family:'JetBrains Mono',monospace;
+    background-color:#000;
+    color:#fff;
+    border:0;
+    outline:0;
+    padding:20px;
+    font-weight:700;
+    font-size:16px;
+    cursor:pointer;
+    transition:.2s;
+    z-index:10;
+    transform-origin:center center
 }
-
-@media screen and (max-width: 1250px) {
-    .package-characteristics-label {
-        left: 15px;
-        top: 1040px;
+.package-download-btn:hover{
+    background-color:#fff;
+    color:#000;
+    scale:1.3;
+    -webkit-border-radius:25px;
+    border-radius:6px
+}
+@media screen and (max-width:1250px){
+    .package-characteristics-label{
+        left:15px;
+        top:1040px
     }
-
-    .package-characteristics-label:after {
-        content: '// 03 - CHARACTERISTICS'
+    .package-characteristics-label:after{
+        content:'// 03 - CHARACTERISTICS'
     }
-
-    .package-screenshots-label:after {
-        content: '// 02 - SCREENSHOTS'
+    .package-screenshots-label:after{
+        content:'// 02 - SCREENSHOTS'
     }
-
-    .package-characteristics {
-        left: 15px;
-        top: 1050px;
+    .package-characteristics{
+        left:15px;
+        top:1050px
     }
-
-    .package-download-btn {
-        top: 1181px;
-        left: 15px;
-        right: revert;
+    .package-download-btn{
+        top:1181px;
+        left:15px;
+        right:revert
     }
-
-    .package-description {
-        width: 83.9vw;
-    }
-
-}
-
-@media screen and (max-width: 905px) {
-    .package-description {
-        width: calc(100% - 15px);
-    }
-
-    .package-screenshots {
-        width: calc(100% - 15px);
+    .package-description{
+        width:83.9vw
     }
 }
-
-@media screen and (max-width: 475px) {
-    .package-img {
-        border-radius: 8px;
-        height: calc((100% - 15px) / 16 * 9);
-        width: calc(100% - 15px);
-        object-fit: cover;
-        scroll-snap-align: start;
-    }
-
-    .package-characteristics-label {
-        top: 995px;
-    }
-
-    .package-characteristics {
-        top: 1005px;
-    }
-
-    .package-download-btn {
-        top: 1136px;
+@media screen and (max-width:905px){
+    .package-description,.package-screenshots{
+        width:calc(100% - 15px)
     }
 }
-
-@media screen and (max-width: 400px) {
-    .package-download-btn {
-        left: calc(50% - (174px / 2));
+@media screen and (max-width:475px){
+    .package-img{
+        border-radius:8px;
+        height:calc((100% - 15px)/ 16 * 9);
+        width:calc(100% - 15px);
+        object-fit:cover;
+        scroll-snap-align:start
+    }
+    .package-characteristics-label{
+        top:995px
+    }
+    .package-characteristics{
+        top:1005px
+    }
+    .package-download-btn{
+        top:1136px
+    }
+}
+@media screen and (max-width:400px){
+    .package-download-btn{
+        left:calc(50% - (174px / 2))
     }
 }

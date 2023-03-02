@@ -7,6 +7,7 @@ import Home from "./Home.jsx";
 import Navbar from "./Navbar.jsx";
 import Packages from "./packages.jsx";
 import PackagePage from "./packagePage.jsx";
+import About from "./about.jsx";
 const SignUp = lazy(() => import('./signup.jsx'))
 const SignIn = lazy(() => import('./signin.jsx'))
 const CodeBlocks = lazy(() => import('./codeBlocks.jsx'))
@@ -45,6 +46,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                         <SignIn/>
                     </Suspense>
                 }/>
+                <Route path="/about" element={<About/>}/>
             </Routes>
         </BrowserRouter>
     </React.StrictMode>,

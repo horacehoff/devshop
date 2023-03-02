@@ -1,127 +1,102 @@
-.nav h2 {
-    font-family: 'Source Code Pro', monospace;
-    font-weight: 900;
-    font-size: 40px;
-    margin: 0;
-    left: 20px;
-    position: fixed;
-    z-index: 5000;
-    cursor: pointer;
+#account,#hamburger{
+    right:20px
 }
-
-.nav h4 {
-    margin: 0;
-    top: 26px;
-    font-weight: 700;
-    font-size: 16px;
-    position: fixed;
-    color: rgba(255, 255, 255, 0.75);
-    cursor: pointer;
-    transition: 0.2s;
+#hamburger,.nav h2{
+    cursor:pointer;
+    z-index:5000;
+    position:fixed
 }
-
-.nav h4:hover {
-    color: white;
+#full-nav,#hamburger,#nav-title,.nav h2,.nav h4{
+    position:fixed
 }
-
-#nav-title {
-    position: fixed;
-    top: 8px;
+#full-nav,#full-nav ul{
+    top:0;
+    width:100%;
+    margin:0
 }
-
-
-#code-blocks {
-    right: 359px;
+#full-nav ul li,#hamburger{
+    font-size:28px;
+    font-weight:700
 }
-
-#packages {
-    right: 262px;
+.nav h2{
+    font-family:'Source Code Pro',monospace;
+    font-weight:900;
+    font-size:40px;
+    margin:0;
+    left:20px
 }
-
-#pricing {
-    right: 175px;
+.nav h4{
+    margin:0;
+    top:26px;
+    font-weight:700;
+    font-size:16px;
+    color:rgba(255,255,255,.75);
+    cursor:pointer;
+    transition:.2s
 }
-
-#about {
-    right: 107px;
+.nav h4:hover{
+    color:#fff
 }
-
-#account {
-    right: 20px;
+#nav-title{
+    top:8px
 }
-
-
-#hamburger {
-    visibility: hidden;
-    position: fixed;
-    cursor: pointer;
-    font-size: 28px;
-    right: 20px;
-    margin: 0;
-    top: 16px;
-    font-weight: 700;
-    z-index: 5000;
+#code-blocks{
+    right:359px
 }
-
-#full-nav {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    margin: 0;
-    width: 100%;
-    height: 200%;
-    z-index: 3000;
-    transition: left 0.3s ease-in-out;
-    background-color: #080D2B;
+#packages{
+    right:262px
 }
-
-#full-nav ul {
-    list-style-type: none;
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: fit-content;
-    margin: 0;
-    padding-left: 0;
-    padding-top: calc((100vh / 2) - (390px / 2))
+#pricing{
+    right:175px
 }
-
-#full-nav ul li {
-    font-weight: 700;
-    font-size: 28px;
-    text-align: center;
+#about{
+    right:107px
 }
-
-#full-nav ul li:not(:last-child) {
-    margin-bottom: 20px;
+#hamburger{
+    visibility:hidden;
+    margin:0;
+    top:16px
 }
-
-
-@media screen and (max-width: 670px) {
-    #about {
-        visibility: hidden;
+#full-nav{
+    left:-100%;
+    height:200%;
+    z-index:3000;
+    transition:left .3s ease-in-out;
+    background-color:#080d2b
+}
+#full-nav ul{
+    list-style-type:none;
+    position:relative;
+    left:0;
+    height:fit-content;
+    padding-left:0;
+    padding-top:calc((100vh / 2) - (390px / 2))
+}
+#full-nav ul li{
+    text-align:center
+}
+#full-nav ul li:not(:last-child){
+    margin-bottom:20px
+}
+@media screen and (max-width:670px){
+    #about{
+        visibility:hidden
     }
-
-    #pricing {
-        right: 107px;
+    #pricing{
+        right:107px
     }
-
-    #packages {
-        right: 194px;
+    #packages{
+        right:194px
     }
-
-    #code-blocks {
-        right: 291px;
+    #code-blocks{
+        right:291px
     }
 }
-
-@media screen and (max-width: 600px) {
-    #code-blocks, #packages, #pricing, #about, #account {
-        visibility: hidden;
+@media screen and (max-width:600px){
+    #about,#account,#code-blocks,#packages,#pricing{
+        visibility:hidden
     }
-
-    #hamburger {
-        visibility: visible;
+    #hamburger{
+        visibility:visible
     }
 }

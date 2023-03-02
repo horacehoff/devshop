@@ -1,77 +1,49 @@
-.packages-title {
-    font-size: 7.5vw;
-    padding-left: 20px;
-    margin-bottom: 0;
-    padding-bottom: 0;
+.packages-title{
+    font-size:7.5vw;
+    padding-left:20px;
+    margin-bottom:0;
+    padding-bottom:0
 }
-
-
-.packages-card-list {
-    list-style-type: none;
-    width: available;
-    margin: 0;
-    padding: 0 0 0 20px;
-    height: fit-content;
+.packages-card-list{
+    list-style-type:none;
+    width:available;
+    margin:0;
+    padding:0 0 0 20px;
+    height:fit-content;
+    -ms-overflow-style:none;
+    scrollbar-width:none;
+    scroll-snap-type:x mandatory;
+    white-space:nowrap;
+    overflow-x:scroll
 }
-
-.packages-card-list li:not(:last-child) {
-    margin-right: 25px;
+.packages-card-list>li{
+    display:inline-block
 }
-
-.packages-card-list > li {
-    display: inline-block;
+.packages-card-list li{
+    height:fit-content;
+    scroll-snap-align:start
 }
-
-.packages-card-list li {
-    height: fit-content;
+.category-title{
+    padding-left:20px
 }
-
-.category-title {
-    padding-left: 20px;
-}
-
-@media screen and (max-width: 600px) {
-    .packages-title {
-        font-size: 13vw;
+@media screen and (max-width:600px){
+    .packages-title{
+        font-size:13vw
     }
 }
-
-@media screen and (max-width: 560px) {
-    .packages-title {
-        padding-left: 10px;
-    }
-
-    .category-title {
-        padding-left: 10px;
-    }
-
-    .packages-card-list {
-        padding-left: 10px;
+@media screen and (max-width:560px){
+    .category-title,.packages-card-list,.packages-title{
+        padding-left:10px
     }
 }
-
-@media screen and (max-width: 400px) {
-    .packages-title {
-        font-size: 17vw;
+@media screen and (max-width:400px){
+    .packages-title{
+        font-size:17vw
     }
 }
-
-.packages-card-list {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    scroll-snap-type: x mandatory;
-    white-space: nowrap;
-    overflow-x: scroll;
+.packages-card-list li:not(:last-child){
+    margin-right:35px
 }
-
-.packages-card-list li {
-    scroll-snap-align: start;
-}
-
-.packages-card-list li:not(:last-child) {
-    margin-right: 35px;
-}
-
-.packages-card-list::-webkit-scrollbar {
-    display: none;
+.packages-card-list::-webkit-scrollbar{
+    display:none
 }
