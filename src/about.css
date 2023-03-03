@@ -5,11 +5,24 @@
     margin-top: 80px;
     margin-bottom: 0;
 }
+
 .about-subtitle {
     font-size: 22px;
     text-align: center;
     margin: 0;
 }
+
+.about-linktree {
+    color: dodgerblue;
+    font-weight: bold;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.about-linktree:hover {
+    color: #0058ab;
+}
+
 @media screen and (max-width: 570px) {
     .about-title {
         font-size: 15.7vw;
