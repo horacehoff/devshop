@@ -149,6 +149,7 @@
     .bottom-block {
         height: 40px;
         width: 10%;
+        left: 0;
         position: absolute;
         top: 1140px;
     }
