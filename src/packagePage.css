@@ -146,10 +146,10 @@
         top: 1005px;
     }
 
-    .bottom-block {
-        height: 40px;
-        width: 100%;
-        position: absolute;
-        top: 1140px;
-    }
+    /*.bottom-block {*/
+    /*    height: 40px;*/
+    /*    width: 100%;*/
+    /*    position: absolute;*/
+    /*    top: 1140px;*/
+    /*}*/
 }
