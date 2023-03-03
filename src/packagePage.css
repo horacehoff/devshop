@@ -79,21 +79,24 @@
     right:75px
 }
 .package-download-btn{
-    position:absolute;
-    right:120px;
-    top:607px;
-    font-family:'JetBrains Mono',monospace;
-    background-color:#000;
-    color:#fff;
-    border:0;
-    outline:0;
-    padding:20px;
-    font-weight:700;
-    font-size:16px;
-    cursor:pointer;
-    transition:.2s;
-    z-index:10;
-    transform-origin:center center
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    font-family: 'JetBrains Mono', monospace;
+    background-color: #000;
+    color: #fff;
+    border: 0;
+    outline: 0;
+    padding: 20px 28px 20px 20px;
+    font-weight: 700;
+    font-size: 18px;
+    cursor: pointer;
+    transition: .2s;
+    z-index: 10;
+    transform-origin: center center;
+    border-top-left-radius: 6px;
+    overflow: hidden;
 }
 .package-download-btn:hover{
     background-color:#fff;
@@ -113,14 +116,9 @@
     .package-screenshots-label:after{
         content:'// 02 - SCREENSHOTS'
     }
-    .package-characteristics{
-        left:15px;
-        top:1050px
-    }
-    .package-download-btn{
-        top:1181px;
-        left:15px;
-        right:revert
+    .package-characteristics {
+        left: 15px;
+        top: 1050px;
     }
     .package-description{
         width:83.9vw
@@ -135,22 +133,23 @@
     .package-img{
         border-radius:8px;
         height:calc((100% - 15px)/ 16 * 9);
-        width:calc(100% - 15px);
-        object-fit:cover;
-        scroll-snap-align:start
+        width: calc(100% - 15px);
+        object-fit: cover;
+        scroll-snap-align: start
     }
-    .package-characteristics-label{
-        top:995px
+
+    .package-characteristics-label {
+        top: 995px
     }
-    .package-characteristics{
-        top:1005px
+
+    .package-characteristics {
+        top: 1005px;
     }
-    .package-download-btn{
-        top:1136px
-    }
-}
-@media screen and (max-width:400px){
-    .package-download-btn{
-        left:calc(50% - (174px / 2))
-    }
+
+    /*.bottom-block {*/
+    /*    height: 40px;*/
+    /*    width: 100%;*/
+    /*    position: absolute;*/
+    /*    top: 1140px;*/
+    /*}*/
 }

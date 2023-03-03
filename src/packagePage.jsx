@@ -48,6 +48,7 @@ export default function PackagePage() {
                 <p>TOTAL DOWNLOADS: 1.45K<br/>AVERAGE HAPPINESS: 100%<br/>TOTAL SIZE: 5.8MB<br/>CURRENT VERSION: 0.X.X
                 </p>
             </div>
+            <div className="bottom-block"></div>
         </>
     )
 }
