@@ -44,7 +44,7 @@
     color:#b9b9b9
 }
 .package-screenshots-label:after{
-    content:'// 03 - SCREENSHOTS'
+    content: '// 03 - GALLERY'
 }
 .package-screenshots{
     top:755px;
@@ -114,7 +114,7 @@
         content:'// 03 - CHARACTERISTICS'
     }
     .package-screenshots-label:after{
-        content:'// 02 - SCREENSHOTS'
+        content: '// 02 - GALLERY'
     }
     .package-characteristics {
         left: 15px;

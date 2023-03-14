@@ -1,4 +1,4 @@
-import React, {Suspense, lazy} from 'react'
+import React, {lazy, Suspense} from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import './lazy.css'
@@ -8,6 +8,8 @@ import Navbar from "./Navbar.jsx";
 import Packages from "./packages.jsx";
 import PackagePage from "./packagePage.jsx";
 import About from "./about.jsx";
+import CreatePackage from "./createPackage.jsx";
+
 const SignUp = lazy(() => import('./signup.jsx'))
 const SignIn = lazy(() => import('./signin.jsx'))
 const CodeBlocks = lazy(() => import('./codeBlocks.jsx'))
@@ -19,6 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Route path="/" element={
                     <Home/>
                 }/>
+                <Route path="/publish-package" element={<CreatePackage/>}></Route>
                 <Route path="/package-page" element={
                     <PackagePage/>
                 }/>
