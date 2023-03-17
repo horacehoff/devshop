@@ -9,27 +9,27 @@ import {useNavigate} from "react-router-dom";
 export default function CreatePackage() {
     const [pkgUpload, setPkgUpload] = useState(null);
     const [name, setName] = useState("");
-    const {uid, setUid} = useState(null);
+    let uid = "";
     const navigate = useNavigate()
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            console.log("yes")
-            setUid(user.uid)
-
+            uid = user.uid;
         } else {
-            console.log("no")
-
             navigate("/")
         }
     });
     const uploadPkg = () => {
         if (pkgUpload != null) {
-            const pkgRef = ref(storage, uid + name + "/pkg/" + pkgUpload.name)
+            if (name === "") {
+                alert("Invalid name")
+                return
+            }
+            const pkgRef = ref(storage, uid + "/" + name + "/pkg/" + pkgUpload.name)
             uploadBytes(pkgRef, pkgUpload).then(() => {
                 alert("img uploaded")
             });
-
-
+        } else {
+            alert("Please select a file.")
         }
     };
     return (
@@ -51,14 +51,14 @@ export default function CreatePackage() {
                 <input type="text" className="desc-input" placeholder="PACKAGE VERSION" style={{marginTop: "10px"}}/>
 
 
-                <h2 style={{margin: "0", marginTop: "25px"}}>// GALLERY IMAGES</h2>
-                <input type="text" className="img-input" placeholder="1ST IMAGE URL"/>
-                <input type="text" className="img-input" placeholder="2ND IMAGE URL"/>
-                <input type="text" className="img-input" placeholder="3RD IMAGE URL"/>
-                <input type="text" className="img-input" placeholder="4TH IMAGE URL"/>
-                <input type="text" className="img-input" placeholder="5TH IMAGE URL"/>
-
-                <button>Publish my package!</button>
+                <h2 style={{margin: "0", marginTop: "25px", marginBottom: "-10px"}}>// GALLERY IMAGES (MAX{'=>'}4)</h2>
+                <input type="file" id="file" style={{display: "none"}} multiple onChange={(event) => {
+                    setPkgUpload(event.target.files[0])
+                }}/>
+                <p>IDEAL DIMENSIONS: 890 x 460</p>
+                <label htmlFor="file" className="file-input">UPLOAD IMAGES</label>
+                <br/><br/>
+                <button onClick={() => uploadPkg()}>Publish my package!</button>
             </div>
         </>
     )
