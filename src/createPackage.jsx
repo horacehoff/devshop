@@ -8,6 +8,10 @@ import {useNavigate} from "react-router-dom";
 
 export default function CreatePackage() {
     const [pkgUpload, setPkgUpload] = useState(null);
+    const [imgUploadOne, setImgUploadOne] = useState(null);
+    const [imgUploadTwo, setImgUploadTwo] = useState(null);
+    const [imgUploadThree, setImgUploadThree] = useState(null);
+    const [imgUploadFour, setImgUploadFour] = useState(null);
     const [name, setName] = useState("");
     let uid = "";
     const navigate = useNavigate()
@@ -19,19 +23,29 @@ export default function CreatePackage() {
         }
     });
     const uploadPkg = () => {
-        if (pkgUpload != null) {
-            if (name === "") {
-                alert("Invalid name")
-                return
-            }
-            const pkgRef = ref(storage, uid + "/" + name + "/pkg/" + pkgUpload.name)
-            uploadBytes(pkgRef, pkgUpload).then(() => {
-                alert("img uploaded")
-            });
-        } else {
-            alert("Please select a file.")
-        }
+        const pkgRef = ref(storage, "users/" + uid + "/" + name + "/pkg/" + pkgUpload.name)
+        uploadBytes(pkgRef, pkgUpload).then(() => {
+            alert("pkg uploaded")
+        });
     };
+    const uploadImg = () => {
+        const imgRefOne = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUploadOne.name)
+        uploadBytes(imgRefOne, imgUploadOne).then(() => {
+            alert("img uploaded")
+        });
+        // const imgRefTwo = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUploadTwo.name)
+        // uploadBytes(imgRefTwo, imgUploadTwo).then(() => {
+        //     alert("img uploaded")
+        // });
+        // const imgRefThree = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUploadThree.name)
+        // uploadBytes(imgRefThree, imgUploadThree).then(() => {
+        //     alert("img uploaded")
+        // });
+        // const imgRefFour = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUploadFour.name)
+        // uploadBytes(imgRefFour, imgUploadFour).then(() => {
+        //     alert("img uploaded")
+        // });
+    }
     return (
         <>
             <Navbar/>
@@ -52,13 +66,23 @@ export default function CreatePackage() {
 
 
                 <h2 style={{margin: "0", marginTop: "25px", marginBottom: "-10px"}}>// GALLERY IMAGES (MAX{'=>'}4)</h2>
-                <input type="file" id="file" style={{display: "none"}} multiple onChange={(event) => {
-                    setPkgUpload(event.target.files[0])
+                <input type="file" id="file" multiple onChange={(event) => {
+                    imgUpload.push(event.target.files[0])
                 }}/>
                 <p>IDEAL DIMENSIONS: 890 x 460</p>
                 <label htmlFor="file" className="file-input">UPLOAD IMAGES</label>
                 <br/><br/>
-                <button onClick={() => uploadPkg()}>Publish my package!</button>
+                <button onClick={() => {
+                    if (name === "") {
+                        alert("Invalid name")
+                    } else if (pkgUpload == null) {
+                        alert("Please select a file.")
+                    } else {
+                        uploadImg()
+                        uploadPkg()
+                    }
+                }}>Publish my package!
+                </button>
             </div>
         </>
     )
