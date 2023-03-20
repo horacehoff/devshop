@@ -7,6 +7,7 @@
     outline: 0;
     color: white;
     width: 100%;
+    overflow-x: scroll;
 }
 
 .name-input::placeholder {
@@ -26,6 +27,7 @@
     outline: 0;
     color: white;
     width: 100%;
+    overflow-x: scroll;
 }
 
 .desc-input::placeholder {

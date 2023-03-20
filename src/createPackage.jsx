@@ -8,10 +8,15 @@ import {useNavigate} from "react-router-dom";
 
 export default function CreatePackage() {
     const [pkgUpload, setPkgUpload] = useState(null);
-    const [imgUploadOne, setImgUploadOne] = useState(null);
+
+    const [imgUpload0ne, setImgUploadOne] = useState(null);
+
     const [imgUploadTwo, setImgUploadTwo] = useState(null);
+
     const [imgUploadThree, setImgUploadThree] = useState(null);
+
     const [imgUploadFour, setImgUploadFour] = useState(null);
+
     const [name, setName] = useState("");
     let uid = "";
     const navigate = useNavigate()
@@ -29,22 +34,27 @@ export default function CreatePackage() {
         });
     };
     const uploadImg = () => {
-        const imgRefOne = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUploadOne.name)
-        uploadBytes(imgRefOne, imgUploadOne).then(() => {
+        let imgRefOne = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUpload0ne.name)
+        uploadBytes(imgRefOne, imgUpload0ne).then(() => {
             alert("img uploaded")
-        });
-        // const imgRefTwo = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUploadTwo.name)
-        // uploadBytes(imgRefTwo, imgUploadTwo).then(() => {
-        //     alert("img uploaded")
-        // });
-        // const imgRefThree = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUploadThree.name)
-        // uploadBytes(imgRefThree, imgUploadThree).then(() => {
-        //     alert("img uploaded")
-        // });
-        // const imgRefFour = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUploadFour.name)
-        // uploadBytes(imgRefFour, imgUploadFour).then(() => {
-        //     alert("img uploaded")
-        // });
+        })
+
+        let imgRefTwo = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUploadTwo.name)
+        uploadBytes(imgRefTwo, imgUploadTwo).then(() => {
+            alert("img uploaded")
+
+        })
+
+        let imgRefThree = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUploadThree.name)
+        uploadBytes(imgRefThree, imgUploadThree).then(() => {
+            alert("img uploaded")
+        })
+
+        let imgRefFour = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUploadFour.name)
+        uploadBytes(imgRefFour, imgUploadFour).then(() => {
+            alert("img uploaded")
+        })
+
     }
     return (
         <>
@@ -60,17 +70,22 @@ export default function CreatePackage() {
                 <h2 style={{margin: "0", marginTop: "25px", marginBottom: "10px"}}>// PACKAGE</h2>
                 <input type="file" id="file" style={{display: "none"}} onChange={(event) => {
                     setPkgUpload(event.target.files[0])
+                    console.log("pkg")
                 }}/>
                 <label htmlFor="file" className="file-input">UPLOAD PACKAGE</label>
                 <input type="text" className="desc-input" placeholder="PACKAGE VERSION" style={{marginTop: "10px"}}/>
 
 
                 <h2 style={{margin: "0", marginTop: "25px", marginBottom: "-10px"}}>// GALLERY IMAGES (MAX{'=>'}4)</h2>
-                <input type="file" id="file" multiple onChange={(event) => {
-                    imgUpload.push(event.target.files[0])
+                <input type="file" id="img-file" style={{display: "none"}} multiple onChange={(event) => {
+                    setImgUploadOne(event.target.files[0])
+                    setImgUploadTwo(event.target.files[1])
+                    setImgUploadThree(event.target.files[2])
+                    setImgUploadFour(event.target.files[3])
+                    console.log("img")
                 }}/>
                 <p>IDEAL DIMENSIONS: 890 x 460</p>
-                <label htmlFor="file" className="file-input">UPLOAD IMAGES</label>
+                <label htmlFor="img-file" className="file-input">UPLOAD IMAGES</label>
                 <br/><br/>
                 <button onClick={() => {
                     if (name === "") {
