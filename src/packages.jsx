@@ -52,7 +52,7 @@ export default function Packages() {
                     Object.entries(packages)
                         .map(([key, value]) => <>
                             <li className="packages-card-list-child">
-                                <PackageCard dwnl="55" author="hombrewTeam"
+                                <PackageCard dwnl="55" author="hombrewTeam" name="Homebrew"
                                              desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
                             </li>
                         </>)
