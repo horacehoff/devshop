@@ -1,9 +1,14 @@
 import "./packageCard.css"
 import shortNumber from "short-number"
 import {useNavigate} from "react-router-dom";
+import {useEffect} from "react";
 
 export default function PackageCard(props) {
     const navigate = useNavigate();
+    useEffect(() => {
+        let card = document.querySelector('.card');
+        card.style.setProperty("--url_img", `url(${props.banner})`);
+    }, []);
     return (
         <div className="card" onClick={() => navigate("/package-page")}>
             <h2 className="card-title">{props.name}</h2>

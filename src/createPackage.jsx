@@ -2,7 +2,7 @@ import "./createPackage.css"
 import Navbar from "./Navbar.jsx";
 import {useState} from "react";
 import {auth, db, storage} from "./firebase.js";
-import {ref, uploadBytes, getDownloadURL} from "firebase/storage"
+import {getDownloadURL, ref, uploadBytes} from "firebase/storage"
 import {onAuthStateChanged} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
 import {doc, setDoc} from "firebase/firestore";
@@ -23,6 +23,7 @@ export default function CreatePackage() {
     const [name, setName] = useState("");
     const [desc, setDesc] = useState("");
     const [version, setVersion] = useState("");
+    const [username, setUsername] = useState("");
 
     let uid = "";
     const navigate = useNavigate()
@@ -64,6 +65,16 @@ export default function CreatePackage() {
         uploadBytes(imgRefFour, imgUploadFour).then(() => {
             alert("img uploaded")
         })
+        // get the username from the database using the uid
+        const userRef = doc(db, "users", uid);
+        userRef.get().then((doc) => {
+            if (doc.exists()) {
+                setUsername(doc.data().username);
+            } else {
+                console.log("No such document!");
+            }
+        })
+
         getDownloadURL(bannerRef).then((bannerFileUrl) => {
             getDownloadURL(imgRefOne).then((url) => {
                 getDownloadURL(imgRefTwo).then((urlTwo) => {
@@ -74,6 +85,7 @@ export default function CreatePackage() {
                                     name: name,
                                     description: desc,
                                     owner_id: uid,
+                                    owner_username: username,
                                     current_version: version,
                                     downloads: 0,
                                     ratings: [],

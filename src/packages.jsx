@@ -2,12 +2,14 @@ import "./packages.css"
 import Navbar from "./Navbar.jsx";
 import PackageCard from "./packageCard.jsx";
 import {db} from "./firebase.js";
-import {useEffect} from "react";
-import {doc, getDocs, collection} from "firebase/firestore";
-import {query, orderBy, limit} from "firebase/firestore";
+import {useEffect, useState} from "react";
+import {collection, doc, getDoc, getDocs, limit, orderBy, query} from "firebase/firestore";
+import {useNavigate} from "react-router-dom";
 
 
 export default function Packages() {
+    const navigate = useNavigate();
+
     function handler(e) {
         const isTouchPad = e.wheelDeltaY ? e.wheelDeltaY === -3 * e.deltaY : e.deltaMode === 0;
         if (!isTouchPad) {
@@ -28,19 +30,35 @@ export default function Packages() {
 
     document.addEventListener("wheel", handler, {passive: false});
 
-    let packages = [];
-    const collectionRef = collection(db, 'packages')
-    const q = query(collectionRef, orderBy("downloads", "desc"), limit(9))
-    getDocs(q)
-        .then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                packages.push(doc.data())
+
+    const [packages, setPackages] = useState([]);
+    useEffect(() => {
+        const collectionRef = collection(db, 'packages')
+        const q = query(collectionRef, orderBy("downloads", "desc"), orderBy("created", "desc"), limit(9))
+        getDocs(q)
+            .then((querySnapshot) => {
+                const packageData = [];
+                querySnapshot.forEach((doc) => {
+                    packageData.push(doc.data());
+                });
+                setPackages(packageData);
+            })
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
             });
-        })
-        .catch((error) => {
-            console.log("Error getting documents: ", error);
-        });
-    console.log(packages)
+    }, []);
+
+    const getUsername = async (userId) => {
+        const userDocRef = doc(collection(db, 'users'), userId);
+        const userDocSnapshot = await getDoc(userDocRef);
+
+        if (userDocSnapshot.exists()) {
+            const userData = userDocSnapshot.data();
+            return userData.username;
+        } else {
+            throw new Error(`User with ID ${userId} not found`);
+        }
+    };
 
     return (
         <>
@@ -48,72 +66,17 @@ export default function Packages() {
             <h1 className="packages-title">PACKAGES</h1>
             <h2 className="category-title">// CURRENTLY TRENDING</h2>
             <ul className="packages-card-list" id="packages-card-list">
-                {
-                    Object.entries(packages)
-                        .map(([key, value]) => <>
-                            <li className="packages-card-list-child">
-                                <PackageCard dwnl="55" author="hombrewTeam" name="Homebrew"
-                                             desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
-                            </li>
-                        </>)
-                }
-                {/*<li className="packages-card-list-child"><PackageCard dwnl="55" author="hombrewTeam"*/}
-                {/*                 desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
-                {/*</li>*/}
-                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
-                {/*                                          desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
-                {/*</li>*/}
-                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
-                {/*                                          desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
-                {/*</li>*/}
-                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
-                {/*                                          desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
-                {/*</li>*/}
-                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
-                {/*                                          desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
-                {/*</li>*/}
-                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
-                {/*                                          desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
-                {/*</li>*/}
-                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
-                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
-                {/*</li>*/}
-                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
-                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
-                {/*</li>*/}
-                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
-                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
-                {/*</li>*/}
+                {packages.map((pkg, index) => (
+                    <li key={index} className="packages-card-list-child" onClick={() => {
+                        navigate("/" + pkg.name)
+                    }}>
+                        <PackageCard dwnl={pkg.downloads} author={pkg.owner_username} name={pkg.name}
+                                     desc={pkg.description} banner={pkg.banner}/>
+                    </li>
+                ))}
             </ul>
             <h2 className="category-title">// RECENTLY CREATED</h2>
             <ul className="packages-card-list" id="packages-card-list">
-                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
-                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
-                {/*</li>*/}
-                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
-                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
-                {/*</li>*/}
-                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
-                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
-                {/*</li>*/}
-                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
-                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
-                {/*</li>*/}
-                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
-                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
-                {/*</li>*/}
-                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
-                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
-                {/*</li>*/}
-                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
-                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
-                {/*</li>*/}
-                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
-                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
-                {/*</li>*/}
-                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
-                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
-                {/*</li>*/}
             </ul>
         </>
     )

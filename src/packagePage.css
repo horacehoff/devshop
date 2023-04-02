@@ -1,13 +1,14 @@
 .banner{
-    width:100%;
-    position:absolute;
-    left:0;
-    top:0;
-    height:334px;
-    background:linear-gradient(180deg,rgba(0,0,0,.05) 0,rgba(0,0,0,.35) 97.4%) 0 0/cover,url("https://brew.sh/assets/img/homebrew-social-card.png") center center/cover;
-    z-index:-1;
-    margin:0;
-    padding:0
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 334px;
+    --banner_url: url("https://brew.sh/assets/img/homebrew-social-card.png");
+    background: linear-gradient(180deg, rgba(0, 0, 0, .05) 0, rgba(0, 0, 0, .15) 100%) 0 0/cover, var(--banner_url) center center/cover;
+    z-index: -1;
+    margin: 0;
+    padding: 0
 }
 .package-author,.package-description,.package-description-label,.package-screenshots,.package-screenshots-label,.package-title{
     left:15px;
