@@ -80,7 +80,7 @@
 }
 
 .publish-btn {
-    width:325px;
+    width:calc(100vw - 20px);
     height:40px;
     background-color:#282828;
     border:0;
