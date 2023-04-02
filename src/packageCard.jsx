@@ -6,7 +6,7 @@ export default function PackageCard(props) {
     const navigate = useNavigate();
     return (
         <div className="card" onClick={() => navigate("/package-page")}>
-            <h2 className="card-title">Homebrew</h2>
+            <h2 className="card-title">{props.name}</h2>
             <h4 className="card-author">// BY <span style={{fontWeight: "500", color: "white"}}>{props.author}</span>
             </h4>
             <p className="card-downloads"><span

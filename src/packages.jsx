@@ -1,6 +1,11 @@
 import "./packages.css"
 import Navbar from "./Navbar.jsx";
 import PackageCard from "./packageCard.jsx";
+import {db} from "./firebase.js";
+import {useEffect} from "react";
+import {doc, getDocs, collection} from "firebase/firestore";
+import {query, orderBy, limit} from "firebase/firestore";
+
 
 export default function Packages() {
     function handler(e) {
@@ -23,69 +28,92 @@ export default function Packages() {
 
     document.addEventListener("wheel", handler, {passive: false});
 
+    let packages = [];
+    const collectionRef = collection(db, 'packages')
+    const q = query(collectionRef, orderBy("downloads", "desc"), orderBy("created", "desc"), limit(9))
+    getDocs(q)
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                packages.push(doc.data())
+            });
+        })
+        .catch((error) => {
+            console.log("Error getting documents: ", error);
+        });
+    console.log(packages)
+
     return (
         <>
             <Navbar/>
             <h1 className="packages-title">PACKAGES</h1>
             <h2 className="category-title">// CURRENTLY TRENDING</h2>
             <ul className="packages-card-list" id="packages-card-list">
-                <li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"
-                                 desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
-                </li>
-                <li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"
-                                                          desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
-                </li>
-                <li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"
-                                                          desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
-                </li>
-                <li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"
-                                                          desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
-                </li>
-                <li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"
-                                                          desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
-                </li>
-                <li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"
-                                                          desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
-                </li>
-                <li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"
-                                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
-                </li>
-                <li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"
-                                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
-                </li>
-                <li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"
-                                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
-                </li>
+                {
+                    Object.entries(packages)
+                        .map(([key, value]) => <>
+                            <li className="packages-card-list-child">
+                                <PackageCard dwnl="55" author="hombrewTeam"
+                                             desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
+                            </li>
+                        </>)
+                }
+                {/*<li className="packages-card-list-child"><PackageCard dwnl="55" author="hombrewTeam"*/}
+                {/*                 desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
+                {/*</li>*/}
+                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
+                {/*                                          desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
+                {/*</li>*/}
+                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
+                {/*                                          desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
+                {/*</li>*/}
+                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
+                {/*                                          desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
+                {/*</li>*/}
+                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
+                {/*                                          desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
+                {/*</li>*/}
+                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
+                {/*                                          desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
+                {/*</li>*/}
+                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
+                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
+                {/*</li>*/}
+                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
+                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
+                {/*</li>*/}
+                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
+                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
+                {/*</li>*/}
             </ul>
             <h2 className="category-title">// RECENTLY CREATED</h2>
             <ul className="packages-card-list" id="packages-card-list">
-                <li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"
-                                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
-                </li>
-                <li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"
-                                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
-                </li>
-                <li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"
-                                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
-                </li>
-                <li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"
-                                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
-                </li>
-                <li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"
-                                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
-                </li>
-                <li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"
-                                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
-                </li>
-                <li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"
-                                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
-                </li>
-                <li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"
-                                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
-                </li>
-                <li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"
-                                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>
-                </li>
+                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
+                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
+                {/*</li>*/}
+                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
+                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
+                {/*</li>*/}
+                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
+                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
+                {/*</li>*/}
+                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
+                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
+                {/*</li>*/}
+                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
+                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
+                {/*</li>*/}
+                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
+                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
+                {/*</li>*/}
+                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
+                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
+                {/*</li>*/}
+                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
+                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
+                {/*</li>*/}
+                {/*<li className="packages-card-list-child"><PackageCard dwnl="55566564" author="hombrewTeam"*/}
+                {/*                                                      desc="Homebrew offers a wide variety of packages to download. Its available platforms are macOS and Linux, and Windows support is coming soon"/>*/}
+                {/*</li>*/}
             </ul>
         </>
     )
