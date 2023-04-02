@@ -30,7 +30,7 @@ export default function Packages() {
 
     let packages = [];
     const collectionRef = collection(db, 'packages')
-    const q = query(collectionRef, orderBy("downloads", "desc"), orderBy("created", "desc"), limit(9))
+    const q = query(collectionRef, orderBy("downloads", "desc"), limit(9))
     getDocs(q)
         .then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
