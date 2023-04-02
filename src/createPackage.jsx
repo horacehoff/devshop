@@ -71,7 +71,7 @@ export default function CreatePackage() {
                 <input type="file" id="file" style={{display: "none"}} onChange={(event) => {
                     setPkgUpload(event.target.files[0])
                     console.log("pkg")
-                }}/>
+                }} accept=".zip, application/zip" required/>
                 <label htmlFor="file" className="file-input">UPLOAD PACKAGE</label>
                 <input type="text" className="desc-input" placeholder="PACKAGE VERSION" style={{marginTop: "10px"}}/>
 
@@ -83,7 +83,7 @@ export default function CreatePackage() {
                     setImgUploadThree(event.target.files[2])
                     setImgUploadFour(event.target.files[3])
                     console.log("img")
-                }}/>
+                }} required accept=".jpeg,.webp, image/jpeg"/>
                 <p>IDEAL DIMENSIONS: 890 x 460</p>
                 <label htmlFor="img-file" className="file-input">UPLOAD IMAGES</label>
                 <br/><br/>
@@ -96,7 +96,7 @@ export default function CreatePackage() {
                         uploadImg()
                         uploadPkg()
                     }
-                }}>Publish my package!
+                }} className="publish-btn">
                 </button>
             </div>
         </>

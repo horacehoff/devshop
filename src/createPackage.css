@@ -8,6 +8,7 @@
     color: white;
     width: 100%;
     overflow-x: scroll;
+    margin: 0;
 }
 
 .name-input::placeholder {
@@ -28,6 +29,7 @@
     color: white;
     width: 100%;
     overflow-x: scroll;
+    margin: 0;
 }
 
 .desc-input::placeholder {
@@ -72,4 +74,29 @@
 .file-input:hover {
     background-color: white;
     color: black;
+}
+
+.publish-btn {
+    width:325px;
+    height:40px;
+    background-color:#282828;
+    border:0;
+    border-radius:5px;
+    color:#fff;
+    font-weight:600;
+    font-size:16px;
+    top:440px;
+    cursor:pointer;
+    transition:0.25s ease-in-out;
+    font-family: 'JetBrains Mono', monospace;
+}
+.publish-btn:before {
+    content: "PUBLISH PACKAGE";
+}
+.publish-btn:hover:before {
+    content: ">> PUBLISH PACKAGE <<";
+}
+.publish-btn:hover{
+    background-color:#fff;
+    color:#000
 }
