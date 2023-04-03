@@ -33,19 +33,19 @@ export default function Packages() {
 
     const [packages, setPackages] = useState([]);
     useEffect(() => {
-        const collectionRef = collection(db, 'packages')
-        const q = query(collectionRef, orderBy("downloads", "desc"), orderBy("created", "desc"), limit(9))
-        getDocs(q)
-            .then((querySnapshot) => {
-                const packageData = [];
-                querySnapshot.forEach((doc) => {
-                    packageData.push(doc.data());
-                });
+        const fetchPackages = async () => {
+            try {
+                const collectionRef = collection(db, 'packages');
+                const q = query(collectionRef, orderBy('downloads', 'desc'), orderBy('created', 'desc'), limit(9));
+                const querySnapshot = await getDocs(q);
+                const packageData = querySnapshot.docs.map(doc => doc.data());
                 setPackages(packageData);
-            })
-            .catch((error) => {
-                console.log("Error getting documents: ", error);
-            });
+            } catch (error) {
+                console.log('Error getting documents: ', error);
+            }
+        };
+
+        fetchPackages().then(r => console.log(r));
     }, []);
 
     const getUsername = async (userId) => {
