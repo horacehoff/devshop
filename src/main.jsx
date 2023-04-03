@@ -46,7 +46,6 @@ function App() {
     }, []);
 
     return (
-        <React.StrictMode>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={
@@ -86,7 +85,6 @@ function App() {
                     ))}
                 </Routes>
             </BrowserRouter>
-        </React.StrictMode>
     )
 }
 
