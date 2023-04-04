@@ -33,7 +33,7 @@ export default function Packages() {
 
 
     const [packages, setPackages] = useState([]);
-    useEffect(() => {
+    useEffect(async () => {
         const fetchPackages = async () => {
             console.log("fetching packages...")
             try {
@@ -50,7 +50,12 @@ export default function Packages() {
             }
         };
 
-        fetchPackages().then(r => console.log(r));
+        try {
+            await fetchPackages();
+            console.log("fetchPackages completed successfully");
+        } catch (error) {
+            console.log("Error fetching packages: ", error);
+        }
     }, []);
 
     const getUsername = async (userId) => {
