@@ -1,4 +1,4 @@
-import React, {lazy, Suspense, useEffect, useState} from 'react'
+import React, {lazy, Suspense, useState} from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import './lazy.css'
@@ -9,8 +9,7 @@ import Packages from "./packages.jsx";
 import PackagePage from "./packagePage.jsx";
 import About from "./about.jsx";
 import CreatePackage from "./createPackage.jsx";
-import {collection, getDocs, query} from "firebase/firestore";
-import {db} from "./firebase.js";
+import {getDocs, query} from "firebase/firestore";
 
 const SignUp = lazy(() => import('./signup.jsx'))
 const SignIn = lazy(() => import('./signin.jsx'))
@@ -30,29 +29,29 @@ async function getPackages(collectionRef) {
 function App() {
     const [packages, setPackages] = useState([]);
 
-    useEffect(() => {
-        const fetchPackages = async () => {
-            try {
-                const collectionRef = collection(db, 'packages');
-                const data = await getPackages(collectionRef);
-                setPackages(data);
-            } catch (error) {
-                console.log('Error getting packages: ', error);
-            }
-        };
-
-        fetchPackages().then(r => console.log('Packages fetched'));
-    }, []);
+    // useEffect(() => {
+    //     const fetchPackages = async () => {
+    //         try {
+    //             const collectionRef = collection(db, 'packages');
+    //             const data = await getPackages(collectionRef);
+    //             setPackages(data);
+    //         } catch (error) {
+    //             console.log('Error getting packages: ', error);
+    //         }
+    //     };
+    //
+    //     fetchPackages().then(r => console.log('Packages fetched'));
+    // }, []);
 
     return (
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={
-                        <Home/>
-                    }/>
-                    <Route path="/publish-package" element={<CreatePackage/>}></Route>
-                    <Route path="/package-page" element={
-                        <PackagePage/>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={
+                    <Home/>
+                }/>
+                <Route path="/publish-package" element={<CreatePackage/>}></Route>
+                <Route path="/package-page" element={
+                    <PackagePage/>
                     }/>
                     <Route path="/packages" element={
                         <Packages/>
@@ -73,16 +72,16 @@ function App() {
                             <SignUp/>
                         </Suspense>
                     }/>
-                    <Route path="/sign-in" element={
-                        <Suspense fallback={<Navbar/>}>
-                            <SignIn/>
-                        </Suspense>
-                    }/>
-                    <Route path="/about" element={<About/>}/>
-                    {packages.map((pkg, index) => (
-                        <Route path={"/" + pkg.name} element={<PackagePage pkg={pkg}/>}/>
-                    ))}
-                </Routes>
+                <Route path="/sign-in" element={
+                    <Suspense fallback={<Navbar/>}>
+                        <SignIn/>
+                    </Suspense>
+                }/>
+                <Route path="/about" element={<About/>}/>
+                {/*{packages.map((pkg, index) => (*/}
+                {/*    <Route path={"/" + pkg.name} element={<PackagePage pkg={pkg}/>}/>*/}
+                {/*))}*/}
+            </Routes>
             </BrowserRouter>
     )
 }
