@@ -9,7 +9,7 @@ import Packages from "./packages.jsx";
 import PackagePage from "./packagePage.jsx";
 import About from "./about.jsx";
 import CreatePackage from "./createPackage.jsx";
-import {collection, getDocs, query} from "firebase/firestore";
+import {collection, getDocs, query, setLogLevel} from "firebase/firestore";
 import {db} from "./firebase.js";
 
 const SignUp = lazy(() => import('./signup.jsx'))
@@ -31,6 +31,7 @@ async function getPackages(collectionRef) {
 
 function App() {
     const [packages, setPackages] = useState([]);
+    setLogLevel("debug");
 
     useEffect(() => {
         console.log("fetching packages(function call)...")

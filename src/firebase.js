@@ -1,6 +1,6 @@
 import {initializeApp} from "firebase/app";
 import {getStorage} from "firebase/storage"
-import {getFirestore} from "firebase/firestore"
+import {getFirestore, setLogLevel} from "firebase/firestore"
 import {browserLocalPersistence, indexedDBLocalPersistence, initializeAuth} from "firebase/auth";
 
 const firebaseConfig = {
@@ -21,6 +21,7 @@ console.log("init storage")
 export const storage = getStorage(app);
 console.log("init firestore")
 export const db = getFirestore();
+setLogLevel("debug");
 console.log("init auth")
 export const auth = initializeAuth(app, {
     persistence: [indexedDBLocalPersistence, browserLocalPersistence]

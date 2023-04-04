@@ -3,7 +3,7 @@ import Navbar from "./Navbar.jsx";
 import PackageCard from "./packageCard.jsx";
 import {db} from "./firebase.js";
 import {useEffect, useState} from "react";
-import {collection, doc, getDoc, getDocs, limit, orderBy, query} from "firebase/firestore";
+import {collection, doc, getDoc, getDocs, limit, orderBy, query, setLogLevel} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
 
 
@@ -29,6 +29,7 @@ export default function Packages() {
     }
 
     document.addEventListener("wheel", handler, {passive: false});
+    setLogLevel("debug");
 
 
     const [packages, setPackages] = useState([]);
