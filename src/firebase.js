@@ -1,7 +1,7 @@
 import {initializeApp} from "firebase/app";
 import {getStorage} from "firebase/storage"
 import {getFirestore} from "firebase/firestore"
-import {browserLocalPersistence, initializeAuth} from "firebase/auth";
+import {browserLocalPersistence, indexedDBLocalPersistence, initializeAuth} from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBOldJ0-VRG2xuEQ-ErjDVlb1ObZcSgTPw",
@@ -13,11 +13,15 @@ const firebaseConfig = {
     measurementId: "G-708JQM44KP"
 };
 
+console.log("init app")
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+console.log("init storage")
 export const storage = getStorage(app);
+console.log("init firestore")
 export const db = getFirestore();
+console.log("init auth")
 export const auth = initializeAuth(app, {
-    persistence: [browserLocalPersistence]
+    persistence: [indexedDBLocalPersistence, browserLocalPersistence]
 });
