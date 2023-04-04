@@ -1,0 +1,137 @@
+index-fe560e66.js:1 init storage
+index-fe560e66.js:1 init firestore
+index-fe560e66.js:1 init auth
+index-fe560e66.js:1 fetching packages(function call)...
+index-fe560e66.js:1 getting packages...
+index-fe560e66.js:1 [2023-04-04T16:05:14.017Z]  @firebase/firestore: Firestore (9.19.1): FirebaseAuthCredentialsProvider Auth detected
+index-fe560e66.js:1 [2023-04-04T16:05:14.024Z]  @firebase/firestore: Firestore (9.19.1): FirebaseAppCheckTokenProvider AppCheck not yet detected
+data:application/js…:1 Manifest: property 'start_url' ignored, URL is invalid.
+index-fe560e66.js:1 [2023-04-04T16:05:14.216Z]  @firebase/firestore: Firestore (9.19.1): FirestoreClient Received user= IhJC1Hf7k8hnFMCcEnIjWVvV7tD2
+index-fe560e66.js:1 [2023-04-04T16:05:14.216Z]  @firebase/firestore: Firestore (9.19.1): FirestoreClient Using default OnlineComponentProvider
+index-fe560e66.js:1 [2023-04-04T16:05:14.216Z]  @firebase/firestore: Firestore (9.19.1): FirestoreClient Using default OfflineComponentProvider
+index-fe560e66.js:1 [2023-04-04T16:05:14.216Z]  @firebase/firestore: Firestore (9.19.1): FirestoreClient Initializing OfflineComponentProvider
+index-fe560e66.js:1 [2023-04-04T16:05:14.217Z]  @firebase/firestore: Firestore (9.19.1): FirestoreClient Initializing OnlineComponentProvider
+index-fe560e66.js:1 [2023-04-04T16:05:14.217Z]  @firebase/firestore: Firestore (9.19.1): MemoryPersistence Starting transaction: Allocate target
+index-fe560e66.js:1 [2023-04-04T16:05:14.218Z]  @firebase/firestore: Firestore (9.19.1): MemoryPersistence Starting transaction: Execute query
+index-fe560e66.js:1 [2023-04-04T16:05:14.218Z]  @firebase/firestore: Firestore (9.19.1): QueryEngine Using full collection scan to execute query: Query(target=Target(packages, orderBy: [__name__ (asc)]); limitType=F)
+index-fe560e66.js:1 [2023-04-04T16:05:14.219Z]  @firebase/firestore: Firestore (9.19.1): WebChannelConnection Creating RPC 'Listen' stream 0x7ac2c047: https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel {"httpSessionIdParam":"gsessionid","initMessageHeaders":{"X-Goog-Api-Client":"gl-js/ fire/9.19.1","Content-Type":"text/plain","X-Firebase-GMPID":"1:91319198237:web:ef3548c24721c2e05e9cf4","Authorization":"Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6Ijg3YzFlN2Y4MDAzNGJiYzgxYjhmMmRiODM3OTIxZjRiZDI4N2YxZGYiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZGV2c2hvcC1kYXRhIiwiYXVkIjoiZGV2c2hvcC1kYXRhIiwiYXV0aF90aW1lIjoxNjc3NTA3OTczLCJ1c2VyX2lkIjoiSWhKQzFIZjdrOGhuRk1DY0VuSWpXVnZWN3REMiIsInN1YiI6IkloSkMxSGY3azhobkZNQ2NFbklqV1Z2Vjd0RDIiLCJpYXQiOjE2ODA2MjI0MDUsImV4cCI6MTY4MDYyNjAwNSwiZW1haWwiOiJob3JhY2UuaG9mZkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsiaG9yYWNlLmhvZmZAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.CIFj0h9XGe4X9LOzMwLBmZzxsdKQO2d0UDOAY4surehDR9YaPSnHAeVbFLMPWzq1ZzYp1AM0DQ2eW5TBzuokHn43AYkpVC1bqG1nirENkN4wOgzEiCR2RVmnGru1P1RUW9O5iJeI5x1K0sObqSG4kcMWOJH6gY_S3fy1BRuwnugPHAL6gOT_pcvxz71AaDICDHNbrd5EAa2TibePCgAApy054Q0iXFrB7dJg9Lvf_IcD4-E0fZpy-VBfZbOWPbgA61OrCovUg2cvoldL8o2-P3cbdm3Y2GXSNyot4eusdhWQlNp0DoZbp93p-5vKhSwbn4xhIMdMQWMJpZlPeHpvnw"},"messageUrlParams":{"database":"projects/devshop-data/databases/(default)"},"sendRawJson":true,"supportsCrossDomainXhr":true,"internalChannelParams":{"forwardChannelRequestTimeoutMs":600000},"forceLongPolling":false,"detectBufferingProxy":false,"xmlHttpFactory":{"l":null,"j":false},"encodeInitMessageHeaders":true}
+index-fe560e66.js:1 [2023-04-04T16:05:14.220Z]  @firebase/firestore: Firestore (9.19.1): WebChannelConnection Opening RPC 'Listen' stream 0x7ac2c047 transport.
+index-fe560e66.js:1 [2023-04-04T16:05:14.221Z]  @firebase/firestore: Firestore (9.19.1): WebChannelConnection RPC 'Listen' stream 0x7ac2c047 sending: {"database":"projects/devshop-data/databases/(default)","addTarget":{"query":{"structuredQuery":{"from":[{"collectionId":"packages"}],"orderBy":[{"field":{"fieldPath":"__name__"},"direction":"ASCENDING"}]},"parent":"projects/devshop-data/databases/(default)/documents"},"targetId":2}}
+index-fe560e66.js:1 [2023-04-04T16:05:14.309Z]  @firebase/firestore: Firestore (9.19.1): WebChannelConnection RPC 'Listen' stream 0x7ac2c047 transport opened.
+index-fe560e66.js:1 [2023-04-04T16:05:14.388Z]  @firebase/firestore: Firestore (9.19.1): FIRESTORE (9.19.1) INTERNAL ASSERTION FAILED: Unexpected state
+Ff @ index-fe560e66.js:1
+error @ index-fe560e66.js:1
+Oy @ index-fe560e66.js:1
+Dy @ index-fe560e66.js:1
+xy @ index-fe560e66.js:1
+(anonymous) @ index-fe560e66.js:1
+(anonymous) @ index-fe560e66.js:1
+Bv @ index-fe560e66.js:1
+jv @ index-fe560e66.js:1
+vy.wa @ index-fe560e66.js:1
+Vw @ index-fe560e66.js:1
+Pw @ index-fe560e66.js:1
+Op.La @ index-fe560e66.js:1
+Op.ib @ index-fe560e66.js:1
+Bv @ index-fe560e66.js:1
+jv @ index-fe560e66.js:1
+$m @ index-fe560e66.js:1
+Op.fb @ index-fe560e66.js:1
+Op.Ha @ index-fe560e66.js:1
+Om @ index-fe560e66.js:1
+Op.Ta @ index-fe560e66.js:1
+Promise.then (async)
+Am @ index-fe560e66.js:1
+Op.Wa @ index-fe560e66.js:1
+Promise.then (async)
+Op.send @ index-fe560e66.js:1
+Op.da @ index-fe560e66.js:1
+xw @ index-fe560e66.js:1
+ey @ index-fe560e66.js:1
+Op.Ia @ index-fe560e66.js:1
+Xv @ index-fe560e66.js:1
+Promise.then (async)
+Hv @ index-fe560e66.js:1
+Wv @ index-fe560e66.js:1
+Zm @ index-fe560e66.js:1
+Vw @ index-fe560e66.js:1
+Pw @ index-fe560e66.js:1
+Op.La @ index-fe560e66.js:1
+Op.ib @ index-fe560e66.js:1
+Bv @ index-fe560e66.js:1
+jv @ index-fe560e66.js:1
+$m @ index-fe560e66.js:1
+Op.fb @ index-fe560e66.js:1
+Op.Ha @ index-fe560e66.js:1
+Om @ index-fe560e66.js:1
+Op.Ta @ index-fe560e66.js:1
+Promise.then (async)
+Am @ index-fe560e66.js:1
+Op.Wa @ index-fe560e66.js:1
+Promise.then (async)
+Op.send @ index-fe560e66.js:1
+Op.da @ index-fe560e66.js:1
+xw @ index-fe560e66.js:1
+Dw @ index-fe560e66.js:1
+Op.Ja @ index-fe560e66.js:1
+Xv @ index-fe560e66.js:1
+Promise.then (async)
+Hv @ index-fe560e66.js:1
+Wv @ index-fe560e66.js:1
+Jm @ index-fe560e66.js:1
+fy.m @ index-fe560e66.js:1
+Wr @ index-fe560e66.js:1
+send @ index-fe560e66.js:1
+Fo @ index-fe560e66.js:1
+jo @ index-fe560e66.js:1
+gS @ index-fe560e66.js:1
+(anonymous) @ index-fe560e66.js:1
+_S @ index-fe560e66.js:1
+(anonymous) @ index-fe560e66.js:1
+(anonymous) @ index-fe560e66.js:1
+(anonymous) @ index-fe560e66.js:1
+(anonymous) @ index-fe560e66.js:1
+Promise.then (async)
+Kc @ index-fe560e66.js:1
+enqueue @ index-fe560e66.js:1
+enqueueAndForget @ index-fe560e66.js:1
+(anonymous) @ index-fe560e66.js:1
+(anonymous) @ index-fe560e66.js:1
+no @ index-fe560e66.js:1
+(anonymous) @ index-fe560e66.js:1
+setTimeout (async)
+wo @ index-fe560e66.js:1
+Qo @ index-fe560e66.js:1
+Ko @ index-fe560e66.js:1
+(anonymous) @ index-fe560e66.js:1
+Promise.then (async)
+auth @ index-fe560e66.js:1
+start @ index-fe560e66.js:1
+kS @ index-fe560e66.js:1
+mS @ index-fe560e66.js:1
+uI @ index-fe560e66.js:1
+await in uI (async)
+JS @ index-fe560e66.js:1
+(anonymous) @ index-fe560e66.js:1
+(anonymous) @ index-fe560e66.js:1
+await in (anonymous) (async)
+(anonymous) @ index-fe560e66.js:1
+(anonymous) @ index-fe560e66.js:1
+Promise.then (async)
+Kc @ index-fe560e66.js:1
+enqueue @ index-fe560e66.js:1
+enqueueAndForget @ index-fe560e66.js:1
+(anonymous) @ index-fe560e66.js:1
+j_ @ index-fe560e66.js:1
+(anonymous) @ index-fe560e66.js:1
+(anonymous) @ index-fe560e66.js:1
+(anonymous) @ index-fe560e66.js:1
+sl @ index-fe560e66.js:1
+Ic @ index-fe560e66.js:1
+(anonymous) @ index-fe560e66.js:1
+k @ index-fe560e66.js:1
+O @ index-fe560e66.js:1
+index-fe560e66.js:1 [2023-04-04T16:05:14.389Z]  @firebase/firestore: Firestore (9.19.1): WebChannelConnection RPC 'Listen' stream 0x7ac2c047 transport closed
+index-fe560e66.js:1 [2023-04-04T16:05:14.389Z]  @firebase/firestore: Firestore (9.19.1): PersistentStream close with error: undefined
+index-fe560e66.js:1 [2023-04-04T16:05:14.390Z]  @firebase/firestore: Firestore (9.19.1): Could not reach Cloud Firestore backend. Connection failed 1 times. Most recent error: undefined
+This typically indicates that your device does not have a healthy Internet connection at the moment. The client will operate in offline mode until it is able to successfully connect to the backend.

@@ -81,8 +81,8 @@
 }
 .package-download-btn{
     position: fixed;
-    right: 0;
-    bottom: 0;
+    right: 16px;
+    bottom: 16px;
     margin: 0;
     font-family: 'JetBrains Mono', monospace;
     background-color: #000;
@@ -90,21 +90,21 @@
     border: 0;
     outline: 0;
     padding: 20px 28px 20px 20px;
-    font-weight: 700;
+    font-weight: 800;
     font-size: 18px;
     cursor: pointer;
     transition: .2s;
     z-index: 10;
     transform-origin: center center;
-    border-top-left-radius: 6px;
+    border-radius: 8px;
     overflow: hidden;
 }
-.package-download-btn:hover{
-    background-color:#fff;
-    color:#000;
-    scale:1.3;
-    -webkit-border-radius:25px;
-    border-radius:6px
+.package-download-btn:hover {
+    background-color: #fff;
+    color: #000;
+    scale: 1.25;
+    border-radius: 8px;
+    right: 32px;
 }
 @media screen and (max-width:1250px){
     .package-characteristics-label{
