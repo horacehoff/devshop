@@ -51,9 +51,6 @@ function App() {
                     <Home/>
                 }/>
                 <Route path="/publish-package" element={<CreatePackage/>}></Route>
-                <Route path="/package-page" element={
-                    <PackagePage/>
-                }/>
                 <Route path="/packages" element={
                     <Packages/>
                 }/>

@@ -10,7 +10,7 @@ export default function PackageCard(props) {
         card.style.setProperty("--url_img", `url(${props.banner})`);
     }, []);
     return (
-        <div className="card" onClick={() => navigate("/package-page")}>
+        <div className="card">
             <h2 className="card-title">{props.name}</h2>
             <h4 className="card-author">// BY <span style={{fontWeight: "500", color: "white"}}>{props.author}</span>
             </h4>
