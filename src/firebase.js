@@ -21,8 +21,7 @@ console.log("init storage")
 export const storage = getStorage(app);
 console.log("init firestore")
 export const db = initializeFirestore(app, {
-    experimentalForceLongPolling: true,
-    cacheSizeBytes: 10000000
+    experimentalForceLongPolling: true
 });
 setLogLevel("debug");
 console.log("init auth")
