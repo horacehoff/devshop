@@ -1,6 +1,6 @@
 import {initializeApp} from "firebase/app";
 import {getStorage} from "firebase/storage"
-import {getFirestore, setLogLevel} from "firebase/firestore"
+import {initializeFirestore, setLogLevel} from "firebase/firestore"
 import {browserLocalPersistence, indexedDBLocalPersistence, initializeAuth} from "firebase/auth";
 
 const firebaseConfig = {
@@ -20,7 +20,7 @@ const app = initializeApp(firebaseConfig);
 console.log("init storage")
 export const storage = getStorage(app);
 console.log("init firestore")
-export const db = getFirestore();
+export const db = initializeFirestore(app, {experimentalForceLongPolling: true});
 setLogLevel("debug");
 console.log("init auth")
 export const auth = initializeAuth(app, {
