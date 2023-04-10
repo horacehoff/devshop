@@ -16,15 +16,17 @@ const firebaseConfig = {
 console.log("init app")
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-console.log("init storage")
-export const storage = getStorage(app);
 console.log("init firestore")
 export const db = initializeFirestore(app, {
     experimentalForceLongPolling: true
 });
-setLogLevel("debug");
+
 console.log("init auth")
 export const auth = initializeAuth(app, {
     persistence: [indexedDBLocalPersistence, browserLocalPersistence]
 });
+
+console.log("init storage")
+export const storage = getStorage(app);
+
+setLogLevel("debug");
