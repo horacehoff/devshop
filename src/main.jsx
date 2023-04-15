@@ -31,7 +31,6 @@ async function getPackages(collectionRef) {
 
 function App() {
     const [packages, setPackages] = useState([]);
-    const [firebaseLoaded, setFirebaseLoaded] = useState(false);
     setLogLevel("debug");
 
     useEffect(() => {
@@ -47,16 +46,7 @@ function App() {
             }
         };
 
-        if (firebaseLoaded) {
-            fetchPackages().then(r => console.log('Packages fetched'));
-        }
-    }, [firebaseLoaded]);
-
-    useEffect(() => {
-        // Check if firebase.js has finished loading
-        if (typeof window.firebase !== 'undefined') {
-            setFirebaseLoaded(true);
-        }
+        fetchPackages().then(r => console.log('Packages fetched'));
     }, []);
 
     return (
