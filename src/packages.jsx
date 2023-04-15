@@ -33,29 +33,31 @@ export default function Packages() {
 
 
     const [packages, setPackages] = useState([]);
-    useEffect(async () => {
-        const fetchPackages = async () => {
-            console.log("fetching packages...")
-            try {
-                const collectionRef = collection(db, 'packages');
-                console.log("ordering packages...")
-                const q = query(collectionRef, orderBy('downloads', 'desc'), orderBy('created', 'desc'), limit(9));
-                console.log("getting packages.../async")
-                const querySnapshot = await getDocs(q);
-                console.log("packages fetched -> setPackages")
+
+    const fetchPackages = () => {
+        console.log("fetching packages...");
+        const collectionRef = collection(db, 'packages');
+        console.log("ordering packages...");
+        const q = query(collectionRef, orderBy('downloads', 'desc'), orderBy('created', 'desc'), limit(9));
+        console.log("getting packages.../async");
+        return getDocs(q)
+            .then(querySnapshot => {
+                console.log("packages fetched -> setPackages");
                 const packageData = querySnapshot.docs.map(doc => doc.data());
                 setPackages(packageData);
-            } catch (error) {
+            })
+            .catch(error => {
                 console.log('Error getting documents: ', error);
-            }
-        };
-
-        try {
-            await fetchPackages();
-            console.log("fetchPackages completed successfully");
-        } catch (error) {
-            console.log("Error fetching packages: ", error);
-        }
+            });
+    };
+    useEffect(() => {
+        fetchPackages()
+            .then(() => {
+                console.log("fetchPackages completed successfully");
+            })
+            .catch(error => {
+                console.log("Error fetching packages: ", error);
+            });
     }, []);
 
     const getUsername = async (userId) => {
