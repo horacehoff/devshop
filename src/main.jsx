@@ -11,6 +11,7 @@ import About from "./about.jsx";
 import CreatePackage from "./createPackage.jsx";
 import {collection, getDocs, query, setLogLevel} from "firebase/firestore";
 import {db} from "./firebase.js";
+import Pricing from "./pricing.jsx";
 
 const SignUp = lazy(() => import('./signup.jsx'))
 const SignIn = lazy(() => import('./signin.jsx'))
@@ -80,6 +81,7 @@ function App() {
                         <SignIn/>
                     </Suspense>
                 }/>
+                <Route path="/pricing" element={<Pricing/>}/>
                 <Route path="/about" element={<About/>}/>
                 {packages.map((pkg, index) => (
                     <Route path={"/" + pkg.name} element={<PackagePage pkg={pkg}/>}/>

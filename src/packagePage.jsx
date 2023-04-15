@@ -11,6 +11,7 @@ export default function PackagePage(props) {
 
     const [is_logged_in, set_is_logged_in] = useState(false);
     const [new_downloads, set_new_downloads] = useState(0);
+    const [touchpad, set_touchpad] = useState(false);
     onAuthStateChanged(auth, (user) => {
         if (user) {
             set_is_logged_in(true);
@@ -21,6 +22,37 @@ export default function PackagePage(props) {
     useEffect(() => {
         let card = document.querySelector('.banner');
         card.style.setProperty("--banner_url", `url(${pkg.banner})`);
+
+        const scrollContainer = document.getElementById("package-screenshots")
+
+        function handler(e) {
+            const isTouchPad = e.wheelDeltaY ? e.wheelDeltaY === -3 * e.deltaY : e.deltaMode === 0;
+            if (isTouchPad) {
+                set_touchpad(true);
+                document.getElementById("package-screenshots").style.scrollSnapType = "x mandatory"
+                for (let i = 0; i < 4; i++) {
+                    document.getElementsByClassName("package-img")[i].style.scrollSnapAlign = "start"
+                }
+            }
+
+
+            document.removeEventListener("wheel", handler, false);
+        }
+
+        document.addEventListener("wheel", handler, {passive: false});
+
+        scrollContainer.addEventListener('wheel', (evt) => {
+            if (touchpad) return;
+            evt.preventDefault();
+            let newScrollLeft = scrollContainer.scrollLeft + (evt.deltaY * 10);
+            let duration = 2000;
+
+            scrollContainer.scrollTo({
+                left: newScrollLeft,
+                behavior: 'smooth',
+                duration: duration
+            });
+        });
     }, []);
     return (
         <>
@@ -60,48 +92,21 @@ export default function PackagePage(props) {
                     id="screenshot_zero"
                     src={pkg.screenshots[0]}
                     className="package-img"
-                    onClick={() => {
-                        document.getElementById("screenshot_zero").scrollIntoView({
-                            behavior: "smooth",
-                            block: "center",
-                        });
-                    }}
                 />
                 <img
                     src={pkg.screenshots[1]}
                     className="package-img"
                     style={{marginLeft: "25px"}}
-                    onClick={() => {
-                        document.getElementById("screenshot_one").scrollIntoView({
-                            behavior: "smooth",
-                            block: "center",
-                        });
-                    }}
-                    id="screenshot_one"
                 />
                 <img
                     src={pkg.screenshots[2]}
                     className="package-img"
                     style={{marginLeft: "25px"}}
-                    onClick={() => {
-                        document.getElementById("screenshot_two").scrollIntoView({
-                            behavior: "smooth",
-                            block: "center",
-                        });
-                    }}
-                    id="screenshot_two"
                 />
                 <img
                     src={pkg.screenshots[3]}
                     className="package-img"
                     style={{marginLeft: "25px", marginRight: "15px"}}
-                    onClick={() => {
-                        document.getElementById("screenshot_three").scrollIntoView({
-                            behavior: "smooth",
-                            block: "center",
-                        });
-                    }}
-                    id="screenshot_three"
                 />
             </div>
             <p className="package-characteristics-label"></p>

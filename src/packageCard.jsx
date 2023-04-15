@@ -1,16 +1,16 @@
 import "./packageCard.css"
 import shortNumber from "short-number"
 import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 
 export default function PackageCard(props) {
     const navigate = useNavigate();
+    let bannerRef = React.createRef();
     useEffect(() => {
-        let card = document.querySelector('.card');
-        card.style.setProperty("--url_img", `url(${props.banner})`);
+        bannerRef.current.style.background = "linear-gradient(0deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)) 0 0/cover, url('" + props.banner + "') center center/cover"
     }, []);
     return (
-        <div className="card">
+        <div className="card" ref={bannerRef}>
             <h2 className="card-title">{props.name}</h2>
             <h4 className="card-author">// BY <span style={{fontWeight: "500", color: "white"}}>{props.author}</span>
             </h4>

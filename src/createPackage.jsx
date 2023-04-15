@@ -5,7 +5,7 @@ import {auth, db, storage} from "./firebase.js";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage"
 import {onAuthStateChanged} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
-import {doc, setDoc} from "firebase/firestore";
+import {doc, getDoc, setDoc} from "firebase/firestore";
 
 export default function CreatePackage() {
     const [pkgUpload, setPkgUpload] = useState(null);
@@ -67,13 +67,13 @@ export default function CreatePackage() {
         })
         // get the username from the database using the uid
         const userRef = doc(db, "users", uid);
-        userRef.get().then((doc) => {
+        getDoc(userRef).then((doc) => {
             if (doc.exists()) {
-                setUsername(doc.data().username);
+                setUsername(doc.data().username)
             } else {
                 console.log("No such document!");
             }
-        })
+        });
 
         getDownloadURL(bannerRef).then((bannerFileUrl) => {
             getDownloadURL(imgRefOne).then((url) => {
@@ -94,6 +94,8 @@ export default function CreatePackage() {
                                     banner: bannerFileUrl,
                                     sizeMb: pkgUpload.size / 1000000,
                                     created: new Date().getTime(),
+                                }).then(r => {
+                                    alert("Package created");
                                 })
                             })
                         })

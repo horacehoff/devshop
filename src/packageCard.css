@@ -19,14 +19,10 @@
     width: 468px;
     border-radius: 14px;
     cursor: pointer;
-    --url_img: url("https://brew.sh/assets/img/homebrew-social-card.png");
-    background: linear-gradient(0deg, rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)) 0 0/cover, var(--url_img) center center/cover;
-    /*transition: .2s;*/
 }
 
 .card:hover {
     animation: bg-infinite 30s infinite linear;
-    /*transition: .2s background-position;*/
 }
 
 .card:hover > .card-read-more {

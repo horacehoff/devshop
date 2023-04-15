@@ -1,0 +1,127 @@
+.pricing-title {
+    font-size: 60px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 100px;
+}
+
+.pricing-subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 50px;
+    color: #a8a8a8;
+}
+
+.pricing-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.basic-plan {
+    background-color: #2d2b57;
+    width: 320px;
+    height: 320px;
+    border-radius: 14px;
+    outline: 1px solid white;
+    margin-right: 25px;
+}
+
+.pro-plan {
+    background-color: #2d2b57;
+    width: 320px;
+    height: 320px;
+    border-radius: 14px;
+    outline: 2px solid mediumpurple;
+    margin-left: 25px;
+}
+
+.plan-title {
+    font-size: 30px;
+    font-weight: 600;
+    font-family: 'Source Code Pro', monospace;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 25px;
+    color: white;
+}
+
+.plan-price {
+    font-size: 16px;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: -15px;
+    margin-bottom: 40px;
+    color: cornflowerblue;
+}
+
+.plan-features {
+    font-size: 16px;
+    color: white;
+}
+
+.plan-sign-up {
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 25px;
+    color: white;
+    border: 0;
+    outline: 0;
+    background-color: #282828;
+    width: 125px;
+    height: 40px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: .2s;
+    margin-left: calc(50% - 63px);
+}
+
+.plan-sign-up:hover {
+    background-color: white;
+    color: black;
+}
+
+.plan-subscribe {
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 0;
+    color: white;
+    border: 0;
+    outline: 0;
+    background-color: #282828;
+    width: 150px;
+    height: 40px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: .3s;
+    margin-left: calc(50% - 75px);
+}
+
+.plan-subscribe:hover {
+    background-color: white;
+    color: black;
+}
+
+@media screen and (max-width: 770px) {
+    .pricing-container {
+        flex-direction: column;
+    }
+
+    .basic-plan {
+        margin-right: 0;
+        margin-bottom: 25px;
+    }
+
+    .pro-plan {
+        margin-left: 0;
+        margin-top: 25px;
+    }
+}

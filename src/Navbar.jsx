@@ -28,6 +28,12 @@ export default function Navbar() {
             document.getElementById("nav-about").style.textDecoration = "underline"
             document.getElementById("about").style.color = "white"
             document.getElementById("nav-about").style.color = "white"
+        } else if (location.slice(0, 8) === "/pricing") {
+            document.getElementById("pricing").style.textDecoration = "underline"
+            document.getElementById("pricing").style.color = "white"
+            document.getElementById("nav-pricing").style.textDecoration = "underline"
+            document.getElementById("nav-pricing").style.color = "white"
+
         }
     }, []);
 
@@ -61,7 +67,7 @@ export default function Navbar() {
                 <h2 onClick={() => navigate("/")} id="nav-title">DEVSHOP</h2>
                 <h4 id="code-blocks" onClick={() => navigate("/code-blocks")}>CODE BLOCKS</h4>
                 <h4 id="packages" onClick={() => navigate("/packages")}>PACKAGES</h4>
-                <h4 id="pricing">PRICING</h4>
+                <h4 id="pricing" onClick={() => navigate("/pricing")}>PRICING</h4>
                 <h4 id="about" onClick={() => navigate("/about")}>ABOUT</h4>
                 <h4 id="account">LOADING</h4>
                 <h4 id="hamburger" onClick={() => {
@@ -77,7 +83,7 @@ export default function Navbar() {
                     <ul>
                         <li onClick={() => navigate("/code-blocks")} id="nav-code-blocks">CODE BLOCKS</li>
                         <li onClick={() => navigate("/packages")} id="nav-packages">PACKAGES</li>
-                        <li>PRICING</li>
+                        <li onClick={() => navigate("/pricing")} id="nav-pricing">PRICING</li>
                         <li onClick={() => navigate("/about")} id="nav-about">ABOUT</li>
                         <li id="nav-account">ACCOUNT</li>
                     </ul>
