@@ -6,7 +6,6 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./Home.jsx";
 import Navbar from "./Navbar.jsx";
 import Packages from "./packages.jsx";
-import PackagePage from "./packagePage.jsx";
 import About from "./about.jsx";
 import CreatePackage from "./createPackage.jsx";
 import {collection, getDocs, query, setLogLevel} from "firebase/firestore";
@@ -17,13 +16,14 @@ const SignUp = lazy(() => import('./signup.jsx'))
 const SignIn = lazy(() => import('./signin.jsx'))
 const CodeBlocks = lazy(() => import('./codeBlocks.jsx'))
 
-async function getPackages(collectionRef) {
+function getPackages(collectionRef) {
     console.log("getting packages...")
     try {
         const q = query(collectionRef);
-        const querySnapshot = await getDocs(q);
-        console.log("packages fetched")
-        return querySnapshot.docs.map(doc => doc.data());
+        const querySnapshot = getDocs(q).then(r => {
+            console.log("packages fetched")
+            return r.docs.map(doc => doc.data());
+        });
     } catch (error) {
         console.log('Error getting documents: ', error);
         return [];
@@ -39,7 +39,7 @@ function App() {
         const fetchPackages = async () => {
             try {
                 const collectionRef = collection(db, 'packages');
-                const data = await getPackages(collectionRef);
+                const data = getPackages(collectionRef);
                 setPackages(data);
                 console.log("packages fetched(function call)+setPackages done")
             } catch (error) {
@@ -83,9 +83,9 @@ function App() {
                 }/>
                 <Route path="/pricing" element={<Pricing/>}/>
                 <Route path="/about" element={<About/>}/>
-                {packages.map((pkg, index) => (
-                    <Route path={"/" + pkg.name} element={<PackagePage pkg={pkg}/>}/>
-                ))}
+                {/*{packages.map((pkg, index) => (*/}
+                {/*    <Route path={"/" + pkg.name} element={<PackagePage pkg={pkg}/>}/>*/}
+                {/*))}*/}
             </Routes>
         </BrowserRouter>
     )
