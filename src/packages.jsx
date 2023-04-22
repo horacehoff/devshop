@@ -4,6 +4,7 @@ import {db} from "./firebase.js";
 import {useEffect, useState} from "react";
 import {collection, getDocs, limit, query, setLogLevel} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
+import PackageCard from "./packageCard.jsx";
 
 
 export default function Packages() {
@@ -75,14 +76,14 @@ export default function Packages() {
             <h1 className="packages-title">PACKAGES</h1>
             <h2 className="category-title">// CURRENTLY TRENDING</h2>
             <ul className="packages-card-list" id="packages-card-list">
-                {/*{packages.map((pkg, index) => (*/}
-                {/*    <li key={index} className="packages-card-list-child" onClick={() => {*/}
-                {/*        navigate("/" + pkg.name)*/}
-                {/*    }}>*/}
-                {/*        <PackageCard dwnl={pkg.downloads} author={pkg.owner_username} name={pkg.name}*/}
-                {/*                     desc={pkg.description} banner={pkg.banner}/>*/}
-                {/*    </li>*/}
-                {/*))}*/}
+                {packages.map((pkg, index) => (
+                    <li key={index} className="packages-card-list-child" onClick={() => {
+                        navigate("/" + pkg.name)
+                    }}>
+                        <PackageCard dwnl={pkg.downloads} author={pkg.owner_username} name={pkg.name}
+                                     desc={pkg.description} banner={pkg.banner}/>
+                    </li>
+                ))}
             </ul>
             <h2 className="category-title">// RECENTLY CREATED</h2>
             <ul className="packages-card-list" id="packages-card-list">
