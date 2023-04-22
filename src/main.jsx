@@ -6,7 +6,6 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./Home.jsx";
 import Navbar from "./Navbar.jsx";
 import Packages from "./packages.jsx";
-import PackagePage from "./packagePage.jsx";
 import About from "./about.jsx";
 import CreatePackage from "./createPackage.jsx";
 import {collection, getDocs, query, setLogLevel} from "firebase/firestore";
@@ -17,13 +16,14 @@ const SignUp = lazy(() => import('./signup.jsx'))
 const SignIn = lazy(() => import('./signin.jsx'))
 const CodeBlocks = lazy(() => import('./codeBlocks.jsx'))
 
-async function getPackages(collectionRef) {
+function getPackages(collectionRef) {
     console.log("getting packages...")
     try {
         const q = query(collectionRef);
-        const querySnapshot = await getDocs(q);
-        console.log("packages fetched")
-        return querySnapshot.docs.map(doc => doc.data());
+        const querySnapshot = getDocs(q).then(e => {
+            console.log("packages fetched")
+            return querySnapshot.docs.map(doc => doc.data());
+        })
     } catch (error) {
         console.log('Error getting documents: ', error);
         return [];
@@ -36,18 +36,19 @@ function App() {
 
     useEffect(() => {
         console.log("fetching packages(function call)...")
-        const fetchPackages = async () => {
+        const fetchPackages = () => {
             try {
                 const collectionRef = collection(db, 'packages');
-                const data = await getPackages(collectionRef);
-                setPackages(data);
-                console.log("packages fetched(function call)+setPackages done")
+                const data = getPackages(collectionRef).then(e => {
+                    setPackages(data);
+                    console.log("packages fetched(function call)+setPackages done")
+                })
             } catch (error) {
                 console.log('Error getting packages: ', error);
             }
         };
 
-        fetchPackages().then(r => console.log('Packages fetched'));
+        fetchPackages();
     }, []);
 
     return (
@@ -83,9 +84,9 @@ function App() {
                 }/>
                 <Route path="/pricing" element={<Pricing/>}/>
                 <Route path="/about" element={<About/>}/>
-                {packages.map((pkg, index) => (
-                    <Route path={"/" + pkg.name} element={<PackagePage pkg={pkg}/>}/>
-                ))}
+                {/*{packages.map((pkg, index) => (*/}
+                {/*    <Route path={"/" + pkg.name} element={<PackagePage pkg={pkg}/>}/>*/}
+                {/*))}*/}
             </Routes>
         </BrowserRouter>
     )
