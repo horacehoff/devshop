@@ -17,15 +17,14 @@ console.log("init app")
 const app = initializeApp(firebaseConfig);
 
 
-console.log("init firestore")
-export const db = initializeFirestore(app, {
-    experimentalForceLongPolling: true
-});
-
-
 console.log("init auth")
 export const auth = initializeAuth(app, {
     persistence: [indexedDBLocalPersistence, browserLocalPersistence]
+});
+
+console.log("init firestore")
+export const db = initializeFirestore(app, {
+    experimentalForceLongPolling: true
 });
 
 
