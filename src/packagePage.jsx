@@ -33,6 +33,7 @@ export default function PackagePage(props) {
                 for (let i = 0; i < 4; i++) {
                     document.getElementsByClassName("package-img")[i].style.scrollSnapAlign = "start"
                 }
+                console.log("touchpad");
             }
 
 
@@ -42,17 +43,19 @@ export default function PackagePage(props) {
         document.addEventListener("wheel", handler, {passive: false});
 
         scrollContainer.addEventListener('wheel', (evt) => {
-            if (touchpad) return;
-            evt.preventDefault();
-            let newScrollLeft = scrollContainer.scrollLeft + (evt.deltaY * 10);
-            let duration = 2000;
+            if (!touchpad) {
+                evt.preventDefault();
+                let newScrollLeft = scrollContainer.scrollLeft + (evt.deltaY * 10);
+                let duration = 2000;
 
-            scrollContainer.scrollTo({
-                left: newScrollLeft,
-                behavior: 'smooth',
-                duration: duration
-            });
-        });
+                scrollContainer.scrollTo({
+                    left: newScrollLeft,
+                    behavior: 'smooth',
+                    duration: duration
+                });
+            }
+
+        }, {passive: false});
     }, []);
     return (
         <>
