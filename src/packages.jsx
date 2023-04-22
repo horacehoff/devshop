@@ -34,14 +34,14 @@ export default function Packages() {
     const [packages, setPackages] = useState([]);
 
 
-    useEffect(() => {
-        const fetchPackages = () => {
+    useEffect(async () => {
+        const fetchPackages = async () => {
             console.log("fetching packages...");
             const collectionRef = collection(db, 'packages');
             console.log("ordering packages...");
             const q = query(collectionRef, limit(9));
             console.log("getting packages.../async");
-            getDocs(q)
+            await getDocs(q)
                 .then(querySnapshot => {
                     console.log("packages fetched -> setPackages");
                     const packageData = querySnapshot.docs.map(doc => doc.data());
@@ -53,7 +53,7 @@ export default function Packages() {
         };
 
 
-        fetchPackages();
+        await fetchPackages()
         console.log("fetch packages end call ")
     }, []);
 
