@@ -1,4 +1,4 @@
-import React, {lazy, Suspense, useEffect, useState} from 'react'
+import React, {lazy, Suspense, useState} from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import './lazy.css'
@@ -8,8 +8,7 @@ import Navbar from "./Navbar.jsx";
 import Packages from "./packages.jsx";
 import About from "./about.jsx";
 import CreatePackage from "./createPackage.jsx";
-import {collection, getDocs, query, setLogLevel} from "firebase/firestore";
-import {db} from "./firebase.js";
+import {getDocs, query, setLogLevel} from "firebase/firestore";
 import Pricing from "./pricing.jsx";
 
 const SignUp = lazy(() => import('./signup.jsx'))
@@ -34,22 +33,22 @@ function App() {
     const [packages, setPackages] = useState([]);
     setLogLevel("debug");
 
-    useEffect(() => {
-        console.log("fetching packages(function call)...")
-        const fetchPackages = () => {
-            try {
-                const collectionRef = collection(db, 'packages');
-                const data = getPackages(collectionRef).then(e => {
-                    setPackages(data);
-                    console.log("packages fetched(function call)+setPackages done")
-                })
-            } catch (error) {
-                console.log('Error getting packages: ', error);
-            }
-        };
-
-        fetchPackages();
-    }, []);
+    // useEffect(() => {
+    //     console.log("fetching packages(function call)...")
+    //     const fetchPackages = () => {
+    //         try {
+    //             const collectionRef = collection(db, 'packages');
+    //             const data = getPackages(collectionRef).then(e => {
+    //                 setPackages(data);
+    //                 console.log("packages fetched(function call)+setPackages done")
+    //             })
+    //         } catch (error) {
+    //             console.log('Error getting packages: ', error);
+    //         }
+    //     };
+    //
+    //     fetchPackages();
+    // }, []);
 
     return (
         <BrowserRouter>
