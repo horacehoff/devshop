@@ -24,7 +24,7 @@ export const auth = initializeAuth(app, {
 
 console.log("init firestore")
 export const db = initializeFirestore(app, {
-    experimentalForceLongPolling: true
+    experimentalForceLongPolling: false
 });
 
 
