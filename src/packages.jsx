@@ -58,17 +58,17 @@ export default function Packages() {
         console.log("fetch packages end call ")
     }, []);
 
-    // const getUsername = async (userId) => {
-    //     const userDocRef = doc(collection(db, 'users'), userId);
-    //     const userDocSnapshot = await getDoc(userDocRef);
-    //
-    //     if (userDocSnapshot.exists()) {
-    //         const userData = userDocSnapshot.data();
-    //         return userData.username;
-    //     } else {
-    //         throw new Error(`User with ID ${userId} not found`);
-    //     }
-    // };
+    const getUsername = async (userId) => {
+        const userDocRef = doc(collection(db, 'users'), userId);
+        const userDocSnapshot = await getDoc(userDocRef);
+
+        if (userDocSnapshot.exists()) {
+            const userData = userDocSnapshot.data();
+            return userData.username;
+        } else {
+            throw new Error(`User with ID ${userId} not found`);
+        }
+    };
 
     return (
         <>
