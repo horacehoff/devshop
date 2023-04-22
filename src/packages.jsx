@@ -2,7 +2,7 @@ import "./packages.css"
 import Navbar from "./Navbar.jsx";
 import {db} from "./firebase.js";
 import {useEffect, useState} from "react";
-import {collection, getDocs, limit, orderBy, query, setLogLevel} from "firebase/firestore";
+import {collection, getDocs, limit, query, setLogLevel} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
 
 
@@ -39,7 +39,7 @@ export default function Packages() {
             console.log("fetching packages...");
             const collectionRef = collection(db, 'packages');
             console.log("ordering packages...");
-            const q = query(collectionRef, orderBy('downloads', 'desc'), orderBy('created', 'desc'), limit(9));
+            const q = query(collectionRef, limit(9));
             console.log("getting packages.../async");
             getDocs(q)
                 .then(querySnapshot => {
