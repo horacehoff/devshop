@@ -34,7 +34,7 @@ export default function Packages() {
     const [packages, setPackages] = useState([]);
 
 
-    useEffect(async () => {
+    useEffect(() => {
         const fetchPackages = async () => {
             console.log("fetching packages...");
             const collectionRef = collection(db, 'packages');
@@ -53,7 +53,7 @@ export default function Packages() {
         };
 
 
-        await fetchPackages()
+        fetchPackages()
         console.log("fetch packages end call ")
     }, []);
 
