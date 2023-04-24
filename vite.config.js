@@ -14,13 +14,13 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          react: ['react'],
-          'react-dom': ['react-dom'],
-          'react-router-dom': ['react-router-dom'],
-          'firebase/app': ['firebase/app'],
-          'firebase/auth': ['firebase/auth'],
-          'firebase/firestore': ['firebase/firestore'],
-          'firebase/storage': ['firebase/storage'],
+          "main": ['react'],
+          'maindm': ['react-dom'],
+          'mainrouterdom': ['react-router-dom'],
+          'app': ['firebase/app'],
+          'auth': ['firebase/auth'],
+          'store': ['firebase/firestore'],
+          'storage': ['firebase/storage'],
         }
       }
     }
