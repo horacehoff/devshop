@@ -36,13 +36,13 @@ export default function Packages() {
 
 
     useEffect(() => {
-        const fetchPackages = async () => {
+        const fetchPackages = () => {
             console.log("fetching packages...");
             const collectionRef = collection(db, 'packages');
             console.log("ordering packages...");
             const q = query(collectionRef, limit(9));
             console.log("getting packages.../async");
-            await getDocs(q)
+            getDocs(q)
                 .then(querySnapshot => {
                     console.log("packages fetched -> setPackages");
                     const packageData = querySnapshot.docs.map(doc => doc.data());
@@ -57,18 +57,6 @@ export default function Packages() {
         fetchPackages()
         console.log("fetch packages end call ")
     }, []);
-
-    const getUsername = async (userId) => {
-        const userDocRef = doc(collection(db, 'users'), userId);
-        const userDocSnapshot = await getDoc(userDocRef);
-
-        if (userDocSnapshot.exists()) {
-            const userData = userDocSnapshot.data();
-            return userData.username;
-        } else {
-            throw new Error(`User with ID ${userId} not found`);
-        }
-    };
 
     return (
         <>
