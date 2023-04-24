@@ -10,6 +10,14 @@ export default defineConfig({
       compress: {
         passes: 100,
       }
+    },
+    rollupOptions: {
+      manualChunks: {
+        react: ['react'],
+        'react-dom': ['react-dom'],
+        'react-router-dom': ['react-router-dom'],
+        'firebase': ['firebase']
+      }
     }
   }
 })
