@@ -10,6 +10,7 @@ import About from "./about.jsx";
 import CreatePackage from "./createPackage.jsx";
 import {getDocs, query, setLogLevel} from "firebase/firestore";
 import Pricing from "./pricing.jsx";
+import "./firebase.js"
 
 const SignUp = lazy(() => import('./signup.jsx'))
 const SignIn = lazy(() => import('./signin.jsx'))
