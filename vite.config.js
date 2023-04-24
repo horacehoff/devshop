@@ -15,12 +15,14 @@ export default defineConfig({
       output: {
         manualChunks: {
           "main": ['react'],
-          'maindm': ['react-dom'],
+          'maindom': ['react-dom'],
           'mainrouterdom': ['react-router-dom'],
           'app': ['firebase/app'],
           'auth': ['firebase/auth'],
           'store': ['firebase/firestore'],
           'storage': ['firebase/storage'],
+          'reactsyntax': ['react-syntax-highlighter'],
+          'shortnum': ['short-number'],
         }
       }
     }
