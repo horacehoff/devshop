@@ -12,11 +12,12 @@ export default defineConfig({
       }
     },
     rollupOptions: {
-      manualChunks: {
-        react: ['react'],
-        'react-dom': ['react-dom'],
-        'react-router-dom': ['react-router-dom'],
-        'firebase': ['firebase']
+      output: {
+        manualChunks: {
+          react: ['react'],
+          'react-dom': ['react-dom'],
+          'react-router-dom': ['react-router-dom']
+        }
       }
     }
   }
