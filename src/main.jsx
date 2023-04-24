@@ -18,14 +18,13 @@ const SignUp = lazy(() => import('./signup.jsx'))
 const SignIn = lazy(() => import('./signin.jsx'))
 const CodeBlocks = lazy(() => import('./codeBlocks.jsx'))
 
-function getPackages(collectionRef) {
+async function getPackages(collectionRef) {
     console.log("getting packages...")
     try {
         const q = query(collectionRef);
-        const querySnapshot = getDocs(q).then(e => {
-            console.log("packages fetched")
-            return e.docs.map(doc => doc.data());
-        })
+        const querySnapshot = await getDocs(q);
+        console.log("packages fetched")
+        return querySnapshot.docs.map(doc => doc.data());
     } catch (error) {
         console.log('Error getting documents: ', error);
         return [];
@@ -38,19 +37,18 @@ function App() {
 
     useEffect(() => {
         console.log("fetching packages(function call)...")
-        const fetchPackages = () => {
+        const fetchPackages = async () => {
             try {
                 const collectionRef = collection(db, 'packages');
-                const data = getPackages(collectionRef).then(e => {
-                    setPackages(data);
-                    console.log("packages fetched(function call)+setPackages done")
-                })
+                const data = await getPackages(collectionRef);
+                setPackages(data);
+                console.log("packages fetched(function call)+setPackages done")
             } catch (error) {
                 console.log('Error getting packages: ', error);
             }
         };
 
-        fetchPackages();
+        fetchPackages().then(r => console.log('Packages fetched'));
     }, []);
 
     return (
