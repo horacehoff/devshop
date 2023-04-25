@@ -28,45 +28,51 @@ export default function PackagePage(props) {
         }
     });
 
+
+    const scrollContainer = document.getElementById("package-screenshots")
+
+    function handler(e) {
+        const isTouchPad = e.wheelDeltaY ? e.wheelDeltaY === -3 * e.deltaY : e.deltaMode === 0;
+        if (isTouchPad || window.mobileCheck()) {
+            console.log("touchpad");
+            set_touchpad(true);
+            document.getElementById("package-screenshots").style.scrollSnapType = "x mandatory"
+            document.getElementById("screenshot_one").style.scrollSnapAlign = "start"
+            document.getElementById("screenshot_two").style.scrollSnapAlign = "start"
+            document.getElementById("screenshot_three").style.scrollSnapAlign = "start"
+            document.getElementById("screenshot_four").style.scrollSnapAlign = "start"
+        }
+        document.removeEventListener("wheel", handler, false);
+    }
+
+    document.addEventListener("wheel", handler, {passive: false});
+
+    function scroll_handle(evt) {
+        if (!touchpad && !window.mobileCheck()) {
+            console.log("function")
+            evt.preventDefault();
+            let newScrollLeft = scrollContainer.scrollLeft + (evt.deltaY * 10);
+            let duration = 2000;
+
+            scrollContainer.scrollTo({
+                left: newScrollLeft,
+                behavior: 'smooth',
+                duration: duration
+            });
+        } else {
+            console.log("REMOVED")
+            scrollContainer.removeEventListener("wheel", scroll_handle, {passive: false})
+        }
+    }
+
+    scrollContainer.addEventListener('wheel', scroll_handle, {passive: false});
+
+
     useEffect(() => {
         let card = document.querySelector('.banner');
         card.style.setProperty("--banner_url", `url(${pkg.banner})`);
 
-        const scrollContainer = document.getElementById("package-screenshots")
 
-        function handler(e) {
-            const isTouchPad = e.wheelDeltaY ? e.wheelDeltaY === -3 * e.deltaY : e.deltaMode === 0;
-            if (isTouchPad || window.mobileCheck()) {
-                set_touchpad(true);
-                document.getElementById("package-screenshots").style.scrollSnapType = "x mandatory"
-                for (let i = 0; i < 4; i++) {
-                    document.getElementsByClassName("package-img")[i].style.scrollSnapAlign = "start"
-                }
-                console.log("touchpad");
-            }
-
-
-            document.removeEventListener("wheel", handler, false);
-        }
-
-        document.addEventListener("wheel", handler, {passive: false});
-
-        if (!touchpad && !window.mobileCheck()) {
-            scrollContainer.addEventListener('wheel', (evt) => {
-                if (!touchpad && !window.mobileCheck()) {
-                    evt.preventDefault();
-                    let newScrollLeft = scrollContainer.scrollLeft + (evt.deltaY * 10);
-                    let duration = 2000;
-
-                    scrollContainer.scrollTo({
-                        left: newScrollLeft,
-                        behavior: 'smooth',
-                        duration: duration
-                    });
-                }
-
-            }, {passive: false});
-        }
     }, []);
     return (
         <>
@@ -103,23 +109,26 @@ export default function PackagePage(props) {
             <p className="package-screenshots-label"></p>
             <div className="package-screenshots" id="package-screenshots">
                 <img
-                    id="screenshot_zero"
+                    id="screenshot_one"
                     src={pkg.screenshots[0]}
                     className="package-img"
                     alt="First screenshot"/>
                 <img
+                    id="screenshot_two"
                     src={pkg.screenshots[1]}
                     className="package-img"
                     style={{marginLeft: "25px"}}
                     alt="Second screenshot"
                 />
                 <img
+                    id="screenshot_three"
                     src={pkg.screenshots[2]}
                     className="package-img"
                     style={{marginLeft: "25px"}}
                     alt="Third screenshot"
                 />
                 <img
+                    id="screenshot_four"
                     src={pkg.screenshots[3]}
                     className="package-img"
                     style={{marginLeft: "25px", marginRight: "15px"}}
