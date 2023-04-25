@@ -73,14 +73,10 @@ function App() {
                     </Suspense>
                 }/>
                 <Route path="/sign-up" element={
-                    <Suspense fallback={<Navbar/>}>
-                        <SignUp/>
-                    </Suspense>
+                    <SignUp/>
                 }/>
                 <Route path="/sign-in" element={
-                    <Suspense fallback={<Navbar/>}>
-                        <SignIn/>
-                    </Suspense>
+                    <SignIn/>
                 }/>
                 <Route path="/pricing" element={<Pricing/>}/>
                 <Route path="/about" element={<About/>}/>
