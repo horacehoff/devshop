@@ -13,9 +13,10 @@ import Pricing from "./pricing.jsx";
 import "./firebase.js"
 import {db} from "./firebase.js";
 import PackagePage from "./packagePage.jsx";
+import SignUp from "./signup.jsx";
+import SignIn from "./signin.jsx";
 
-const SignUp = lazy(() => import('./signup.jsx'))
-const SignIn = lazy(() => import('./signin.jsx'))
+// lazy load
 const CodeBlocks = lazy(() => import('./codeBlocks.jsx'))
 
 async function getPackages(collectionRef) {
