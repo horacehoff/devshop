@@ -25,8 +25,6 @@ export default defineConfig({
           'shortnum': ['short-number'],
         },
         compact: true,
-        // add settings for best performance
-        inlineDynamicImports: true,
         minifyInternalExports: true,
 
 
