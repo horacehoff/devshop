@@ -82,7 +82,7 @@ function App() {
                 <Route path="/pricing" element={<Pricing/>}/>
                 <Route path="/about" element={<About/>}/>
                 {packages.map((pkg, index) => (
-                    <Route path={"/" + pkg.name} element={<PackagePage pkg={pkg}/>}/>
+                    <Route path={"/packages/" + pkg.name} element={<PackagePage pkg={pkg}/>}/>
                 ))}
             </Routes>
         </BrowserRouter>

@@ -5,9 +5,11 @@ import {doc, getDoc, updateDoc} from "firebase/firestore";
 import {auth, db, storage} from "./firebase.js";
 import {useEffect, useState} from "react";
 import {getDownloadURL, ref} from "firebase/storage";
+import {useNavigate} from "react-router-dom";
 
 export default function PackagePage(props) {
     const pkg = props.pkg;
+    const navigate = useNavigate();
 
     window.mobileCheck = function () {
         let check = false;
@@ -82,6 +84,9 @@ export default function PackagePage(props) {
             <h3 className="package-author">// BY <span style={{color: "#F0EBBA"}}>{pkg.owner_username}</span></h3>
             <button className="package-download-btn" id="package-download-btn" onClick={() => {
                 // download pkg
+                if (!is_logged_in) {
+                    navigate("/sign-in")
+                }
                 let pkgRef = ref(storage, pkg.package);
                 getDownloadURL(pkgRef).then((url) => {
                     window.location.assign(url);
@@ -100,6 +105,7 @@ export default function PackagePage(props) {
                                 console.log("updated");
                             });
                         }
+
                     }
                 })
 

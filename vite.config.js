@@ -26,8 +26,6 @@ export default defineConfig({
         },
         compact: true,
         minifyInternalExports: true,
-
-
       }
     }
   }

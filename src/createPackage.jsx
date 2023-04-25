@@ -34,40 +34,41 @@ export default function CreatePackage() {
             navigate("/")
         }
     });
-    const upload = () => {
-        let pkgRef = ref(storage, "users/" + uid + "/" + name + "/pkg/" + pkgUpload.name)
-        uploadBytes(pkgRef, pkgUpload).then(() => {
+    const upload = async () => {
+        let extension = pkgUpload.type.replace(/(.*)\//g, '')
+        let pkgRef = ref(storage, "users/" + uid + "/" + name + "/pkg/" + name + "." + extension)
+        await uploadBytes(pkgRef, pkgUpload).then(() => {
             alert("pkg uploaded")
         });
 
         let bannerRef = ref(storage, "users/" + uid + "/" + name + "/img/" + banner.name)
-        uploadBytes(bannerRef, banner).then(() => {
+        await uploadBytes(bannerRef, banner).then(() => {
             alert("banner uploaded")
         })
 
-        let imgRefOne = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUpload0ne.name)
-        uploadBytes(imgRefOne, imgUpload0ne).then(() => {
+        let imgRefOne = ref(storage, "users/" + uid + "/" + name + "/img/" + (imgUpload0ne.name ?? ("screenone" + imgUpload0ne.type)))
+        await uploadBytes(imgRefOne, imgUpload0ne).then(() => {
             alert("img uploaded")
         })
 
-        let imgRefTwo = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUploadTwo.name)
-        uploadBytes(imgRefTwo, imgUploadTwo).then(() => {
+        let imgRefTwo = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUploadTwo.name ?? ("screentwo" + imgUpload0ne.type))
+        await uploadBytes(imgRefTwo, imgUploadTwo).then(() => {
             alert("img uploaded")
 
         })
 
-        let imgRefThree = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUploadThree.name)
-        uploadBytes(imgRefThree, imgUploadThree).then(() => {
+        let imgRefThree = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUploadThree.name ?? ("screenthree" + imgUpload0ne.type))
+        await uploadBytes(imgRefThree, imgUploadThree).then(() => {
             alert("img uploaded")
         })
 
-        let imgRefFour = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUploadFour.name)
-        uploadBytes(imgRefFour, imgUploadFour).then(() => {
+        let imgRefFour = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUploadFour.name ?? ("screenfour" + imgUpload0ne.type))
+        await uploadBytes(imgRefFour, imgUploadFour).then(() => {
             alert("img uploaded")
         })
         // get the username from the database using the uid
         const userRef = doc(db, "users", uid);
-        getDoc(userRef).then((doc) => {
+        await getDoc(userRef).then((doc) => {
             if (doc.exists()) {
                 setUsername(doc.data().username)
             } else {
@@ -75,31 +76,51 @@ export default function CreatePackage() {
             }
         });
 
-        getDownloadURL(bannerRef).then((bannerFileUrl) => {
-            getDownloadURL(imgRefOne).then((url) => {
-                getDownloadURL(imgRefTwo).then((urlTwo) => {
-                    getDownloadURL(imgRefThree).then((urlThree) => {
-                        getDownloadURL(imgRefFour).then((urlFour) => {
-                            getDownloadURL(pkgRef).then((pkgUrl) => {
-                                setDoc(doc(db, "packages", name), {
-                                    name: name,
-                                    description: desc,
-                                    owner_id: uid,
-                                    owner_username: username,
-                                    current_version: version,
-                                    downloads: 0,
-                                    ratings: [],
-                                    screenshots: [url, urlTwo, urlThree, urlFour],
-                                    package: pkgUrl,
-                                    banner: bannerFileUrl,
-                                    sizeMb: pkgUpload.size / 1000000,
-                                    created: new Date().getTime(),
-                                }).then(r => {
-                                    alert("Package created");
-                                })
-                            })
+        let bannerUrl = await getDownloadURL(bannerRef);
+        console.log("uploaded banner")
+        let screenOneUrl = await getDownloadURL(imgRefOne);
+        console.log("uploaded screen one")
+        let screenTwoUrl = await getDownloadURL(imgRefTwo);
+        console.log("uploaded screen two")
+        let screenThreeUrl = await getDownloadURL(imgRefThree);
+        console.log("uploaded screen three")
+        let screenFourUrl = await getDownloadURL(imgRefFour);
+        console.log("uploaded screen four")
+        let pkgUrl = await getDownloadURL(pkgRef).then(async (pkgUrl) => {
+            await setDoc(doc(db, "packages", name), {
+                name: name,
+                description: desc,
+                owner_id: uid,
+                owner_username: username,
+                current_version: version,
+                downloads: 0,
+                ratings: [],
+                banner: bannerUrl,
+                screenshots: [screenOneUrl, screenTwoUrl, screenThreeUrl, screenFourUrl],
+                package: pkgUrl,
+                sizeMb: pkgUpload.size / 1000000,
+                created: new Date().getTime(),
+            }).then(async r => {
+                alert("Package created");
+                // update user packages array with the new package
+                const userRef = doc(db, "users", uid);
+                await getDoc(userRef).then(async (doc) => {
+                    if (doc.exists()) {
+                        let packages = doc.data().owned_packages;
+                        packages.push(name);
+                        await setDoc(userRef, {
+                            uid: uid,
+                            username: doc.data().username,
+                            plan: doc.data().plan,
+                            owned_packages: packages,
+                            owned_code_blocks: doc.data().owned_code_blocks,
+                        }).then(r => {
+                            alert("User updated");
+                            navigate("/dashboard")
                         })
-                    })
+                    } else {
+                        console.log("No such document!");
+                    }
                 })
             })
         })
@@ -147,7 +168,9 @@ export default function CreatePackage() {
                     } else if (pkgUpload == null) {
                         alert("Please select a file.")
                     } else {
-                        upload()
+                        upload().then(r => {
+                            navigate("/packages/" + name)
+                        })
                     }
                 }} className="publish-btn">
                 </button>

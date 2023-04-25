@@ -25,17 +25,17 @@
     border:3px solid #1e90ff
 }
 .signup-button{
-    width:325px;
-    height:40px;
-    background-color:#282828;
-    border:0;
-    border-radius:5px;
-    color:#fff;
-    font-weight:800;
-    font-size:14px;
-    top:440px;
-    cursor:pointer;
-    transition:.3s ease-in-out
+    width: 325px;
+    height: 40px;
+    background-color: #282828;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+    top: 485px;
+    cursor: pointer;
+    transition: .3s ease-in-out
 }
 .signup-forgot,.signup-signin{
     left:50%;

@@ -73,7 +73,7 @@ export default function Packages() {
             <ul className="packages-card-list" id="packages-card-list">
                 {packages.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child" onClick={() => {
-                        navigate("/" + pkg.name)
+                        navigate("/packages/" + pkg.name)
                     }}>
                         <PackageCard dwnl={pkg.downloads} author={pkg.owner_username} name={pkg.name}
                                      desc={pkg.description} banner={pkg.banner}/>
