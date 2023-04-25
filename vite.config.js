@@ -21,7 +21,7 @@ export default defineConfig({
           'auth': ['firebase/auth'],
           'store': ['firebase/firestore'],
           'storage': ['firebase/storage'],
-          'reactsyntax': ['react-syntax-highlighter'],
+          'codehighlight': ['react-syntax-highlighter'],
           'shortnum': ['short-number'],
         }
       }

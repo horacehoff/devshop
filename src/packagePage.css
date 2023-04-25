@@ -8,7 +8,8 @@
     background: linear-gradient(180deg, rgba(0, 0, 0, .05) 0, rgba(0, 0, 0, .15) 100%) 0 0/cover, var(--banner_url) center center/cover;
     z-index: -1;
     margin: 0;
-    padding: 0
+    padding: 0;
+    background-position: center center;
 }
 .package-author,.package-description,.package-description-label,.package-screenshots,.package-screenshots-label,.package-title{
     left:15px;
@@ -122,37 +123,48 @@
         left: 15px;
         top: 1050px;
     }
-    .package-description{
-        width:83.9vw
+
+    .package-description {
+        width: 83.9vw
     }
 }
-@media screen and (max-width:905px){
-    .package-description,.package-screenshots{
-        width:calc(100% - 15px)
+
+@media screen and (max-width: 905px) {
+    .package-description, .package-screenshots {
+        width: calc(100% - 15px)
     }
 }
-@media screen and (max-width:475px){
-    .package-img{
-        border-radius:8px;
-        height:calc((100% - 15px)/ 16 * 9);
+
+@media screen and (max-width: 475px) {
+    .package-img {
         width: calc(100% - 15px);
-        object-fit: cover;
-        scroll-snap-align: start
-    }
-
-    .package-characteristics-label {
-        top: 995px
-    }
-
-    .package-characteristics {
-        top: 1005px;
-    }
-
-    .bottom-block {
-        height: 40px;
-        width: 10%;
-        left: 0;
-        position: absolute;
-        top: 1140px;
+        scroll-snap-align: start;
+        scroll-snap-type: x mandatory
     }
 }
+
+/*@media screen and (max-width:475px){*/
+/*    .package-img{*/
+/*        border-radius:8px;*/
+/*        height:calc((100% - 15px)/ 16 * 9);*/
+/*        width: calc(100% - 15px);*/
+/*        object-fit: cover;*/
+/*        scroll-snap-align: start*/
+/*    }*/
+
+/*    .package-characteristics-label {*/
+/*        top: 995px*/
+/*    }*/
+
+/*    .package-characteristics {*/
+/*        top: 1005px;*/
+/*    }*/
+
+/*    .bottom-block {*/
+/*        height: 40px;*/
+/*        width: 10%;*/
+/*        left: 0;*/
+/*        position: absolute;*/
+/*        top: 1140px;*/
+/*    }*/
+/*}*/
