@@ -23,7 +23,13 @@ export default defineConfig({
           'storage': ['firebase/storage'],
           'codehighlight': ['react-syntax-highlighter'],
           'shortnum': ['short-number'],
-        }
+        },
+        compact: true,
+        // add settings for best performance
+        inlineDynamicImports: true,
+        minifyInternalExports: true,
+
+
       }
     }
   }
