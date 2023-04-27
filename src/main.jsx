@@ -15,6 +15,8 @@ import {db} from "./firebase.js";
 import PackagePage from "./packagePage.jsx";
 import SignUp from "./signup.jsx";
 import SignIn from "./signin.jsx";
+import ResetPassword from "./resetPassword.jsx";
+import AccountSettings from "./accountSettings.jsx";
 
 // lazy load
 const CodeBlocks = lazy(() => import('./codeBlocks.jsx'))
@@ -79,6 +81,8 @@ function App() {
                 <Route path="/sign-in" element={
                     <SignIn/>
                 }/>
+                <Route path="/account" element={<AccountSettings/>}/>
+                <Route path="/reset-password" element={<ResetPassword/>}/>
                 <Route path="/pricing" element={<Pricing/>}/>
                 <Route path="/about" element={<About/>}/>
                 {packages.map((pkg, index) => (

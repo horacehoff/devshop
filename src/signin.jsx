@@ -46,11 +46,11 @@ export default function SignIn() {
             <h1 className="signup-title">SIGN_IN</h1>
             <p className="signup-signin" onClick={() => navigate("/sign-up")}>// SIGN_UP INSTEAD</p>
             <p className="signup-error" id="error-msg">// AN ERROR OCCURED</p>
-            <input type="email" id="email" className="signup-input" placeholder="@EMAIL" value={email}
+            <input type="email" id="email" className="txt-input" placeholder="@EMAIL" value={email}
                    onChange={e => setEmail(e.target.value)}/><br/><br/>
-            <input type="password" id="password" className="signup-input" placeholder="@PASSWORD" value={password}
+            <input type="password" id="password" className="txt-input" placeholder="@PASSWORD" value={password}
                    onChange={e => setPassword(e.target.value)}/>
-            <p className="signup-forgot">// FORGOTTEN PASSWORD</p>
+            <p className="signup-forgot" onClick={() => navigate("/reset-password")}>FORGOT PASSWORD?</p>
             <button className="signup-button" style={{top: "460px"}}
                     onClick={() => SignInUser({navigate}, email, password)}>SIGN_IN
             </button>

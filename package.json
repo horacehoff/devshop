@@ -14,7 +14,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
     "react-syntax-highlighter": "^15.5.0",
-    "short-number": "^1.0.7"
+    "short-number": "^1.0.7",
+    "reactjs-popup": "^2.0.5"
   },
   "devDependencies": {
     "@types/react": "^18.0.32",

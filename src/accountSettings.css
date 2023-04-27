@@ -1,0 +1,114 @@
+.title {
+    font-size: 45px;
+    text-align: center;
+    margin-top: 120px;
+    font-weight: 800;
+    margin-bottom: 0;
+}
+
+.subtitle {
+    font-size: 20px;
+    text-align: center;
+    margin: 0;
+    font-weight: 500;
+}
+
+.section-title {
+    margin-top: 25px;
+    font-size: 32px;
+    font-weight: 800;
+    text-align: center;
+    margin-right: 0;
+    margin-bottom: 0;
+}
+
+.avatar-section {
+    text-align: center;
+    margin: 0;
+}
+
+.avatar-text {
+    display: inline-block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: start;
+    line-height: 25px;
+    position: relative;
+    vertical-align: 40%;
+}
+
+.avatar-size {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.profile-picture {
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+    object-position: center center;
+    display: inline-block;
+    position: relative;
+    margin-right: 10px;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.profile-picture:hover {
+    filter: brightness(0.5);
+}
+
+.profile-picture:before:hover {
+    content: "hey"
+}
+
+.section-input {
+    position: relative;
+    left: 0;
+    margin: 0;
+}
+
+.section-input::placeholder {
+    color: #575757 !important;
+}
+
+.section-input-name {
+    margin-right: 250px;
+    margin-bottom: 4px;
+}
+
+.section-input-name[data-name-content="email"] {
+    margin-right: 275px;
+}
+
+.section-inputs {
+    justify-items: center;
+    justify-content: center;
+}
+
+
+.btn-primary {
+    width: 325px;
+    height: 40px;
+    background-color: #282828;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+    cursor: pointer;
+    transition: .2s linear;
+    border: 0;
+    outline: 0;
+    font-family: "JetBrains Mono", monospace;
+}
+
+.btn-primary:hover {
+    background-color: #fff;
+    color: #000
+}
+
+.save-btn {
+    margin-top: 20px;
+}
