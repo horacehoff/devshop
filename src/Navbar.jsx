@@ -71,8 +71,15 @@ export default function Navbar() {
         if (user) {
             document.getElementById("account").innerHTML = "ACCOUNT"
             document.getElementById("nav-account").innerHTML = "ACCOUNT"
-            document.getElementById("account").onclick = () => {
+            document.getElementById("settings").onclick = () => {
                 navigate("/account");
+            }
+            document.getElementById("sign-out").onclick = () => {
+                auth.signOut().then(() => {
+                    navigate("/");
+                }).catch((error) => {
+                    console.log(error);
+                });
             }
 
             document.getElementById("account").onmouseenter = () => showAccountPages()

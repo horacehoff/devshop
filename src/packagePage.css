@@ -111,7 +111,7 @@
 @media screen and (max-width:1250px){
     .package-characteristics-label{
         left:15px;
-        top:1040px
+        top: 1300px
     }
     .package-characteristics-label:after{
         content:'// 03 - CHARACTERISTICS'
@@ -119,14 +119,32 @@
     .package-screenshots-label:after{
         content: '// 02 - GALLERY'
     }
+
     .package-characteristics {
         left: 15px;
-        top: 1050px;
+        top: 1310px;
     }
 
     .package-description {
         width: 83.9vw
     }
+}
+
+@media screen and (max-width: 915px) {
+    #screenshotbreak {
+        display: none;
+    }
+
+    .package-characteristics-label {
+        left: 15px;
+        top: 1040px
+    }
+
+    .package-characteristics {
+        left: 15px;
+        top: 1050px;
+    }
+
 }
 
 @media screen and (max-width: 905px) {

@@ -1,7 +1,7 @@
 import Navbar from "./Navbar.jsx";
 import "./accountSettings.css";
 import {useEffect, useState} from "react";
-import {getAuth, onAuthStateChanged} from "firebase/auth";
+import {EmailAuthProvider, getAuth, onAuthStateChanged, reauthenticateWithCredential,} from "firebase/auth";
 import {auth, db} from "./firebase.js";
 import {doc, getDoc, setDoc} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
@@ -10,9 +10,11 @@ import {useNavigate} from "react-router-dom";
 export default function AccountSettings() {
     const [NewUserName, setNewUserName] = useState("");
     const [baseUserName, setBaseUserName] = useState("");
-    const [NewPassword, setNewPassword] = useState("")
+    const [NewPassword, setNewPassword] = useState("");
+    const [OldPassword, setOldPassword] = useState("");
     let _uid = "";
     let state_changed = false;
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -25,7 +27,6 @@ export default function AccountSettings() {
                 });
             } else {
                 console.log("USER IS NOT LOGGED IN");
-                const navigate = useNavigate();
                 navigate("/sign-in");
             }
         });
@@ -63,13 +64,23 @@ export default function AccountSettings() {
 
     const updatePassword = async () => {
         const auth = getAuth();
-        const user = auth.currentUser;
-
-        updatePassword(user, NewPassword).then(() => {
-            console.log("PASSWORD UPDATED")
-        }).catch((error) => {
-            console.log(error)
-        })
+        const credential = EmailAuthProvider.credential(
+            auth.currentUser.email,
+            OldPassword
+        )
+        const result = await reauthenticateWithCredential(
+            auth.currentUser,
+            credential
+        ).catch((error) => {
+            console.log(error);
+        });
+        if (result) {
+            const user = auth.currentUser;
+            console.log("REAUTHENTICATED");
+            updatePassword(user, NewPassword).then(() => {
+                console.log("PASSWORD UPDATED");
+            });
+        }
     }
 
     return (
@@ -102,9 +113,13 @@ export default function AccountSettings() {
                     </div>
                 </div>
                 <br/><br/>
-                <h4 className="section-title">PASSWORD</h4>
+                <h4 className="section-title">PASSWORD(WIP)</h4>
                 <div className="avatar-section">
                     <div className="section-inputs">
+                        <p className="section-input-name">OLD PASSWORD</p>
+                        <input type="text" className="txt-input section-input" value={OldPassword}
+                               onChange={e => setOldPassword(e.target.value)}/>
+                        <br/>
                         <p className="section-input-name">NEW PASSWORD</p>
                         <input type="text" className="txt-input section-input" value={NewPassword}
                                onChange={e => setNewPassword(e.target.value)}/>

@@ -31,49 +31,46 @@ export default function PackagePage(props) {
     });
 
 
-
-
-
     useEffect(() => {
         let card = document.querySelector('.banner');
         card.style.setProperty("--banner_url", `url(${pkg.banner})`);
-        const scrollContainer = document.getElementById("package-screenshots")
-
-        function handler(e) {
-            const isTouchPad = e.wheelDeltaY ? e.wheelDeltaY === -3 * e.deltaY : e.deltaMode === 0;
-            if (isTouchPad || window.mobileCheck()) {
-                console.log("touchpad");
-                set_touchpad(true);
-                document.getElementById("package-screenshots").style.scrollSnapType = "x mandatory"
-                document.getElementById("screenshot_one").style.scrollSnapAlign = "start"
-                document.getElementById("screenshot_two").style.scrollSnapAlign = "start"
-                document.getElementById("screenshot_three").style.scrollSnapAlign = "start"
-                document.getElementById("screenshot_four").style.scrollSnapAlign = "start"
-            }
-            document.removeEventListener("wheel", handler, false);
-        }
-
-        document.addEventListener("wheel", handler, {passive: false});
-
-        function scroll_handle(evt) {
-            if (!touchpad && !window.mobileCheck()) {
-                console.log("function")
-                evt.preventDefault();
-                let newScrollLeft = scrollContainer.scrollLeft + (evt.deltaY * 10);
-                let duration = 2000;
-
-                scrollContainer.scrollTo({
-                    left: newScrollLeft,
-                    behavior: 'smooth',
-                    duration: duration
-                });
-            } else {
-                console.log("REMOVED")
-                scrollContainer.removeEventListener("wheel", scroll_handle, {passive: false})
-            }
-        }
-
-        scrollContainer.addEventListener('wheel', scroll_handle, {passive: false});
+        // const scrollContainer = document.getElementById("package-screenshots")
+        //
+        // function handler(e) {
+        //     const isTouchPad = e.wheelDeltaY ? e.wheelDeltaY === -3 * e.deltaY : e.deltaMode === 0;
+        //     if (isTouchPad || window.mobileCheck()) {
+        //         console.log("touchpad");
+        //         set_touchpad(true);
+        //         document.getElementById("package-screenshots").style.scrollSnapType = "x mandatory"
+        //         document.getElementById("screenshot_one").style.scrollSnapAlign = "start"
+        //         document.getElementById("screenshot_two").style.scrollSnapAlign = "start"
+        //         document.getElementById("screenshot_three").style.scrollSnapAlign = "start"
+        //         document.getElementById("screenshot_four").style.scrollSnapAlign = "start"
+        //     }
+        //     document.removeEventListener("wheel", handler, false);
+        // }
+        //
+        // document.addEventListener("wheel", handler, {passive: false});
+        //
+        // function scroll_handle(evt) {
+        //     if (!touchpad && !window.mobileCheck()) {
+        //         console.log("function")
+        //         evt.preventDefault();
+        //         let newScrollLeft = scrollContainer.scrollLeft + (evt.deltaY * 10);
+        //         let duration = 2000;
+        //
+        //         scrollContainer.scrollTo({
+        //             left: newScrollLeft,
+        //             behavior: 'smooth',
+        //             duration: duration
+        //         });
+        //     } else {
+        //         console.log("REMOVED")
+        //         scrollContainer.removeEventListener("wheel", scroll_handle, {passive: false})
+        //     }
+        // }
+        //
+        // scrollContainer.addEventListener('wheel', scroll_handle, {passive: false});
 
     }, []);
     return (
@@ -123,21 +120,20 @@ export default function PackagePage(props) {
                     id="screenshot_two"
                     src={pkg.screenshots[1]}
                     className="package-img"
-                    style={{marginLeft: "25px"}}
+                    style={{marginLeft: "5px"}}
                     alt="Second screenshot"
-                />
+                /><br id="screenshotbreak"/>
                 <img
                     id="screenshot_three"
                     src={pkg.screenshots[2]}
                     className="package-img"
-                    style={{marginLeft: "25px"}}
                     alt="Third screenshot"
                 />
                 <img
                     id="screenshot_four"
                     src={pkg.screenshots[3]}
                     className="package-img"
-                    style={{marginLeft: "25px", marginRight: "15px"}}
+                    style={{marginLeft: "5px"}}
                     alt="Fourth screenshot"
                 />
             </div>

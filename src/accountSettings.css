@@ -77,6 +77,7 @@
 .section-input-name {
     margin-right: 250px;
     margin-bottom: 4px;
+    white-space: nowrap;
 }
 
 .section-input-name[data-name-content="email"] {
