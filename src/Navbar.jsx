@@ -1,5 +1,4 @@
 import "./Navbar.css"
-import {auth} from "./firebase.js";
 import {onAuthStateChanged} from "firebase/auth"
 import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
@@ -64,77 +63,84 @@ export default function Navbar() {
                 document.getElementById("sign-out").style.display = "none"
             }
         }, 250)
-
     }
 
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            document.getElementById("account").innerHTML = "ACCOUNT"
-            document.getElementById("nav-account").innerHTML = "ACCOUNT"
-            document.getElementById("settings").onclick = () => {
-                navigate("/account");
-            }
-            document.getElementById("sign-out").onclick = () => {
-                auth.signOut().then(() => {
-                    navigate("/");
-                }).catch((error) => {
-                    console.log(error);
-                });
-            }
+    const fetchAuth = async () => {
+        let {auth} = await import("./firebase.js");
+        return auth;
+    }
 
-            document.getElementById("account").onmouseenter = () => showAccountPages()
-            document.getElementById("account").onmouseleave = () => hideAccountPages()
+    fetchAuth().then((auth) => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById("account").innerHTML = "ACCOUNT"
+                document.getElementById("nav-account").innerHTML = "ACCOUNT"
+                document.getElementById("settings").onclick = () => {
+                    navigate("/account");
+                }
+                document.getElementById("sign-out").onclick = () => {
+                    auth.signOut().then(() => {
+                        navigate("/");
+                    }).catch((error) => {
+                        console.log(error);
+                    });
+                }
 
-            // create a code block below that will keep the three account options visible when the mouse is over them and hide them when the mouse is not over them
-            document.getElementById("profile").onmouseenter = () => {
-                isMouseHover = true
-                showAccountPages()
-                document.getElementById("profile").style.color = "white"
-            }
-            document.getElementById("profile").onmouseleave = () => {
-                isMouseHover = false
-                hideAccountPages()
-                document.getElementById("profile").style.color = "#606060"
-            }
-            document.getElementById("settings").onmouseenter = () => {
-                isMouseHover = true
-                showAccountPages()
-                document.getElementById("settings").style.color = "white"
-            }
-            document.getElementById("settings").onmouseleave = () => {
-                isMouseHover = false
-                hideAccountPages()
-                document.getElementById("settings").style.color = "#606060"
-            }
-            document.getElementById("sign-out").onmouseenter = () => {
-                isMouseHover = true
-                showAccountPages()
-                document.getElementById("sign-out").style.color = "white"
-            }
-            document.getElementById("sign-out").onmouseleave = () => {
-                isMouseHover = false
-                hideAccountPages()
-                document.getElementById("sign-out").style.color = "#606060"
-            }
+                document.getElementById("account").onmouseenter = () => showAccountPages()
+                document.getElementById("account").onmouseleave = () => hideAccountPages()
+
+                // create a code block below that will keep the three account options visible when the mouse is over them and hide them when the mouse is not over them
+                document.getElementById("profile").onmouseenter = () => {
+                    isMouseHover = true
+                    showAccountPages()
+                    document.getElementById("profile").style.color = "white"
+                }
+                document.getElementById("profile").onmouseleave = () => {
+                    isMouseHover = false
+                    hideAccountPages()
+                    document.getElementById("profile").style.color = "#606060"
+                }
+                document.getElementById("settings").onmouseenter = () => {
+                    isMouseHover = true
+                    showAccountPages()
+                    document.getElementById("settings").style.color = "white"
+                }
+                document.getElementById("settings").onmouseleave = () => {
+                    isMouseHover = false
+                    hideAccountPages()
+                    document.getElementById("settings").style.color = "#606060"
+                }
+                document.getElementById("sign-out").onmouseenter = () => {
+                    isMouseHover = true
+                    showAccountPages()
+                    document.getElementById("sign-out").style.color = "white"
+                }
+                document.getElementById("sign-out").onmouseleave = () => {
+                    isMouseHover = false
+                    hideAccountPages()
+                    document.getElementById("sign-out").style.color = "#606060"
+                }
 
 
-            document.getElementById("nav-account").onclick = () => {
-                document.getElementById("full-nav-account").style.left = "0";
-            }
+                document.getElementById("nav-account").onclick = () => {
+                    document.getElementById("full-nav-account").style.left = "0";
+                }
 
 
-        } else {
-            document.getElementById("account").innerHTML = "SIGN_UP"
-            document.getElementById("nav-account").innerHTML = "SIGN_UP"
-            document.getElementById("account").onclick = () => {
+            } else {
+                document.getElementById("account").innerHTML = "SIGN_UP"
+                document.getElementById("nav-account").innerHTML = "SIGN_UP"
+                document.getElementById("account").onclick = () => {
 
-                navigate("/sign-up")
+                    navigate("/sign-up")
+                }
+                document.getElementById("nav-account").onclick = () => {
+                    navigate("/sign-up")
+                }
             }
-            document.getElementById("nav-account").onclick = () => {
-                navigate("/sign-up")
-            }
-        }
+        });
     });
+
     return (
         <>
             <div className="nav">

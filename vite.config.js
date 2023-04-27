@@ -8,7 +8,7 @@ export default defineConfig({
     sourcemap: false,
     terserOptions: {
       compress: {
-        passes: 100,
+        passes: 1000,
         drop_console: true,
       },
 
