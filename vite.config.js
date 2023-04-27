@@ -9,7 +9,9 @@ export default defineConfig({
     terserOptions: {
       compress: {
         passes: 100,
-      }
+        drop_console: true,
+      },
+
     },
     rollupOptions: {
       output: {
@@ -23,6 +25,7 @@ export default defineConfig({
           'storage': ['firebase/storage'],
           'codehighlight': ['react-syntax-highlighter'],
           'shortnum': ['short-number'],
+          'popup': ['reactjs-popup'],
         },
         compact: true,
         minifyInternalExports: true,

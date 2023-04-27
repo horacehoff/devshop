@@ -7,6 +7,7 @@ import {useState} from "react";
 
 
 function SignInUser({navigate}, email, password) {
+    document.getElementById("sign-in-btn").innerHTML = "LOADING...";
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             navigate("/");
@@ -51,7 +52,7 @@ export default function SignIn() {
             <input type="password" id="password" className="txt-input" placeholder="@PASSWORD" value={password}
                    onChange={e => setPassword(e.target.value)}/>
             <p className="signup-forgot" onClick={() => navigate("/reset-password")}>FORGOT PASSWORD?</p>
-            <button className="signup-button" style={{top: "460px"}}
+            <button className="signup-button" id="sign-in-btn" style={{top: "460px"}}
                     onClick={() => SignInUser({navigate}, email, password)}>SIGN_IN
             </button>
         </>
