@@ -1,0 +1,31 @@
+.user_banner {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 330px;
+    --banner_url: url("https://brew.sh/assets/img/homebrew-social-card.png");
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 27.6%, rgba(0, 0, 0, 0) 100%), var(--banner_url) center center/cover;
+    padding: 0;
+    z-index: -1;
+}
+
+.user_pfp {
+    position: absolute;
+    left: 40px;
+    top: 250px;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    background-image: url("https://brew.sh/assets/img/homebrew-social-card.png");
+    border: 10px solid #161C5B;
+}
+
+.user_name {
+    font-family: "JetBrains Mono", monospace;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    top: 370px;
+    left: 40px;
+}

@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import {collection, getDocs, limit, query, setLogLevel} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
 import PackageCard from "./packageCard.jsx";
+import fancy_name_to_id from "./utility.js";
 
 
 export default function Packages() {
@@ -73,7 +74,7 @@ export default function Packages() {
             <ul className="packages-card-list" id="packages-card-list">
                 {packages.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child" onClick={() => {
-                        navigate("/packages/" + pkg.name)
+                        navigate("/packages/" + fancy_name_to_id(pkg.name))
                     }}>
                         <PackageCard dwnl={pkg.downloads} author={pkg.owner_username} name={pkg.name}
                                      desc={pkg.description} banner={pkg.banner}/>

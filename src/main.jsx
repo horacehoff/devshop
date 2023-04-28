@@ -17,6 +17,8 @@ import SignUp from "./signup.jsx";
 import SignIn from "./signin.jsx";
 import ResetPassword from "./resetPassword.jsx";
 import AccountSettings from "./accountSettings.jsx";
+import fancy_name_to_id from "./utility.js";
+import AccountPage from "./accountPage.jsx";
 
 // lazy load
 const CodeBlocks = lazy(() => import('./codeBlocks.jsx'))
@@ -36,6 +38,7 @@ async function getPackages(collectionRef) {
 
 function App() {
     const [packages, setPackages] = useState([]);
+    const [users, setUsers] = useState([]);
     setLogLevel("debug");
 
     useEffect(() => {
@@ -50,8 +53,19 @@ function App() {
                 console.log('Error getting packages: ', error);
             }
         };
+        const fetchUsers = async () => {
+            try {
+                const collectionRef = collection(db, 'users');
+                const data = await getPackages(collectionRef);
+                setUsers(data);
+                console.log("users fetched(function call)+setUsers done")
+            } catch (error) {
+                console.log('Error getting users: ', error);
+            }
+        };
 
         fetchPackages().then(r => console.log('Packages fetched'));
+        fetchUsers().then(r => console.log('Users fetched'));
     }, []);
 
     return (
@@ -86,8 +100,13 @@ function App() {
                 <Route path="/pricing" element={<Pricing/>}/>
                 <Route path="/about" element={<About/>}/>
                 {packages.map((pkg, index) => (
-                    <Route path={"/packages/" + pkg.name} element={<PackagePage pkg={pkg}/>}/>
+                    <Route path={"/packages/" + fancy_name_to_id(pkg.name)} element={<PackagePage pkg={pkg}/>}/>
                 ))}
+                {
+                    users.map((user, index) => (
+                        <Route path={"/users/" + fancy_name_to_id(user.username)} element={<AccountPage user={user}/>}/>
+                    ))
+                }
             </Routes>
         </BrowserRouter>
     )

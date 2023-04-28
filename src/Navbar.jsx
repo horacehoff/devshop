@@ -2,6 +2,8 @@ import "./Navbar.css"
 import {onAuthStateChanged} from "firebase/auth"
 import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
+import {doc, getDoc} from "firebase/firestore";
+import fancy_name_to_id from "./utility.js";
 
 export default function Navbar() {
     const navigate = useNavigate();
@@ -75,6 +77,17 @@ export default function Navbar() {
             if (user) {
                 document.getElementById("account").innerHTML = "ACCOUNT"
                 document.getElementById("nav-account").innerHTML = "ACCOUNT"
+                document.getElementById("profile").onclick = async () => {
+                    // get the username from the database
+                    let {db} = await import("./firebase.js");
+                    let docRef = doc(db, "users", user.uid);
+                    await getDoc(docRef).then((doc) => {
+                        if (doc.exists()) {
+                            let username = fancy_name_to_id(doc.data().username);
+                            navigate("/users/" + username);
+                        }
+                    });
+                }
                 document.getElementById("settings").onclick = () => {
                     navigate("/account");
                 }
@@ -121,7 +134,6 @@ export default function Navbar() {
                     document.getElementById("sign-out").style.color = "#606060"
                 }
 
-
                 document.getElementById("nav-account").onclick = () => {
                     document.getElementById("full-nav-account").style.left = "0";
                 }
@@ -131,7 +143,6 @@ export default function Navbar() {
                 document.getElementById("account").innerHTML = "SIGN_UP"
                 document.getElementById("nav-account").innerHTML = "SIGN_UP"
                 document.getElementById("account").onclick = () => {
-
                     navigate("/sign-up")
                 }
                 document.getElementById("nav-account").onclick = () => {
@@ -178,9 +189,9 @@ export default function Navbar() {
                         <li onClick={() => {
                             document.getElementById("full-nav-account").style.left = "-100%";
                         }}>{"<== BACK"}</li>
-                        <li onClick={() => navigate("/code-blocks")}>PROFILE</li>
-                        <li onClick={() => navigate("/packages")}>SETTINGS</li>
-                        <li onClick={() => navigate("/pricing")}>SIGN OUT</li>
+                        <li onClick={() => navigate("/code-blocks")} id="nav-profile">PROFILE</li>
+                        <li onClick={() => navigate("/packages")} id="nav-settings">SETTINGS</li>
+                        <li onClick={() => navigate("/pricing")} id="nav-sign-out">SIGN OUT</li>
                     </ul>
                 </div>
 
