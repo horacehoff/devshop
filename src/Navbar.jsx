@@ -88,10 +88,32 @@ export default function Navbar() {
                         }
                     });
                 }
+                document.getElementById("nav-profile").onclick = async () => {
+                    // get the username from the database
+                    let {db} = await import("./firebase.js");
+                    let docRef = doc(db, "users", user.uid);
+                    await getDoc(docRef).then((doc) => {
+                        if (doc.exists()) {
+                            let username = fancy_name_to_id(doc.data().username);
+                            navigate("/users/" + username);
+                        }
+                    });
+                }
+
                 document.getElementById("settings").onclick = () => {
                     navigate("/account");
                 }
+                document.getElementById("nav-settings").onclick = () => {
+                    navigate("/account");
+                }
                 document.getElementById("sign-out").onclick = () => {
+                    auth.signOut().then(() => {
+                        navigate("/");
+                    }).catch((error) => {
+                        console.log(error);
+                    });
+                }
+                document.getElementById("nav-sign-out").onclick = () => {
                     auth.signOut().then(() => {
                         navigate("/");
                     }).catch((error) => {
@@ -189,9 +211,9 @@ export default function Navbar() {
                         <li onClick={() => {
                             document.getElementById("full-nav-account").style.left = "-100%";
                         }}>{"<== BACK"}</li>
-                        <li onClick={() => navigate("/code-blocks")} id="nav-profile">PROFILE</li>
-                        <li onClick={() => navigate("/packages")} id="nav-settings">SETTINGS</li>
-                        <li onClick={() => navigate("/pricing")} id="nav-sign-out">SIGN OUT</li>
+                        <li id="nav-profile">PROFILE</li>
+                        <li id="nav-settings">SETTINGS</li>
+                        <li id="nav-sign-out">SIGN OUT</li>
                     </ul>
                 </div>
 
