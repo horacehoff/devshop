@@ -1,13 +1,15 @@
 .user_banner {
-    position: absolute;
-    left: 0;
-    top: 0;
     width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
     height: 330px;
     --banner_url: url("https://brew.sh/assets/img/homebrew-social-card.png");
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 27.6%, rgba(0, 0, 0, 0) 100%), var(--banner_url) center center/cover;
     padding: 0;
+    margin: 0;
     z-index: -1;
+    background-position: center center;
 }
 
 .user_pfp {
@@ -26,6 +28,67 @@
     padding: 0;
     margin: 0;
     position: relative;
-    top: 370px;
-    left: 40px;
+    top: 385px;
+    left: 35px;
+    font-weight: 800;
+    width: calc(100% - 70px);
+}
+
+.user_id {
+    font-family: "JetBrains Mono", monospace;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    top: 385px;
+    left: 35px;
+    color: #a8a8a8;
+    width: calc(100% - 100px);
+    overflow-wrap: break-word;
+}
+
+.user_github {
+    width: calc(100% - 70px);
+    overflow-wrap: break-word;
+}
+
+.user_github:hover {
+    cursor: pointer;
+}
+
+.user_github:hover > .user_github_id {
+    text-decoration: underline;
+}
+
+.user_github_icon {
+    position: absolute;
+    font-size: 18px;
+    margin-left: 13px;
+    margin-top: 3px;
+}
+
+.user_github_id {
+    position: absolute;
+    margin-left: 34px;
+    margin-top: 7px;
+    width: calc(100% - 150px);
+    overflow-wrap: break-word;
+    line-height: 10px;
+}
+
+.user_bio_title {
+    font-family: Inter, sans-serif;
+    margin: 0;
+    position: relative;
+    top: 395px;
+    left: 35px;
+    font-weight: 600;
+    padding: 0 15px 0 0;
+    width: calc(100% - 50px);
+}
+
+
+@media screen and (max-width: 500px) {
+    .user_pfp {
+
+    }
 }
