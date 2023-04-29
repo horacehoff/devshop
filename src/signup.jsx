@@ -22,6 +22,18 @@ function SignUpUser(username, email, password, {navigate}) {
             document.getElementById("error-msg").style.visibility = "visible";
             document.getElementById("error-msg").innerHTML = "// USERNAME ALREADY EXISTS";
             return;
+        } else if (email === "") {
+            document.getElementById("error-msg").style.visibility = "visible";
+            document.getElementById("error-msg").innerHTML = "// INVALID EMAIL";
+            return;
+        } else if (password === "") {
+            document.getElementById("error-msg").style.visibility = "visible";
+            document.getElementById("error-msg").innerHTML = "// INVALID PASSWORD";
+            return;
+        } else if (username.length > 20) {
+            document.getElementById("error-msg").style.visibility = "visible";
+            document.getElementById("error-msg").innerHTML = "// USERNAME TOO LONG";
+            return;
         }
         document.getElementById("signup-button").innerHTML = "LOADING.."
         createUserWithEmailAndPassword(auth, email, password)
@@ -33,7 +45,8 @@ function SignUpUser(username, email, password, {navigate}) {
                     username: username,
                     plan: 0,
                     owned_packages: [],
-                    owned_code_blocks: []
+                    owned_code_blocks: [],
+                    bio: "Hi, I'm new to DEVSHOP!"
                 }).then(r => {
                         console.log("registered+db_created+signed-in");
                         navigate("/");

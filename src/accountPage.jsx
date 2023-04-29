@@ -1,6 +1,7 @@
 import "./accountPage.css"
 import Navbar from "./Navbar.jsx";
 import {SiGithub} from "react-icons/si";
+import fancy_name_to_id from "./utility.js";
 
 export default function AccountPage(props) {
     const usr = props.user;
@@ -11,13 +12,10 @@ export default function AccountPage(props) {
             <div className="user_banner"></div>
             <div className="user_pfp"></div>
             <h1 className="user_name">{usr.username}</h1>
-            <p className="user_id">{"@" + "257052639663862809476246572688635667782"} ·<span
-                className="user_github"><SiGithub className="user_github_icon"/> <span
-                className="user_github_id">just-a-mango</span></span></p>
-            <p className="user_bio_title">I am a passionate developer with a strong focus on creating elegant and
-                efficient solutions to complex problems. I also like mangoes which are cooler.</p>
-
-
+            <p className="user_id">{"@" + fancy_name_to_id(usr.username)} <span id="user_id_middle_dot">·</span><span
+                className="user_github" id="user_github"><SiGithub className="user_github_icon"/><span
+                className="user_github_id">{usr.github}</span></span></p>
+            <p className="user_bio">{usr.bio}</p>
         </>
     )
 

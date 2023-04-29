@@ -31,6 +31,7 @@ export default defineConfig({
           codehighlight: ['react-syntax-highlighter'],
           shortnum: ['short-number'],
           popup: ['reactjs-popup'],
+          icons: ['react-icons'],
         },
         compact: true,
         minifyInternalExports: true,

@@ -84,6 +84,14 @@
     margin-right: 275px;
 }
 
+.section-input-name[data-name-content="bio"] {
+    margin-right: 290px;
+}
+
+.section-input-name[data-name-content="github"] {
+    margin-right: 180px;
+}
+
 .section-inputs {
     justify-items: center;
     justify-content: center;

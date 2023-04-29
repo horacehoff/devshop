@@ -12,6 +12,9 @@ export default function AccountSettings() {
     const [baseUserName, setBaseUserName] = useState("");
     const [NewPassword, setNewPassword] = useState("");
     const [OldPassword, setOldPassword] = useState("");
+    const [baseBio, setBaseBio] = useState("");
+    const [NewBio, setNewBio] = useState("");
+    const [NewGithub, setNewGithub] = useState("");
     let _uid = "";
     let state_changed = false;
     const navigate = useNavigate();
@@ -39,6 +42,9 @@ export default function AccountSettings() {
             console.log("Document data:", docSnap.data());
             setNewUserName(docSnap.data().username);
             setBaseUserName(docSnap.data().username);
+            setNewBio(docSnap.data().bio);
+            setBaseBio(docSnap.data().bio);
+            setNewGithub(docSnap.data().github);
             _uid = uid;
 
         } else {
@@ -47,19 +53,21 @@ export default function AccountSettings() {
     }
 
     const updateUserName = async () => {
-        if (NewUserName !== baseUserName) {
+        // if (NewUserName !== baseUserName && baseBio !== NewBio) {
             console.log(_uid);
             try {
                 const docRef = doc(db, "users", auth.currentUser.uid);
                 await setDoc(docRef, {
                     username: NewUserName,
+                    bio: NewBio,
+                    github: NewGithub
                 }, {merge: true}).then(() => {
                     console.log("USERNAME UPDATED");
                 });
             } catch (e) {
                 console.error("ERROR UPDATING USERNAME: ", e);
             }
-        }
+        // }
     }
 
     const updatePassword = async () => {
@@ -100,6 +108,14 @@ export default function AccountSettings() {
                         <p className="section-input-name">USERNAME</p>
                         <input type="text" className="txt-input section-input" placeholder={baseUserName}
                                value={NewUserName} onChange={e => setNewUserName(e.target.value)}/>
+                        <br/>
+                        <p className="section-input-name" data-name-content="bio">BIO</p>
+                        <input type="text" className="txt-input section-input" placeholder="Hi, I'm new to DEVSHOP!"
+                               value={NewBio} onChange={e => setNewBio(e.target.value)}/>
+                        <br/>
+                        <p className="section-input-name" data-name-content="github">GITHUB USERNAME</p>
+                        <input type="text" className="txt-input section-input" placeholder="your-github-username"
+                               value={NewGithub} onChange={e => setNewGithub(e.target.value)}/>
                         <br/>
                         <button id="profile-save-btn" className="btn-primary save-btn"
                                 onClick={async () => await updateUserName().then(() => {
