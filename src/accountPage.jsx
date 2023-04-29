@@ -2,9 +2,18 @@ import "./accountPage.css"
 import Navbar from "./Navbar.jsx";
 import {SiGithub} from "react-icons/si";
 import fancy_name_to_id from "./utility.js";
+import {useEffect} from "react";
 
 export default function AccountPage(props) {
     const usr = props.user;
+
+    useEffect(() => {
+        if (usr.github === "") {
+            document.getElementById("user_github").style.display = "none";
+            document.getElementById("user_id_middle_dot").style.display = "none";
+        }
+    }, []);
+
 
     return (
         <>
