@@ -19,7 +19,9 @@
     height: 120px;
     width: 120px;
     border-radius: 50%;
-    background-image: url("https://brew.sh/assets/img/homebrew-social-card.png");
+    --pfp_url: url("https://brew.sh/assets/img/homebrew-social-card.png");
+    background-image: var(--pfp_url);
+    background-position: center center;
     border: 10px solid #161C5B;
 }
 
@@ -49,9 +51,6 @@
 .user_github {
     width: calc(100% - 70px);
     overflow-wrap: break-word;
-}
-
-.user_github:hover {
     cursor: pointer;
 }
 
@@ -81,6 +80,18 @@
     position: relative;
     top: 395px;
     left: 35px;
+    font-weight: 600;
+    padding: 0 15px 0 0;
+    width: calc(100% - 50px);
+}
+
+.user_packages_title {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 30px;
+    margin: 0;
+    position: relative;
+    top: 450px;
+    left: 25px;
     font-weight: 600;
     padding: 0 15px 0 0;
     width: calc(100% - 50px);
