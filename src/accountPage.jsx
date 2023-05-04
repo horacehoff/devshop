@@ -6,10 +6,12 @@ import {useEffect, useState} from "react";
 import {collection, getDocs, query, where} from "firebase/firestore";
 import {db} from "./firebase.js";
 import PackageCard from "./packageCard.jsx";
+import {useNavigate} from "react-router-dom";
 
 export default function AccountPage(props) {
     const usr = props.user;
     const [usrPackages, setUsrPackages] = useState([])
+    const navigate = useNavigate();
 
 
     useEffect(() => {
