@@ -6,6 +6,7 @@ import {auth, db, storage} from "./firebase.js";
 import {useEffect, useState} from "react";
 import {getDownloadURL, ref} from "firebase/storage";
 import {useNavigate} from "react-router-dom";
+import shortNumber from "short-number";
 
 export default function PackagePage(props) {
     const pkg = props.pkg;
@@ -139,7 +140,7 @@ export default function PackagePage(props) {
             </div>
             <p className="package-characteristics-label"></p>
             <div className="package-characteristics">
-                <p>TOTAL DOWNLOADS: {pkg.downloads}<br/>AVERAGE HAPPINESS: 100%<br/>TOTAL
+                <p>TOTAL DOWNLOADS: {shortNumber(pkg.downloads)}<br/>AVERAGE HAPPINESS: 100%<br/>TOTAL
                     SIZE: {Math.round(pkg.sizeMb * 10) / 10}MB<br/>CURRENT VERSION: {pkg.current_version}
                 </p>
             </div>
