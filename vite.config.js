@@ -28,7 +28,6 @@ export default defineConfig({
           auth: ['firebase/auth'],
           store: ['firebase/firestore'],
           storage: ['firebase/storage'],
-          codehighlight: ['react-syntax-highlighter'],
           shortnum: ['short-number'],
           popup: ['reactjs-popup'],
           icons: ['react-icons'],

@@ -1,7 +1,5 @@
 import "./codeCard.css"
 import shortNumber from "short-number"
-import SyntaxHighlighter from "react-syntax-highlighter";
-import {shadesOfPurple} from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 export default function CodeCard(props) {
     const code = `
@@ -16,7 +14,6 @@ export default function CodeCard(props) {
             <p className="code-card-downloads"><span
                 style={{fontSize: "16px"}}>{shortNumber(Number(props.dwnl))}</span> downloads</p>
             <p>Sample</p>
-            <SyntaxHighlighter children={code} language="javascript" style={shadesOfPurple}/>
             <p className="code-card-read-more"></p>
         </div>
     )
