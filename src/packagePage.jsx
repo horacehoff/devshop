@@ -35,6 +35,34 @@ export default function PackagePage(props) {
     useEffect(() => {
         let card = document.querySelector('.banner');
         card.style.setProperty("--banner_url", `url(${pkg.banner})`);
+
+
+        if (pkg.ratings.length === 0) {
+            document.getElementById("happiness_num").innerHTML = "NaN"
+            document.getElementById("review_num").innerHTML = "0"
+        } else {
+            if (pkg.ratings.length === 1) {
+                document.getElementById("review_num_plural").innerHTML = "review"
+            }
+            document.getElementById("review_num").innerHTML = pkg.ratings.length
+            let ratings = pkg.ratings;
+            let sum = 0;
+            for (let i = 0; i < ratings.length; i++) {
+                sum += parseInt(ratings[i]);
+            }
+            let avg = (sum / ratings.length).toFixed(1)
+            if (parseInt(avg) === 100) {
+                document.getElementById("happiness_num").innerHTML = "100"
+            } else {
+                if (avg.length === 3) {
+                    avg = "0" + avg
+                }
+
+                document.getElementById("happiness_num").innerHTML = avg
+            }
+        }
+
+
         // const scrollContainer = document.getElementById("package-screenshots")
         //
         // function handler(e) {
@@ -140,7 +168,9 @@ export default function PackagePage(props) {
             </div>
             <p className="package-characteristics-label"></p>
             <div className="package-characteristics">
-                <p>TOTAL DOWNLOADS: {shortNumber(pkg.downloads)}<br/>AVERAGE HAPPINESS: 100%<br/>TOTAL
+                <p>TOTAL DOWNLOADS: {shortNumber(pkg.downloads)}<br/>AVERAGE HAPPINESS: <span
+                    id="happiness_num">xx.x</span><br/>↳ <span id="review_num">5</span> <span
+                    id="review_num_plural">reviews</span><br/>TOTAL
                     SIZE: {Math.round(pkg.sizeMb * 10) / 10}MB<br/>CURRENT VERSION: {pkg.current_version}
                 </p>
             </div>
