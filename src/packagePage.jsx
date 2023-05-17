@@ -7,9 +7,11 @@ import {useEffect, useState} from "react";
 import {getDownloadURL, ref} from "firebase/storage";
 import {useNavigate} from "react-router-dom";
 import shortNumber from "short-number";
+import fancy_name_to_id from "./utility.js";
 
 export default function PackagePage(props) {
     const pkg = props.pkg;
+    const [uid, set_uid] = useState("");
     const navigate = useNavigate();
 
     window.mobileCheck = function () {
@@ -26,26 +28,29 @@ export default function PackagePage(props) {
     onAuthStateChanged(auth, (user) => {
         if (user) {
             set_is_logged_in(true);
+            set_uid(user.uid)
         } else {
             set_is_logged_in(false);
         }
     });
 
-
     useEffect(() => {
         let card = document.querySelector('.banner');
         card.style.setProperty("--banner_url", `url(${pkg.banner})`);
+        // get the length of the ratings map
+        let ratings_length = Object.keys(pkg.ratings).length;
 
-
-        if (pkg.ratings.length === 0) {
+        if (ratings_length === 0) {
             document.getElementById("happiness_num").innerHTML = "NaN"
             document.getElementById("review_num").innerHTML = "0"
         } else {
-            if (pkg.ratings.length === 1) {
-                document.getElementById("review_num_plural").innerHTML = "review"
+            if (ratings_length === 1) {
+                document.getElementById("review_num_plural").innerHTML = "rating"
             }
-            document.getElementById("review_num").innerHTML = pkg.ratings.length
+            document.getElementById("review_num").innerHTML = ratings_length
             let ratings = pkg.ratings;
+            // set ratings as an array of all the ratings numbers
+            ratings = Object.values(ratings);
             let sum = 0;
             for (let i = 0; i < ratings.length; i++) {
                 sum += parseInt(ratings[i]);
@@ -107,7 +112,9 @@ export default function PackagePage(props) {
             <Navbar/>
             <div className="banner"></div>
             <h2 className="package-title">{pkg.name}</h2>
-            <h3 className="package-author">// BY <span style={{color: "#F0EBBA"}}>{pkg.owner_username}</span></h3>
+            <h3 className="package-author">// BY <span style={{color: "#F0EBBA", cursor: "pointer"}}
+                                                       onClick={() => navigate("/users/" + fancy_name_to_id(pkg.owner_username))}>{pkg.owner_username}</span>
+            </h3>
             <button className="package-download-btn" id="package-download-btn" onClick={() => {
                 // download pkg
                 if (!is_logged_in) {
@@ -170,8 +177,32 @@ export default function PackagePage(props) {
             <div className="package-characteristics">
                 <p>TOTAL DOWNLOADS: {shortNumber(pkg.downloads)}<br/>AVERAGE HAPPINESS: <span
                     id="happiness_num">xx.x</span><br/>↳ <span id="review_num">5</span> <span
-                    id="review_num_plural">reviews</span><br/>TOTAL
-                    SIZE: {Math.round(pkg.sizeMb * 10) / 10}MB<br/>CURRENT VERSION: {pkg.current_version}
+                    id="review_num_plural">ratings</span>
+
+                    <span id="rate_btn"><br/>↳ <span className="rate_btn" onClick={() => {
+                        document.getElementById("rate_btn").innerHTML = "<br/>RATING: <input type='number' max='100' min='0' maxlength='3' class='rating_input' id='rating_input'/><br/><button class='rating_done_btn' id='rating_done_btn'>SUBMIT</button>"
+                        document.getElementById("rating_input").oninput = () => {
+                            if (document.getElementById("rating_input").value > 100) {
+                                document.getElementById("rating_input").value = 100
+                            } else if (document.getElementById("rating_input").value < 0) {
+                                document.getElementById("rating_input").value = 0
+                            }
+                        }
+
+                        document.getElementById("rating_done_btn").onclick = async () => {
+                            // if no map exists on the package firebase doc, create one and add the rating, else add the rating to the map
+                            await updateDoc(doc(db, "packages", fancy_name_to_id(pkg.name)), {
+                                // get all existing ratings of the package using the pkg object, and add the new rating to the map
+                                ratings: {
+                                    ...pkg.ratings,
+                                    [uid]: document.getElementById("rating_input").value
+                                }
+                            })
+
+                        }
+                    }}>{">> RATE THIS <<"}</span></span>
+
+                    <br/>TOTAL SIZE: {Math.round(pkg.sizeMb * 10) / 10}MB<br/>CURRENT VERSION: {pkg.current_version}
                 </p>
             </div>
             <div className="bottom-block"></div>

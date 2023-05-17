@@ -6,6 +6,7 @@ import {getDownloadURL, ref, uploadBytes} from "firebase/storage"
 import {onAuthStateChanged} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
 import {doc, getDoc, setDoc} from "firebase/firestore";
+import fancy_name_to_id from "./utility.js";
 
 export default function CreatePackage() {
     const [pkgUpload, setPkgUpload] = useState(null);
@@ -23,7 +24,6 @@ export default function CreatePackage() {
     const [name, setName] = useState("");
     const [desc, setDesc] = useState("");
     const [version, setVersion] = useState("");
-    const [username, setUsername] = useState("");
 
     let uid = "";
     const navigate = useNavigate()
@@ -66,15 +66,6 @@ export default function CreatePackage() {
         await uploadBytes(imgRefFour, imgUploadFour).then(() => {
             alert("img uploaded")
         })
-        // get the username from the database using the uid
-        const userRef = doc(db, "users", uid);
-        await getDoc(userRef).then((doc) => {
-            if (doc.exists()) {
-                setUsername(doc.data().username)
-            } else {
-                console.log("No such document!");
-            }
-        });
 
         let bannerUrl = await getDownloadURL(bannerRef);
         console.log("uploaded banner")
@@ -86,12 +77,24 @@ export default function CreatePackage() {
         console.log("uploaded screen three")
         let screenFourUrl = await getDownloadURL(imgRefFour);
         console.log("uploaded screen four")
+
+        let own_username = "";
+        const userRef = doc(db, "users", uid);
+        await getDoc(userRef).then((doc) => {
+            if (doc.exists()) {
+                own_username = doc.data().username;
+            } else {
+                console.log("No such document!");
+            }
+        });
+
+
         let pkgUrl = await getDownloadURL(pkgRef).then(async (pkgUrl) => {
-            await setDoc(doc(db, "packages", name), {
+            await setDoc(doc(db, "packages", fancy_name_to_id(name)), {
                 name: name,
                 description: desc,
                 owner_id: uid,
-                owner_username: username,
+                owner_username: own_username,
                 current_version: version,
                 downloads: 0,
                 ratings: [],
@@ -116,7 +119,6 @@ export default function CreatePackage() {
                             owned_code_blocks: doc.data().owned_code_blocks,
                         }).then(r => {
                             alert("User updated");
-                            navigate("/dashboard")
                         })
                     } else {
                         console.log("No such document!");

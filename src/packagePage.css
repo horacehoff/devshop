@@ -110,6 +110,7 @@
     border-radius: 8px;
     overflow: hidden;
 }
+
 .package-download-btn:hover {
     background-color: #fff;
     color: #000;
@@ -118,15 +119,69 @@
     right: 32px;
 }
 
-@media screen and (max-width:1250px){
-    .package-characteristics-label{
-        left:15px;
+
+.rate_btn {
+    cursor: pointer;
+}
+
+.rate_btn:hover {
+    text-decoration: underline;
+}
+
+.rating_input {
+    width: 50px;
+    border: solid 1px white;
+    color: white;
+    outline: 0;
+    -moz-appearance: textfield;
+    height: 22px;
+    background-color: transparent;
+    border-radius: 2px;
+    padding: 0 0 0 5px;
+    font-family: 'JetBrains Mono', monospace;
+
+
+}
+
+.rating_input::-webkit-outer-spin-button, .rating_input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.rating_done_btn {
+    width: 200px;
+    height: 35px;
+    background-color: white;
+    border-radius: 5px;
+    color: #282828;
+    font-weight: 800;
+    font-size: 14px;
+    cursor: pointer;
+    transition: .2s linear;
+    border: 0;
+    outline: 0;
+    font-family: "JetBrains Mono", monospace;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.rating_done_btn:hover {
+    background-color: #282828;
+    color: white
+}
+
+
+@media screen and (max-width: 1250px) {
+    .package-characteristics-label {
+        left: 15px;
         top: 1300px
     }
-    .package-characteristics-label:after{
-        content:'// 03 - CHARACTERISTICS'
+
+    .package-characteristics-label:after {
+        content: '// 03 - CHARACTERISTICS'
     }
-    .package-screenshots-label:after{
+
+    .package-screenshots-label:after {
         content: '// 02 - GALLERY'
     }
 

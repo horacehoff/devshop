@@ -44,6 +44,10 @@ export default function Navbar() {
         document.getElementById("profile").style.display = "block"
         document.getElementById("settings").style.display = "block"
         document.getElementById("sign-out").style.display = "block"
+        // set their positions as fixed
+        document.getElementById("profile").style.position = "fixed"
+        document.getElementById("settings").style.position = "fixed"
+        document.getElementById("sign-out").style.position = "fixed"
         document.getElementById("profile").style.top = (account_pos.top + 30 + "px")
         document.getElementById("profile").style.left = (account_pos.left + "px")
         document.getElementById("settings").style.top = (account_pos.top + 60 + "px")
