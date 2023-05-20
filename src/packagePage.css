@@ -250,6 +250,11 @@
     .package-description, .package-screenshots {
         width: calc(100% - 15px)
     }
+
+    .screenshot_full_close {
+        top: 10px;
+        left: 15px;
+    }
 }
 
 @media screen and (max-width: 475px) {
