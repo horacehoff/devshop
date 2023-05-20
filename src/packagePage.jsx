@@ -13,6 +13,7 @@ import ReactMarkdown from "react-markdown";
 export default function PackagePage(props) {
     const pkg = props.pkg;
     const [uid, set_uid] = useState("");
+    const [baseStyle, set_baseStyle] = useState({});
     const navigate = useNavigate();
 
     window.mobileCheck = function () {
@@ -107,6 +108,7 @@ export default function PackagePage(props) {
         //
         // scrollContainer.addEventListener('wheel', scroll_handle, {passive: false});
 
+        set_baseStyle(document.getElementById("screenshot_one").style)
     }, []);
 
     function fullScreen(img) {
@@ -136,12 +138,7 @@ export default function PackagePage(props) {
             }} id="screenshot_bg_div"></div>
             <p className="screenshot_full_close" id="screenshot_full_close" onClick={() => {
                 const revertChanges = img => {
-                    img.style.position = "revert";
-                    img.style.top = "revert";
-                    img.style.left = "revert";
-                    img.style.width = "444px";
-                    img.style.height = "calc(444px / 16 * 9)";
-                    img.style.zIndex = "revert";
+                    img.style = baseStyle;
                 }
                 let img = document.getElementById("screenshot_one");
                 revertChanges(img);
