@@ -119,23 +119,14 @@ export default function PackagePage(props) {
         img.style.height = "85%";
         img.style.zIndex = "9999";
         document.getElementById("screenshot_bg_div").style.display = "block";
-        document.getElementById("screenshot_bg_div").style.backdropFilter = "blur(10px)";
+        // document.getElementById("screenshot_bg_div").style.backdropFilter = "blur(10px)";
         document.getElementById("screenshot_full_close").style.display = "block";
     }
 
     return (
         <>
             <Navbar/>
-            <div style={{
-                position: "fixed",
-                display: "none",
-                top: "0",
-                left: "0",
-                width: "100%",
-                height: "100%",
-                zIndex: "9998",
-                backgroundColor: "rgba(0,0,0,0.25)"
-            }} id="screenshot_bg_div"></div>
+            <div className="screenshot_bg_div" id="screenshot_bg_div"></div>
             <p className="screenshot_full_close" id="screenshot_full_close" onClick={() => {
                 const revertChanges = img => {
                     img.style = baseStyle;
