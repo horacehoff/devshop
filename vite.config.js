@@ -31,6 +31,7 @@ export default defineConfig({
           shortnum: ['short-number'],
           popup: ['reactjs-popup'],
           icons: ['react-icons'],
+          reactmarkdown: ['react-markdown'],
         },
         compact: true,
         minifyInternalExports: true,
