@@ -46,10 +46,12 @@
     padding:0
 }
 .package-description{
-    top:476px;
-    width:calc(100% - 15px - 75px - 220px - 20px);
-    height:200px;
-    overflow-y:scroll
+    margin-top: 0;
+    top: 476px;
+    width: calc(100% - 15px - 75px - 220px - 20px);
+    height: 200px;
+    overflow-y: scroll;
+    padding-top: 0;
 }
 .package-screenshots-label{
     top:710px;
@@ -67,12 +69,13 @@
     white-space:nowrap;
     scroll-snap-type: x mandatory
 }
-.package-img{
-    border-radius:8px;
-    height:calc(444px / 16 * 9);
-    width:444px;
-    object-fit:cover;
-    scroll-snap-align: start
+.package-img {
+    border-radius: 8px;
+    height: calc(444px / 16 * 9);
+    width: 444px;
+    object-fit: cover;
+    scroll-snap-align: start;
+    cursor: pointer;
 }
 .package-characteristics-label{
     position:absolute;
@@ -168,6 +171,25 @@
 .rating_done_btn:hover {
     background-color: #282828;
     color: white
+}
+
+
+.screenshot_full_close {
+    position: fixed;
+    top: 25px;
+    left: 25px;
+    font-family: "JetBrains Mono", monospace;
+    color: white;
+    z-index: 9999;
+    font-size: 25px;
+    margin: 0;
+    padding: 0;
+    transition: 0.15s;
+    cursor: pointer;
+}
+
+.screenshot_full_close:hover {
+    color: #b4b4b4;
 }
 
 

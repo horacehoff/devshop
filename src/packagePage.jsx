@@ -8,6 +8,7 @@ import {getDownloadURL, ref} from "firebase/storage";
 import {useNavigate} from "react-router-dom";
 import shortNumber from "short-number";
 import fancy_name_to_id from "./utility.js";
+import ReactMarkdown from "react-markdown";
 
 export default function PackagePage(props) {
     const pkg = props.pkg;
@@ -107,9 +108,52 @@ export default function PackagePage(props) {
         // scrollContainer.addEventListener('wheel', scroll_handle, {passive: false});
 
     }, []);
+
+    function fullScreen(img) {
+        img.style.position = "fixed";
+        img.style.top = "calc(50% - 42.5%)";
+        img.style.left = "calc(50% - 42.5%)";
+        img.style.width = "85%";
+        img.style.height = "85%";
+        img.style.zIndex = "9999";
+        document.getElementById("screenshot_bg_div").style.display = "block";
+        document.getElementById("screenshot_bg_div").style.backdropFilter = "blur(10px)";
+        document.getElementById("screenshot_full_close").style.display = "block";
+    }
+
     return (
         <>
             <Navbar/>
+            <div style={{
+                position: "fixed",
+                display: "none",
+                top: "0",
+                left: "0",
+                width: "100%",
+                height: "100%",
+                zIndex: "9998",
+                backgroundColor: "rgba(0,0,0,0.25)"
+            }} id="screenshot_bg_div"></div>
+            <p className="screenshot_full_close" id="screenshot_full_close" onClick={() => {
+                const revertChanges = img => {
+                    img.style.position = "revert";
+                    img.style.top = "revert";
+                    img.style.left = "revert";
+                    img.style.width = "444px";
+                    img.style.height = "calc(444px / 16 * 9)";
+                    img.style.zIndex = "revert";
+                }
+                let img = document.getElementById("screenshot_one");
+                revertChanges(img);
+                img = document.getElementById("screenshot_two");
+                revertChanges(img);
+                img = document.getElementById("screenshot_three");
+                revertChanges(img);
+                img = document.getElementById("screenshot_four");
+                revertChanges(img);
+                document.getElementById("screenshot_bg_div").style.display = "none";
+                document.getElementById("screenshot_full_close").style.display = "none";
+            }}>CLOSE</p>
             <div className="banner"></div>
             <h2 className="package-title">{pkg.name}</h2>
             <h3 className="package-author">// BY <span style={{color: "#F0EBBA", cursor: "pointer"}}
@@ -144,33 +188,49 @@ export default function PackagePage(props) {
 
             }}>{"DOWNLOAD -> 0$"}</button>
             <p className="package-description-label">// 01 - DESCRIPTION</p>
-            <p className="package-description">{pkg.description}</p>
+            <p className="package-description"><ReactMarkdown>{pkg.description}</ReactMarkdown></p>
             <p className="package-screenshots-label"></p>
             <div className="package-screenshots" id="package-screenshots">
                 <img
                     id="screenshot_one"
                     src={pkg.screenshots[0]}
                     className="package-img"
-                    alt="First screenshot"/>
+                    alt="First screenshot" onClick={() => {
+                    // animate the image to full screen
+                    let img = document.getElementById("screenshot_one");
+                    fullScreen(img);
+                }}/>
                 <img
                     id="screenshot_two"
                     src={pkg.screenshots[1]}
                     className="package-img"
                     style={{marginLeft: "5px"}}
-                    alt="Second screenshot"
+                    alt="Second screenshot" onClick={() => {
+                    // animate the image to full screen
+                    let img = document.getElementById("screenshot_two");
+                    fullScreen(img);
+                }}
                 /><br id="screenshotbreak"/>
                 <img
                     id="screenshot_three"
                     src={pkg.screenshots[2]}
                     className="package-img"
-                    alt="Third screenshot"
+                    alt="Third screenshot" onClick={() => {
+                    // animate the image to full screen
+                    let img = document.getElementById("screenshot_three");
+                    fullScreen(img);
+                }}
                 />
                 <img
                     id="screenshot_four"
                     src={pkg.screenshots[3]}
                     className="package-img"
                     style={{marginLeft: "5px"}}
-                    alt="Fourth screenshot"
+                    alt="Fourth screenshot" onClick={() => {
+                    // animate the image to full screen
+                    let img = document.getElementById("screenshot_four");
+                    fullScreen(img);
+                }}
                 />
             </div>
             <p className="package-characteristics-label"></p>
@@ -197,6 +257,9 @@ export default function PackagePage(props) {
                                     ...pkg.ratings,
                                     [uid]: document.getElementById("rating_input").value
                                 }
+                            }).then(() => {
+                                // reload the page to update the rating
+                                window.location.reload();
                             })
 
                         }

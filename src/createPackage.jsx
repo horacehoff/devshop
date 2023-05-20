@@ -135,8 +135,11 @@ export default function CreatePackage() {
                 <h2 style={{margin: "0"}}>// GENERAL INFO</h2>
                 <input type="text" className="name-input" placeholder="NAME" value={name}
                        onChange={e => setName(e.target.value)}/>
-                <input type="text" className="desc-input" placeholder="DESCRIPTION" style={{marginBottom: "10px"}} value={desc}
-                       onChange={e => setDesc(e.target.value)}/>
+                <input type="text" className="desc-input" placeholder="SHORT DESCRIPTION"
+                       style={{marginBottom: "10px"}}/>
+                <textarea name="long_desc" cols="40" rows="5" className="textarea-long" placeholder="LONG DESCRIPTION"
+                          value={desc}
+                          onChange={e => setDesc(e.target.value)}></textarea>
                 <input type="file" id="banner-file" style={{display: "none"}} onChange={(event) => {
                     setBanner(event.target.files[0])
                     console.log("banner")

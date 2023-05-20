@@ -96,18 +96,39 @@
 .publish-btn:before {
     content: "PUBLISH PACKAGE";
 }
+
 .publish-btn:hover:before {
     content: ">> PUBLISH PACKAGE <<";
 }
-.publish-btn:hover{
-    background-color:#fff;
-    color:#000
+
+.publish-btn:hover {
+    background-color: #fff;
+    color: #000
+}
+
+
+.textarea-long {
+    resize: none;
+    font-family: 'JetBrains Mono', monospace;
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+    color: white;
+}
+
+.textarea-long::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.textarea-long:focus {
+    outline: none;
 }
 
 @media screen and (min-width: 390px) {
     .publish-btn {
         width: 370px;
     }
+
     .centered {
         margin-left: calc(50vw - 185px);
         width: 370px;
