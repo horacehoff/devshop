@@ -13,7 +13,7 @@ import ReactMarkdown from "react-markdown";
 export default function PackagePage(props) {
     const pkg = props.pkg;
     const [uid, set_uid] = useState("");
-    const [baseStyle, set_baseStyle] = useState({});
+    let baseStyle = {}
     const navigate = useNavigate();
 
     window.mobileCheck = function () {
@@ -108,7 +108,7 @@ export default function PackagePage(props) {
         //
         // scrollContainer.addEventListener('wheel', scroll_handle, {passive: false});
 
-        set_baseStyle(document.getElementById("screenshot_one").style)
+        baseStyle = document.getElementById("screenshot_one").style
     }, []);
 
     function fullScreen(img) {
@@ -176,7 +176,7 @@ export default function PackagePage(props) {
 
             }}>{"DOWNLOAD -> 0$"}</button>
             <p className="package-description-label">// 01 - DESCRIPTION</p>
-            <p className="package-description"><ReactMarkdown>{pkg.description}</ReactMarkdown></p>
+            <p className="package-description">{<ReactMarkdown>{pkg.description}</ReactMarkdown>}</p>
             <p className="package-screenshots-label"></p>
             <div className="package-screenshots" id="package-screenshots">
                 <img
