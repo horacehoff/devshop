@@ -42,6 +42,7 @@ export default function AccountSettings() {
             console.log("Document data:", docSnap.data());
             setNewUserName(docSnap.data().username);
             setBaseUserName(docSnap.data().username);
+            document.getElementById("profile-picture").style.backgroundImage = "url('https://source.boringavatars.com/pixel/120/" + baseUserName + "?colors=6E00FF,0300FF,000000,FC7600,FFFFFF')"
             setNewBio(docSnap.data().bio);
             setBaseBio(docSnap.data().bio);
             setNewGithub(docSnap.data().github);
@@ -52,22 +53,48 @@ export default function AccountSettings() {
         }
     }
 
+    const updateBio = async () => {
+        const docRef = doc(db, "users", auth.currentUser.uid);
+        await setDoc(docRef, {
+            bio: NewBio
+        }, {merge: true}).then(() => {
+            console.log("BIO UPDATED");
+        });
+    }
+
+    const updateGithub = async () => {
+        const docRef = doc(db, "users", auth.currentUser.uid);
+        await setDoc(docRef, {
+            github: NewGithub
+        }, {merge: true}).then(() => {
+            console.log("GITHUB UPDATED");
+        });
+    }
+
     const updateUserName = async () => {
-        // if (NewUserName !== baseUserName && baseBio !== NewBio) {
-            console.log(_uid);
-            try {
-                const docRef = doc(db, "users", auth.currentUser.uid);
-                await setDoc(docRef, {
-                    username: NewUserName,
-                    bio: NewBio,
-                    github: NewGithub
-                }, {merge: true}).then(() => {
-                    console.log("USERNAME UPDATED");
-                });
-            } catch (e) {
-                console.error("ERROR UPDATING USERNAME: ", e);
-            }
-        // }
+        const docRef = doc(db, "users", auth.currentUser.uid);
+        await setDoc(docRef, {
+            username: NewUserName,
+            bio: NewBio,
+            github: NewGithub
+        }, {merge: true}).then(() => {
+            console.log("USERNAME UPDATED");
+        });
+    }
+
+    const updateProfile = async () => {
+        if (NewBio !== baseBio) {
+            console.log("BIO UPDATE")
+            await updateBio();
+        }
+        if (NewGithub !== "") {
+            console.log("GITHUB UPDATE")
+            await updateGithub();
+        }
+        if (NewUserName !== baseUserName) {
+            console.log("USERNAME UPDATE")
+            await updateUserName();
+        }
     }
 
     const updatePassword = async () => {
@@ -99,7 +126,14 @@ export default function AccountSettings() {
             <div id="acc-settings">
                 <h4 className="section-title">PROFILE</h4>
                 <div className="avatar-section">
-                    <img className="profile-picture" src="https://i.imgur.com/0X0X0X0.png" alt="profile picture"/>
+                    <input type="file" id="img-file" style={{display: "none"}} multiple onChange={(event) => {
+                        // setImgUploadOne(event.target.files[0])
+                        // setImgUploadTwo(event.target.files[1])
+                        // setImgUploadThree(event.target.files[2])
+                        // setImgUploadFour(event.target.files[3])
+                        // console.log("img")
+                    }} required accept=".jpeg,.webp, image/jpeg"/>
+                    <label className="profile-picture" id="profile-picture" htmlFor="img-file"/>
                     <div className="avatar-text">
                         AVATAR<br/><span className="avatar-size">MIN. 60x60PX</span>
                     </div>
@@ -118,12 +152,13 @@ export default function AccountSettings() {
                                value={NewGithub} onChange={e => setNewGithub(e.target.value)}/>
                         <br/>
                         <button id="profile-save-btn" className="btn-primary save-btn"
-                                onClick={async () => await updateUserName().then(() => {
+                                onClick={async () => await updateProfile().then(() => {
                                     document.getElementById("profile-save-btn").innerHTML = "SAVED ✅";
                                     // wait 1 second
                                     setTimeout(() => {
                                         document.getElementById("profile-save-btn").innerHTML = "SAVE";
-                                    }, 1500);
+                                        window.location.reload();
+                                    }, 1000);
                                 })}>SAVE
                         </button>
                     </div>

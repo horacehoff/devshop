@@ -47,13 +47,13 @@
     border-radius: 50%;
     height: 60px;
     width: 60px;
-    object-fit: cover;
-    object-position: center center;
     display: inline-block;
     position: relative;
     margin-right: 10px;
     transition: 0.2s;
     cursor: pointer;
+    background-position: center center;
+    background-size: cover;
 }
 
 .profile-picture:hover {

@@ -20,7 +20,7 @@ export default function AccountPage(props) {
             document.getElementById("user_id_middle_dot").style.display = "none";
         }
         let card = document.querySelector('.user_pfp');
-        let pfp_url = "https://ui-avatars.com/api/?name=" + usr.username + "&background=000000&color=ffffff&size=120";
+        let pfp_url = "https://source.boringavatars.com/pixel/120/" + usr.username + "?colors=6E00FF,0300FF,000000,FC7600,FFFFFF";
         card.style.setProperty("--pfp_url", `url(${pfp_url})`);
 
         const getUsrPackages = () => {
