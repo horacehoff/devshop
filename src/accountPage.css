@@ -22,6 +22,7 @@
     --pfp_url: url("https://brew.sh/assets/img/homebrew-social-card.png");
     background-image: var(--pfp_url);
     background-position: center center;
+    background-size: cover;
     border: 10px solid #161C5B;
 }
 

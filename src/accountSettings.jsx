@@ -2,9 +2,10 @@ import Navbar from "./Navbar.jsx";
 import "./accountSettings.css";
 import {useEffect, useState} from "react";
 import {EmailAuthProvider, getAuth, onAuthStateChanged, reauthenticateWithCredential,} from "firebase/auth";
-import {auth, db} from "./firebase.js";
+import {auth, db, storage} from "./firebase.js";
 import {doc, getDoc, setDoc} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
+import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 
 
 export default function AccountSettings() {
@@ -46,6 +47,9 @@ export default function AccountSettings() {
             if (docSnap.data().pfp_path === "") {
                 console.log("no pfp")
                 document.getElementById("profile-picture").style.backgroundImage = "url('https://source.boringavatars.com/pixel/120/" + baseUserName + "?colors=6E00FF,0300FF,000000,FC7600,FFFFFF')"
+            } else {
+                console.log("pfp")
+                document.getElementById("profile-picture").style.backgroundImage = "url('" + docSnap.data().pfp_path + "')";
             }
             setNewBio(docSnap.data().bio);
             setBaseBio(docSnap.data().bio);
@@ -99,6 +103,21 @@ export default function AccountSettings() {
             console.log("USERNAME UPDATE")
             await updateUserName();
         }
+        if (pfpUpload !== "") {
+            let extension = pfpUpload.type.replace(/(.*)\//g, '')
+            let pfpRef = ref(storage, "users/" + _uid + "/" + "pfp." + extension)
+            await uploadBytes(pfpRef, pfpUpload).then(() => {
+                console.log("pfp uploaded")
+            });
+            let pfpUrl = await getDownloadURL(pfpRef);
+            const docRef = doc(db, "users", auth.currentUser.uid);
+            await setDoc(docRef, {
+                pfp_path: pfpUrl
+            }, {merge: true}).then(() => {
+                console.log("pfp user updated");
+            });
+
+        }
     }
 
     const updatePassword = async () => {
@@ -131,13 +150,8 @@ export default function AccountSettings() {
                 <h4 className="section-title">PROFILE</h4>
                 <div className="avatar-section">
                     <input type="file" id="img-file" style={{display: "none"}} onChange={(event) => {
-                        // setImgUploadOne(event.target.files[0])
-                        // setImgUploadTwo(event.target.files[1])
-                        // setImgUploadThree(event.target.files[2])
-                        // setImgUploadFour(event.target.files[3])
-                        // console.log("img")
                         setPfpUpload(event.target.files[0])
-                        document.getElementById("")
+                        document.getElementById("profile-picture").style.backgroundImage = "url('" + URL.createObjectURL(event.target.files[0]) + "')";
                     }} required accept=".jpeg,.webp, image/jpeg"/>
                     <label className="profile-picture" id="profile-picture" htmlFor="img-file"/>
                     <div className="avatar-text">
