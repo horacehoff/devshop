@@ -78,7 +78,7 @@ export default function Packages() {
                         navigate("/packages/" + fancy_name_to_id(pkg.name))
                     }}>
                         <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
-                                     desc={pkg.description} banner={pkg.banner}/>
+                                     catchphrase={pkg.catchphrase} banner={pkg.banner}/>
                     </li>
                 ))}
             </ul>

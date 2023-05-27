@@ -3,12 +3,12 @@ import Navbar from "./Navbar.jsx";
 import {onAuthStateChanged} from "firebase/auth";
 import {doc, getDoc, updateDoc} from "firebase/firestore";
 import {auth, db, storage} from "./firebase.js";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {getDownloadURL, ref} from "firebase/storage";
 import {useNavigate} from "react-router-dom";
 import shortNumber from "short-number";
 import fancy_name_to_id from "./utility.js";
-import ReactMarkdown from "react-markdown";
+import MDEditor from '@uiw/react-md-editor';
 
 export default function PackagePage(props) {
     const pkg = props.pkg;
@@ -137,7 +137,8 @@ export default function PackagePage(props) {
 
             }}>{"DOWNLOAD -> 0$"}</button>
             <p className="package-description-label">// 01 - DESCRIPTION</p>
-            <p className="package-description">{<ReactMarkdown>{pkg.description}</ReactMarkdown>}</p>
+            <p className="package-description">{<MDEditor.Markdown source={pkg.description}
+                                                                   className="package-desc-md"/>}</p>
             <p className="package-screenshots-label"></p>
             <div className="package-screenshots" id="package-screenshots">
                 <img

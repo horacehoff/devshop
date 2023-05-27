@@ -46,27 +46,27 @@
     padding:0
 }
 .package-description{
-    margin-top: 0;
+    margin-top: 17px;
     top: 476px;
     width: calc(100% - 15px - 75px - 220px - 20px);
-    height: 200px;
+    height: 300px;
     overflow-y: scroll;
     padding-top: 0;
 }
-.package-screenshots-label{
-    top:710px;
-    color:#b9b9b9
+.package-screenshots-label {
+    top: 810px;
+    color: #b9b9b9
 }
 .package-screenshots-label:after{
     content: '// 03 - GALLERY'
 }
-.package-screenshots{
-    top:755px;
-    margin:0;
-    padding:0;
-    width:calc(100% - 15px);
-    overflow:scroll;
-    white-space:nowrap;
+.package-screenshots {
+    top: 855px;
+    margin: 0;
+    padding: 0;
+    width: calc(100% - 15px);
+    overflow: scroll;
+    white-space: nowrap;
     scroll-snap-type: x mandatory
 }
 .package-img {
@@ -206,10 +206,17 @@
     -webkit-backdrop-filter: blur(10px);
 }
 
+.package-desc-md {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+
+}
+
 @media screen and (max-width: 1250px) {
     .package-characteristics-label {
         left: 15px;
-        top: 1300px
+        top: 1400px
     }
 
     .package-characteristics-label:after {
@@ -222,7 +229,7 @@
 
     .package-characteristics {
         left: 15px;
-        top: 1310px;
+        top: 1410px;
     }
 
     .package-description {
@@ -237,12 +244,12 @@
 
     .package-characteristics-label {
         left: 15px;
-        top: 1040px
+        top: 1140px
     }
 
     .package-characteristics {
         left: 15px;
-        top: 1050px;
+        top: 1150px;
     }
 
 }
@@ -265,29 +272,3 @@
         scroll-snap-type: x mandatory
     }
 }
-
-/*@media screen and (max-width:475px){*/
-/*    .package-img{*/
-/*        border-radius:8px;*/
-/*        height:calc((100% - 15px)/ 16 * 9);*/
-/*        width: calc(100% - 15px);*/
-/*        object-fit: cover;*/
-/*        scroll-snap-align: start*/
-/*    }*/
-
-/*    .package-characteristics-label {*/
-/*        top: 995px*/
-/*    }*/
-
-/*    .package-characteristics {*/
-/*        top: 1005px;*/
-/*    }*/
-
-/*    .bottom-block {*/
-/*        height: 40px;*/
-/*        width: 10%;*/
-/*        left: 0;*/
-/*        position: absolute;*/
-/*        top: 1140px;*/
-/*    }*/
-/*}*/

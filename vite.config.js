@@ -31,7 +31,7 @@ export default defineConfig({
           shortnum: ['short-number'],
           popup: ['reactjs-popup'],
           icons: ['react-icons'],
-          markdown: ['react-markdown'],
+          markdown: ['@uiw/react-md-editor'],
         },
         compact: true,
         minifyInternalExports: true,

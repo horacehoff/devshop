@@ -71,7 +71,7 @@
     font-weight: bold;
     transition: 0.2s;
     margin-left: 3px;
-
+    cursor: pointer;
 }
 
 .file-input:hover {
@@ -124,13 +124,20 @@
     outline: none;
 }
 
+.md-editor-container {
+    margin-bottom: 20px;
+}
+
 @media screen and (min-width: 390px) {
     .publish-btn {
         width: 370px;
     }
 
+    /*.centered {*/
+    /*    margin-left: calc(50vw - 185px);*/
+    /*    width: 370px;*/
+    /*}*/
     .centered {
-        margin-left: calc(50vw - 185px);
-        width: 370px;
+        margin-left: 15px;
     }
 }

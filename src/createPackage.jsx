@@ -7,6 +7,7 @@ import {onAuthStateChanged} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
 import {doc, getDoc, setDoc} from "firebase/firestore";
 import fancy_name_to_id from "./utility.js";
+import MDEditor from '@uiw/react-md-editor';
 
 export default function CreatePackage() {
     const [pkgUpload, setPkgUpload] = useState(null);
@@ -24,6 +25,7 @@ export default function CreatePackage() {
     const [name, setName] = useState("");
     const [desc, setDesc] = useState("");
     const [version, setVersion] = useState("");
+    const [longDesc, setLongDesc] = useState("**This is the description for my awesome package!**");
 
     let uid = "";
     const navigate = useNavigate()
@@ -92,7 +94,8 @@ export default function CreatePackage() {
         let pkgUrl = await getDownloadURL(pkgRef).then(async (pkgUrl) => {
             await setDoc(doc(db, "packages", fancy_name_to_id(name)), {
                 name: name,
-                description: desc,
+                description: longDesc,
+                catchphrase: desc,
                 owner_id: uid,
                 owner_username: own_username,
                 current_version: version,
@@ -135,25 +138,33 @@ export default function CreatePackage() {
                 <h2 style={{margin: "0"}}>// GENERAL INFO</h2>
                 <input type="text" className="name-input" placeholder="NAME" value={name}
                        onChange={e => setName(e.target.value)}/>
-                <input type="text" className="desc-input" placeholder="SHORT DESCRIPTION"
-                       style={{marginBottom: "10px"}}/>
-                <textarea name="long_desc" cols="40" rows="5" className="textarea-long" placeholder="LONG DESCRIPTION"
-                          value={desc}
-                          onChange={e => setDesc(e.target.value)}></textarea>
+                <input type="text" className="desc-input" placeholder="CATCHPHRASE"
+                       style={{marginBottom: "10px"}} value={desc} onChange={e => setDesc(e.target.value)}/>
+
+                <div className="md-editor-container">
+                    <MDEditor
+                        value={longDesc}
+                        onChange={setLongDesc}
+                        height={350}
+                    />
+                </div>
+
+
                 <input type="file" id="banner-file" style={{display: "none"}} onChange={(event) => {
                     setBanner(event.target.files[0])
                     console.log("banner")
                 }} accept=".jpeg,.webp, image/jpeg" required/>
                 <label htmlFor="banner-file" className="file-input">UPLOAD BANNER</label>
 
-                <h2 style={{margin: "0", marginTop: "40px", marginBottom: "10px"}}>// PACKAGE</h2>
+                <h2 style={{margin: "0", marginTop: "40px", marginBottom: "0"}}>// PACKAGE</h2>
+                <input type="text" className="desc-input" placeholder="PACKAGE VERSION"
+                       style={{marginTop: "0px", marginBottom: "10px"}} value={version}
+                       onChange={e => setVersion(e.target.value)}/>
                 <input type="file" id="file" style={{display: "none"}} onChange={(event) => {
                     setPkgUpload(event.target.files[0])
                     console.log("pkg")
                 }} accept=".zip, application/zip" required/>
                 <label htmlFor="file" className="file-input">UPLOAD PACKAGE</label>
-                <input type="text" className="desc-input" placeholder="PACKAGE VERSION" style={{marginTop: "10px"}} value={version}
-                       onChange={e => setVersion(e.target.value)}/>
 
 
                 <h2 style={{margin: "0", marginTop: "25px", marginBottom: "-10px"}}>// GALLERY IMAGES (MAX{'=>'}4)</h2>
