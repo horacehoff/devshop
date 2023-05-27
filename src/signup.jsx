@@ -47,7 +47,8 @@ function SignUpUser(username, email, password, {navigate}) {
                     owned_packages: [],
                     owned_code_blocks: [],
                     bio: "Hi, I'm new to DEVSHOP!",
-                    github: ""
+                    github: "",
+                    pfp_path: ""
                 }).then(r => {
                         console.log("registered+db_created+signed-in");
                         navigate("/");

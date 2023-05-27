@@ -15,6 +15,7 @@ export default function AccountSettings() {
     const [baseBio, setBaseBio] = useState("");
     const [NewBio, setNewBio] = useState("");
     const [NewGithub, setNewGithub] = useState("");
+    const [pfpUpload, setPfpUpload] = useState(null);
     let _uid = "";
     let state_changed = false;
     const navigate = useNavigate();
@@ -42,7 +43,10 @@ export default function AccountSettings() {
             console.log("Document data:", docSnap.data());
             setNewUserName(docSnap.data().username);
             setBaseUserName(docSnap.data().username);
-            document.getElementById("profile-picture").style.backgroundImage = "url('https://source.boringavatars.com/pixel/120/" + baseUserName + "?colors=6E00FF,0300FF,000000,FC7600,FFFFFF')"
+            if (docSnap.data().pfp_path === "") {
+                console.log("no pfp")
+                document.getElementById("profile-picture").style.backgroundImage = "url('https://source.boringavatars.com/pixel/120/" + baseUserName + "?colors=6E00FF,0300FF,000000,FC7600,FFFFFF')"
+            }
             setNewBio(docSnap.data().bio);
             setBaseBio(docSnap.data().bio);
             setNewGithub(docSnap.data().github);
@@ -126,12 +130,14 @@ export default function AccountSettings() {
             <div id="acc-settings">
                 <h4 className="section-title">PROFILE</h4>
                 <div className="avatar-section">
-                    <input type="file" id="img-file" style={{display: "none"}} multiple onChange={(event) => {
+                    <input type="file" id="img-file" style={{display: "none"}} onChange={(event) => {
                         // setImgUploadOne(event.target.files[0])
                         // setImgUploadTwo(event.target.files[1])
                         // setImgUploadThree(event.target.files[2])
                         // setImgUploadFour(event.target.files[3])
                         // console.log("img")
+                        setPfpUpload(event.target.files[0])
+                        document.getElementById("")
                     }} required accept=".jpeg,.webp, image/jpeg"/>
                     <label className="profile-picture" id="profile-picture" htmlFor="img-file"/>
                     <div className="avatar-text">

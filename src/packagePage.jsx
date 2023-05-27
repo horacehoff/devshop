@@ -164,7 +164,7 @@ export default function PackagePage(props) {
                             }
                         })
                         if (new_downloads !== -1) {
-                            updateDoc(doc(db, "packages", pkg.name), {
+                            updateDoc(doc(db, "packages", fancy_name_to_id(pkg.name)), {
                                 downloads: new_downloads + 1
                             }).then(r => {
                                 console.log("updated");
