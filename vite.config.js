@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     terser({
       compress: {
-        passes: 1000,
+        passes: 10000,
         drop_console: true,
         toplevel: true
       },
@@ -32,12 +32,7 @@ export default defineConfig({
           shortnum: ['short-number'],
           popup: ['reactjs-popup'],
           icons: ['react-icons'],
-          markdown(id) {
-            if (id.includes('@uiw/react-md-editor')) {
-              const fileName = id.match(/\/([^/]+)$/)[1];
-              return `markdown_${fileName}`;
-            }
-          },
+          markdown: ['@uiw/react-md-editor'],
         },
         compact: true,
         minifyInternalExports: true,
