@@ -32,10 +32,7 @@ export default defineConfig({
           shortnum: ['short-number'],
           popup: ['reactjs-popup'],
           icons: ['react-icons'],
-          markdowndist: ['@uiw/react-md-editor/dist'],
-          markdownlib: ['@uiw/react-md-editor/lib'],
-          markdownesm: ['@uiw/react-md-editor/esm'],
-          markdownsrc: ['@uiw/react-md-editor/src'],
+          markdown: ['@uiw/react-md-editor/esm', '@uiw/react-md-editor/lib', '@uiw/react-md-editor/dist'],
 
         },
         compact: true,
