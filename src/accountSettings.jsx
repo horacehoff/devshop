@@ -103,7 +103,7 @@ export default function AccountSettings() {
             console.log("USERNAME UPDATE")
             await updateUserName();
         }
-        if (pfpUpload !== "") {
+        if (pfpUpload !== null) {
             let extension = pfpUpload.type.replace(/(.*)\//g, '')
             let pfpRef = ref(storage, "users/" + _uid + "/" + "pfp." + extension)
             await uploadBytes(pfpRef, pfpUpload).then(() => {
