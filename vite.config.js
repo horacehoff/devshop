@@ -54,7 +54,7 @@ export default defineConfig({
         comments: false,
       },
       compress: {
-        passes: 10, // Adjust the number of compression passes as needed
+        passes: 1000, // Adjust the number of compression passes as needed
         drop_console: true,
         toplevel: true,
       },
@@ -65,11 +65,14 @@ export default defineConfig({
     sourcemap: false,
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            // Split each dependency into separate chunks
-            const packageName = id.match(/\/node_modules\/([^/]+)/)[1];
-            return packageName.replace('@', '');
+        manualChunks(id, {getModuleInfo}) {
+          const {size} = getModuleInfo(id);
+          if (size > 50000) {
+            // Only split packages larger than 50kB into separate chunks
+            if (id.includes('node_modules')) {
+              const packageName = id.match(/\/node_modules\/([^/]+)/)[1];
+              return packageName.replace('@', '');
+            }
           }
         },
         compact: true,
