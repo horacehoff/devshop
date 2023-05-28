@@ -25,7 +25,7 @@ export default function CreatePackage() {
     const [name, setName] = useState("");
     const [desc, setDesc] = useState("");
     const [version, setVersion] = useState("");
-    const [longDesc, setLongDesc] = useState("**This is the description for my awesome package!**");
+    const [longDesc, setLongDesc] = useState("**This is the detailed description of my awesome package!**");
 
     let uid = "";
     const navigate = useNavigate()
