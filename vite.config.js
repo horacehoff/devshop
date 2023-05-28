@@ -7,9 +7,8 @@ export default defineConfig({
     react(),
     terser({
       compress: {
-        passes: 10000,
+        passes: 1000,
         drop_console: true,
-        toplevel: true
       },
       format: {
         comments: false,
@@ -33,13 +32,11 @@ export default defineConfig({
           popup: ['reactjs-popup'],
           icons: ['react-icons'],
           markdown: ['@uiw/react-md-editor'],
-
         },
         compact: true,
         minifyInternalExports: true,
       },
       plugins: [terser()],
     },
-
-  }
+  },
 });
