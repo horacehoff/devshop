@@ -256,8 +256,12 @@
 }
 
 @media screen and (max-width: 905px) {
-    .package-description, .package-screenshots {
+    .package-screenshots {
         width: calc(100% - 15px)
+    }
+
+    .package-description {
+        width: calc(100% - 30px)
     }
 
     .screenshot_full_close {
