@@ -54,7 +54,7 @@ export default defineConfig({
         comments: false,
       },
       compress: {
-        passes: 10, // Adjust the number of compression passes as needed
+        passes: 1000, // Adjust the number of compression passes as needed
         drop_console: true,
         toplevel: true,
       },
