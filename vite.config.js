@@ -12,6 +12,7 @@ export default defineConfig({
       },
       format: {
         comments: false,
+        source_map: false,
       },
     }),
   ],
@@ -35,6 +36,7 @@ export default defineConfig({
         },
         compact: true,
         minifyInternalExports: true,
+        sourcemap: false,
       },
       plugins: [terser()],
     },
