@@ -12,12 +12,10 @@ import React, {useEffect, useState} from "react";
 export default function EditPackage(props) {
     const pkg = props.pkg
     const navigate = useNavigate()
-    const [uid, set_uid] = useState("");
+    let uid = "";
     let baseStyle = {}
     const [is_logged_in, set_is_logged_in] = useState(false);
     const [new_downloads, set_new_downloads] = useState(0);
-
-    let editorValue = pkg.description;
 
 
     window.mobileCheck = function () {
@@ -34,7 +32,7 @@ export default function EditPackage(props) {
             // check if user id is the package owner_id
             if (user.uid === pkg.owner_id) {
                 console.log("user is owner")
-                set_uid(user.uid)
+                uid = user.uid;
             } else {
                 console.log("user is not owner")
                 navigate("/packages/" + fancy_name_to_id(pkg.id))
@@ -98,10 +96,13 @@ export default function EditPackage(props) {
                 <p className="package-description-label">// 01 - DESCRIPTION</p>
                 <p className="package-description package-description-edit">{
                     <MDEditor
-                        value={editorValue}
-                        onChange={handleMarkdownChange}
                         className="package-desc-editor-edit"
                         height="100%"
+                        id="package-desc-editor"
+                        value={pkg.description}
+                        onChange={e => {
+                            document.getElementById("package-desc-editor").value = e;
+                        }}
                     />
                 }</p>
                 <p className="package-screenshots-label"></p>
