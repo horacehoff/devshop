@@ -21,6 +21,7 @@ import SignIn from "./signin.jsx";
 import ResetPassword from "./resetPassword.jsx";
 import AccountSettings from "./accountSettings.jsx";
 import AccountPage from "./accountPage.jsx";
+import EditPackage from "./editPackage.jsx";
 
 
 const CodeBlocks = lazy(() => import('./codeBlocks.jsx'))
@@ -116,6 +117,9 @@ function App() {
                 <Route path="/about" element={<About/>}/>
                 {packages.map((pkg, index) => (
                     <Route path={"/packages/" + fancy_name_to_id(pkg.name)} element={<PackagePage pkg={pkg}/>}/>
+                ))}
+                {packages.map((pkg, index) => (
+                    <Route path={"/edit/" + fancy_name_to_id(pkg.name)} element={<EditPackage pkg={pkg}/>}/>
                 ))}
                 {
                     users.map((user, index) => (

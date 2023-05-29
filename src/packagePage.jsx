@@ -26,11 +26,32 @@ export default function PackagePage(props) {
 
     const [is_logged_in, set_is_logged_in] = useState(false);
     const [new_downloads, set_new_downloads] = useState(0);
-    const [touchpad, set_touchpad] = useState(false);
     onAuthStateChanged(auth, (user) => {
         if (user) {
             set_is_logged_in(true);
             set_uid(user.uid)
+            console.log("PKG: " + pkg.owner_id)
+            console.log("UID: " + uid)
+            if (uid === pkg.owner_id) {
+                document.getElementById("package-download-btn").innerHTML = "EDIT"
+                document.getElementById("package-download-btn").style.backgroundColor = "#F0EBBA"
+                // fix the text not being centered
+                document.getElementById("package-download-btn").style.paddingLeft = "30px"
+                document.getElementById("package-download-btn").style.paddingRight = "30px"
+                document.getElementById("package-download-btn").style.paddingTop = "15px"
+                document.getElementById("package-download-btn").style.paddingBottom = "15px"
+                // fix the margins
+                document.getElementById("package-download-btn").style.right = "15px"
+                document.getElementById("package-download-btn").style.bottom = "15px"
+                // change transform origin
+                document.getElementById("package-download-btn").style.transformOrigin = "bottom right"
+                document.getElementById("package-download-btn").style.color = "#000000"
+                document.getElementById("package-download-btn").style.border = "none"
+                document.getElementById("package-download-btn").style.cursor = "pointer"
+                document.getElementById("package-download-btn").onclick = () => {
+                    navigate("/edit/" + fancy_name_to_id(pkg.name))
+                }
+            }
         } else {
             set_is_logged_in(false);
         }
@@ -70,6 +91,8 @@ export default function PackagePage(props) {
         }
 
         baseStyle = document.getElementById("screenshot_one").style
+
+
     }, []);
 
     function fullScreen(img) {

@@ -1,0 +1,35 @@
+.banner-edit {
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.banner-edit:hover {
+    filter: blur(2px) brightness(0.8);
+}
+
+.package-img-edit {
+    transition: 0.2s;
+}
+
+.package-img-edit:hover {
+    z-index: 1000;
+    filter: blur(2px) brightness(0.8);
+}
+
+.package-description-edit {
+    height: 310px !important;
+}
+
+.package-desc-editor-edit {
+    height: 100%;
+}
+
+.w-md-editor-bar {
+    display: none;
+}
+
+@media screen and (max-width: 1060px) {
+    .package-description-edit {
+        width: calc(100% - 30px)
+    }
+}
