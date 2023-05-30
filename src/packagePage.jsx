@@ -58,8 +58,7 @@ export default function PackagePage(props) {
     });
 
     useEffect(() => {
-        let card = document.querySelector('.banner');
-        card.style.setProperty("--banner_url", `url(${pkg.banner})`);
+        document.querySelector('.banner').style.setProperty("--banner_url", `url(${pkg.banner})`);
         // get the length of the ratings map
         let ratings_length = Object.keys(pkg.ratings).length;
 
