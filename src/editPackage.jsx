@@ -51,7 +51,7 @@ export default function EditPackage(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/" + (imgUpload0ne.name ?? ("screenone" + imgUpload0ne.type)))
+            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/" + imgUpload0ne.name)
             await uploadBytes(uploadRef, imgUpload0ne).then(() => {
                 console.log("img one uploaded")
             })
@@ -65,8 +65,8 @@ export default function EditPackage(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/" + (imgUploadTwo.name ?? ("screentwo" + imgUploadTwo.type)))
-            await uploadBytes(uploadRef, imgUpload0ne).then(() => {
+            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/" + imgUploadTwo.name)
+            await uploadBytes(uploadRef, imgUploadTwo).then(() => {
                 console.log("img two uploaded")
             })
             screenTwoUrl = await getDownloadURL(uploadRef)
@@ -78,8 +78,8 @@ export default function EditPackage(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/" + (imgUploadThree.name ?? ("screenthree" + imgUploadThree.type)))
-            await uploadBytes(uploadRef, imgUpload0ne).then(() => {
+            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/" + imgUploadThree.name)
+            await uploadBytes(uploadRef, imgUploadThree).then(() => {
                 console.log("img three uploaded")
             })
             screenThreeUrl = await getDownloadURL(uploadRef)
@@ -91,8 +91,8 @@ export default function EditPackage(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/" + (imgUploadFour.name ?? ("screenfour" + imgUploadFour.type)))
-            await uploadBytes(uploadRef, imgUpload0ne).then(() => {
+            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/" + imgUploadFour.name)
+            await uploadBytes(uploadRef, imgUploadFour).then(() => {
                 console.log("img four uploaded")
             })
             screenFourUrl = await getDownloadURL(uploadRef)
@@ -118,11 +118,13 @@ export default function EditPackage(props) {
                     style={{color: "#F0EBBA", cursor: "pointer"}}>{pkg.owner_username}</span>
                 </h3>
                 <button className="package-download-btn" id="package-download-btn" onClick={async () => {
-                    await saveChanges()
-
-                    // if (uid !== "") {
-                    //     navigate("/packages/" + fancy_name_to_id(pkg.name))
-                    // }
+                    document.getElementById("package-download-btn").innerHTML = "SAVING.."
+                    await saveChanges().then(() => {
+                        document.getElementById("package-download-btn").innerHTML = "SAVED ✅"
+                        setTimeout(() => {
+                            navigate("/packages/" + fancy_name_to_id(pkg.name))
+                        }, 1000)
+                    })
 
                 }}>{"SAVE"}</button>
                 <p className="package-description-label">// 01 - DESCRIPTION</p>
@@ -138,6 +140,7 @@ export default function EditPackage(props) {
                 <p className="package-screenshots-label"></p>
                 <div className="package-screenshots" id="package-screenshots">
                     <input type="file" id="img-file-one" style={{display: "none"}}
+                           onChange={(event) => setImgUploadOne(event.target.files[0])}
                            required
                            accept=".jpeg,.webp, image/jpeg"/>
                     <input type="file" id="img-file-two" style={{display: "none"}}
@@ -151,9 +154,17 @@ export default function EditPackage(props) {
                            accept=".jpeg,.webp, image/jpeg"/>
                     <img
                         id="screenshot_one"
-                        style={{backgroundImage: "url('" + pkg.screenshots[0] + "')"}}
+                        src={pkg.screenshots[0]}
                         className="package-img package-img-edit"
                         onClick={() => {
+                            document.getElementById("img-file-one").addEventListener('change', function () {
+                                var vals = this.value,
+                                    val = vals.length ? vals.split('\\').pop() : '';
+                                let fileup = new File([this.files[0]], this.files[0].name, {type: this.files[0].type})
+                                setImgUploadTwo(fileup)
+                                console.log(fileup)
+                                document.getElementById('screenshot_one').src = URL.createObjectURL(fileup);
+                            });
                             document.getElementById("img-file-one").click()
                         }}
                     />
@@ -164,15 +175,15 @@ export default function EditPackage(props) {
                         style={{marginLeft: "5px"}}
                         alt="Second screenshot"
                         onClick={() => {
-                            document.getElementById("img-file-two").click()
                             document.getElementById("img-file-two").addEventListener('change', function () {
                                 var vals = this.value,
                                     val = vals.length ? vals.split('\\').pop() : '';
-                                setImgUploadTwo(val)
-                                console.log(val)
-                                // set this image as this image src
-                                document.getElementById('screenshot_two').src = val;
+                                let fileup = new File([this.files[0]], this.files[0].name, {type: this.files[0].type})
+                                setImgUploadTwo(fileup)
+                                console.log(fileup)
+                                document.getElementById('screenshot_two').src = URL.createObjectURL(fileup);
                             });
+                            document.getElementById("img-file-two").click()
                         }}
                     /><br id="screenshotbreak"/>
                     <img
@@ -181,6 +192,14 @@ export default function EditPackage(props) {
                         className="package-img package-img-edit"
                         alt="Third screenshot"
                         onClick={() => {
+                            document.getElementById("img-file-three").addEventListener('change', function () {
+                                var vals = this.value,
+                                    val = vals.length ? vals.split('\\').pop() : '';
+                                let fileup = new File([this.files[0]], this.files[0].name, {type: this.files[0].type})
+                                setImgUploadTwo(fileup)
+                                console.log(fileup)
+                                document.getElementById('screenshot_three').src = URL.createObjectURL(fileup);
+                            });
                             document.getElementById("img-file-three").click()
                         }}
                     />
@@ -191,6 +210,14 @@ export default function EditPackage(props) {
                         style={{marginLeft: "5px"}}
                         alt="Fourth screenshot"
                         onClick={() => {
+                            document.getElementById("img-file-four").addEventListener('change', function () {
+                                var vals = this.value,
+                                    val = vals.length ? vals.split('\\').pop() : '';
+                                let fileup = new File([this.files[0]], this.files[0].name, {type: this.files[0].type})
+                                setImgUploadTwo(fileup)
+                                console.log(fileup)
+                                document.getElementById('screenshot_four').src = URL.createObjectURL(fileup);
+                            });
                             document.getElementById("img-file-four").click()
                         }}
                     />

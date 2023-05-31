@@ -29,7 +29,10 @@ export default function AccountSettings() {
                 console.log("USER IS LOGGED IN");
                 getData(user.uid, user.email).then(() => {
                     console.log("DATA LOADED");
+                    _uid = user.uid;
+                    console.log("UID: " + _uid)
                 });
+
             } else {
                 console.log("USER IS NOT LOGGED IN");
                 navigate("/sign-in");

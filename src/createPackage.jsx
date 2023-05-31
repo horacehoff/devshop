@@ -43,28 +43,28 @@ export default function CreatePackage() {
             alert("pkg uploaded")
         });
 
-        let bannerRef = ref(storage, "users/" + uid + "/" + name + "/img/" + banner.name)
+        let bannerRef = ref(storage, "users/" + uid + "/" + name + "/img/banner/" + banner.name)
         await uploadBytes(bannerRef, banner).then(() => {
             alert("banner uploaded")
         })
 
-        let imgRefOne = ref(storage, "users/" + uid + "/" + name + "/img/" + (imgUpload0ne.name ?? ("screenone" + imgUpload0ne.type)))
+        let imgRefOne = ref(storage, "users/" + uid + "/" + name + "/img/one/" + (imgUpload0ne.name ?? ("screenone" + imgUpload0ne.type)))
         await uploadBytes(imgRefOne, imgUpload0ne).then(() => {
             alert("img uploaded")
         })
 
-        let imgRefTwo = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUploadTwo.name ?? ("screentwo" + imgUpload0ne.type))
+        let imgRefTwo = ref(storage, "users/" + uid + "/" + name + "/img/two/" + imgUploadTwo.name ?? ("screentwo" + imgUpload0ne.type))
         await uploadBytes(imgRefTwo, imgUploadTwo).then(() => {
             alert("img uploaded")
 
         })
 
-        let imgRefThree = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUploadThree.name ?? ("screenthree" + imgUpload0ne.type))
+        let imgRefThree = ref(storage, "users/" + uid + "/" + name + "/img/three/" + imgUploadThree.name ?? ("screenthree" + imgUpload0ne.type))
         await uploadBytes(imgRefThree, imgUploadThree).then(() => {
             alert("img uploaded")
         })
 
-        let imgRefFour = ref(storage, "users/" + uid + "/" + name + "/img/" + imgUploadFour.name ?? ("screenfour" + imgUpload0ne.type))
+        let imgRefFour = ref(storage, "users/" + uid + "/" + name + "/img/four/" + imgUploadFour.name ?? ("screenfour" + imgUpload0ne.type))
         await uploadBytes(imgRefFour, imgUploadFour).then(() => {
             alert("img uploaded")
         })
@@ -169,12 +169,13 @@ export default function CreatePackage() {
 
                 <h2 style={{margin: "0", marginTop: "25px", marginBottom: "-10px"}}>// GALLERY IMAGES (MAX{'=>'}4)</h2>
                 <input type="file" id="img-file" style={{display: "none"}} multiple onChange={(event) => {
+                    console.log(event.target.files[0])
                     setImgUploadOne(event.target.files[0])
                     setImgUploadTwo(event.target.files[1])
                     setImgUploadThree(event.target.files[2])
                     setImgUploadFour(event.target.files[3])
                     console.log("img")
-                }} required accept=".jpeg,.webp, image/jpeg"/>
+                }} required accept=".png,.jpeg,.webp, image/jpeg, image/png"/>
                 <p>IDEAL DIMENSIONS: 890 x 460</p>
                 <label htmlFor="img-file" className="file-input">UPLOAD IMAGES</label>
                 <br/><br/>
@@ -185,7 +186,7 @@ export default function CreatePackage() {
                         alert("Please select a file.")
                     } else {
                         upload().then(r => {
-                            navigate("/packages/" + name)
+                            navigate("/packages/" + fancy_name_to_id(name))
                         })
                     }
                 }} className="publish-btn">

@@ -52,6 +52,7 @@ function SignUpUser(username, email, password, {navigate}) {
                 }).then(r => {
                         console.log("registered+db_created+signed-in");
                         navigate("/");
+                    window.location.reload();
                     }
                 );
             })
