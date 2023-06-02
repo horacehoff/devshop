@@ -50,7 +50,8 @@ export default function PackagePage(props) {
     });
 
     useEffect(() => {
-        document.querySelector('.banner').style.setProperty("--banner_url", `url(${pkg.banner})`);
+        console.log("package banner load: " + pkg.banner)
+        document.querySelector('.banner').style.setProperty("--banner_url", `url('${pkg.banner}')`);
         // get the length of the ratings map
         let ratings_length = Object.keys(pkg.ratings).length;
 

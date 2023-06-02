@@ -38,53 +38,60 @@ export default function CreatePackage() {
     });
     const upload = async () => {
         let extension = pkgUpload.type.replace(/(.*)\//g, '')
-        let pkgRef = ref(storage, "users/" + uid + "/" + name + "/pkg/" + name + "." + extension)
+        let pkgRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(name) + "/pkg/" + fancy_name_to_id(name) + "." + extension)
         await uploadBytes(pkgRef, pkgUpload).then(() => {
-            alert("pkg uploaded")
+            document.getElementById("publish-btn").innerHTML = "UPLOADING... => █▒▒▒▒▒▒▒▒▒▒▒▒▒ 7%"
         });
 
-        let bannerRef = ref(storage, "users/" + uid + "/" + name + "/img/banner/" + banner.name)
+        let bannerRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(name) + "/img/banner/" + banner.name)
         await uploadBytes(bannerRef, banner).then(() => {
-            alert("banner uploaded")
+            document.getElementById("publish-btn").innerHTML = "UPLOADING... => ██▒▒▒▒▒▒▒▒▒▒▒▒ 14%"
         })
 
-        let imgRefOne = ref(storage, "users/" + uid + "/" + name + "/img/one/" + (imgUpload0ne.name ?? ("screenone" + imgUpload0ne.type)))
+        let imgRefOne = ref(storage, "users/" + uid + "/" + fancy_name_to_id(name) + "/img/one/" + (imgUpload0ne.name ?? ("screenone" + imgUpload0ne.type)))
         await uploadBytes(imgRefOne, imgUpload0ne).then(() => {
-            alert("img uploaded")
+            document.getElementById("publish-btn").innerHTML = "UPLOADING... => ███▒▒▒▒▒▒▒▒▒▒▒ 21%"
         })
 
-        let imgRefTwo = ref(storage, "users/" + uid + "/" + name + "/img/two/" + imgUploadTwo.name ?? ("screentwo" + imgUpload0ne.type))
+        let imgRefTwo = ref(storage, "users/" + uid + "/" + fancy_name_to_id(name) + "/img/two/" + imgUploadTwo.name ?? ("screentwo" + imgUpload0ne.type))
         await uploadBytes(imgRefTwo, imgUploadTwo).then(() => {
-            alert("img uploaded")
-
+            document.getElementById("publish-btn").innerHTML = "UPLOADING... => ████▒▒▒▒▒▒▒▒▒▒ 28%"
         })
 
-        let imgRefThree = ref(storage, "users/" + uid + "/" + name + "/img/three/" + imgUploadThree.name ?? ("screenthree" + imgUpload0ne.type))
+        let imgRefThree = ref(storage, "users/" + uid + "/" + fancy_name_to_id(name) + "/img/three/" + imgUploadThree.name ?? ("screenthree" + imgUpload0ne.type))
         await uploadBytes(imgRefThree, imgUploadThree).then(() => {
-            alert("img uploaded")
+            document.getElementById("publish-btn").innerHTML = "UPLOADING... => █████▒▒▒▒▒▒▒▒▒ 35%"
         })
 
-        let imgRefFour = ref(storage, "users/" + uid + "/" + name + "/img/four/" + imgUploadFour.name ?? ("screenfour" + imgUpload0ne.type))
+        let imgRefFour = ref(storage, "users/" + uid + "/" + fancy_name_to_id(name) + "/img/four/" + imgUploadFour.name ?? ("screenfour" + imgUpload0ne.type))
         await uploadBytes(imgRefFour, imgUploadFour).then(() => {
-            alert("img uploaded")
+            document.getElementById("publish-btn").innerHTML = "UPLOADING... => ██████▒▒▒▒▒▒▒▒ 42%"
         })
 
         let bannerUrl = await getDownloadURL(bannerRef);
         console.log("uploaded banner")
+        document.getElementById("publish-btn").innerHTML = "UPLOADING... => ███████▒▒▒▒▒▒▒ 49%"
         let screenOneUrl = await getDownloadURL(imgRefOne);
         console.log("uploaded screen one")
+        document.getElementById("publish-btn").innerHTML = "UPLOADING... => ████████▒▒▒▒▒▒ 56%"
         let screenTwoUrl = await getDownloadURL(imgRefTwo);
         console.log("uploaded screen two")
+        document.getElementById("publish-btn").innerHTML = "UPLOADING... => █████████▒▒▒▒▒ 63%"
         let screenThreeUrl = await getDownloadURL(imgRefThree);
         console.log("uploaded screen three")
+        document.getElementById("publish-btn").innerHTML = "UPLOADING... => ██████████▒▒▒▒ 70%"
         let screenFourUrl = await getDownloadURL(imgRefFour);
         console.log("uploaded screen four")
+        document.getElementById("publish-btn").innerHTML = "UPLOADING... => ███████████▒▒▒ 77%"
+
 
         let own_username = "";
         const userRef = doc(db, "users", uid);
         await getDoc(userRef).then((doc) => {
             if (doc.exists()) {
                 own_username = doc.data().username;
+                document.getElementById("publish-btn").innerHTML = "UPLOADING... => ████████████▒▒ 84%"
+
             } else {
                 console.log("No such document!");
             }
@@ -107,13 +114,13 @@ export default function CreatePackage() {
                 sizeMb: pkgUpload.size / 1000000,
                 created: new Date().getTime(),
             }).then(async r => {
-                alert("Package created");
+                document.getElementById("publish-btn").innerHTML = "UPLOADING... => █████████████▒ 91%"
                 // update user packages array with the new package
                 const userRef = doc(db, "users", uid);
                 await getDoc(userRef).then(async (doc) => {
                     if (doc.exists()) {
                         let packages = doc.data().owned_packages;
-                        packages.push(name);
+                        packages.push(fancy_name_to_id(name));
                         await setDoc(userRef, {
                             uid: uid,
                             username: doc.data().username,
@@ -121,7 +128,7 @@ export default function CreatePackage() {
                             owned_packages: packages,
                             owned_code_blocks: doc.data().owned_code_blocks,
                         }).then(r => {
-                            alert("User updated");
+                            document.getElementById("publish-btn").innerHTML = "UPLOADING... => ██████████████ 100%"
                         })
                     } else {
                         console.log("No such document!");
@@ -130,6 +137,7 @@ export default function CreatePackage() {
             })
         })
     }
+
     return (
         <>
             <Navbar/>
@@ -179,17 +187,29 @@ export default function CreatePackage() {
                 <p>IDEAL DIMENSIONS: 890 x 460</p>
                 <label htmlFor="img-file" className="file-input">UPLOAD IMAGES</label>
                 <br/><br/>
-                <button onClick={() => {
+                <button onMouseEnter={() => {
+                    if (document.getElementById("publish-btn").style.pointerEvents !== "none") {
+                        document.getElementById("publish-btn").innerHTML = ">> PUBLISH PACKAGE <<"
+                    }
+                }} onMouseLeave={() => {
+                    if (document.getElementById("publish-btn").style.pointerEvents !== "none") {
+                        document.getElementById("publish-btn").innerHTML = "PUBLISH PACKAGE"
+                    }
+                }} onClick={() => {
                     if (name === "") {
                         alert("Invalid name")
                     } else if (pkgUpload == null) {
                         alert("Please select a file.")
                     } else {
+                        document.getElementById("publish-btn").style.pointerEvents = "none"
+                        document.getElementById("publish-btn").innerHTML = "UPLOADING... => ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 0%"
                         upload().then(r => {
                             navigate("/packages/" + fancy_name_to_id(name))
+                            window.location.reload()
                         })
                     }
-                }} className="publish-btn">
+                }} className="publish-btn" id="publish-btn">
+                    PUBLISH PACKAGE
                 </button>
             </div>
         </>

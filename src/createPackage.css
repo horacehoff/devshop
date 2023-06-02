@@ -83,23 +83,24 @@
     width:calc(100vw - 20px);
     height:50px;
     background-color:#282828;
-    border:0;
-    border-radius:5px;
-    color:#fff;
-    font-weight:600;
-    font-size:16px;
-    top:440px;
-    cursor:pointer;
-    transition:0.25s ease-in-out;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    top: 440px;
+    cursor: pointer;
+    transition: 0.25s ease-in-out;
     font-family: 'JetBrains Mono', monospace;
 }
-.publish-btn:before {
-    content: "PUBLISH PACKAGE";
-}
 
-.publish-btn:hover:before {
-    content: ">> PUBLISH PACKAGE <<";
-}
+/*.publish-btn:before {*/
+/*    content: "PUBLISH PACKAGE";*/
+/*}*/
+
+/*.publish-btn:hover:before {*/
+/*    content: ">> PUBLISH PACKAGE <<";*/
+/*}*/
 
 .publish-btn:hover {
     background-color: #fff;

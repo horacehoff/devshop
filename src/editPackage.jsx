@@ -6,7 +6,7 @@ import fancy_name_to_id from "./utility.js";
 import {useNavigate} from "react-router-dom";
 import Navbar from "./Navbar.jsx";
 import MDEditor from "@uiw/react-md-editor";
-import React, {useState} from "react";
+import React, {useLayoutEffect, useState} from "react";
 import {deleteObject, getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
 import {doc, setDoc} from "firebase/firestore";
 
@@ -16,6 +16,7 @@ export default function EditPackage(props) {
     let uid = "";
     const [newDesc, setNewDesc] = useState(pkg.description)
 
+    const [bannerUpload, setBannerUpload] = useState(null);
     const [imgUpload0ne, setImgUploadOne] = useState(null);
     const [imgUploadTwo, setImgUploadTwo] = useState(null);
     const [imgUploadThree, setImgUploadThree] = useState(null);
@@ -45,13 +46,28 @@ export default function EditPackage(props) {
         let screenTwoUrl = ""
         let screenThreeUrl = ""
         let screenFourUrl = ""
+        let bannerUrl = ""
 
+        if (bannerUpload !== null) {
+            const imgRef = ref(storage, pkg.banner);
+            await deleteObject(imgRef).then(() => {
+                console.log("deleted")
+            })
+            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/banner/" + bannerUpload.name)
+            await uploadBytes(uploadRef, bannerUpload).then(() => {
+                console.log("banner uploaded")
+            })
+            bannerUrl = await getDownloadURL(uploadRef)
+
+        } else {
+            bannerUrl = pkg.banner
+        }
         if (imgUpload0ne !== null) {
             const imgRef = ref(storage, pkg.screenshots[0]);
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/" + imgUpload0ne.name)
+            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/one/" + imgUpload0ne.name)
             await uploadBytes(uploadRef, imgUpload0ne).then(() => {
                 console.log("img one uploaded")
             })
@@ -65,7 +81,7 @@ export default function EditPackage(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/" + imgUploadTwo.name)
+            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/two/" + imgUploadTwo.name)
             await uploadBytes(uploadRef, imgUploadTwo).then(() => {
                 console.log("img two uploaded")
             })
@@ -78,7 +94,7 @@ export default function EditPackage(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/" + imgUploadThree.name)
+            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/three/" + imgUploadThree.name)
             await uploadBytes(uploadRef, imgUploadThree).then(() => {
                 console.log("img three uploaded")
             })
@@ -91,7 +107,7 @@ export default function EditPackage(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/" + imgUploadFour.name)
+            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/four/" + imgUploadFour.name)
             await uploadBytes(uploadRef, imgUploadFour).then(() => {
                 console.log("img four uploaded")
             })
@@ -101,17 +117,36 @@ export default function EditPackage(props) {
         }
 
         await setDoc(doc(db, "packages", fancy_name_to_id(pkg.name)), {
+            banner: bannerUrl,
             screenshots: [screenOneUrl, screenTwoUrl, screenThreeUrl, screenFourUrl],
         }, {merge: true})
     }
+
+    useLayoutEffect(() => {
+        document.querySelector('.banner').style.setProperty("--banner_url", `url('${pkg.banner}')`);
+    }, []);
 
 
     return (
         <>
             <>
                 <Navbar/>
-                <div className="banner banner-edit" onLoad={() => {
-                    document.querySelector('.banner').style.setProperty("--banner_url", `url(${pkg.banner})`);
+                <input type="file" id="banner-file" style={{display: "none"}}
+                       onChange={(event) => setBannerUpload(event.target.files[0])}
+                       required
+                       accept=".jpeg,.webp, image/jpeg"
+                />
+                <div className="banner banner-edit" id="banner" onClick={() => {
+                    document.getElementById("banner-file").addEventListener('change', function () {
+                        var vals = this.value,
+                            val = vals.length ? vals.split('\\').pop() : '';
+                        let fileup = new File([this.files[0]], this.files[0].name, {type: this.files[0].type})
+                        setBannerUpload(fileup)
+                        console.log(fileup)
+                        // document.getElementById('banner').src = URL.createObjectURL(fileup);
+                        document.querySelector('.banner').style.setProperty("--banner_url", `url(${URL.createObjectURL(fileup)})`);
+                    });
+                    document.getElementById("banner-file").click()
                 }}></div>
                 <h2 className="package-title">{pkg.name}</h2>
                 <h3 className="package-author">// BY <span
@@ -123,6 +158,7 @@ export default function EditPackage(props) {
                         document.getElementById("package-download-btn").innerHTML = "SAVED ✅"
                         setTimeout(() => {
                             navigate("/packages/" + fancy_name_to_id(pkg.name))
+                            window.location.reload()
                         }, 1000)
                     })
 
