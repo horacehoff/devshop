@@ -47,7 +47,7 @@ export default function AccountSettings() {
             console.log("Document data:", docSnap.data());
             setNewUserName(docSnap.data().username);
             setBaseUserName(docSnap.data().username);
-            if (docSnap.data().pfp_path === "") {
+            if (docSnap.data().pfp_path === "" || docSnap.data().pfp_path === undefined) {
                 console.log("no pfp")
                 document.getElementById("profile-picture").style.backgroundImage = "url('https://source.boringavatars.com/pixel/120/" + baseUserName + "?colors=6E00FF,0300FF,000000,FC7600,FFFFFF')"
             } else {
@@ -56,7 +56,11 @@ export default function AccountSettings() {
             }
             setNewBio(docSnap.data().bio);
             setBaseBio(docSnap.data().bio);
-            setNewGithub(docSnap.data().github);
+            if (docSnap.data().github === undefined) {
+                setNewGithub("");
+            } else {
+                setNewGithub(docSnap.data().github);
+            }
 
         } else {
             console.log("USER DOES NOT EXIST");
@@ -105,7 +109,7 @@ export default function AccountSettings() {
             console.log("USERNAME UPDATE")
             await updateUserName();
         }
-        if (pfpUpload !== null) {
+        if (pfpUpload !== null && pfpUpload !== undefined) {
             let extension = pfpUpload.type.replace(/(.*)\//g, '')
             let pfpRef = ref(storage, "users/" + uid + "/" + "pfp." + extension)
             await uploadBytes(pfpRef, pfpUpload).then(() => {
