@@ -17,7 +17,7 @@ export default function AccountSettings() {
     const [NewBio, setNewBio] = useState("");
     const [NewGithub, setNewGithub] = useState("");
     const [pfpUpload, setPfpUpload] = useState(null);
-    let _uid = "";
+    const [uid, setUid] = useState("");
     let state_changed = false;
     const navigate = useNavigate();
 
@@ -29,8 +29,8 @@ export default function AccountSettings() {
                 console.log("USER IS LOGGED IN");
                 getData(user.uid, user.email).then(() => {
                     console.log("DATA LOADED");
-                    _uid = user.uid;
-                    console.log("UID: " + _uid)
+                    setUid(user.uid);
+                    console.log("UID: " + uid)
                 });
 
             } else {
@@ -57,7 +57,6 @@ export default function AccountSettings() {
             setNewBio(docSnap.data().bio);
             setBaseBio(docSnap.data().bio);
             setNewGithub(docSnap.data().github);
-            _uid = uid;
 
         } else {
             console.log("USER DOES NOT EXIST");
@@ -108,7 +107,7 @@ export default function AccountSettings() {
         }
         if (pfpUpload !== null) {
             let extension = pfpUpload.type.replace(/(.*)\//g, '')
-            let pfpRef = ref(storage, "users/" + _uid + "/" + "pfp." + extension)
+            let pfpRef = ref(storage, "users/" + uid + "/" + "pfp." + extension)
             await uploadBytes(pfpRef, pfpUpload).then(() => {
                 console.log("pfp uploaded")
             });

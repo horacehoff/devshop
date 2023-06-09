@@ -71,7 +71,7 @@ export default function Packages() {
         <>
             <Navbar/>
             <h1 className="packages-title">PACKAGES</h1>
-            <button className="package-publish-btn" onClick={() => navigate("/publish-package")}>PUBLISH A PACKAGE
+            <button className="package-publish-btn" onClick={() => navigate("/publish-package")}>+ PUBLISH A PACKAGE
             </button>
             <h2 className="category-title">// CURRENTLY TRENDING</h2>
             <ul className="packages-card-list" id="packages-card-list">
