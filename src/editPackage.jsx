@@ -119,6 +119,7 @@ export default function EditPackage(props) {
         await setDoc(doc(db, "packages", fancy_name_to_id(pkg.name)), {
             banner: bannerUrl,
             screenshots: [screenOneUrl, screenTwoUrl, screenThreeUrl, screenFourUrl],
+            description: newDesc
         }, {merge: true})
     }
 

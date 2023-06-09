@@ -8,6 +8,7 @@ import {useNavigate} from "react-router-dom";
 import {doc, getDoc, setDoc} from "firebase/firestore";
 import fancy_name_to_id from "./utility.js";
 import MDEditor from '@uiw/react-md-editor';
+import {BiCloudUpload} from "react-icons/all.js";
 
 export default function CreatePackage() {
     const [pkgUpload, setPkgUpload] = useState(null);
@@ -143,7 +144,7 @@ export default function CreatePackage() {
             <Navbar/>
             <h1 className="about-title">PUBLISH A PACKAGE</h1>
             <div className="centered">
-                <h2 style={{margin: "0"}}>// GENERAL INFO</h2>
+                <h2 style={{margin: "0", fontWeight: "400", fontSize: "18px"}}>// GENERAL INFO</h2>
                 <input type="text" className="name-input" placeholder="NAME" value={name}
                        onChange={e => setName(e.target.value)}/>
                 <input type="text" className="desc-input" placeholder="CATCHPHRASE"
@@ -154,6 +155,7 @@ export default function CreatePackage() {
                         value={longDesc}
                         onChange={setLongDesc}
                         height={350}
+                        style={{borderRadius: "4px", border: "none", outline: "none"}}
                     />
                 </div>
 
@@ -162,20 +164,28 @@ export default function CreatePackage() {
                     setBanner(event.target.files[0])
                     console.log("banner")
                 }} accept=".jpeg,.webp, image/jpeg" required/>
-                <label htmlFor="banner-file" className="file-input">UPLOAD BANNER</label>
+                <div className="upload-section">
+                    <label htmlFor="banner-file" className="file-input"><BiCloudUpload
+                        className="file-input-icon"></BiCloudUpload>UPLOAD BANNER</label>
+                    <label htmlFor="file" className="file-input"><BiCloudUpload
+                        className="file-input-icon"></BiCloudUpload>UPLOAD PACKAGE</label>
+                    <label htmlFor="img-file" className="file-input"><BiCloudUpload
+                        className="file-input-icon"></BiCloudUpload>UPLOAD IMAGES(4)</label>
+                    <br/>
+                    <input type="text" className="desc-input" placeholder="PACKAGE VERSION"
+                           style={{marginTop: "20px", marginBottom: "30px", fontSize: "20px"}} value={version}
+                           onChange={e => setVersion(e.target.value)}/>
+                </div>
 
-                <h2 style={{margin: "0", marginTop: "40px", marginBottom: "0"}}>// PACKAGE</h2>
-                <input type="text" className="desc-input" placeholder="PACKAGE VERSION"
-                       style={{marginTop: "0px", marginBottom: "10px"}} value={version}
-                       onChange={e => setVersion(e.target.value)}/>
+                {/*<h2 style={{margin: "0", marginTop: "40px", marginBottom: "0"}}>// PACKAGE</h2>*/}
+
                 <input type="file" id="file" style={{display: "none"}} onChange={(event) => {
                     setPkgUpload(event.target.files[0])
                     console.log("pkg")
                 }} accept=".zip, application/zip" required/>
-                <label htmlFor="file" className="file-input">UPLOAD PACKAGE</label>
 
 
-                <h2 style={{margin: "0", marginTop: "25px", marginBottom: "-10px"}}>// GALLERY IMAGES (MAX{'=>'}4)</h2>
+                {/*<h2 style={{margin: "0", marginTop: "25px", marginBottom: "-10px"}}>// GALLERY IMAGES (MAX{'=>'}4)</h2>*/}
                 <input type="file" id="img-file" style={{display: "none"}} multiple onChange={(event) => {
                     console.log(event.target.files[0])
                     setImgUploadOne(event.target.files[0])
@@ -184,9 +194,8 @@ export default function CreatePackage() {
                     setImgUploadFour(event.target.files[3])
                     console.log("img")
                 }} required accept=".png,.jpeg,.webp, image/jpeg, image/png"/>
-                <p>IDEAL DIMENSIONS: 890 x 460</p>
-                <label htmlFor="img-file" className="file-input">UPLOAD IMAGES</label>
-                <br/><br/>
+                {/*<p>IDEAL DIMENSIONS: 890 x 460</p>*/}
+
                 <button onMouseEnter={() => {
                     if (document.getElementById("publish-btn").style.pointerEvents !== "none") {
                         document.getElementById("publish-btn").innerHTML = ">> PUBLISH PACKAGE <<"
