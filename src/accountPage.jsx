@@ -15,7 +15,7 @@ export default function AccountPage(props) {
 
 
     useEffect(() => {
-        if (usr.github === "") {
+        if (usr.github === "" || usr.github === undefined) {
             document.getElementById("user_github").style.display = "none";
             document.getElementById("user_id_middle_dot").style.display = "none";
         }
