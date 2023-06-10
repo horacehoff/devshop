@@ -159,20 +159,15 @@
         position: relative;
         padding-right: 0;
         margin-left: -15px;
+        width: calc(100vw - 25px);
     }
+}
 
+@media screen and (max-width: 650px) and (min-width: 580px) {
     .upload-section {
         position: relative;
         left: 50%;
         transform: translateX(-51.5%);
-    }
-}
-
-@media screen and (max-width: 580px) {
-    .upload-section {
-        position: revert;
-        left: revert;
-        transform: revert;
     }
 }
 
