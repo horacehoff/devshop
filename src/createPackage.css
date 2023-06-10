@@ -140,10 +140,10 @@
 .upload-section {
     overflow: scroll;
     white-space: nowrap;
-    height: 50px;
-    padding-top: 15px;
-    margin-top: -20px;
-    margin-bottom: -25px;
+    height: 33px;
+    padding-top: 7px;
+    margin-top: -10px;
+    margin-bottom: -10px;
 }
 
 @media screen and (min-width: 390px) {
