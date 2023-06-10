@@ -139,6 +139,7 @@
 
 .upload-section {
     white-space: nowrap;
+    overflow: scroll;
 }
 
 @media screen and (min-width: 390px) {
