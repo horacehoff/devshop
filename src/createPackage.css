@@ -129,6 +129,7 @@
 
 .md-editor-container {
     margin-bottom: 20px;
+    padding-right: 10px;
 }
 
 .file-input-icon {
@@ -146,10 +147,33 @@
     margin-bottom: -10px;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    width: fit-content;
 }
 
 .upload-section::-webkit-scrollbar {
     display: none;
+}
+
+@media screen and (max-width: 650px) {
+    .md-editor-container {
+        position: relative;
+        padding-right: 0;
+        margin-left: -15px;
+    }
+
+    .upload-section {
+        position: relative;
+        left: 50%;
+        transform: translateX(-51.5%);
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .upload-section {
+        position: revert;
+        left: revert;
+        transform: revert;
+    }
 }
 
 @media screen and (min-width: 390px) {
