@@ -160,6 +160,10 @@
         margin-left: -15px;
         width: calc(100vw - 25px);
     }
+
+    .publish-btn {
+        margin-left: calc(50vw - 207px);
+    }
 }
 
 @media screen and (max-width: 650px) and (min-width: 580px) {
