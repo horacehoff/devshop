@@ -172,11 +172,11 @@ export default function CreatePackage() {
                     <label htmlFor="img-file" className="file-input"><BiCloudUpload
                         className="file-input-icon"></BiCloudUpload>UPLOAD IMAGES(4)</label>
                     <br/>
-                    <input type="text" className="desc-input" placeholder="PACKAGE VERSION"
-                           style={{marginTop: "20px", marginBottom: "30px", fontSize: "20px"}} value={version}
-                           onChange={e => setVersion(e.target.value)}/>
-                </div>
 
+                </div>
+                <input type="text" className="desc-input" placeholder="PACKAGE VERSION"
+                       style={{marginTop: "20px", marginBottom: "30px", fontSize: "20px"}} value={version}
+                       onChange={e => setVersion(e.target.value)}/>
                 {/*<h2 style={{margin: "0", marginTop: "40px", marginBottom: "0"}}>// PACKAGE</h2>*/}
 
                 <input type="file" id="file" style={{display: "none"}} onChange={(event) => {
