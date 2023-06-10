@@ -8,7 +8,7 @@ import {useNavigate} from "react-router-dom";
 import {doc, getDoc, setDoc} from "firebase/firestore";
 import fancy_name_to_id from "./utility.js";
 import MDEditor from '@uiw/react-md-editor';
-import {BiCloudUpload} from "react-icons/all.js";
+import {BiCloudUpload} from "react-icons/bi";
 
 export default function CreatePackage() {
     const [pkgUpload, setPkgUpload] = useState(null);
