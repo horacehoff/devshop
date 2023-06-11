@@ -63,7 +63,7 @@ export default function AccountPage(props) {
                         navigate("/packages/" + fancy_name_to_id(pkg.name))
                     }}>
                         <PackageCard dwnl={pkg.downloads} author={pkg.owner_username} name={pkg.name}
-                                     desc={pkg.description} banner={pkg.banner}/>
+                                     desc={pkg.description} banner={pkg.banner} catchphrase={pkg.catchphrase}/>
                     </li>
                 ))}
             </ul>
