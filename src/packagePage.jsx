@@ -18,6 +18,36 @@ export default function PackagePage(props) {
 
     const [is_logged_in, set_is_logged_in] = useState(false);
     const [new_downloads, set_new_downloads] = useState(0);
+
+
+    function downloadPkg() {
+        if (!is_logged_in) {
+            navigate("/sign-in")
+        }
+        let pkgRef = ref(storage, pkg.package);
+        getDownloadURL(pkgRef).then((url) => {
+            window.location.assign(url);
+            if (is_logged_in) {
+                getDoc(doc(db, "packages", pkg.name)).then((doc) => {
+                    if (doc.exists()) {
+                        set_new_downloads(doc.data().downloads);
+                    } else {
+                        set_new_downloads(-1);
+                    }
+                })
+                if (new_downloads !== -1) {
+                    updateDoc(doc(db, "packages", fancy_name_to_id(pkg.name)), {
+                        downloads: new_downloads + 1
+                    }).then(r => {
+                        console.log("updated");
+                    });
+                }
+
+            }
+        })
+    }
+
+
     onAuthStateChanged(auth, (user) => {
         if (user) {
             set_is_logged_in(true);
@@ -43,6 +73,8 @@ export default function PackagePage(props) {
                 document.getElementById("package-download-btn").onclick = () => {
                     navigate("/edit/" + fancy_name_to_id(pkg.name))
                 }
+                document.getElementById("package-download-side").style.display = "block"
+
             }
         } else {
             set_is_logged_in(false);
@@ -126,34 +158,8 @@ export default function PackagePage(props) {
             <h3 className="package-author">// BY <span style={{color: "#F0EBBA", cursor: "pointer"}}
                                                        onClick={() => navigate("/users/" + fancy_name_to_id(pkg.owner_username))}>{pkg.owner_username}</span>
             </h3>
-            <button className="package-download-btn" id="package-download-btn" onClick={() => {
-                // download pkg
-                if (!is_logged_in) {
-                    navigate("/sign-in")
-                }
-                let pkgRef = ref(storage, pkg.package);
-                getDownloadURL(pkgRef).then((url) => {
-                    window.location.assign(url);
-                    if (is_logged_in) {
-                        getDoc(doc(db, "packages", pkg.name)).then((doc) => {
-                            if (doc.exists()) {
-                                set_new_downloads(doc.data().downloads);
-                            } else {
-                                set_new_downloads(-1);
-                            }
-                        })
-                        if (new_downloads !== -1) {
-                            updateDoc(doc(db, "packages", fancy_name_to_id(pkg.name)), {
-                                downloads: new_downloads + 1
-                            }).then(r => {
-                                console.log("updated");
-                            });
-                        }
-
-                    }
-                })
-
-            }}>{"DOWNLOAD -> 0$"}</button>
+            <button className="package-download-btn" id="package-download-btn"
+                    onClick={() => downloadPkg()}>{"DOWNLOAD -> 0$"}</button>
             <p className="package-description-label">// 01 - DESCRIPTION</p>
             <p className="package-description">{<MDEditor.Markdown source={pkg.description}
                                                                    className="package-desc-md"/>}</p>
@@ -233,7 +239,11 @@ export default function PackagePage(props) {
                         }
                     }}>{">> RATE THIS <<"}</span></span>
 
-                    <br/>TOTAL SIZE: {Math.round(pkg.sizeMb * 10) / 10}MB<br/>CURRENT VERSION: {pkg.current_version}
+                    <br/>TOTAL SIZE: {Math.round(pkg.sizeMb * 10) / 10}MB<br/>CURRENT
+                    VERSION: {pkg.current_version}<br/>
+                    <button className="package-download-side" id="package-download-side"
+                            onClick={() => downloadPkg()}>DOWNLOAD
+                    </button>
                 </p>
             </div>
             <div className="bottom-block"></div>

@@ -1,14 +1,16 @@
 import './packagePage.css'
 import "./editPackage.css"
 import {onAuthStateChanged} from "firebase/auth";
-import {auth, db} from "./firebase.js";
+import {auth, db, storage} from "./firebase.js";
 import fancy_name_to_id from "./utility.js";
 import {useNavigate} from "react-router-dom";
 import Navbar from "./Navbar.jsx";
 import MDEditor from "@uiw/react-md-editor";
 import React, {useLayoutEffect, useState} from "react";
-import {deleteObject, getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
+import {deleteObject, getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {doc, setDoc} from "firebase/firestore";
+import {BiCloudUpload} from "react-icons/bi";
+import {FcCancel} from "react-icons/fc";
 
 export default function EditPackage(props) {
     const pkg = props.pkg
@@ -21,6 +23,9 @@ export default function EditPackage(props) {
     const [imgUploadTwo, setImgUploadTwo] = useState(null);
     const [imgUploadThree, setImgUploadThree] = useState(null);
     const [imgUploadFour, setImgUploadFour] = useState(null);
+    const [newVer, setNewVer] = useState("")
+
+    const [pkgUpload, setPkgUpload] = useState(null);
 
 
     onAuthStateChanged(auth, (user) => {
@@ -41,12 +46,13 @@ export default function EditPackage(props) {
     })
 
     async function saveChanges() {
-        const storage = getStorage();
         let screenOneUrl = ""
         let screenTwoUrl = ""
         let screenThreeUrl = ""
         let screenFourUrl = ""
         let bannerUrl = ""
+        let pkgUrl = ""
+        let currentVer = ""
 
         if (bannerUpload !== null) {
             const imgRef = ref(storage, pkg.banner);
@@ -115,11 +121,28 @@ export default function EditPackage(props) {
         } else {
             screenFourUrl = pkg.screenshots[3]
         }
+        if (pkgUpload !== null) {
+            const pkgRef = ref(storage, pkg.package);
+            await deleteObject(pkgRef).then(() => {
+                console.log("deleted pkg")
+            })
+            let pkgUploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/pkg/" + pkgUpload.name)
+            await uploadBytes(pkgUploadRef, pkgUpload).then(() => {
+                console.log("pkg uploaded")
+            })
+            pkgUrl = await getDownloadURL(pkgUploadRef)
+            currentVer = document.getElementById("pkg-version-input").value
+        } else {
+            pkgUrl = pkg.package
+            currentVer = pkg.current_version
+        }
 
         await setDoc(doc(db, "packages", fancy_name_to_id(pkg.name)), {
             banner: bannerUrl,
             screenshots: [screenOneUrl, screenTwoUrl, screenThreeUrl, screenFourUrl],
-            description: newDesc
+            description: newDesc,
+            package: pkgUrl,
+            current_version: currentVer,
         }, {merge: true})
     }
 
@@ -260,9 +283,51 @@ export default function EditPackage(props) {
                     />
                 </div>
                 <p className="package-characteristics-label"></p>
-                <div className="package-characteristics">
-                    <p style={{paddingRight: "18px"}}>
-                        TOTAL SIZE: {Math.round(pkg.sizeMb * 10) / 10}MB<br/>CURRENT VERSION: {pkg.current_version}
+                <div className="package-characteristics" id="package-characteristics">
+                    <p style={{marginRight: "29px"}} id="package-char-p">
+                        TOTAL SIZE: {Math.round(pkg.sizeMb * 10) / 10}MB<br/><input type='text' id='pkg-version-input'
+                                                                                    className='pkg-version-input'
+                                                                                    placeholder='NEW VERSION'
+                                                                                    style={{display: "none"}}
+                                                                                    value={newVer} onChange={e => {
+                        setNewVer(e.target.value);
+                        console.log("yup")
+                    }}/><span
+                        id="package-version">CURRENT VERSION: {pkg.current_version}</span>
+                        <input type="file" id="pkg-new-version" style={{display: "none"}} onChange={(event) => {
+                            setPkgUpload(event.target.files[0])
+                            console.log("pkg")
+                            document.getElementById("file-input-icon").style.display = "none"
+                            document.getElementById("upload-new-pkg-btn").innerHTML = document.getElementById("upload-new-pkg-btn").innerHTML.replace("UPLOAD PACKAGE", "✅ UPLOAD PACKAGE")
+
+                        }} accept=".zip, application/zip" required/>
+                        <label htmlFor="pkg-new-version" className="upload-new-pkg-btn"
+                               id="upload-new-pkg-btn"><BiCloudUpload
+                            className="file-input-icon" id="file-input-icon"></BiCloudUpload>UPLOAD PACKAGE</label>
+                        <FcCancel className="revert-upload-pkg" id="revert-upload-pkg" onClick={() => {
+                            if (document.getElementById("upload-new-pkg-btn").innerHTML.includes("UPLOAD PACKAGE")) {
+                                document.getElementById("package-version").innerHTML = "CURRENT VERSION: " + pkg.current_version
+                                document.getElementById("upload-new-pkg-btn").style.display = "none"
+                                document.getElementById("new-pkg-version-btn").style.display = "block"
+                                document.getElementById("revert-upload-pkg").style.display = "none"
+                                document.getElementById("package-char-p").style.marginRight = "29px"
+                                document.getElementById("upload-new-pkg-btn").innerHTML = document.getElementById("upload-new-pkg-btn").innerHTML.replace("✅ UPLOAD PACKAGE", "UPLOAD PACKAGE")
+                                // add the icon back
+                                document.getElementById("file-input-icon").style.display = "revert"
+                                document.getElementById("package-version").innerHTML = "CURRENT VERSION: " + pkg.current_version
+                                document.getElementById("pkg-version-input").style.display = "none"
+                            }
+
+                        }}></FcCancel><br/>
+                        <button className="new-pkg-version-btn" id="new-pkg-version-btn" onClick={() => {
+                            document.getElementById("package-version").innerHTML = "<br/>"
+                            document.getElementById("pkg-version-input").style.display = "block"
+                            document.getElementById("upload-new-pkg-btn").style.display = "block"
+                            document.getElementById("new-pkg-version-btn").style.display = "none"
+                            document.getElementById("revert-upload-pkg").style.display = "block"
+                            document.getElementById("package-char-p").style.marginRight = "22px"
+                        }}>+ NEW VERSION
+                        </button>
                     </p>
                 </div>
                 <div className="bottom-block"></div>

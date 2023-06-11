@@ -163,13 +163,14 @@ export default function CreatePackage() {
                 <input type="file" id="banner-file" style={{display: "none"}} onChange={(event) => {
                     setBanner(event.target.files[0])
                     console.log("banner")
+                    document.getElementById("banner-upload").innerHTML = "✅ UPLOAD BANNER"
                 }} accept=".jpeg,.webp, image/jpeg" required/>
                 <div className="upload-section">
-                    <label htmlFor="banner-file" className="file-input"><BiCloudUpload
+                    <label htmlFor="banner-file" className="file-input" id="banner-upload"><BiCloudUpload
                         className="file-input-icon"></BiCloudUpload>UPLOAD BANNER</label>
-                    <label htmlFor="file" className="file-input"><BiCloudUpload
+                    <label htmlFor="file" className="file-input" id="file-upload"><BiCloudUpload
                         className="file-input-icon"></BiCloudUpload>UPLOAD PACKAGE</label>
-                    <label htmlFor="img-file" className="file-input"><BiCloudUpload
+                    <label htmlFor="img-file" className="file-input" id="gallery-upload"><BiCloudUpload
                         className="file-input-icon"></BiCloudUpload>UPLOAD IMAGES(4)</label>
                     <br/>
 
@@ -182,6 +183,7 @@ export default function CreatePackage() {
                 <input type="file" id="file" style={{display: "none"}} onChange={(event) => {
                     setPkgUpload(event.target.files[0])
                     console.log("pkg")
+                    document.getElementById("file-upload").innerHTML = "✅ UPLOAD PACKAGE"
                 }} accept=".zip, application/zip" required/>
 
 
@@ -193,6 +195,9 @@ export default function CreatePackage() {
                     setImgUploadThree(event.target.files[2])
                     setImgUploadFour(event.target.files[3])
                     console.log("img")
+                    if (event.target.files.length === 4) {
+                        document.getElementById("gallery-upload").innerHTML = "✅ UPLOAD IMAGES(4)"
+                    }
                 }} required accept=".png,.jpeg,.webp, image/jpeg, image/png"/>
                 {/*<p>IDEAL DIMENSIONS: 890 x 460</p>*/}
 
