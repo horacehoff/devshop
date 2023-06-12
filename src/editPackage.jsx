@@ -8,7 +8,7 @@ import Navbar from "./Navbar.jsx";
 import MDEditor from "@uiw/react-md-editor";
 import React, {useLayoutEffect, useState} from "react";
 import {deleteObject, getDownloadURL, ref, uploadBytes} from "firebase/storage";
-import {doc, setDoc} from "firebase/firestore";
+import {deleteDoc, doc, setDoc} from "firebase/firestore";
 import {BiCloudUpload} from "react-icons/bi";
 import {FcCancel} from "react-icons/fc";
 
@@ -316,6 +316,8 @@ export default function EditPackage(props) {
                                 document.getElementById("file-input-icon").style.display = "revert"
                                 document.getElementById("package-version").innerHTML = "CURRENT VERSION: " + pkg.current_version
                                 document.getElementById("pkg-version-input").style.display = "none"
+                                document.getElementById("delete-pkg-btn").style.display = "revert"
+                                document.getElementById("delete-pkg-btn").style.marginTop = "-35px"
                             }
 
                         }}></FcCancel><br/>
@@ -326,7 +328,61 @@ export default function EditPackage(props) {
                             document.getElementById("new-pkg-version-btn").style.display = "none"
                             document.getElementById("revert-upload-pkg").style.display = "block"
                             document.getElementById("package-char-p").style.marginRight = "22px"
+                            document.getElementById("delete-pkg-btn").style.display = "none"
                         }}>+ NEW VERSION
+                        </button>
+                        <br/>
+                        <button className="delete-pkg-btn" id="delete-pkg-btn" onClick={async () => {
+                            const delete_btn_content = document.getElementById("delete-pkg-btn").innerHTML
+                            if (delete_btn_content === "DELETE PACKAGE") {
+                                document.getElementById("delete-pkg-btn").innerHTML = "CONFIRM (3)"
+                            } else if (delete_btn_content === "CONFIRM (3)") {
+                                document.getElementById("delete-pkg-btn").innerHTML = "CONFIRM (2)"
+                            } else if (delete_btn_content === "CONFIRM (2)") {
+                                document.getElementById("delete-pkg-btn").innerHTML = "CONFIRM (1)"
+                            } else if (delete_btn_content === "CONFIRM (1)") {
+                                document.getElementById("delete-pkg-btn").innerHTML = "CONFIRM (!)"
+                            } else if (delete_btn_content === "CONFIRM (!)") {
+                                document.getElementById("delete-pkg-btn").innerHTML = "DELETING..."
+                                // get the ref of every package screenshot and the ref of the package itself
+                                const bannerRef = ref(storage, pkg.banner);
+                                await deleteObject(bannerRef).then(() => {
+                                    console.log("deleted")
+                                })
+                                const imgOneRef = ref(storage, pkg.screenshots[0]);
+                                await deleteObject(imgOneRef).then(() => {
+                                    console.log("deleted")
+                                })
+
+                                const imgTwoRef = ref(storage, pkg.screenshots[1]);
+                                await deleteObject(imgTwoRef).then(() => {
+                                    console.log("deleted")
+                                })
+
+                                const imgThreeRef = ref(storage, pkg.screenshots[2]);
+                                await deleteObject(imgThreeRef).then(() => {
+                                    console.log("deleted")
+                                })
+
+                                const imgFourRef = ref(storage, pkg.screenshots[3]);
+                                await deleteObject(imgFourRef).then(() => {
+                                    console.log("deleted")
+                                })
+
+                                const pkgRef = ref(storage, pkg.package);
+                                await deleteObject(pkgRef).then(() => {
+                                    console.log("deleted pkg")
+                                })
+                                // delete the package from the database
+                                await deleteDoc(doc(db, "packages", fancy_name_to_id(pkg.name))).then(() => {
+                                    console.log("deleted pkg from db")
+                                }).then(() => {
+                                    navigate("/packages")
+                                    window.location.reload()
+                                })
+
+                            }
+                        }}>DELETE PACKAGE
                         </button>
                     </p>
                 </div>
