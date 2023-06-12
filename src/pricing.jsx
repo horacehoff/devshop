@@ -1,7 +1,18 @@
 import Navbar from "./Navbar.jsx";
 import "./pricing.css"
+import {useNavigate} from "react-router-dom";
+import {useEffect} from "react";
 
 export default function Pricing() {
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (document.getElementById("account").innerHTML === "ACCOUNT" || document.getElementById("nav-account").innerHTML === "ACCOUNT") {
+            document.getElementById("plan-subscribe").innerHTML = "UPGRADE(SOON)"
+        }
+    }, [])
+
+
     return (
         <>
             <Navbar/>
@@ -17,7 +28,10 @@ export default function Pricing() {
                         <li>Full access to the website</li>
                         <li>Ads</li>
                     </ul>
-                    <button className="plan-sign-up">Sign Up</button>
+                    <button className="plan-sign-up" onClick={() => {
+                        navigate("/sign-up")
+                    }}>Sign Up
+                    </button>
                 </div>
 
                 <div className="pro-plan">
@@ -28,7 +42,7 @@ export default function Pricing() {
                         <li>No ads</li>
                         <li><span style={{color: "mediumpurple"}}>More to come...</span></li>
                     </ul>
-                    <button className="plan-subscribe">subscribe</button>
+                    <button className="plan-subscribe" id="plan-subscribe">coming soon</button>
                 </div>
             </div>
         </>
