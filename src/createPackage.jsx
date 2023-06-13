@@ -123,12 +123,8 @@ export default function CreatePackage() {
                         let packages = doc.data().owned_packages;
                         packages.push(fancy_name_to_id(name));
                         await setDoc(userRef, {
-                            uid: uid,
-                            username: doc.data().username,
-                            plan: doc.data().plan,
-                            owned_packages: packages,
-                            owned_code_blocks: doc.data().owned_code_blocks,
-                        }).then(r => {
+                            owned_packages: packages
+                        }, {merge: true}).then(r => {
                             document.getElementById("publish-btn").innerHTML = "UPLOADING... => ██████████████ 100%"
                         })
                     } else {
