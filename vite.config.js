@@ -46,7 +46,9 @@ export default defineConfig({
         'short-number',
         'reactjs-popup',
         'react-icons',
-        '@uiw/react-md-editor'
+        '@uiw/react-md-editor',
+        '/node_modules/'
+
       ],
     },
     rollupOptions: {
