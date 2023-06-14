@@ -8,7 +8,7 @@ import Navbar from "./Navbar.jsx";
 import MDEditor from "@uiw/react-md-editor";
 import React, {useLayoutEffect, useState} from "react";
 import {deleteObject, getDownloadURL, ref, uploadBytes} from "firebase/storage";
-import {deleteDoc, doc, setDoc} from "firebase/firestore";
+import {deleteDoc, doc, getDoc, setDoc} from "firebase/firestore";
 import {BiCloudUpload} from "react-icons/bi";
 import {FcCancel} from "react-icons/fc";
 
@@ -372,6 +372,21 @@ export default function EditPackage(props) {
                                 const pkgRef = ref(storage, pkg.package);
                                 await deleteObject(pkgRef).then(() => {
                                     console.log("deleted pkg")
+                                })
+                                // remove the package from owned_packages
+                                const userRef = doc(db, "users", uid)
+                                // remove this package from the user's owned_packages
+                                await getDoc(doc(db, "users", uid)).then(async (doc) => {
+                                    if (doc.exists()) {
+                                        const data = doc.data()
+                                        let owned_packages = data.owned_packages
+                                        owned_packages.splice(owned_packages.indexOf(pkg.id), 1)
+                                        await setDoc(userRef, {
+                                            owned_packages: owned_packages
+                                        }, {merge: true}).then(() => {
+                                            console.log("removed pkg from owned_packages")
+                                        })
+                                    }
                                 })
                                 // delete the package from the database
                                 await deleteDoc(doc(db, "packages", pkg.id)).then(() => {

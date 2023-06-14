@@ -82,6 +82,7 @@ export default function PackagePage(props) {
     });
 
     useEffect(() => {
+        document.title = pkg.name + " - DEVSHOP"
         console.log("package banner load: " + pkg.banner)
         document.querySelector('.banner').style.setProperty("--banner_url", `url('${pkg.banner}')`);
         // get the length of the ratings map

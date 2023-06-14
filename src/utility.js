@@ -24,8 +24,7 @@ export function generateUUID(str) {
 
     for (let i = 0; i < uniqueStr.length; i++) {
         const char = uniqueStr.charCodeAt(i);
-        hash = (hash << 5) - hash + char;
-        hash |= 0; // Convert to 32-bit integer
+        hash = ((hash << 5) - hash + char) & 0xffffffff; // Apply bitwise AND operation with 32-bit mask
     }
 
     return hash.toString();

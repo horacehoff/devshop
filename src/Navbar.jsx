@@ -29,12 +29,15 @@ export default function Navbar() {
             document.getElementById("nav-about").style.textDecoration = "underline"
             document.getElementById("about").style.color = "white"
             document.getElementById("nav-about").style.color = "white"
+            document.title = "DEVSHOP"
         } else if (location.slice(0, 8) === "/pricing") {
             document.getElementById("pricing").style.textDecoration = "underline"
             document.getElementById("pricing").style.color = "white"
             document.getElementById("nav-pricing").style.textDecoration = "underline"
             document.getElementById("nav-pricing").style.color = "white"
-
+            document.title = "DEVSHOP"
+        } else if (location.slice(0, 1) === "/") {
+            document.title = "DEVSHOP"
         }
     }, []);
 

@@ -27,6 +27,7 @@ export default function CreatePackage() {
     const [desc, setDesc] = useState("");
     const [version, setVersion] = useState("");
     const [longDesc, setLongDesc] = useState("**This is the detailed description of my awesome package!**");
+    let pkg_id = "";
 
     let uid = "";
     const navigate = useNavigate()
@@ -39,6 +40,7 @@ export default function CreatePackage() {
     });
     const upload = async () => {
         let name_id = generateUUID(fancy_name_to_id(name))
+        pkg_id = name_id;
         let extension = pkgUpload.type.replace(/(.*)\//g, '')
         let pkgRef = ref(storage, "users/" + uid + "/" + name_id + "/pkg/" + fancy_name_to_id(name) + "." + extension)
         await uploadBytes(pkgRef, pkgUpload).then(() => {
@@ -218,7 +220,7 @@ export default function CreatePackage() {
                         document.getElementById("publish-btn").style.pointerEvents = "none"
                         document.getElementById("publish-btn").innerHTML = "UPLOADING... => ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 0%"
                         upload().then(name_id => {
-                            navigate("/packages/" + name_id)
+                            navigate("/packages/" + pkg_id)
                             window.location.reload()
                         })
                     }
