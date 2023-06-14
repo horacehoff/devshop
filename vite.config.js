@@ -34,23 +34,6 @@ export default defineConfig({
   build: {
     minify: 'terser',
     sourcemap: false,
-    commonjsOptions: {
-      include: [
-        'react',
-        'react-dom',
-        'react-router-dom',
-        'firebase/app',
-        'firebase/auth',
-        'firebase/firestore',
-        'firebase/storage',
-        'short-number',
-        'reactjs-popup',
-        'react-icons',
-        '@uiw/react-md-editor',
-        '/node_modules/'
-
-      ],
-    },
     rollupOptions: {
       output: {
         manualChunks: {
