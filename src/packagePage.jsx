@@ -7,7 +7,7 @@ import React, {useEffect, useState} from "react";
 import {getDownloadURL, ref} from "firebase/storage";
 import {useNavigate} from "react-router-dom";
 import shortNumber from "short-number";
-import fancy_name_to_id from "./utility.js";
+import fancy_name_to_id, {generateUniqueId} from "./utility.js";
 import MDEditor from '@uiw/react-md-editor';
 
 export default function PackagePage(props) {
@@ -71,7 +71,7 @@ export default function PackagePage(props) {
                 document.getElementById("package-download-btn").style.border = "none"
                 document.getElementById("package-download-btn").style.cursor = "pointer"
                 document.getElementById("package-download-btn").onclick = () => {
-                    navigate("/edit/" + fancy_name_to_id(pkg.name))
+                    navigate("/packages/" + generateUniqueId(fancy_name_to_id(pkg.name) + user.uid))
                 }
                 document.getElementById("package-download-side").style.display = "block"
 
@@ -134,8 +134,7 @@ export default function PackagePage(props) {
     return (
         <>
             <Navbar/>
-            <div className="screenshot_bg_div" id="screenshot_bg_div"></div>
-            <p className="screenshot_full_close" id="screenshot_full_close" onClick={() => {
+            <div className="screenshot_bg_div" id="screenshot_bg_div" onClick={() => {
                 const revertChanges = img => {
                     img.style = baseStyle;
                     if (img.id === "screenshot_two" || img.id === "screenshot_four") {
@@ -152,7 +151,7 @@ export default function PackagePage(props) {
                 revertChanges(img);
                 document.getElementById("screenshot_bg_div").style.display = "none";
                 document.getElementById("screenshot_full_close").style.display = "none";
-            }}>CLOSE</p>
+            }}></div>
             <div className="banner"></div>
             <h2 className="package-title">{pkg.name}</h2>
             <h3 className="package-author">// BY <span style={{color: "#F0EBBA", cursor: "pointer"}}

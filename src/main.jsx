@@ -2,7 +2,7 @@ import React, {lazy, Suspense, useEffect, useState} from 'react'
 import ReactDOM from 'react-dom/client'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import "./firebase.js"
-import fancy_name_to_id from "./utility.js";
+import fancy_name_to_id, {generateUniqueId} from "./utility.js";
 
 
 import './index.css'
@@ -25,6 +25,7 @@ import EditPackage from "./editPackage.jsx";
 
 
 const CodeBlocks = lazy(() => import('./codeBlocks.jsx'))
+console.log("UNIQUE ID => " + generateUniqueId("hello world"))
 
 
 async function getPackages(collectionRef) {
@@ -119,7 +120,8 @@ function App() {
                     <Route path={"/packages/" + fancy_name_to_id(pkg.name)} element={<PackagePage pkg={pkg}/>}/>
                 ))}
                 {packages.map((pkg, index) => (
-                    <Route path={"/edit/" + fancy_name_to_id(pkg.name)} element={<EditPackage pkg={pkg}/>}/>
+                    <Route path={"/packages/" + generateUniqueId(fancy_name_to_id(pkg.name) + pkg.owner_id)}
+                           element={<EditPackage pkg={pkg}/>}/>
                 ))}
                 {
                     users.map((user, index) => (
