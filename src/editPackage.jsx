@@ -59,7 +59,7 @@ export default function EditPackage(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/banner/" + bannerUpload.name)
+            let uploadRef = ref(storage, "users/" + uid + "/" + pkg.id + "/img/banner/" + bannerUpload.name)
             await uploadBytes(uploadRef, bannerUpload).then(() => {
                 console.log("banner uploaded")
             })
@@ -73,7 +73,7 @@ export default function EditPackage(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/one/" + imgUpload0ne.name)
+            let uploadRef = ref(storage, "users/" + uid + "/" + pkg.id + "/img/one/" + imgUpload0ne.name)
             await uploadBytes(uploadRef, imgUpload0ne).then(() => {
                 console.log("img one uploaded")
             })
@@ -87,7 +87,7 @@ export default function EditPackage(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/two/" + imgUploadTwo.name)
+            let uploadRef = ref(storage, "users/" + uid + "/" + pkg.id + "/img/two/" + imgUploadTwo.name)
             await uploadBytes(uploadRef, imgUploadTwo).then(() => {
                 console.log("img two uploaded")
             })
@@ -100,7 +100,7 @@ export default function EditPackage(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/three/" + imgUploadThree.name)
+            let uploadRef = ref(storage, "users/" + uid + "/" + pkg.id + "/img/three/" + imgUploadThree.name)
             await uploadBytes(uploadRef, imgUploadThree).then(() => {
                 console.log("img three uploaded")
             })
@@ -113,7 +113,7 @@ export default function EditPackage(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/img/four/" + imgUploadFour.name)
+            let uploadRef = ref(storage, "users/" + uid + "/" + pkg.id + "/img/four/" + imgUploadFour.name)
             await uploadBytes(uploadRef, imgUploadFour).then(() => {
                 console.log("img four uploaded")
             })
@@ -126,7 +126,7 @@ export default function EditPackage(props) {
             await deleteObject(pkgRef).then(() => {
                 console.log("deleted pkg")
             })
-            let pkgUploadRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(pkg.name) + "/pkg/" + pkgUpload.name)
+            let pkgUploadRef = ref(storage, "users/" + uid + "/" + pkg.id + "/pkg/" + pkgUpload.name)
             await uploadBytes(pkgUploadRef, pkgUpload).then(() => {
                 console.log("pkg uploaded")
             })
@@ -137,7 +137,7 @@ export default function EditPackage(props) {
             currentVer = pkg.current_version
         }
 
-        await setDoc(doc(db, "packages", fancy_name_to_id(pkg.name)), {
+        await setDoc(doc(db, "packages", pkg.id), {
             banner: bannerUrl,
             screenshots: [screenOneUrl, screenTwoUrl, screenThreeUrl, screenFourUrl],
             description: newDesc,
@@ -181,7 +181,7 @@ export default function EditPackage(props) {
                     await saveChanges().then(() => {
                         document.getElementById("package-download-btn").innerHTML = "SAVED ✅"
                         setTimeout(() => {
-                            navigate("/packages/" + fancy_name_to_id(pkg.name))
+                            navigate("/packages/" + pkg.id)
                             window.location.reload()
                         }, 1000)
                     })
@@ -374,7 +374,7 @@ export default function EditPackage(props) {
                                     console.log("deleted pkg")
                                 })
                                 // delete the package from the database
-                                await deleteDoc(doc(db, "packages", fancy_name_to_id(pkg.name))).then(() => {
+                                await deleteDoc(doc(db, "packages", pkg.id)).then(() => {
                                     console.log("deleted pkg from db")
                                 }).then(() => {
                                     navigate("/packages")

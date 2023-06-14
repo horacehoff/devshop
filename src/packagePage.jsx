@@ -28,7 +28,7 @@ export default function PackagePage(props) {
         getDownloadURL(pkgRef).then((url) => {
             window.location.assign(url);
             if (is_logged_in) {
-                getDoc(doc(db, "packages", pkg.name)).then((doc) => {
+                getDoc(doc(db, "packages", pkg.id)).then((doc) => {
                     if (doc.exists()) {
                         set_new_downloads(doc.data().downloads);
                     } else {
@@ -36,7 +36,7 @@ export default function PackagePage(props) {
                     }
                 })
                 if (new_downloads !== -1) {
-                    updateDoc(doc(db, "packages", fancy_name_to_id(pkg.name)), {
+                    updateDoc(doc(db, "packages", pkg.id), {
                         downloads: new_downloads + 1
                     }).then(r => {
                         console.log("updated");
@@ -224,7 +224,7 @@ export default function PackagePage(props) {
 
                         document.getElementById("rating_done_btn").onclick = async () => {
                             // if no map exists on the package firebase doc, create one and add the rating, else add the rating to the map
-                            await updateDoc(doc(db, "packages", fancy_name_to_id(pkg.name)), {
+                            await updateDoc(doc(db, "packages", pkg.id), {
                                 // get all existing ratings of the package using the pkg object, and add the new rating to the map
                                 ratings: {
                                     ...pkg.ratings,

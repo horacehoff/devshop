@@ -6,7 +6,7 @@ import {getDownloadURL, ref, uploadBytes} from "firebase/storage"
 import {onAuthStateChanged} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
 import {doc, getDoc, setDoc} from "firebase/firestore";
-import fancy_name_to_id from "./utility.js";
+import fancy_name_to_id, {generateUUID} from "./utility.js";
 import MDEditor from '@uiw/react-md-editor';
 import {BiCloudUpload} from "react-icons/bi";
 
@@ -38,33 +38,34 @@ export default function CreatePackage() {
         }
     });
     const upload = async () => {
+        let name_id = generateUUID(fancy_name_to_id(name))
         let extension = pkgUpload.type.replace(/(.*)\//g, '')
-        let pkgRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(name) + "/pkg/" + fancy_name_to_id(name) + "." + extension)
+        let pkgRef = ref(storage, "users/" + uid + "/" + name_id + "/pkg/" + fancy_name_to_id(name) + "." + extension)
         await uploadBytes(pkgRef, pkgUpload).then(() => {
             document.getElementById("publish-btn").innerHTML = "UPLOADING... => █▒▒▒▒▒▒▒▒▒▒▒▒▒ 7%"
         });
 
-        let bannerRef = ref(storage, "users/" + uid + "/" + fancy_name_to_id(name) + "/img/banner/" + banner.name)
+        let bannerRef = ref(storage, "users/" + uid + "/" + name_id + "/img/banner/" + banner.name)
         await uploadBytes(bannerRef, banner).then(() => {
             document.getElementById("publish-btn").innerHTML = "UPLOADING... => ██▒▒▒▒▒▒▒▒▒▒▒▒ 14%"
         })
 
-        let imgRefOne = ref(storage, "users/" + uid + "/" + fancy_name_to_id(name) + "/img/one/" + (imgUpload0ne.name ?? ("screenone" + imgUpload0ne.type)))
+        let imgRefOne = ref(storage, "users/" + uid + "/" + name_id + "/img/one/" + (imgUpload0ne.name ?? ("screenone" + imgUpload0ne.type)))
         await uploadBytes(imgRefOne, imgUpload0ne).then(() => {
             document.getElementById("publish-btn").innerHTML = "UPLOADING... => ███▒▒▒▒▒▒▒▒▒▒▒ 21%"
         })
 
-        let imgRefTwo = ref(storage, "users/" + uid + "/" + fancy_name_to_id(name) + "/img/two/" + imgUploadTwo.name ?? ("screentwo" + imgUpload0ne.type))
+        let imgRefTwo = ref(storage, "users/" + uid + "/" + name_id + "/img/two/" + imgUploadTwo.name ?? ("screentwo" + imgUpload0ne.type))
         await uploadBytes(imgRefTwo, imgUploadTwo).then(() => {
             document.getElementById("publish-btn").innerHTML = "UPLOADING... => ████▒▒▒▒▒▒▒▒▒▒ 28%"
         })
 
-        let imgRefThree = ref(storage, "users/" + uid + "/" + fancy_name_to_id(name) + "/img/three/" + imgUploadThree.name ?? ("screenthree" + imgUpload0ne.type))
+        let imgRefThree = ref(storage, "users/" + uid + "/" + name_id + "/img/three/" + imgUploadThree.name ?? ("screenthree" + imgUpload0ne.type))
         await uploadBytes(imgRefThree, imgUploadThree).then(() => {
             document.getElementById("publish-btn").innerHTML = "UPLOADING... => █████▒▒▒▒▒▒▒▒▒ 35%"
         })
 
-        let imgRefFour = ref(storage, "users/" + uid + "/" + fancy_name_to_id(name) + "/img/four/" + imgUploadFour.name ?? ("screenfour" + imgUpload0ne.type))
+        let imgRefFour = ref(storage, "users/" + uid + "/" + name_id + "/img/four/" + imgUploadFour.name ?? ("screenfour" + imgUpload0ne.type))
         await uploadBytes(imgRefFour, imgUploadFour).then(() => {
             document.getElementById("publish-btn").innerHTML = "UPLOADING... => ██████▒▒▒▒▒▒▒▒ 42%"
         })
@@ -100,7 +101,7 @@ export default function CreatePackage() {
 
 
         let pkgUrl = await getDownloadURL(pkgRef).then(async (pkgUrl) => {
-            await setDoc(doc(db, "packages", fancy_name_to_id(name)), {
+            await setDoc(doc(db, "packages", name_id), {
                 name: name,
                 description: longDesc,
                 catchphrase: desc,
@@ -114,6 +115,7 @@ export default function CreatePackage() {
                 package: pkgUrl,
                 sizeMb: pkgUpload.size / 1000000,
                 created: new Date().getTime(),
+                id: name_id
             }).then(async r => {
                 document.getElementById("publish-btn").innerHTML = "UPLOADING... => █████████████▒ 91%"
                 // update user packages array with the new package
@@ -121,14 +123,16 @@ export default function CreatePackage() {
                 await getDoc(userRef).then(async (doc) => {
                     if (doc.exists()) {
                         let packages = doc.data().owned_packages;
-                        packages.push(fancy_name_to_id(name));
+                        packages.push(name_id);
                         await setDoc(userRef, {
                             owned_packages: packages
                         }, {merge: true}).then(r => {
                             document.getElementById("publish-btn").innerHTML = "UPLOADING... => ██████████████ 100%"
+                            return name_id
                         })
                     } else {
                         console.log("No such document!");
+                        return name_id
                     }
                 })
             })
@@ -213,8 +217,8 @@ export default function CreatePackage() {
                     } else {
                         document.getElementById("publish-btn").style.pointerEvents = "none"
                         document.getElementById("publish-btn").innerHTML = "UPLOADING... => ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 0%"
-                        upload().then(r => {
-                            navigate("/packages/" + fancy_name_to_id(name))
+                        upload().then(name_id => {
+                            navigate("/packages/" + name_id)
                             window.location.reload()
                         })
                     }

@@ -66,7 +66,7 @@ export default function AccountPage(props) {
             <ul className="packages-card-list" id="packages-card-list" style={{marginTop: "450px"}}>
                 {usrPackages.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child" onClick={() => {
-                        navigate("/packages/" + fancy_name_to_id(pkg.name))
+                        navigate("/packages/" + pkg.id)
                     }}>
                         <PackageCard dwnl={pkg.downloads} author={pkg.owner_username} name={pkg.name}
                                      desc={pkg.description} banner={pkg.banner} catchphrase={pkg.catchphrase}/>
