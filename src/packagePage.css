@@ -78,20 +78,32 @@
     cursor: pointer;
 }
 .package-characteristics-label{
-    position:absolute;
-    top:467px;
-    right:75px;
-    color:#b9b9b9;
-    margin:0;
-    padding:0
+    position: absolute;
+    top: 467px;
+    left: 980px;
+    color: #b9b9b9;
+    margin: 0;
+    padding: 0
 }
 .package-characteristics-label:after{
     content:'// 02 - CHARACTERISTICS'
 }
-.package-characteristics{
-    position:absolute;
-    top:476px;
-    right:75px
+.package-characteristics {
+    /*width: fit-content;*/
+    /*position: absolute;*/
+    /*top: 476px;*/
+    /*right: 75px;*/
+    /*white-space: nowrap;*/
+    /*overflow-x: auto; !* Change overflow to overflow-x *!*/
+    /*overflow-y: hidden; !* Add this line to hide vertical overflow *!*/
+    width: fit-content;
+    max-width: 100%;
+    position: absolute;
+    top: 476px;
+    left: 980px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .package-download-btn{
     position: fixed;
@@ -237,8 +249,8 @@
 
 @media screen and (max-width: 1250px) {
     .package-characteristics-label {
+        top: 1400px;
         left: 15px;
-        top: 1400px
     }
 
     .package-characteristics-label:after {
@@ -250,8 +262,8 @@
     }
 
     .package-characteristics {
-        left: 15px;
         top: 1410px;
+        left: 15px;
     }
 
     .package-description {
@@ -265,12 +277,10 @@
     }
 
     .package-characteristics-label {
-        left: 15px;
         top: 1140px
     }
 
     .package-characteristics {
-        left: 15px;
         top: 1150px;
     }
 
