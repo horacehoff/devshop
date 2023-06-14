@@ -17,6 +17,7 @@ export default function AccountSettings() {
     const [NewBio, setNewBio] = useState("");
     const [NewGithub, setNewGithub] = useState("");
     const [pfpUpload, setPfpUpload] = useState(null);
+    const [bannerUpload, setBannerUpload] = useState(null);
     const [uid, setUid] = useState("");
     let state_changed = false;
     const navigate = useNavigate();
@@ -47,13 +48,23 @@ export default function AccountSettings() {
             console.log("Document data:", docSnap.data());
             setNewUserName(docSnap.data().username);
             setBaseUserName(docSnap.data().username);
-            if (docSnap.data().pfp_path === "" || docSnap.data().pfp_path === undefined) {
+
+            if (docSnap.data().pfp_path === "" || !docSnap.data().pfp_path) {
                 console.log("no pfp")
                 document.getElementById("profile-picture").style.backgroundImage = "url('https://source.boringavatars.com/pixel/120/" + baseUserName + "?colors=6E00FF,0300FF,000000,FC7600,FFFFFF')"
             } else {
                 console.log("pfp")
                 document.getElementById("profile-picture").style.backgroundImage = "url('" + docSnap.data().pfp_path + "')";
             }
+            console.log(docSnap.data().banner_path)
+            if (docSnap.data().banner_bath === "" || !docSnap.data().banner_path) {
+                console.log("no banner")
+                document.getElementById("banner-img").style.backgroundImage = "url('https://source.boringavatars.com/marble/850/" + baseUserName + "?square')"
+            } else {
+                console.log("banner")
+                document.getElementById("banner-img").style.backgroundImage = "url('" + docSnap.data().banner_path + "')";
+            }
+
             setNewBio(docSnap.data().bio);
             setBaseBio(docSnap.data().bio);
             if (docSnap.data().github === undefined) {
@@ -96,6 +107,29 @@ export default function AccountSettings() {
         });
     }
 
+    const uploadImg = async () => {
+        let pfpUrl = "";
+        let bannerUrl = "";
+        if (pfpUpload !== null && pfpUpload !== undefined) {
+            let extension = pfpUpload.type.replace(/(.*)\//g, '')
+            let pfpRef = ref(storage, "users/" + uid + "/" + "pfp." + extension)
+            await uploadBytes(pfpRef, pfpUpload).then(() => {
+                console.log("pfp uploaded")
+            });
+            pfpUrl = await getDownloadURL(pfpRef);
+        }
+        if (bannerUpload !== null && bannerUpload !== undefined) {
+            let extension = bannerUpload.type.replace(/(.*)\//g, '')
+            let bannerRef = ref(storage, "users/" + uid + "/" + "banner." + extension)
+            await uploadBytes(bannerRef, bannerUpload).then(() => {
+                console.log("banner uploaded")
+            })
+            bannerUrl = await getDownloadURL(bannerRef);
+        }
+
+        return [pfpUrl, bannerUrl];
+    }
+
     const updateProfile = async () => {
         if (NewBio !== baseBio) {
             console.log("BIO UPDATE")
@@ -109,21 +143,35 @@ export default function AccountSettings() {
             console.log("USERNAME UPDATE")
             await updateUserName();
         }
-        if (pfpUpload !== null && pfpUpload !== undefined) {
-            let extension = pfpUpload.type.replace(/(.*)\//g, '')
-            let pfpRef = ref(storage, "users/" + uid + "/" + "pfp." + extension)
-            await uploadBytes(pfpRef, pfpUpload).then(() => {
-                console.log("pfp uploaded")
-            });
-            let pfpUrl = await getDownloadURL(pfpRef);
-            const docRef = doc(db, "users", auth.currentUser.uid);
-            await setDoc(docRef, {
-                pfp_path: pfpUrl
-            }, {merge: true}).then(() => {
-                console.log("pfp user updated");
-            });
+        if (pfpUpload || bannerUpload) {
+            await uploadImg().then((urls) => {
+                if (urls[0] !== "" && urls[1] === "") {
+                    const docRef = doc(db, "users", auth.currentUser.uid);
+                    setDoc(docRef, {
+                        pfp_path: urls[0]
+                    }, {merge: true}).then(() => {
+                        console.log("pfp user updated");
+                    });
+                } else if (urls[0] !== "" && urls[1] !== "") {
+                    const docRef = doc(db, "users", auth.currentUser.uid);
+                    setDoc(docRef, {
+                        pfp_path: urls[0],
+                        banner_path: urls[1]
+                    }, {merge: true}).then(() => {
+                        console.log("pfp and banner user updated");
+                    });
+                } else if (urls[0] === "" && urls[1] !== "") {
+                    const docRef = doc(db, "users", auth.currentUser.uid);
+                    setDoc(docRef, {
+                        banner_path: urls[1]
+                    }, {merge: true}).then(() => {
+                        console.log("banner user updated");
+                    });
+                }
+            })
 
         }
+
     }
 
     const updatePassword = async () => {
@@ -158,10 +206,20 @@ export default function AccountSettings() {
                     <input type="file" id="img-file" style={{display: "none"}} onChange={(event) => {
                         setPfpUpload(event.target.files[0])
                         document.getElementById("profile-picture").style.backgroundImage = "url('" + URL.createObjectURL(event.target.files[0]) + "')";
-                    }} required accept=".jpeg,.webp, image/jpeg"/>
+                    }} required accept="image/png, image/jpeg, image/jpg, image/webp"/>
                     <label className="profile-picture" id="profile-picture" htmlFor="img-file"/>
                     <div className="avatar-text">
-                        AVATAR<br/><span className="avatar-size">MIN. 60x60PX</span>
+                        AVATAR<br/><span className="avatar-size">.PNG/.JPG/.WEBP</span>
+                    </div>
+                    <br/>
+                    <input type="file" id="banner-file" style={{display: "none"}} onChange={(event) => {
+                        setBannerUpload(event.target.files[0])
+                        document.getElementById("banner-img").style.backgroundImage = "url('" + URL.createObjectURL(event.target.files[0]) + "')";
+                    }} required accept="image/png, image/jpeg, image/jpg, image/webp"/>
+                    <label className="profile-picture" style={{width: "100px", borderRadius: "6px"}} id="banner-img"
+                           htmlFor="banner-file"/>
+                    <div className="avatar-text">
+                        BANNER<br/><span className="avatar-size">.PNG/.JPG/.WEBP</span>
                     </div>
                     <br/>
                     <div className="section-inputs">
