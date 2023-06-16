@@ -2,7 +2,7 @@ import './packagePage.css'
 import "./editPackage.css"
 import {onAuthStateChanged} from "firebase/auth";
 import {auth, db, storage} from "./firebase.js";
-import fancy_name_to_id from "./utility.js";
+import fancy_name_to_id, {profanityFilter} from "./utility.js";
 import {useNavigate} from "react-router-dom";
 import Navbar from "./Navbar.jsx";
 import MDEditor from "@uiw/react-md-editor";
@@ -140,7 +140,7 @@ export default function EditPackage(props) {
         await setDoc(doc(db, "packages", pkg.id), {
             banner: bannerUrl,
             screenshots: [screenOneUrl, screenTwoUrl, screenThreeUrl, screenFourUrl],
-            description: newDesc,
+            description: profanityFilter(newDesc),
             package: pkgUrl,
             current_version: currentVer,
         }, {merge: true})

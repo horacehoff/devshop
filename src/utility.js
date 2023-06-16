@@ -1,3 +1,6 @@
+import badwords from "./badwords.txt?raw"
+
+
 export default function fancy_name_to_id(name) {
     let underscored = name.replace(/ /g, '_');
     let alphanumeric = underscored.replace(/\W/g, '');
@@ -12,6 +15,7 @@ export function generateUniqueId(str) {
     }
     return uniqueId;
 }
+
 
 export function generateUUID(str) {
     const timestamp = new Date().getTime();
@@ -28,4 +32,17 @@ export function generateUUID(str) {
     }
 
     return hash.toString();
+}
+
+
+export function profanityFilter(str) {
+    let output = str;
+    let email_regex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/g;
+    let phone_regex = /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/g;
+    output = output.replace(email_regex, "*")
+    output = output.replace(phone_regex, "*")
+    let badlist = badwords.split("\n");
+    const regexPattern = new RegExp(`\\b(${badlist.join('|')})\\b`, 'gi');
+    output = output.replace(regexPattern, "*")
+    return output;
 }

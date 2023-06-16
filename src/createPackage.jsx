@@ -6,7 +6,7 @@ import {getDownloadURL, ref, uploadBytes} from "firebase/storage"
 import {onAuthStateChanged} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
 import {doc, getDoc, setDoc} from "firebase/firestore";
-import fancy_name_to_id, {generateUUID} from "./utility.js";
+import fancy_name_to_id, {generateUUID, profanityFilter} from "./utility.js";
 import MDEditor from '@uiw/react-md-editor';
 import {BiCloudUpload} from "react-icons/bi";
 
@@ -104,9 +104,9 @@ export default function CreatePackage() {
 
         let pkgUrl = await getDownloadURL(pkgRef).then(async (pkgUrl) => {
             await setDoc(doc(db, "packages", name_id), {
-                name: name,
-                description: longDesc,
-                catchphrase: desc,
+                name: profanityFilter(name),
+                description: profanityFilter(longDesc),
+                catchphrase: profanityFilter(desc),
                 owner_id: uid,
                 owner_username: own_username,
                 current_version: version,

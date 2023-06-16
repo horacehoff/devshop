@@ -6,6 +6,7 @@ import {auth, db, storage} from "./firebase.js";
 import {doc, getDoc, setDoc} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
+import {profanityFilter} from "./utility.js";
 
 
 export default function AccountSettings() {
@@ -81,7 +82,7 @@ export default function AccountSettings() {
     const updateBio = async () => {
         const docRef = doc(db, "users", auth.currentUser.uid);
         await setDoc(docRef, {
-            bio: NewBio
+            bio: profanityFilter(NewBio)
         }, {merge: true}).then(() => {
             console.log("BIO UPDATED");
         });
@@ -99,8 +100,8 @@ export default function AccountSettings() {
     const updateUserName = async () => {
         const docRef = doc(db, "users", auth.currentUser.uid);
         await setDoc(docRef, {
-            username: NewUserName,
-            bio: NewBio,
+            username: profanityFilter(NewUserName),
+            bio: profanityFilter(NewBio),
             github: NewGithub
         }, {merge: true}).then(() => {
             console.log("USERNAME UPDATED");
