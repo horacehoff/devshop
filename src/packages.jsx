@@ -2,7 +2,7 @@ import "./packages.css"
 import Navbar from "./Navbar.jsx";
 import {db} from "./firebase.js";
 import {useEffect, useState} from "react";
-import {collection, getDocs, limit, query, setLogLevel} from "firebase/firestore";
+import {collection, getDocs, limit, orderBy, query, setLogLevel} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
 import PackageCard from "./packageCard.jsx";
 import shortNumber from "short-number";
@@ -41,14 +41,16 @@ export default function Packages() {
 
 
     const [packages, setPackages] = useState([]);
+    const [lastPackages, setLastPackages] = useState([]);
 
 
     useEffect(() => {
+
         const fetchPackages = () => {
             console.log("fetching packages...");
             const collectionRef = collection(db, 'packages');
             console.log("ordering packages...");
-            const q = query(collectionRef, limit(9));
+            const q = query(collectionRef, orderBy("downloads", "desc"), limit(9))
             console.log("getting packages.../async");
             getDocs(q)
                 .then(querySnapshot => {
@@ -61,8 +63,26 @@ export default function Packages() {
                 });
         };
 
+        const fetchLastPackages = () => {
+            console.log("fetching last packages...");
+            const collectionRef = collection(db, 'packages');
+            console.log("ordering last packages...");
+            const q = query(collectionRef, orderBy("created", "desc"), limit(9))
+            console.log("getting last packages.../async");
+            getDocs(q)
+                .then(querySnapshot => {
+                    console.log("packages fetched -> setLastPackages");
+                    const packageData = querySnapshot.docs.map(doc => doc.data());
+                    setLastPackages(packageData);
+                })
+                .catch(error => {
+                    console.log('Error getting documents: ', error);
+                });
+        }
+
 
         fetchPackages()
+        fetchLastPackages()
         console.log("fetch packages end call ")
     }, []);
 
@@ -85,6 +105,14 @@ export default function Packages() {
             </ul>
             <h2 className="category-title">// RECENTLY CREATED</h2>
             <ul className="packages-card-list" id="packages-card-list">
+                {lastPackages.map((pkg, index) => (
+                    <li key={index} className="packages-card-list-child" onClick={() => {
+                        navigate("/packages/" + pkg.id)
+                    }}>
+                        <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
+                                     catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                    </li>
+                ))}
             </ul>
         </>
     )
