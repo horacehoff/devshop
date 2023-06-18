@@ -161,8 +161,9 @@ export default function PackagePage(props) {
             <button className="package-download-btn" id="package-download-btn"
                     onClick={() => downloadPkg()}>{"DOWNLOAD -> 0$"}</button>
             <p className="package-description-label">// 01 - DESCRIPTION</p>
-            <p className="package-description">{<MDEditor.Markdown source={pkg.description}
-                                                                   className="package-desc-md"/>}</p>
+            <p className="package-description">{
+                <MDEditor.Markdown source={pkg.description} className="package-desc-md"/>
+            }</p>
             <p className="package-screenshots-label"></p>
             <div className="package-screenshots" id="package-screenshots">
                 <img

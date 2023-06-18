@@ -32,6 +32,7 @@ export default defineConfig({
     }),
   ],
   build: {
+    cssMinify: 'terser',
     minify: 'terser',
     sourcemap: false,
     rollupOptions: {

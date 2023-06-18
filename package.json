@@ -15,7 +15,6 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.10.0",
-    "reactjs-popup": "^2.0.5",
     "short-number": "^1.0.7"
   },
   "devDependencies": {
