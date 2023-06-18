@@ -13,7 +13,6 @@ export default defineConfig({
       'firebase/firestore',
       'firebase/storage',
       'short-number',
-      'reactjs-popup',
       'react-icons',
       '@uiw/react-md-editor'
     ],
@@ -46,7 +45,6 @@ export default defineConfig({
           store: ['firebase/firestore'],
           storage: ['firebase/storage'],
           shortnum: ['short-number'],
-          popup: ['reactjs-popup'],
           icons: ['react-icons'],
           markdown: ['@uiw/react-md-editor'],
         },
