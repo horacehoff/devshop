@@ -1,4 +1,4 @@
-.banner{
+.banner {
     width: 100%;
     position: absolute;
     left: 0;
@@ -11,11 +11,13 @@
     padding: 0;
     background-position: center center;
 }
-.package-author,.package-description,.package-description-label,.package-screenshots,.package-screenshots-label,.package-title{
-    left:15px;
-    position:absolute
+
+.package-author, .package-description, .package-description-label, .package-screenshots, .package-screenshots-label, .package-title {
+    left: 15px;
+    position: absolute
 }
-.package-title{
+
+.package-title {
     font-weight: 700;
     font-size: 55px;
     top: 337px;
@@ -39,13 +41,15 @@
     padding: 0;
     color: #b9b9b9
 }
-.package-description-label{
-    top:467px;
-    color:#b9b9b9;
-    margin:0;
-    padding:0
+
+.package-description-label {
+    top: 467px;
+    color: #b9b9b9;
+    margin: 0;
+    padding: 0
 }
-.package-description{
+
+.package-description {
     margin-top: 17px;
     top: 476px;
     width: calc(100% - 15px - 75px - 220px - 20px);
@@ -53,13 +57,16 @@
     overflow-y: scroll;
     padding-top: 0;
 }
+
 .package-screenshots-label {
     top: 810px;
     color: #b9b9b9
 }
-.package-screenshots-label:after{
+
+.package-screenshots-label:after {
     content: '// 03 - GALLERY'
 }
+
 .package-screenshots {
     top: 855px;
     margin: 0;
@@ -69,6 +76,7 @@
     white-space: nowrap;
     scroll-snap-type: x mandatory
 }
+
 .package-img {
     border-radius: 8px;
     height: calc(444px / 16 * 9);
@@ -77,7 +85,8 @@
     scroll-snap-align: start;
     cursor: pointer;
 }
-.package-characteristics-label{
+
+.package-characteristics-label {
     position: absolute;
     top: 467px;
     left: 980px;
@@ -85,9 +94,11 @@
     margin: 0;
     padding: 0
 }
-.package-characteristics-label:after{
-    content:'// 02 - CHARACTERISTICS'
+
+.package-characteristics-label:after {
+    content: '// 02 - CHARACTERISTICS'
 }
+
 .package-characteristics {
     /*width: fit-content;*/
     /*position: absolute;*/
@@ -104,8 +115,10 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    word-break: break-word;
 }
-.package-download-btn{
+
+.package-download-btn {
     position: fixed;
     right: 16px;
     bottom: 16px;
@@ -245,6 +258,11 @@
 .package-download-side:hover {
     background-color: white;
     color: #1e1e1e;
+}
+
+.current-ver {
+    width: 80px;
+    white-space: break-spaces;
 }
 
 @media screen and (max-width: 1250px) {

@@ -1,6 +1,7 @@
-#account,#hamburger{
-    right:20px
+#account, #hamburger {
+    right: 20px
 }
+
 #hamburger, .nav h2 {
     cursor: pointer;
     z-index: 5000;
@@ -40,37 +41,45 @@
     margin: 0;
     left: 20px
 }
-.nav h4{
-    margin:0;
-    top:26px;
-    font-weight:700;
-    font-size:16px;
-    color:rgba(255,255,255,.75);
-    cursor:pointer;
-    transition:.2s
+
+.nav h4 {
+    margin: 0;
+    top: 26px;
+    font-weight: 700;
+    font-size: 16px;
+    color: rgba(255, 255, 255, .75);
+    cursor: pointer;
+    transition: .2s
 }
-.nav h4:hover{
-    color:#fff
+
+.nav h4:hover {
+    color: #fff
 }
-#nav-title{
-    top:8px
+
+#nav-title {
+    top: 8px
 }
-#code-blocks{
-    right:359px
+
+#code-blocks {
+    right: 359px
 }
-#packages{
-    right:262px
+
+#packages {
+    right: 262px
 }
-#pricing{
-    right:175px
+
+#pricing {
+    right: 175px
 }
-#about{
-    right:107px
+
+#about {
+    right: 107px
 }
-#hamburger{
-    visibility:hidden;
-    margin:0;
-    top:16px
+
+#hamburger {
+    visibility: hidden;
+    margin: 0;
+    top: 16px
 }
 
 #full-nav {
@@ -136,15 +145,18 @@
     #packages {
         right: 194px
     }
-    #code-blocks{
-        right:291px
+
+    #code-blocks {
+        right: 291px
     }
 }
-@media screen and (max-width:600px){
-    #about,#account,#code-blocks,#packages,#pricing{
-        visibility:hidden
+
+@media screen and (max-width: 600px) {
+    #about, #account, #code-blocks, #packages, #pricing {
+        visibility: hidden
     }
-    #hamburger{
-        visibility:visible
+
+    #hamburger {
+        visibility: visible
     }
 }

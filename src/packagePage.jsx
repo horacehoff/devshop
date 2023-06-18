@@ -239,8 +239,8 @@ export default function PackagePage(props) {
                         }
                     }}>{">> RATE THIS <<"}</span></span>
 
-                    <br/>TOTAL SIZE: {Math.round(pkg.sizeMb * 10) / 10}MB<br/>CURRENT
-                    VERSION: {pkg.current_version}<br/>
+                    <br/>TOTAL SIZE: {Math.round(pkg.sizeMb * 10) / 10}MB<br/><span className="current-ver">CURRENT
+                        VERSION: {pkg.current_version}</span><br/>
                     <button className="package-download-side" id="package-download-side"
                             onClick={() => downloadPkg()}>DOWNLOAD
                     </button>

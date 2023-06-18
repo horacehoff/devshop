@@ -91,6 +91,7 @@ function App() {
                 <Route path="/" element={
                     <Home/>
                 }/>
+                <Route path="*" element={<Home/>}/>
                 <Route path="/publish-package" element={<CreatePackage/>}></Route>
                 <Route path="/packages" element={
                     <Packages/>
