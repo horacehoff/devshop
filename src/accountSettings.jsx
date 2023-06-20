@@ -1,4 +1,4 @@
-import Navbar from "./Navbar.jsx";
+import Navbar, {user_data} from "./Navbar.jsx";
 import "./accountSettings.css";
 import {useEffect, useState} from "react";
 import {EmailAuthProvider, getAuth, onAuthStateChanged, reauthenticateWithCredential,} from "firebase/auth";
@@ -7,6 +7,8 @@ import {doc, getDoc, setDoc} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {profanityFilter} from "./utility.js";
+
+console.log(user_data)
 
 
 export default function AccountSettings() {

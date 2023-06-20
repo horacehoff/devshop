@@ -5,6 +5,7 @@ import {useEffect} from "react";
 import {doc, getDoc} from "firebase/firestore";
 import fancy_name_to_id from "./utility.js";
 
+let user_data = null
 export default function Navbar() {
     const navigate = useNavigate();
     const location = useLocation().pathname;
@@ -90,6 +91,7 @@ export default function Navbar() {
                     let docRef = doc(db, "users", user.uid);
                     await getDoc(docRef).then((doc) => {
                         if (doc.exists()) {
+                            user_data = doc.data()
                             let username = fancy_name_to_id(doc.data().username);
                             navigate("/users/" + username);
                         }
@@ -228,3 +230,5 @@ export default function Navbar() {
         </>
     )
 }
+
+export {user_data}

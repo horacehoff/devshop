@@ -2,7 +2,7 @@ import React, {lazy, Suspense, useEffect, useState} from 'react'
 import ReactDOM from 'react-dom/client'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import "./firebase.js"
-import fancy_name_to_id, {generateUniqueId, generateUUID} from "./utility.js";
+import fancy_name_to_id, {generateUniqueId} from "./utility.js";
 
 
 import './index.css'
@@ -10,7 +10,6 @@ import './lazy.css'
 
 
 import Home from "./Home.jsx";
-import Navbar from "./Navbar.jsx";
 import Packages from "./packages.jsx";
 import About from "./about.jsx";
 import CreatePackage from "./createPackage.jsx";
@@ -22,10 +21,20 @@ import ResetPassword from "./resetPassword.jsx";
 import AccountSettings from "./accountSettings.jsx";
 import AccountPage from "./accountPage.jsx";
 import EditPackage from "./editPackage.jsx";
+// const Packages = lazy(() => import('./packages.jsx'))
+// const About = lazy(() => import('./about.jsx'))
+// const CreatePackage = lazy(() => import('./createPackage.jsx'))
+// const Pricing = lazy(() => import('./pricing.jsx'))
+// const PackagePage = lazy(() => import('./packagePage.jsx'))
+// const SignUp = lazy(() => import('./signup.jsx'))
+// const SignIn = lazy(() => import('./signin.jsx'))
+// const ResetPassword = lazy(() => import('./resetPassword.jsx'))
+// const AccountSettings = lazy(() => import('./accountSettings.jsx'))
+// const AccountPage = lazy(() => import('./accountPage.jsx'))
+// const EditPackage = lazy(() => import('./editPackage.jsx'))
 
 
 const CodeBlocks = lazy(() => import('./codeBlocks.jsx'))
-console.log("UNIQUE ID => " + generateUUID("hello world"))
 
 
 async function getPackages(collectionRef) {
@@ -87,6 +96,7 @@ function App() {
 
     return (
         <BrowserRouter>
+            {/*<Suspense>*/}
             <Routes>
                 <Route path="/" element={
                     <Home/>
@@ -98,7 +108,6 @@ function App() {
                 <Route path="/code-blocks" element={
                     <Suspense fallback={
                         <>
-                            <Navbar/>
                             <h1 className="packages-title">CODE<br/>BLOCKS</h1>
                             <h2 className="category-title">// CURRENTLY TRENDING</h2>
                         </>
@@ -129,6 +138,7 @@ function App() {
                     ))
                 }
             </Routes>
+            {/*</Suspense>*/}
         </BrowserRouter>
     )
 }
