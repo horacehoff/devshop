@@ -107,6 +107,10 @@
         width: 92vw
     }
 
+    .card-title {
+        width: calc(92vw - 15px)
+    }
+
     .card-description {
         width: calc(92vw - 15px)
     }

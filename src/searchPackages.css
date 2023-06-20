@@ -1,0 +1,16 @@
+.search-input {
+    padding-left: 30px;
+}
+
+.search-input-icon {
+    position: absolute;
+    margin: 11px 0px 0 calc(50% - 160px);
+    z-index: 100000;
+    filter: brightness(0.5);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.search-input-icon:hover {
+    filter: brightness(0.25);
+}

@@ -6,6 +6,7 @@ import {collection, getDocs, limit, orderBy, query, setLogLevel} from "firebase/
 import {useNavigate} from "react-router-dom";
 import PackageCard from "./packageCard.jsx";
 import shortNumber from "short-number";
+import {IoMdSearch} from "react-icons/all.js";
 
 
 export default function Packages() {
@@ -26,11 +27,17 @@ export default function Packages() {
                 packagesCardListChild[i].style.marginRight = "15px";
                 packagesCardListChild[i].style.marginTop = "10px";
                 document.getElementsByClassName("card")[i].style.width = "calc(100vw / 3 - 50px)";
+                document.getElementsByClassName("card-title")[i].style.maxWidth = "calc(100vw / 3 - 50px - 15px)";
             }
             const packagesCardList = document.getElementsByClassName("packages-card-list");
             for (let i = 0; i < packagesCardList.length; i++) {
                 packagesCardList[i].style.transform = "translateY(-20px)";
                 packagesCardList[i].style.whiteSpace = "normal";
+                const packagesCardList = document.getElementsByClassName("card-title");
+                for (let i = 0; i < packagesCardList.length; i++) {
+                    packagesCardList[i].style.whiteSpace = "nowrap";
+                    packagesCardList[i].style.overflow = "scroll"
+                }
             }
         }
         document.removeEventListener("wheel", handler, false);
@@ -45,7 +52,6 @@ export default function Packages() {
 
 
     useEffect(() => {
-
         const fetchPackages = () => {
             console.log("fetching packages...");
             const collectionRef = collection(db, 'packages');
@@ -90,10 +96,15 @@ export default function Packages() {
         <>
             <Navbar/>
             <h1 className="packages-title">PACKAGES</h1>
-            <button className="package-publish-btn" onClick={() => navigate("/publish-package")}>+ PUBLISH A PACKAGE
+            <button className="package-publish-btn" id="package-publish-btn"
+                    onClick={() => navigate("/publish-package")}>+ PUBLISH A PACKAGE
+            </button>
+            <button className="package-publish-btn" id="package-search-btn" style={{marginLeft: "10px"}}
+                    onClick={() => navigate("/search-packages")}><IoMdSearch
+                style={{position: "relative", top: "1px"}}/> SEARCH PACKAGES
             </button>
             <h2 className="category-title">// CURRENTLY TRENDING</h2>
-            <ul className="packages-card-list" id="packages-card-list">
+            <ul className="packages-card-list" id="packages-card-list-one">
                 {packages.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child" onClick={() => {
                         navigate("/packages/" + pkg.id)

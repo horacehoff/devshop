@@ -21,6 +21,7 @@ import ResetPassword from "./resetPassword.jsx";
 import AccountSettings from "./accountSettings.jsx";
 import AccountPage from "./accountPage.jsx";
 import EditPackage from "./editPackage.jsx";
+import SearchPackages from "./searchPackages.jsx";
 // const Packages = lazy(() => import('./packages.jsx'))
 // const About = lazy(() => import('./about.jsx'))
 // const CreatePackage = lazy(() => import('./createPackage.jsx'))
@@ -105,6 +106,7 @@ function App() {
                 <Route path="/packages" element={
                     <Packages/>
                 }/>
+                <Route path="/search-packages" element={<SearchPackages/>}/>
                 <Route path="/code-blocks" element={
                     <Suspense fallback={
                         <>
