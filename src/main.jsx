@@ -106,7 +106,7 @@ function App() {
                 <Route path="/packages" element={
                     <Packages/>
                 }/>
-                <Route path="/search-packages" element={<SearchPackages/>}/>
+                <Route path="/search-packages/:query?" element={<SearchPackages packages={packages}/>}/>
                 <Route path="/code-blocks" element={
                     <Suspense fallback={
                         <>

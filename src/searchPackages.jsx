@@ -1,23 +1,38 @@
 import "./searchPackages.css"
 import Navbar from "./Navbar.jsx";
 import {IoMdSearch} from "react-icons/all.js";
-import {collection, getDocs, query, where} from "firebase/firestore";
-import {db} from "./firebase.js";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import PackageCard from "./packageCard.jsx";
+import shortNumber from "short-number";
+import {useParams} from "react-router-dom";
 
-export default function SearchPackages() {
+export default function SearchPackages({packages}) {
     const [searchInput, setSearchInput] = useState("")
+    const [searchResults, setSearchResults] = useState([])
+    const query = useParams().query
 
-    async function search(e, forcePass) {
-        if (e.key === "Enter" || forcePass) {
-            const q = query(collection(db, "packages"), where("name", "==", searchInput));
-            const querySnapshot = await getDocs(q);
-            console.log("yo")
-            querySnapshot.forEach((doc) => {
-                console.log(doc.id, " => ", doc.data());
-            })
+    async function search(query, e, forcePass) {
+        if ((e.key === "Enter" || forcePass) && query !== "") {
+            setSearchResults([])
+            let search_results = []
+            for (let i = 0; i < packages.length; i++) {
+                if (packages[i].name.toLowerCase().includes(query.toLowerCase()) || packages[i].owner_username.toLowerCase().includes(query.toLowerCase())) {
+                    setSearchResults(search_results.push(packages[i]))
+                }
+            }
+            console.log(search_results)
+            setSearchResults(Array.from(search_results))
+
         }
+
     }
+
+    useEffect(() => {
+        if (query) {
+            search(query, {key: 'Enter'}, true)
+        }
+    }, [searchResults]);
+
 
     return (
         <>
@@ -26,8 +41,16 @@ export default function SearchPackages() {
             <IoMdSearch className="search-input-icon"/>
             <input type="text" placeholder="Search something..." value={searchInput}
                    onChange={e => setSearchInput(e.target.value)} className="txt-input search-input"
-                   onKeyDown={e => search(e, false)}/>
-            <ul className="packages-card-list" id="packages-card-list-one">
+                   onKeyDown={e => search(searchInput, e, false)}/>
+            <ul className="packages-card-list" id="packages-card-list-one" style={{marginTop: "60px"}}>
+                {searchResults.map((pkg, index) => (
+                    <li key={index} className="packages-card-list-child" onClick={() => {
+                        navigate("/packages/" + pkg.id)
+                    }}>
+                        <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
+                                     catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                    </li>
+                ))}
             </ul>
 
         </>
