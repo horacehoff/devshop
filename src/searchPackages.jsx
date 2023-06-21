@@ -7,29 +7,59 @@ import shortNumber from "short-number";
 import {useParams} from "react-router-dom";
 
 export default function SearchPackages({packages}) {
-    const [searchInput, setSearchInput] = useState("")
-    const [searchResults, setSearchResults] = useState([])
-    const query = useParams().query
+    // const [searchInput, setSearchInput] = useState("")
+    // const [searchResults, setSearchResults] = useState([])
+    // const query = useParams().query
+    //
+    // async function search(query, e, forcePass) {
+    //     if ((e.key === "Enter" || forcePass) && query !== "") {
+    //         let search_results = []
+    //         for (let i = 0; i < packages.length; i++) {
+    //             if (packages[i].name.toLowerCase().includes(query.toLowerCase()) || packages[i].owner_username.toLowerCase().includes(query.toLowerCase())) {
+    //                 setSearchResults(search_results.push(packages[i]))
+    //             }
+    //         }
+    //         console.log(search_results)
+    //         setSearchResults(Array.from(search_results))
+    //     }
+    // }
+    //
+    // useEffect(() => {
+    //     if (query) {
+    //         setSearchInput(query)
+    //         search(query, {key: 'Enter'}, true).then(() => {
+    //             console.log("searched")
+    //             setSearchResults([])
+    //         })
+    //     }
+    // }, [searchResults])
+    const [searchInput, setSearchInput] = useState("");
+    const [searchResults, setSearchResults] = useState([]);
+    const {query} = useParams();
 
-    async function search(query, e, forcePass) {
-        if ((e.key === "Enter" || forcePass) && query !== "") {
-            setSearchResults([])
-            let search_results = []
+    async function search(e, forcePass) {
+        if (e.key === "Enter" || forcePass) {
+            let search_results = [];
             for (let i = 0; i < packages.length; i++) {
-                if (packages[i].name.toLowerCase().includes(query.toLowerCase()) || packages[i].owner_username.toLowerCase().includes(query.toLowerCase())) {
-                    setSearchResults(search_results.push(packages[i]))
+                if (
+                    packages[i].name.toLowerCase().includes(searchInput.toLowerCase()) ||
+                    packages[i].owner_username.toLowerCase().includes(searchInput.toLowerCase())
+                ) {
+                    search_results.push(packages[i]);
                 }
             }
-            console.log(search_results)
-            setSearchResults(Array.from(search_results))
-
+            console.log(search_results);
+            setSearchResults(Array.from(search_results));
         }
-
     }
 
     useEffect(() => {
-        if (query) {
-            search(query, {key: 'Enter'}, true)
+        if (query && searchResults.length === 0) {
+            setSearchInput(query);
+            search({key: "Enter"}, false).then(() => {
+                console.log("searched");
+                setSearchResults([]);
+            });
         }
     }, [searchResults]);
 
