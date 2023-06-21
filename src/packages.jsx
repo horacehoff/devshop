@@ -103,6 +103,17 @@ export default function Packages() {
                     onClick={() => navigate("/search-packages")}><IoMdSearch
                 style={{position: "relative", top: "1px"}}/> SEARCH PACKAGES
             </button>
+            <h2 className="category-title">// FOR YOU</h2>
+            <ul className="packages-card-list" id="packages-card-list-one">
+                {packages.map((pkg, index) => (
+                    <li key={index} className="packages-card-list-child" onClick={() => {
+                        navigate("/packages/" + pkg.id)
+                    }}>
+                        <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
+                                     catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                    </li>
+                ))}
+            </ul>
             <h2 className="category-title">// CURRENTLY TRENDING</h2>
             <ul className="packages-card-list" id="packages-card-list-one">
                 {packages.map((pkg, index) => (

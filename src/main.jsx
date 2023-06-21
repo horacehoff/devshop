@@ -97,7 +97,6 @@ function App() {
 
     return (
         <BrowserRouter>
-            {/*<Suspense>*/}
             <Routes>
                 <Route path="/" element={
                     <Home/>
@@ -140,7 +139,6 @@ function App() {
                     ))
                 }
             </Routes>
-            {/*</Suspense>*/}
         </BrowserRouter>
     )
 }
