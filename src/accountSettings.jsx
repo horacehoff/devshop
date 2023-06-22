@@ -7,7 +7,6 @@ import {doc, getDoc, setDoc} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {profanityFilter} from "./utility.js";
-import InputCompletor from "./inputCompletor.jsx";
 
 console.log(user_data)
 
@@ -199,13 +198,71 @@ export default function AccountSettings() {
         }
     }
 
+    const interests_one = ["🤖AI", "🌎WEB", "📱MOBILE APPS", "🎮GAME DEV"];
+    const interests_two = ["📊DATA", "🔒SECURITY", "🎨DESIGN", "⚙️ENGINEERING"];
+
+    const toggled_interests = []
+
+    function handleInterestClick(interest, index) {
+        if (!toggled_interests.includes(interest)) {
+            document.getElementById("interest" + index).style.backgroundColor = "#fff";
+            document.getElementById("interest" + index).style.color = "#000";
+            toggled_interests.push(interest);
+        } else {
+            document.getElementById("interest" + index).style.backgroundColor = "#282828";
+            document.getElementById("interest" + index).style.color = "white";
+            toggled_interests.splice(toggled_interests.indexOf(interest), 1);
+        }
+    }
+
     return (
         <>
             <Navbar/>
             <h1 className="title">ACCOUNT</h1>
             <h2 className="subtitle">MODIFY YOUR ACCOUNT SETTINGS BELOW</h2>
             <div id="acc-settings">
-                <InputCompletor/>
+                <h4 className="section-title">INTERESTS</h4>
+                <div className="interest-center">
+                    {
+                        interests_one.map((interest, index) => {
+                            return (
+                                <div className="interest" id={"interest" + index} onClick={() => {
+                                    handleInterestClick(interest, index);
+                                }} onMouseEnter={() => {
+                                    document.getElementById("interest" + index).style.backgroundColor = "white"
+                                    document.getElementById("interest" + index).style.color = "black"
+                                }} onMouseLeave={() => {
+                                    if (!toggled_interests.includes(interest)) {
+                                        document.getElementById("interest" + index).style.backgroundColor = "#282828"
+                                        document.getElementById("interest" + index).style.color = "white"
+                                    }
+                                }}>
+                                    {interest}
+                                </div>
+                            )
+                        })
+                    }</div>
+                <div className="interest-center">
+                    {
+                        interests_two.map((interest, index) => {
+                            return (
+                                <div className="interest" id={"interesttwo" + index} onClick={() => {
+                                    handleInterestClick(interest, index);
+                                }} onMouseEnter={() => {
+                                    document.getElementById("interesttwo" + index).style.backgroundColor = "white"
+                                    document.getElementById("interesttwo" + index).style.color = "black"
+                                }} onMouseLeave={() => {
+                                    if (!toggled_interests.includes(interest)) {
+                                        document.getElementById("interesttwo" + index).style.backgroundColor = "#282828"
+                                        document.getElementById("interesttwo" + index).style.color = "white"
+                                    }
+                                }}>
+                                    {interest}
+                                </div>
+                            )
+                        })
+                    }</div>
+                <br/>
                 <h4 className="section-title">PROFILE</h4>
                 <div className="avatar-section">
                     <input type="file" id="img-file" style={{display: "none"}} onChange={(event) => {

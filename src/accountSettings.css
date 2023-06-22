@@ -121,3 +121,33 @@
 .save-btn {
     margin-top: 20px;
 }
+
+.interest-center {
+    text-align: center;
+}
+
+.interest {
+    display: inline-block;
+    background-color: #282828;
+    color: white;
+    text-align: center;
+    margin-left: 10px;
+    padding: 10px 15px;
+    border-radius: 50px;
+    transition: 0.225s;
+    cursor: pointer;
+}
+
+.interest:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+@media screen and (max-width: 500px) {
+    .interest {
+        margin-left: 5px;
+        padding: 7px 12px;
+        border-radius: 35px;
+
+    }
+}
