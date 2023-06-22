@@ -29,6 +29,10 @@ export default function AccountSettings() {
 
     let toggled_interests = []
 
+    function preInterests() {
+        //
+    }
+
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
