@@ -143,6 +143,12 @@
     color: #000;
 }
 
+@media screen and (min-width: 500px) {
+    .interest {
+        margin-top: 10px;
+    }
+}
+
 @media screen and (max-width: 500px) {
     .interest {
         margin-left: 5px;
