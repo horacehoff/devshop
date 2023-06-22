@@ -203,14 +203,14 @@ export default function AccountSettings() {
 
     const toggled_interests = []
 
-    function handleInterestClick(interest, index) {
+    function handleInterestClick(name, interest, index) {
         if (!toggled_interests.includes(interest)) {
-            document.getElementById("interest" + index).style.backgroundColor = "#fff";
-            document.getElementById("interest" + index).style.color = "#000";
+            document.getElementById(name + index).style.backgroundColor = "#fff";
+            document.getElementById(name + index).style.color = "#000";
             toggled_interests.push(interest);
         } else {
-            document.getElementById("interest" + index).style.backgroundColor = "#282828";
-            document.getElementById("interest" + index).style.color = "white";
+            document.getElementById(name + index).style.backgroundColor = "#282828";
+            document.getElementById(name + index).style.color = "white";
             toggled_interests.splice(toggled_interests.indexOf(interest), 1);
         }
     }
@@ -227,7 +227,7 @@ export default function AccountSettings() {
                         interests_one.map((interest, index) => {
                             return (
                                 <div className="interest" id={"interest" + index} onClick={() => {
-                                    handleInterestClick(interest, index);
+                                    handleInterestClick("interest", interest, index);
                                 }} onMouseEnter={() => {
                                     document.getElementById("interest" + index).style.backgroundColor = "white"
                                     document.getElementById("interest" + index).style.color = "black"
@@ -247,7 +247,7 @@ export default function AccountSettings() {
                         interests_two.map((interest, index) => {
                             return (
                                 <div className="interest" id={"interesttwo" + index} onClick={() => {
-                                    handleInterestClick(interest, index);
+                                    handleInterestClick("interesttwo", interest, index);
                                 }} onMouseEnter={() => {
                                     document.getElementById("interesttwo" + index).style.backgroundColor = "white"
                                     document.getElementById("interesttwo" + index).style.color = "black"
