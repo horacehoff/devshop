@@ -7,6 +7,7 @@ import {doc, getDoc, setDoc} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {profanityFilter} from "./utility.js";
+import InputCompletor from "./inputCompletor.jsx";
 
 console.log(user_data)
 
@@ -204,6 +205,7 @@ export default function AccountSettings() {
             <h1 className="title">ACCOUNT</h1>
             <h2 className="subtitle">MODIFY YOUR ACCOUNT SETTINGS BELOW</h2>
             <div id="acc-settings">
+                <InputCompletor/>
                 <h4 className="section-title">PROFILE</h4>
                 <div className="avatar-section">
                     <input type="file" id="img-file" style={{display: "none"}} onChange={(event) => {

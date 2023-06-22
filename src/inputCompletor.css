@@ -1,0 +1,28 @@
+.autocomplete-window {
+    width: fit-content;
+    height: 25px;
+    color: black;
+    display: none;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.19);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: absolute;
+    margin-top: -23px;
+    overflow-y: hidden;
+}
+
+.autocomplete-window ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.autocomplete-window ul::-webkit-scrollbar {
+    display: none;
+}

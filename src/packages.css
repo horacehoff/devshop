@@ -51,6 +51,7 @@
 .package-publish-btn:hover {
     background-color: #282828;
     color: white;
+    /*scale: 1.05;*/
 }
 
 @media screen and (max-width: 870px) {

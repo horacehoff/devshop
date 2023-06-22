@@ -103,7 +103,7 @@ function App() {
                 }/>
                 <Route path="/publish-package" element={<CreatePackage/>}></Route>
                 <Route path="/packages" element={
-                    <Packages/>
+                    <Packages packagesData={packages}/>
                 }/>
                 <Route path="/search-packages/:query?" element={<SearchPackages packages={packages}/>}/>
                 <Route path="/code-blocks" element={

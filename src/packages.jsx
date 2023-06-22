@@ -1,15 +1,13 @@
 import "./packages.css"
 import Navbar from "./Navbar.jsx";
-import {db} from "./firebase.js";
-import {useEffect, useState} from "react";
-import {collection, getDocs, limit, orderBy, query, setLogLevel} from "firebase/firestore";
+import {setLogLevel} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
 import PackageCard from "./packageCard.jsx";
 import shortNumber from "short-number";
 import {IoMdSearch} from "react-icons/all.js";
 
 
-export default function Packages() {
+export default function Packages({packagesData}) {
     const navigate = useNavigate();
     window.mobileCheck = function () {
         let check = false;
@@ -47,50 +45,19 @@ export default function Packages() {
     setLogLevel("debug");
 
 
-    const [packages, setPackages] = useState([]);
-    const [lastPackages, setLastPackages] = useState([]);
+    function getTopRankedObjects(arr, property, limit) {
+        // Sort the array in descending order based on the property value
+        arr.sort((a, b) => b[property] - a[property]);
 
+        // Get the top ranked objects up to the specified limit
+        const topObjects = arr.slice(0, limit);
 
-    useEffect(() => {
-        const fetchPackages = () => {
-            console.log("fetching packages...");
-            const collectionRef = collection(db, 'packages');
-            console.log("ordering packages...");
-            const q = query(collectionRef, orderBy("downloads", "desc"), limit(9))
-            console.log("getting packages.../async");
-            getDocs(q)
-                .then(querySnapshot => {
-                    console.log("packages fetched -> setPackages");
-                    const packageData = querySnapshot.docs.map(doc => doc.data());
-                    setPackages(packageData);
-                })
-                .catch(error => {
-                    console.log('Error getting documents: ', error);
-                });
-        };
+        return topObjects;
+    }
 
-        const fetchLastPackages = () => {
-            console.log("fetching last packages...");
-            const collectionRef = collection(db, 'packages');
-            console.log("ordering last packages...");
-            const q = query(collectionRef, orderBy("created", "desc"), limit(9))
-            console.log("getting last packages.../async");
-            getDocs(q)
-                .then(querySnapshot => {
-                    console.log("packages fetched -> setLastPackages");
-                    const packageData = querySnapshot.docs.map(doc => doc.data());
-                    setLastPackages(packageData);
-                })
-                .catch(error => {
-                    console.log('Error getting documents: ', error);
-                });
-        }
-
-
-        fetchPackages()
-        fetchLastPackages()
-        console.log("fetch packages end call ")
-    }, []);
+    const trendingPackageData = getTopRankedObjects(packagesData, "downloads", 9);
+    const lastPackagesData = getTopRankedObjects(packagesData, "created", 9);
+    console.log(packagesData)
 
     return (
         <>
@@ -105,7 +72,7 @@ export default function Packages() {
             </button>
             <h2 className="category-title">// FOR YOU</h2>
             <ul className="packages-card-list" id="packages-card-list-one">
-                {packages.map((pkg, index) => (
+                {trendingPackageData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child" onClick={() => {
                         navigate("/packages/" + pkg.id)
                     }}>
@@ -116,7 +83,7 @@ export default function Packages() {
             </ul>
             <h2 className="category-title">// CURRENTLY TRENDING</h2>
             <ul className="packages-card-list" id="packages-card-list-one">
-                {packages.map((pkg, index) => (
+                {trendingPackageData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child" onClick={() => {
                         navigate("/packages/" + pkg.id)
                     }}>
@@ -127,7 +94,7 @@ export default function Packages() {
             </ul>
             <h2 className="category-title">// RECENTLY CREATED</h2>
             <ul className="packages-card-list" id="packages-card-list">
-                {lastPackages.map((pkg, index) => (
+                {lastPackagesData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child" onClick={() => {
                         navigate("/packages/" + pkg.id)
                     }}>

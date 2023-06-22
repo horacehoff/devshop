@@ -16,7 +16,8 @@
 }
 
 .card {
-    height: 334px;
+    /*height: 334px;*/
+    height: 225px;
     width: 468px;
     border-radius: 14px;
     cursor: pointer;
@@ -79,7 +80,7 @@
     line-height: 22px;
     position: relative;
     width: calc(100% - 38px);
-    height: 200px;
+    height: 100px;
     left: 15px;
     padding-right: 5px;
     text-shadow: 0 0 5px rgba(0, 0, 0, .5);
@@ -94,7 +95,8 @@
     margin: 0;
     position: relative;
     left: 15px;
-    bottom: 15px;
+    bottom: 20px;
+    /*bottom: 15px;*/
     transition: .2s
 }
 
