@@ -136,6 +136,8 @@
     border-radius: 50px;
     transition: 0.225s;
     cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
 }
 
 .interest:hover {
@@ -143,10 +145,11 @@
     color: #000;
 }
 
-@media screen and (min-width: 500px) {
-    .interest {
-        margin-top: 10px;
-    }
+.section-subtitle {
+    font-size: 13px;
+    color: #b2b2b2;
+    text-align: center;
+    margin-top: -8px;
 }
 
 @media screen and (max-width: 500px) {
@@ -154,6 +157,8 @@
         margin-left: 5px;
         padding: 7px 12px;
         border-radius: 35px;
+        margin-top: 5px;
+        font-size: 12px;
 
     }
 }

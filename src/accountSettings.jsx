@@ -24,6 +24,10 @@ export default function AccountSettings() {
     const [uid, setUid] = useState("");
     let state_changed = false;
     const navigate = useNavigate();
+    const interests_one = ["🤖AI", "🌎WEB", "📱MOBILE APPS", "🎮GAME DEV"];
+    const interests_two = ["📊DATA", "🔒SECURITY", "🎨DESIGN", "⚙️ENGINEERING"];
+
+    let toggled_interests = []
 
 
     useEffect(() => {
@@ -51,6 +55,11 @@ export default function AccountSettings() {
             console.log("Document data:", docSnap.data());
             setNewUserName(docSnap.data().username);
             setBaseUserName(docSnap.data().username);
+            toggled_interests = docSnap.data().interests;
+            console.log(toggled_interests)
+            // get the index of each interest in the array
+            for (let i = 0; i < toggled_interests.length; i++) {
+            }
 
             if (docSnap.data().pfp_path === "" || !docSnap.data().pfp_path) {
                 console.log("no pfp")
@@ -198,11 +207,6 @@ export default function AccountSettings() {
         }
     }
 
-    const interests_one = ["🤖AI", "🌎WEB", "📱MOBILE APPS", "🎮GAME DEV"];
-    const interests_two = ["📊DATA", "🔒SECURITY", "🎨DESIGN", "⚙️ENGINEERING"];
-
-    const toggled_interests = []
-
     function handleInterestClick(name, interest, index) {
         if (!toggled_interests.includes(interest)) {
             document.getElementById(name + index).style.backgroundColor = "#fff";
@@ -215,6 +219,15 @@ export default function AccountSettings() {
         }
     }
 
+    const updateInterests = async () => {
+        const docRef = doc(db, "users", auth.currentUser.uid);
+        await setDoc(docRef, {
+            interests: toggled_interests
+        }, {merge: true}).then(() => {
+            console.log("INTERESTS UPDATED");
+        });
+    }
+
     return (
         <>
             <Navbar/>
@@ -222,6 +235,7 @@ export default function AccountSettings() {
             <h2 className="subtitle">MODIFY YOUR ACCOUNT SETTINGS BELOW</h2>
             <div id="acc-settings">
                 <h4 className="section-title">INTERESTS</h4>
+                <p className="section-subtitle">What do you like ?</p>
                 <div className="interest-center">
                     {
                         interests_one.map((interest, index) => {
@@ -261,8 +275,20 @@ export default function AccountSettings() {
                                 </div>
                             )
                         })
-                    }</div>
-                <br/>
+                    }<br/>
+                    <button id="profile-save-btn" className="btn-primary save-btn"
+                            onClick={async () => await updateInterests().then(() => {
+                                document.getElementById("profile-save-btn").innerHTML = "SAVED ✅";
+                                // wait 1 second
+                                setTimeout(() => {
+                                    document.getElementById("profile-save-btn").innerHTML = "SAVE";
+                                    window.location.reload();
+                                }, 1000);
+                            })}>SAVE
+                    </button>
+                </div>
+
+                <br/><br/>
                 <h4 className="section-title">PROFILE</h4>
                 <div className="avatar-section">
                     <input type="file" id="img-file" style={{display: "none"}} onChange={(event) => {
