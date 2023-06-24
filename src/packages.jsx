@@ -1,10 +1,11 @@
 import "./packages.css"
-import Navbar from "./Navbar.jsx";
+import Navbar, {user_data} from "./Navbar.jsx";
 import {setLogLevel} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
 import PackageCard from "./packageCard.jsx";
 import shortNumber from "short-number";
 import {IoMdSearch} from "react-icons/all.js";
+import {useEffect} from "react";
 
 
 export default function Packages({packagesData}) {
@@ -58,6 +59,12 @@ export default function Packages({packagesData}) {
     const trendingPackageData = getTopRankedObjects(packagesData, "downloads", 9);
     const lastPackagesData = getTopRankedObjects(packagesData, "created", 9);
     console.log(packagesData)
+
+
+    useEffect(() => {
+        console.log(user_data)
+    }, []);
+
 
     return (
         <>

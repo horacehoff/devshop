@@ -101,7 +101,7 @@ export default function CreatePackage() {
             }
         });
         let final_interests = [];
-        let interests = document.getElementsByClassName("interest");
+        let interests = document.getElementsByClassName("interestpkg");
         for (let i = 0; i < interests.length; i++) {
             if (interests[i].classList.contains("interest-toggled")) {
                 final_interests.push(interests[i].innerHTML);

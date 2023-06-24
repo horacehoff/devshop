@@ -7,6 +7,7 @@ import fancy_name_to_id from "./utility.js";
 
 let user_data = null
 export default function Navbar() {
+    export let user_data = []
     const navigate = useNavigate();
     const location = useLocation().pathname;
     useEffect(() => {
@@ -78,6 +79,24 @@ export default function Navbar() {
     const fetchAuth = async () => {
         let {auth} = await import("./firebase.js");
         return auth;
+    }
+
+    export async function getUsrData() {
+        let {auth} = await import("./firebase.js");
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                let {db} = await import("./firebase.js");
+                let docRef = doc(db, "users", user.uid);
+                await getDoc(docRef).then((doc) => {
+                    if (doc.exists()) {
+                        user_data = doc.data()
+                        return user_data
+                    }
+                });
+            } else {
+                return null
+            }
+        })
     }
 
     fetchAuth().then((auth) => {
@@ -182,6 +201,10 @@ export default function Navbar() {
             }
         });
     });
+
+    getUsrData().then((usrdata) => {
+        user_data = usrdata
+    })
 
     return (
         <>
