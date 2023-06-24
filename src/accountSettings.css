@@ -145,6 +145,16 @@
     color: #000;
 }
 
+.interest-toggled {
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+.interest-toggled:hover {
+    background-color: #282828 !important;
+    color: #fff !important;
+}
+
 .section-subtitle {
     font-size: 13px;
     color: #b2b2b2;

@@ -24,33 +24,16 @@ export default function AccountSettings() {
     const [uid, setUid] = useState("");
     let state_changed = false;
     const navigate = useNavigate();
-    const interests_one = ["🤖AI", "🌎WEB", "📱MOBILE APPS", "🎮GAME DEV"];
-    const interests_two = ["📊DATA", "🔒SECURITY", "🎨DESIGN", "⚙️ENGINEERING"];
+    const interests_data = ["🤖AI", "🌎WEB", "📱MOBILE APPS", "🎮GAME DEV", "📊DATA", "🔒SECURITY", "🎨DESIGN", "⚙️ENGINEERING"];
 
-    let toggled_interests = []
-
-    function preInterests() {
-        //
+    function preInterests(interests) {
+        for (let i = 0; i < interests_data.length; i++) {
+            if (interests.includes(interests_data[i])) {
+                document.getElementById("interest" + i).classList.add("interest-toggled");
+            }
+        }
     }
 
-
-    useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user && !state_changed) {
-                state_changed = true;
-                console.log("USER IS LOGGED IN");
-                getData(user.uid, user.email).then(() => {
-                    console.log("DATA LOADED");
-                    setUid(user.uid);
-                    console.log("UID: " + uid)
-                });
-
-            } else {
-                console.log("USER IS NOT LOGGED IN");
-                navigate("/sign-in");
-            }
-        });
-    }, []);
 
     const getData = async (uid) => {
         const docRef = doc(db, "users", uid);
@@ -59,11 +42,6 @@ export default function AccountSettings() {
             console.log("Document data:", docSnap.data());
             setNewUserName(docSnap.data().username);
             setBaseUserName(docSnap.data().username);
-            toggled_interests = docSnap.data().interests;
-            console.log(toggled_interests)
-            // get the index of each interest in the array
-            for (let i = 0; i < toggled_interests.length; i++) {
-            }
 
             if (docSnap.data().pfp_path === "" || !docSnap.data().pfp_path) {
                 console.log("no pfp")
@@ -88,11 +66,33 @@ export default function AccountSettings() {
             } else {
                 setNewGithub(docSnap.data().github);
             }
+            return docSnap.data();
 
         } else {
             console.log("USER DOES NOT EXIST");
         }
     }
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user && !state_changed) {
+                state_changed = true;
+                console.log("USER IS LOGGED IN");
+                getData(user.uid, user.email).then((docSnap) => {
+                    console.log("DATA LOADED");
+                    setUid(user.uid);
+                    console.log("UID: " + uid)
+                    preInterests(docSnap.interests);
+                });
+
+            } else {
+                console.log("USER IS NOT LOGGED IN");
+                navigate("/sign-in");
+            }
+        });
+    }, []);
+
+
 
     const updateBio = async () => {
         const docRef = doc(db, "users", auth.currentUser.uid);
@@ -211,22 +211,18 @@ export default function AccountSettings() {
         }
     }
 
-    function handleInterestClick(name, interest, index) {
-        if (!toggled_interests.includes(interest)) {
-            document.getElementById(name + index).style.backgroundColor = "#fff";
-            document.getElementById(name + index).style.color = "#000";
-            toggled_interests.push(interest);
+    const handleInterestClick = (index) => {
+        if (document.getElementById("interest" + index).classList.contains("interest-toggled")) {
+            document.getElementById("interest" + index).classList.remove("interest-toggled");
         } else {
-            document.getElementById(name + index).style.backgroundColor = "#282828";
-            document.getElementById(name + index).style.color = "white";
-            toggled_interests.splice(toggled_interests.indexOf(interest), 1);
+            document.getElementById("interest" + index).classList.add("interest-toggled");
         }
     }
 
-    const updateInterests = async () => {
+    const updateInterests = async (new_interests) => {
         const docRef = doc(db, "users", auth.currentUser.uid);
         await setDoc(docRef, {
-            interests: toggled_interests
+            interests: new_interests
         }, {merge: true}).then(() => {
             console.log("INTERESTS UPDATED");
         });
@@ -242,53 +238,35 @@ export default function AccountSettings() {
                 <p className="section-subtitle">What do you like ?</p>
                 <div className="interest-center">
                     {
-                        interests_one.map((interest, index) => {
+                        interests_data.map((interest, index) => {
                             return (
                                 <div className="interest" id={"interest" + index} onClick={() => {
-                                    handleInterestClick("interest", interest, index);
-                                }} onMouseEnter={() => {
-                                    document.getElementById("interest" + index).style.backgroundColor = "white"
-                                    document.getElementById("interest" + index).style.color = "black"
-                                }} onMouseLeave={() => {
-                                    if (!toggled_interests.includes(interest)) {
-                                        document.getElementById("interest" + index).style.backgroundColor = "#282828"
-                                        document.getElementById("interest" + index).style.color = "white"
-                                    }
+                                    handleInterestClick(index);
                                 }}>
                                     {interest}
                                 </div>
                             )
                         })
-                    }</div>
-                <div className="interest-center">
-                    {
-                        interests_two.map((interest, index) => {
-                            return (
-                                <div className="interest" id={"interesttwo" + index} onClick={() => {
-                                    handleInterestClick("interesttwo", interest, index);
-                                }} onMouseEnter={() => {
-                                    document.getElementById("interesttwo" + index).style.backgroundColor = "white"
-                                    document.getElementById("interesttwo" + index).style.color = "black"
-                                }} onMouseLeave={() => {
-                                    if (!toggled_interests.includes(interest)) {
-                                        document.getElementById("interesttwo" + index).style.backgroundColor = "#282828"
-                                        document.getElementById("interesttwo" + index).style.color = "white"
-                                    }
-                                }}>
-                                    {interest}
-                                </div>
-                            )
-                        })
-                    }<br/>
+                    }
+                    <br/>
                     <button id="profile-save-btn" className="btn-primary save-btn"
-                            onClick={async () => await updateInterests().then(() => {
-                                document.getElementById("profile-save-btn").innerHTML = "SAVED ✅";
-                                // wait 1 second
-                                setTimeout(() => {
-                                    document.getElementById("profile-save-btn").innerHTML = "SAVE";
-                                    window.location.reload();
-                                }, 1000);
-                            })}>SAVE
+                            onClick={async () => {
+                                let final_interests = [];
+                                let interests = document.getElementsByClassName("interest");
+                                for (let i = 0; i < interests.length; i++) {
+                                    if (interests[i].classList.contains("interest-toggled")) {
+                                        final_interests.push(interests[i].innerHTML);
+                                    }
+                                }
+                                await updateInterests(final_interests).then(() => {
+                                    document.getElementById("profile-save-btn").innerHTML = "SAVED ✅";
+                                    // wait 1 second
+                                    setTimeout(() => {
+                                        document.getElementById("profile-save-btn").innerHTML = "SAVE";
+                                        window.location.reload();
+                                    }, 1000);
+                                })
+                            }}>SAVE
                     </button>
                 </div>
 
