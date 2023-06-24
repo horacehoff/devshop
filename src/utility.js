@@ -46,3 +46,5 @@ export function profanityFilter(str) {
     output = output.replace(regexPattern, "*")
     return output;
 }
+
+export const interests_data = ["🤖AI", "🌎WEB", "👨‍💻PROGRAMMING", "📱MOBILE APPS", "🎮GAME DEV", "📊DATA", "🔒SECURITY", "🎨DESIGN", "⚙️ENGINEERING"];

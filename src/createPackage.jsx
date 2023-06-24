@@ -6,7 +6,7 @@ import {getDownloadURL, ref, uploadBytes} from "firebase/storage"
 import {onAuthStateChanged} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
 import {doc, getDoc, setDoc} from "firebase/firestore";
-import fancy_name_to_id, {generateUUID, profanityFilter} from "./utility.js";
+import fancy_name_to_id, {generateUUID, interests_data, profanityFilter} from "./utility.js";
 import MDEditor from '@uiw/react-md-editor';
 import {BiCloudUpload} from "react-icons/bi";
 
@@ -100,6 +100,13 @@ export default function CreatePackage() {
                 console.log("No such document!");
             }
         });
+        let final_interests = [];
+        let interests = document.getElementsByClassName("interest");
+        for (let i = 0; i < interests.length; i++) {
+            if (interests[i].classList.contains("interest-toggled")) {
+                final_interests.push(interests[i].innerHTML);
+            }
+        }
 
 
         let pkgUrl = await getDownloadURL(pkgRef).then(async (pkgUrl) => {
@@ -112,6 +119,7 @@ export default function CreatePackage() {
                 current_version: version,
                 downloads: 0,
                 ratings: [],
+                interests: final_interests,
                 banner: bannerUrl,
                 screenshots: [screenOneUrl, screenTwoUrl, screenThreeUrl, screenFourUrl],
                 package: pkgUrl,
@@ -139,6 +147,14 @@ export default function CreatePackage() {
                 })
             })
         })
+    }
+
+    const handleInterestClick = (index) => {
+        if (document.getElementById("interest" + index).classList.contains("interest-toggled")) {
+            document.getElementById("interest" + index).classList.remove("interest-toggled");
+        } else {
+            document.getElementById("interest" + index).classList.add("interest-toggled");
+        }
     }
 
     return (
@@ -201,8 +217,22 @@ export default function CreatePackage() {
                         document.getElementById("gallery-upload").innerHTML = "✅ UPLOAD IMAGES(4)"
                     }
                 }} required accept=".png,.jpeg,.webp, image/jpeg, image/png"/>
-                {/*<p>IDEAL DIMENSIONS: 890 x 460</p>*/}
-
+                <br/><br/>
+                <p className="create-package-interest-data">Which of these subjects apply to your package ?</p>
+                <div className="create-package-interest-div">
+                    {
+                        interests_data.map((interest, index) => {
+                            return (
+                                <div className="interestpkg" id={"interest" + index} onClick={() => {
+                                    handleInterestClick(index);
+                                }}>
+                                    {interest}
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+                <br/>
                 <button onMouseEnter={() => {
                     if (document.getElementById("publish-btn").style.pointerEvents !== "none") {
                         document.getElementById("publish-btn").innerHTML = ">> PUBLISH PACKAGE <<"

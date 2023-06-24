@@ -153,6 +153,47 @@
     display: none;
 }
 
+.create-package-interest-data {
+    font-size: 15px;
+    color: white;
+    margin-top: -10px;
+}
+
+.create-package-interest-div {
+    position: relative;
+    margin-right: 150px;
+    padding: 0;
+    width: calc(100vw - 20px);
+    margin-top: -15px;
+}
+
+.interestpkg {
+    display: inline-block;
+    background-color: #282828;
+    color: white;
+    text-align: center;
+    margin-left: 10px;
+    padding: 10px 15px;
+    border-radius: 50px;
+    transition: 0.225s;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.interestpkg:first-child {
+    margin-left: 0 !important;
+}
+
+.interestpkg:nth-child(6n + 1) {
+    clear: left;
+}
+
+.interestpkg:hover {
+    background-color: #fff;
+    color: #000;
+}
+
 @media screen and (max-width: 650px) {
     .md-editor-container {
         position: relative;

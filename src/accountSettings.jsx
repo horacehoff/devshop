@@ -6,7 +6,7 @@ import {auth, db, storage} from "./firebase.js";
 import {doc, getDoc, setDoc} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
-import {profanityFilter} from "./utility.js";
+import {interests_data, profanityFilter} from "./utility.js";
 
 console.log(user_data)
 
@@ -24,7 +24,6 @@ export default function AccountSettings() {
     const [uid, setUid] = useState("");
     let state_changed = false;
     const navigate = useNavigate();
-    const interests_data = ["🤖AI", "🌎WEB", "📱MOBILE APPS", "🎮GAME DEV", "📊DATA", "🔒SECURITY", "🎨DESIGN", "⚙️ENGINEERING"];
 
     function preInterests(interests) {
         for (let i = 0; i < interests_data.length; i++) {
@@ -92,27 +91,7 @@ export default function AccountSettings() {
         });
     }, []);
 
-
-
-    const updateBio = async () => {
-        const docRef = doc(db, "users", auth.currentUser.uid);
-        await setDoc(docRef, {
-            bio: profanityFilter(NewBio)
-        }, {merge: true}).then(() => {
-            console.log("BIO UPDATED");
-        });
-    }
-
-    const updateGithub = async () => {
-        const docRef = doc(db, "users", auth.currentUser.uid);
-        await setDoc(docRef, {
-            github: NewGithub
-        }, {merge: true}).then(() => {
-            console.log("GITHUB UPDATED");
-        });
-    }
-
-    const updateUserName = async () => {
+    const updateAccount = async () => {
         const docRef = doc(db, "users", auth.currentUser.uid);
         await setDoc(docRef, {
             username: profanityFilter(NewUserName),
@@ -147,17 +126,9 @@ export default function AccountSettings() {
     }
 
     const updateProfile = async () => {
-        if (NewBio !== baseBio) {
-            console.log("BIO UPDATE")
-            await updateBio();
-        }
-        if (NewGithub !== "") {
-            console.log("GITHUB UPDATE")
-            await updateGithub();
-        }
-        if (NewUserName !== baseUserName) {
-            console.log("USERNAME UPDATE")
-            await updateUserName();
+        if (NewBio !== baseBio || NewGithub !== "" || NewUserName !== baseUserName) {
+            console.log("PROFILE UPDATED")
+            await updateAccount()
         }
         if (pfpUpload || bannerUpload) {
             await uploadImg().then((urls) => {
@@ -190,6 +161,8 @@ export default function AccountSettings() {
 
     }
 
+
+    // NEEDS FIX !! => maybe just send reset password email
     const updatePassword = async () => {
         const auth = getAuth();
         const credential = EmailAuthProvider.credential(
@@ -249,7 +222,7 @@ export default function AccountSettings() {
                         })
                     }
                     <br/>
-                    <button id="profile-save-btn" className="btn-primary save-btn"
+                    <button id="interests-save-btn" className="btn-primary save-btn"
                             onClick={async () => {
                                 let final_interests = [];
                                 let interests = document.getElementsByClassName("interest");
@@ -259,10 +232,10 @@ export default function AccountSettings() {
                                     }
                                 }
                                 await updateInterests(final_interests).then(() => {
-                                    document.getElementById("profile-save-btn").innerHTML = "SAVED ✅";
+                                    document.getElementById("interests-save-btn").innerHTML = "SAVED ✅";
                                     // wait 1 second
                                     setTimeout(() => {
-                                        document.getElementById("profile-save-btn").innerHTML = "SAVE";
+                                        document.getElementById("interests-save-btn").innerHTML = "SAVE";
                                         window.location.reload();
                                     }, 1000);
                                 })
@@ -329,12 +302,12 @@ export default function AccountSettings() {
                         <input type="text" className="txt-input section-input" value={NewPassword}
                                onChange={e => setNewPassword(e.target.value)}/>
                         <br/>
-                        <button id="profile-save-btn" className="btn-primary save-btn"
+                        <button id="pwd-save-btn" className="btn-primary save-btn"
                                 onClick={async () => await updatePassword().then(() => {
-                                    document.getElementById("profile-save-btn").innerHTML = "SAVED ✅";
+                                    document.getElementById("pwd-save-btn").innerHTML = "SAVED ✅";
                                     // wait 1 second
                                     setTimeout(() => {
-                                        document.getElementById("profile-save-btn").innerHTML = "SAVE";
+                                        document.getElementById("pwd-save-btn").innerHTML = "SAVE";
                                     }, 1500);
                                 })}>SAVE
                         </button>
