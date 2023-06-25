@@ -5,9 +5,8 @@ import {useEffect} from "react";
 import {doc, getDoc} from "firebase/firestore";
 import fancy_name_to_id from "./utility.js";
 
-let user_data = null
+
 export default function Navbar() {
-    export let user_data = []
     const navigate = useNavigate();
     const location = useLocation().pathname;
     useEffect(() => {
@@ -81,24 +80,6 @@ export default function Navbar() {
         return auth;
     }
 
-    export async function getUsrData() {
-        let {auth} = await import("./firebase.js");
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                let {db} = await import("./firebase.js");
-                let docRef = doc(db, "users", user.uid);
-                await getDoc(docRef).then((doc) => {
-                    if (doc.exists()) {
-                        user_data = doc.data()
-                        return user_data
-                    }
-                });
-            } else {
-                return null
-            }
-        })
-    }
-
     fetchAuth().then((auth) => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -110,7 +91,6 @@ export default function Navbar() {
                     let docRef = doc(db, "users", user.uid);
                     await getDoc(docRef).then((doc) => {
                         if (doc.exists()) {
-                            user_data = doc.data()
                             let username = fancy_name_to_id(doc.data().username);
                             navigate("/users/" + username);
                         }
@@ -202,10 +182,6 @@ export default function Navbar() {
         });
     });
 
-    getUsrData().then((usrdata) => {
-        user_data = usrdata
-    })
-
     return (
         <>
             <div className="nav">
@@ -253,5 +229,3 @@ export default function Navbar() {
         </>
     )
 }
-
-export {user_data}

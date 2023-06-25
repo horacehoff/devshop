@@ -48,3 +48,13 @@ export function profanityFilter(str) {
 }
 
 export const interests_data = ["🤖AI", "🌎WEB", "👨‍💻PROGRAMMING", "📱MOBILE APPS", "🎮GAME DEV", "📊DATA", "🔒SECURITY", "🎨DESIGN", "⚙️ENGINEERING"];
+
+export function waitForVariable(variableName, callback) {
+    if (window[variableName] !== null) {
+        callback();
+    } else {
+        setTimeout(function () {
+            waitForVariable(variableName, callback);
+        }, 10); // Adjust the timeout interval as needed
+    }
+}

@@ -1,11 +1,12 @@
 import "./packages.css"
-import Navbar, {user_data} from "./Navbar.jsx";
+import Navbar from "./Navbar.jsx";
 import {setLogLevel} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
 import PackageCard from "./packageCard.jsx";
 import shortNumber from "short-number";
 import {IoMdSearch} from "react-icons/all.js";
 import {useEffect} from "react";
+import {user_data} from "./firebase.js";
 
 
 export default function Packages({packagesData}) {
@@ -56,13 +57,28 @@ export default function Packages({packagesData}) {
         return topObjects;
     }
 
+    function getSimilarInterests(user_interests, package_data) {
+        let similar_pkg_interests = [];
+        for (let i = 0; i < package_data.length; i++) {
+            if (package_data[i].interests.some(r => user_interests.includes(r))) {
+                similar_pkg_interests.push(package_data[i]);
+            }
+        }
+        return similar_pkg_interests;
+    }
+
+
     const trendingPackageData = getTopRankedObjects(packagesData, "downloads", 9);
     const lastPackagesData = getTopRankedObjects(packagesData, "created", 9);
-    console.log(packagesData)
-
+    let similarPackagesData = [];
+    if (user_data) {
+        similarPackagesData = getSimilarInterests(user_data.interests, packagesData);
+    }
 
     useEffect(() => {
-        console.log(user_data)
+        if (similarPackagesData.length === 0) {
+            document.getElementById("for-you-section").style.display = "none";
+        }
     }, []);
 
 
@@ -77,17 +93,19 @@ export default function Packages({packagesData}) {
                     onClick={() => navigate("/search-packages")}><IoMdSearch
                 style={{position: "relative", top: "1px"}}/> SEARCH PACKAGES
             </button>
-            <h2 className="category-title">// FOR YOU</h2>
-            <ul className="packages-card-list" id="packages-card-list-one">
-                {trendingPackageData.map((pkg, index) => (
-                    <li key={index} className="packages-card-list-child" onClick={() => {
-                        navigate("/packages/" + pkg.id)
-                    }}>
-                        <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
-                                     catchphrase={pkg.catchphrase} banner={pkg.banner}/>
-                    </li>
-                ))}
-            </ul>
+            <div id="for-you-section">
+                <h2 className="category-title">// FOR YOU</h2>
+                <ul className="packages-card-list" id="packages-card-list-one">
+                    {similarPackagesData.map((pkg, index) => (
+                        <li key={index} className="packages-card-list-child" onClick={() => {
+                            navigate("/packages/" + pkg.id)
+                        }}>
+                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
+                                         catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                        </li>
+                    ))}
+                </ul>
+            </div>
             <h2 className="category-title">// CURRENTLY TRENDING</h2>
             <ul className="packages-card-list" id="packages-card-list-one">
                 {trendingPackageData.map((pkg, index) => (

@@ -1,7 +1,7 @@
 import {initializeApp} from "firebase/app";
 import {getStorage} from "firebase/storage"
-import {initializeFirestore, setLogLevel} from "firebase/firestore"
-import {browserLocalPersistence, indexedDBLocalPersistence, initializeAuth} from "firebase/auth";
+import {doc, getDoc, initializeFirestore, setLogLevel} from "firebase/firestore"
+import {browserLocalPersistence, indexedDBLocalPersistence, initializeAuth, onAuthStateChanged} from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBOldJ0-VRG2xuEQ-ErjDVlb1ObZcSgTPw",
@@ -32,3 +32,19 @@ console.log("init storage")
 export const storage = getStorage(app);
 
 setLogLevel("debug");
+
+
+export let user_data = null;
+onAuthStateChanged(auth, async (user) => {
+    if (user) {
+        let docRef = doc(db, "users", user.uid);
+        await getDoc(docRef).then((doc) => {
+            if (doc.exists()) {
+                user_data = doc.data();
+                return doc.data();
+            }
+        });
+    } else {
+        return "no-user";
+    }
+})
