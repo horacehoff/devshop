@@ -28,7 +28,7 @@ export function generateUUID(str) {
 
     for (let i = 0; i < uniqueStr.length; i++) {
         const char = uniqueStr.charCodeAt(i);
-        hash = ((hash << 5) - hash + char) & 0xffffffff; // Apply bitwise AND operation with 32-bit mask
+        hash = ((hash << 5) - hash + char) & 0xffffffff;
     }
 
     return hash.toString();
@@ -48,13 +48,3 @@ export function profanityFilter(str) {
 }
 
 export const interests_data = ["🤖AI", "🌎WEB", "👨‍💻PROGRAMMING", "📱MOBILE APPS", "🎮GAME DEV", "📊DATA", "🔒SECURITY", "🎨DESIGN", "⚙️ENGINEERING"];
-
-export function waitForVariable(variableName, callback) {
-    if (window[variableName] !== null) {
-        callback();
-    } else {
-        setTimeout(function () {
-            waitForVariable(variableName, callback);
-        }, 10); // Adjust the timeout interval as needed
-    }
-}

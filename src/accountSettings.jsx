@@ -2,12 +2,11 @@ import Navbar from "./Navbar.jsx";
 import "./accountSettings.css";
 import {useEffect, useState} from "react";
 import {EmailAuthProvider, getAuth, onAuthStateChanged, reauthenticateWithCredential,} from "firebase/auth";
-import {auth, db, storage} from "./firebase.js";
-import {doc, getDoc, setDoc} from "firebase/firestore";
+import {auth, db, storage, user_data} from "./firebase.js";
 import {useNavigate} from "react-router-dom";
-import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {interests_data, profanityFilter} from "./utility.js";
-
+import {doc, setDoc} from "firebase/firestore";
+import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 
 export default function AccountSettings() {
     const [NewUserName, setNewUserName] = useState("");
@@ -20,7 +19,6 @@ export default function AccountSettings() {
     const [pfpUpload, setPfpUpload] = useState(null);
     const [bannerUpload, setBannerUpload] = useState(null);
     const [uid, setUid] = useState("");
-    let state_changed = false;
     const navigate = useNavigate();
 
     function preInterests(interests) {
@@ -31,63 +29,62 @@ export default function AccountSettings() {
         }
     }
 
+    const getUserData = () => {
+        if (user_data) {
+            setNewUserName(user_data.username);
+            setBaseUserName(user_data.username);
 
-    const getData = async (uid) => {
-        const docRef = doc(db, "users", uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            console.log("Document data:", docSnap.data());
-            setNewUserName(docSnap.data().username);
-            setBaseUserName(docSnap.data().username);
-
-            if (docSnap.data().pfp_path === "" || !docSnap.data().pfp_path) {
-                console.log("no pfp")
-                document.getElementById("profile-picture").style.backgroundImage = "url('https://source.boringavatars.com/pixel/120/" + baseUserName + "?colors=6E00FF,0300FF,000000,FC7600,FFFFFF')"
+            if (!user_data.pfp_path) {
+                console.log("No profile picture");
+                document.getElementById("profile-picture").style.backgroundImage =
+                    "url('https://source.boringavatars.com/pixel/120/" +
+                    baseUserName +
+                    "?colors=6E00FF,0300FF,000000,FC7600,FFFFFF')";
             } else {
-                console.log("pfp")
-                document.getElementById("profile-picture").style.backgroundImage = "url('" + docSnap.data().pfp_path + "')";
-            }
-            console.log(docSnap.data().banner_path)
-            if (docSnap.data().banner_bath === "" || !docSnap.data().banner_path) {
-                console.log("no banner")
-                document.getElementById("banner-img").style.backgroundImage = "url('https://source.boringavatars.com/marble/850/" + baseUserName + "?square')"
-            } else {
-                console.log("banner")
-                document.getElementById("banner-img").style.backgroundImage = "url('" + docSnap.data().banner_path + "')";
+                console.log("Profile picture");
+                document.getElementById("profile-picture").style.backgroundImage =
+                    "url('" + user_data.pfp_path + "')";
             }
 
-            setNewBio(docSnap.data().bio);
-            setBaseBio(docSnap.data().bio);
-            if (docSnap.data().github === undefined) {
-                setNewGithub("");
+            console.log(user_data.banner_path);
+            if (!user_data.banner_path) {
+                console.log("No banner image");
+                document.getElementById("banner-img").style.backgroundImage =
+                    "url('https://source.boringavatars.com/marble/850/" +
+                    baseUserName +
+                    "?square')";
             } else {
-                setNewGithub(docSnap.data().github);
+                console.log("Banner image");
+                document.getElementById("banner-img").style.backgroundImage =
+                    "url('" + user_data.banner_path + "')";
             }
-            return docSnap.data();
 
+            setNewBio(user_data.bio);
+            setBaseBio(user_data.bio);
+            setNewGithub(user_data.github || "");
         } else {
-            console.log("USER DOES NOT EXIST");
+            console.log("No user data found");
         }
-    }
+    };
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
-            if (user && !state_changed) {
-                state_changed = true;
+            if (user) {
                 console.log("USER IS LOGGED IN");
-                getData(user.uid, user.email).then((docSnap) => {
-                    console.log("DATA LOADED");
-                    setUid(user.uid);
-                    console.log("UID: " + uid)
-                    preInterests(docSnap.interests);
-                });
-
+                setUid(user.uid);
             } else {
                 console.log("USER IS NOT LOGGED IN");
                 navigate("/sign-in");
             }
         });
     }, []);
+
+    useEffect(() => {
+        if (user_data) {
+            getUserData();
+            preInterests(user_data.interests);
+        }
+    }, [user_data]);
 
     const updateAccount = async () => {
         const docRef = doc(db, "users", auth.currentUser.uid);
@@ -310,7 +307,6 @@ export default function AccountSettings() {
                                 })}>SAVE
                         </button>
                     </div>
-
                 </div>
             </div>
         </>

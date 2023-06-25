@@ -2,8 +2,8 @@ import "./Navbar.css"
 import {onAuthStateChanged} from "firebase/auth"
 import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
-import {doc, getDoc} from "firebase/firestore";
 import fancy_name_to_id from "./utility.js";
+import {user_data} from "./firebase.js";
 
 
 export default function Navbar() {
@@ -86,26 +86,16 @@ export default function Navbar() {
                 document.getElementById("account").innerHTML = "ACCOUNT"
                 document.getElementById("nav-account").innerHTML = "ACCOUNT"
                 document.getElementById("profile").onclick = async () => {
-                    // get the username from the database
-                    let {db} = await import("./firebase.js");
-                    let docRef = doc(db, "users", user.uid);
-                    await getDoc(docRef).then((doc) => {
-                        if (doc.exists()) {
-                            let username = fancy_name_to_id(doc.data().username);
-                            navigate("/users/" + username);
-                        }
-                    });
+                    if (user_data) {
+                        let username = fancy_name_to_id(user_data.username);
+                        navigate("/users/" + username);
+                    }
                 }
                 document.getElementById("nav-profile").onclick = async () => {
-                    // get the username from the database
-                    let {db} = await import("./firebase.js");
-                    let docRef = doc(db, "users", user.uid);
-                    await getDoc(docRef).then((doc) => {
-                        if (doc.exists()) {
-                            let username = fancy_name_to_id(doc.data().username);
-                            navigate("/users/" + username);
-                        }
-                    });
+                    if (user_data) {
+                        let username = fancy_name_to_id(user_data.username);
+                        navigate("/users/" + username);
+                    }
                 }
 
                 document.getElementById("settings").onclick = () => {
