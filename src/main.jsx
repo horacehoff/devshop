@@ -135,7 +135,8 @@ function App() {
                 ))}
                 {
                     users.map((user, index) => (
-                        <Route path={"/users/" + fancy_name_to_id(user.username)} element={<AccountPage user={user}/>}/>
+                        <Route path={"/users/" + fancy_name_to_id(user.username)}
+                               element={<AccountPage user={user} packagesData={packages}/>}/>
                     ))
                 }
             </Routes>

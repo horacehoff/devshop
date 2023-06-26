@@ -3,13 +3,12 @@ import Navbar from "./Navbar.jsx";
 import {SiGithub} from "react-icons/si";
 import fancy_name_to_id from "./utility.js";
 import {useEffect, useState} from "react";
-import {collection, getDocs, query, where} from "firebase/firestore";
-import {db} from "./firebase.js";
 import PackageCard from "./packageCard.jsx";
 import {useNavigate} from "react-router-dom";
 
 export default function AccountPage(props) {
     const usr = props.user;
+    const pkgs = props.packagesData
     const [usrPackages, setUsrPackages] = useState([])
     const navigate = useNavigate();
 
@@ -37,19 +36,15 @@ export default function AccountPage(props) {
         banner.style.setProperty("--banner_url", `url(${banner_url})`);
 
         const getUsrPackages = () => {
-            const citiesRef = collection(db, "packages");
-            const q = query(citiesRef, where("owner_id", "==", usr.uid));
-            const querySnapshot = getDocs(q).then((snap) => {
-                snap.forEach((doc) => {
-                    setUsrPackages((oldArray) => [...oldArray, doc.data()])
-                });
+            let final_packages = []
+            pkgs.forEach((pkg) => {
+                if (pkg.owner_id === usr.uid) {
+                    final_packages.push(pkg)
+                }
             })
+            setUsrPackages(final_packages)
         }
         getUsrPackages();
-        console.log(usrPackages)
-
-
-        //
     }, []);
     return (
         <>
