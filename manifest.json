@@ -1,7 +1,7 @@
 {
   "name": "DEVSHOP",
   "description": "An online marketplace for selling code snippets and programs",
-  "start_url": "/",
+  "start_url": "https://dev-shop.vercel.app/",
   "lang": "en-US",
   "theme_color": "#161C5B",
   "display": "standalone",
