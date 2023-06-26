@@ -1,7 +1,7 @@
 import {defineConfig} from 'vite';
 import react from '@vitejs/plugin-react-swc';
-import compress from 'vite-plugin-compress'
 import terser from "@rollup/plugin-terser";
+import viteCompression from 'vite-plugin-compression';
 
 export default defineConfig({
   optimizeDeps: {
@@ -20,8 +20,8 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    compress.default({
-      verbose: true,
+    viteCompression({
+      verbose: true
     }),
     terser({
       compress: {
