@@ -15,7 +15,8 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.10.0",
-    "short-number": "^1.0.7"
+    "short-number": "^1.0.7",
+    "vite-plugin-compress": "^2.1.1"
   },
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.3",
