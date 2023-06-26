@@ -21,7 +21,8 @@ export default defineConfig({
   plugins: [
     react(),
     viteCompression({
-      verbose: true
+      verbose: true,
+      algorithm: "brotliCompress"
     }),
     terser({
       compress: {
