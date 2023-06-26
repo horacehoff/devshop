@@ -218,7 +218,7 @@ export default function CreatePackage() {
                     }
                 }} required accept=".png,.jpeg,.webp, image/jpeg, image/png"/>
                 <br/><br/>
-                <p className="create-package-interest-data">Which of these subjects apply to your package ?</p>
+                <p className="create-package-interest-data">CATEGORIES</p>
                 <div className="create-package-interest-div">
                     {
                         interests_data.map((interest, index) => {

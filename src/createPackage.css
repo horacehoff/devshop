@@ -154,7 +154,8 @@
 }
 
 .create-package-interest-data {
-    font-size: 15px;
+    font-size: 17px;
+    font-weight: 600;
     color: white;
     margin-top: -10px;
 }
