@@ -6,5 +6,12 @@
   "theme_color": "#161C5B",
   "display": "standalone",
   "background_color": "#161C5B",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://dev-shop.vercel.app/icon.png",
+      "sizes": "1080x1080",
+      "type": "image/png"
+    }
+  ]
 }
