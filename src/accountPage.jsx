@@ -5,10 +5,11 @@ import fancy_name_to_id from "./utility.js";
 import {useEffect, useState} from "react";
 import PackageCard from "./packageCard.jsx";
 import {useNavigate} from "react-router-dom";
+import {collection, getDocs, query, where} from "firebase/firestore";
+import {db} from "./firebase.js";
 
 export default function AccountPage(props) {
     const usr = props.user;
-    const pkgs = props.packagesData
     const [usrPackages, setUsrPackages] = useState([])
     const navigate = useNavigate();
 
@@ -37,12 +38,13 @@ export default function AccountPage(props) {
 
         const getUsrPackages = () => {
             let final_packages = []
-            pkgs.forEach((pkg) => {
-                if (pkg.owner_id === usr.uid) {
-                    final_packages.push(pkg)
-                }
+            const q = query(collection(db, "packages"), where("owner_username", "==", usr.username));
+            getDocs(q).then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    final_packages.push(new Object(doc.data()))
+                })
+                setUsrPackages(final_packages)
             })
-            setUsrPackages(final_packages)
         }
         getUsrPackages();
     }, []);

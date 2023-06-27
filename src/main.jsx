@@ -52,18 +52,6 @@ async function getPackages(collectionRef) {
     }
 }
 
-async function fetchPackagesData() {
-    try {
-        const {db} = await import('./firebase.js');
-        const {collection} = await import('firebase/firestore');
-        const collectionRef = collection(db, 'packages');
-        return await getPackages(collectionRef);
-    } catch (error) {
-        console.log('Error getting packages: ', error);
-        return [];
-    }
-}
-
 async function fetchUsersData() {
     try {
         const {db} = await import('./firebase.js');
@@ -77,17 +65,11 @@ async function fetchUsersData() {
 }
 
 function App() {
-    const [packages, setPackages] = useState([]);
     const [users, setUsers] = useState([]);
 
 
     useEffect(() => {
         console.log('fetching packages (function call)...');
-
-        fetchPackagesData().then((data) => {
-            setPackages(data);
-            console.log('packages fetched (function call) + setPackages done');
-        });
 
         fetchUsersData().then((data) => {
             setUsers(data);
@@ -103,9 +85,9 @@ function App() {
                 }/>
                 <Route path="/publish-package" element={<CreatePackage/>}></Route>
                 <Route path="/packages" element={
-                    <Packages packagesData={packages}/>
+                    <Packages/>
                 }/>
-                <Route path="/search-packages/:query?" element={<SearchPackages packages={packages}/>}/>
+                <Route path="/search-packages/:query?" element={<SearchPackages/>}/>
                 <Route path="/code-blocks" element={
                     <Suspense fallback={
                         <>
@@ -131,7 +113,7 @@ function App() {
                 {
                     users.map((user, index) => (
                         <Route path={"/users/" + fancy_name_to_id(user.username)}
-                               element={<AccountPage user={user} packagesData={packages}/>}/>
+                               element={<AccountPage user={user}/>}/>
                     ))
                 }
             </Routes>

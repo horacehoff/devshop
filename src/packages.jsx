@@ -1,15 +1,15 @@
 import "./packages.css"
 import Navbar from "./Navbar.jsx";
-import {setLogLevel} from "firebase/firestore";
+import {collection, getDocs, limit, orderBy, query, setLogLevel, where} from "firebase/firestore";
 import {useNavigate} from "react-router-dom";
 import PackageCard from "./packageCard.jsx";
 import shortNumber from "short-number";
 import {IoMdSearch} from "react-icons/all.js";
-import {useEffect} from "react";
-import {user_data} from "./firebase.js";
+import {useEffect, useState} from "react";
+import {db, user_data} from "./firebase.js";
 
 
-export default function Packages({packagesData}) {
+export default function Packages() {
     const navigate = useNavigate();
     window.mobileCheck = function () {
         let check = false;
@@ -47,39 +47,38 @@ export default function Packages({packagesData}) {
     setLogLevel("debug");
 
 
-    function getTopRankedObjects(arr, property, limit) {
-        // Sort the array in descending order based on the property value
-        arr.sort((a, b) => b[property] - a[property]);
-
-        // Get the top ranked objects up to the specified limit
-        const topObjects = arr.slice(0, limit);
-
-        return topObjects;
-    }
-
-    function getSimilarInterests(user_interests, package_data) {
-        let similar_pkg_interests = [];
-        for (let i = 0; i < package_data.length; i++) {
-            if (package_data[i].interests.some(r => user_interests.includes(r))) {
-                similar_pkg_interests.push(package_data[i]);
-            }
-        }
-        return similar_pkg_interests;
-    }
-
-
-    const trendingPackageData = getTopRankedObjects(packagesData, "downloads", 9);
-    const lastPackagesData = getTopRankedObjects(packagesData, "created", 9);
-    let similarPackagesData = [];
-    if (user_data) {
-        similarPackagesData = getSimilarInterests(user_data.interests, packagesData);
-    }
-
+    const [trendingPackageData, setTrendingPackageData] = useState([]);
+    const [lastPackagesData, setLastPackagesData] = useState([]);
+    const [similarPackagesData, setSimilarPackagesData] = useState([]);
     useEffect(() => {
+        if (user_data) {
+            const q = query(collection(db, "packages"), orderBy("downloads", "desc"), limit(9));
+            getDocs(q).then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    setTrendingPackageData(prevState => [...prevState, doc.data()]);
+                })
+            })
+            const q1 = query(collection(db, "packages"), orderBy("created", "desc"), limit(9));
+            getDocs(q1).then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    setLastPackagesData(prevState => [...prevState, doc.data()]);
+                })
+            })
+            console.log("HEYYYYA")
+            console.log(user_data.interests)
+            const q2 = query(collection(db, "users"), where("interests", "array-contains-any", Array.from(user_data.interests)), orderBy("downloads", "desc"), limit(9));
+            getDocs(q2).then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    console.log("fuck yeah")
+                    setSimilarPackagesData(prevState => [...prevState, doc.data()]);
+                })
+                console.log(similarPackagesData)
+            })
+        }
         if (similarPackagesData.length === 0) {
             document.getElementById("for-you-section").style.display = "none";
         }
-    }, []);
+    }, [user_data]);
 
 
     return (
