@@ -2,52 +2,73 @@ import "./accountPage.css"
 import Navbar from "./Navbar.jsx";
 import {SiGithub} from "react-icons/si";
 import fancy_name_to_id from "./utility.js";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import PackageCard from "./packageCard.jsx";
-import {useNavigate} from "react-router-dom";
-import {collection, getDocs, query, where} from "firebase/firestore";
+import {useNavigate, useParams} from "react-router-dom";
+import {collection, doc, getDoc, getDocs, query, where} from "firebase/firestore";
 import {db} from "./firebase.js";
 
 export default function AccountPage(props) {
-    const usr = props.user;
+    const [usr, setUsr] = useState(null)
     const [usrPackages, setUsrPackages] = useState([])
     const navigate = useNavigate();
 
 
+    const params_id = useParams().id;
     useEffect(() => {
-        document.title = usr.username + " - DEVSHOP";
-        if (usr.github === "" || usr.github === undefined) {
-            document.getElementById("user_github").style.display = "none";
-            document.getElementById("user_id_middle_dot").style.display = "none";
-        }
-        let card = document.querySelector('.user_pfp');
-        let banner = document.querySelector('.user_banner');
+        if (usr === null) {
+            getDoc(doc(db, "users", params_id)).then((doc) => {
+                if (doc.exists()) {
+                    setUsr(doc.data());
+                    console.log("usr: ", usr)
 
-
-        let pfp_url = "https://source.boringavatars.com/pixel/120/" + usr.username + "?colors=6E00FF,0300FF,000000,FC7600,FFFFFF";
-        let banner_url = "https://source.boringavatars.com/marble/850/" + usr.username + "?square"
-        if (usr.pfp_path !== "" && usr.pfp_path !== undefined) {
-            pfp_url = usr.pfp_path;
-        }
-        if (usr.banner_path !== "" && usr.banner_path !== undefined) {
-            banner_url = usr.banner_path;
-        }
-
-        card.style.setProperty("--pfp_url", `url(${pfp_url})`);
-        banner.style.setProperty("--banner_url", `url(${banner_url})`);
-
-        const getUsrPackages = () => {
-            let final_packages = []
-            const q = query(collection(db, "packages"), where("owner_username", "==", usr.username));
-            getDocs(q).then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    final_packages.push(new Object(doc.data()))
-                })
-                setUsrPackages(final_packages)
+                } else {
+                    const navigate = useNavigate();
+                    navigate("/packages")
+                }
             })
         }
-        getUsrPackages();
-    }, []);
+        if (usr !== null) {
+            document.title = usr.username + " - DEVSHOP";
+            if (usr.github === "" || usr.github === undefined) {
+                document.getElementById("user_github").style.display = "none";
+                document.getElementById("user_id_middle_dot").style.display = "none";
+            }
+            let card = document.querySelector('.user_pfp');
+            let banner = document.querySelector('.user_banner');
+
+
+            let pfp_url = "https://source.boringavatars.com/pixel/120/" + usr.username + "?colors=6E00FF,0300FF,000000,FC7600,FFFFFF";
+            let banner_url = "https://source.boringavatars.com/marble/850/" + usr.username + "?square"
+            if (usr.pfp_path !== "" && usr.pfp_path !== undefined) {
+                pfp_url = usr.pfp_path;
+            }
+            if (usr.banner_path !== "" && usr.banner_path !== undefined) {
+                banner_url = usr.banner_path;
+            }
+
+            card.style.setProperty("--pfp_url", `url(${pfp_url})`);
+            banner.style.setProperty("--banner_url", `url(${banner_url})`);
+
+            const getUsrPackages = () => {
+                let final_packages = []
+                const q = query(collection(db, "packages"), where("owner_username", "==", usr.username));
+                getDocs(q).then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        final_packages.push(new Object(doc.data()))
+                    })
+                    setUsrPackages(final_packages)
+                })
+            }
+            getUsrPackages();
+        }
+
+    }, [usr]);
+
+    if (usr === null) {
+        return <Navbar/>
+    }
+
     return (
         <>
             <Navbar/>
