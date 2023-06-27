@@ -2,7 +2,7 @@ import React, {lazy, Suspense, useEffect, useState} from 'react'
 import ReactDOM from 'react-dom/client'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import "./firebase.js"
-import fancy_name_to_id, {generateUniqueId} from "./utility.js";
+import fancy_name_to_id from "./utility.js";
 
 
 import './index.css'
@@ -127,10 +127,7 @@ function App() {
                 <Route path="/pricing" element={<Pricing/>}/>
                 <Route path="/about" element={<About/>}/>
                 <Route path="/packages/:id" element={<PackagePage/>}/>
-                {packages.map((pkg, index) => (
-                    <Route path={"/packages/" + generateUniqueId(fancy_name_to_id(pkg.name) + pkg.owner_id)}
-                           element={<EditPackage pkg={pkg}/>}/>
-                ))}
+                <Route path="/packages/:id/edit" element={<EditPackage/>}/>
                 {
                     users.map((user, index) => (
                         <Route path={"/users/" + fancy_name_to_id(user.username)}

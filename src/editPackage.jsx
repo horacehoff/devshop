@@ -3,7 +3,7 @@ import "./editPackage.css"
 import {onAuthStateChanged} from "firebase/auth";
 import {auth, db, storage} from "./firebase.js";
 import fancy_name_to_id, {profanityFilter} from "./utility.js";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import Navbar from "./Navbar.jsx";
 import MDEditor from "@uiw/react-md-editor";
 import React, {useLayoutEffect, useState} from "react";
@@ -13,8 +13,12 @@ import {BiCloudUpload} from "react-icons/bi";
 import {FcCancel} from "react-icons/fc";
 
 export default function EditPackage(props) {
-    const pkg = props.pkg
     const navigate = useNavigate()
+    if (!useLocation().state) {
+        navigate("/packages")
+    }
+    const {state} = useLocation()
+    const pkg = state.pkg
     let uid = "";
     const [newDesc, setNewDesc] = useState(pkg.description)
 

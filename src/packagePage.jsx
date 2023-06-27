@@ -7,7 +7,7 @@ import React, {useEffect, useState} from "react";
 import {getDownloadURL, ref} from "firebase/storage";
 import {useNavigate, useParams} from "react-router-dom";
 import shortNumber from "short-number";
-import fancy_name_to_id, {generateUniqueId} from "./utility.js";
+import fancy_name_to_id from "./utility.js";
 import MDEditor from '@uiw/react-md-editor';
 
 export default function PackagePage() {
@@ -72,7 +72,7 @@ export default function PackagePage() {
                 document.getElementById("package-download-btn").style.border = "none"
                 document.getElementById("package-download-btn").style.cursor = "pointer"
                 document.getElementById("package-download-btn").onclick = () => {
-                    navigate("/packages/" + generateUniqueId(fancy_name_to_id(pkg.name) + user.uid))
+                    navigate("/packages/" + pkg.id + "/edit", {state: {pkg: pkg}})
                 }
                 document.getElementById("package-download-side").style.display = "block"
 

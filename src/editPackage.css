@@ -19,6 +19,7 @@
 .package-description-edit {
     height: 310px !important;
     overflow-y: hidden;
+    width: 75vw;
 }
 
 .package-desc-editor-edit {
@@ -124,6 +125,10 @@
 .delete-pkg-btn:hover {
     background-color: #c70000;
 }
+
+/*.package-characteristics {*/
+/*    right: 980px;*/
+/*}*/
 
 
 @media screen and (max-width: 1060px) {
