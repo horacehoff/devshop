@@ -89,7 +89,7 @@
 .package-characteristics-label {
     position: absolute;
     top: 467px;
-    left: 980px;
+    left: 77.778vw;
     color: #b9b9b9;
     margin: 0;
     padding: 0
@@ -100,18 +100,11 @@
 }
 
 .package-characteristics {
-    /*width: fit-content;*/
-    /*position: absolute;*/
-    /*top: 476px;*/
-    /*right: 75px;*/
-    /*white-space: nowrap;*/
-    /*overflow-x: auto; !* Change overflow to overflow-x *!*/
-    /*overflow-y: hidden; !* Add this line to hide vertical overflow *!*/
     width: fit-content;
     max-width: 100%;
     position: absolute;
     top: 476px;
-    left: 980px;
+    left: 77.778vw;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

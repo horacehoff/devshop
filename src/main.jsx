@@ -126,9 +126,7 @@ function App() {
                 <Route path="/reset-password" element={<ResetPassword/>}/>
                 <Route path="/pricing" element={<Pricing/>}/>
                 <Route path="/about" element={<About/>}/>
-                {packages.map((pkg, index) => (
-                    <Route path={"/packages/" + pkg.id} element={<PackagePage pkg={pkg}/>}/>
-                ))}
+                <Route path="/packages/:id" element={<PackagePage/>}/>
                 {packages.map((pkg, index) => (
                     <Route path={"/packages/" + generateUniqueId(fancy_name_to_id(pkg.name) + pkg.owner_id)}
                            element={<EditPackage pkg={pkg}/>}/>

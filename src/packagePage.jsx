@@ -5,13 +5,14 @@ import {doc, getDoc, updateDoc} from "firebase/firestore";
 import {auth, db, storage} from "./firebase.js";
 import React, {useEffect, useState} from "react";
 import {getDownloadURL, ref} from "firebase/storage";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import shortNumber from "short-number";
 import fancy_name_to_id, {generateUniqueId} from "./utility.js";
 import MDEditor from '@uiw/react-md-editor';
 
-export default function PackagePage(props) {
-    const pkg = props.pkg;
+export default function PackagePage() {
+    const [pkg, setPkg] = useState(null);
+
     const [uid, set_uid] = useState("");
     let baseStyle = {}
     const navigate = useNavigate();
@@ -49,7 +50,7 @@ export default function PackagePage(props) {
 
 
     onAuthStateChanged(auth, (user) => {
-        if (user) {
+        if (user && pkg !== null) {
             set_is_logged_in(true);
             set_uid(user.uid)
             console.log("PKG: " + pkg.owner_id)
@@ -81,44 +82,59 @@ export default function PackagePage(props) {
         }
     });
 
+    const params_id = useParams().id;
     useEffect(() => {
-        document.title = pkg.name + " - DEVSHOP"
-        console.log("package banner load: " + pkg.banner)
-        document.querySelector('.banner').style.setProperty("--banner_url", `url('${pkg.banner}')`);
-        // get the length of the ratings map
-        let ratings_length = Object.keys(pkg.ratings).length;
+        if (pkg === null) {
+            getDoc(doc(db, "packages", params_id)).then((doc) => {
+                if (doc.exists()) {
+                    setPkg(doc.data());
+                    console.log("pkg: ", pkg)
 
-        if (ratings_length === 0) {
-            document.getElementById("happiness_num").innerHTML = "NaN"
-            document.getElementById("review_num").innerHTML = "0"
-        } else {
-            if (ratings_length === 1) {
-                document.getElementById("review_num_plural").innerHTML = "rating"
-            }
-            document.getElementById("review_num").innerHTML = ratings_length
-            let ratings = pkg.ratings;
-            // set ratings as an array of all the ratings numbers
-            ratings = Object.values(ratings);
-            let sum = 0;
-            for (let i = 0; i < ratings.length; i++) {
-                sum += parseInt(ratings[i]);
-            }
-            let avg = (sum / ratings.length).toFixed(1)
-            if (parseInt(avg) === 100) {
-                document.getElementById("happiness_num").innerHTML = "100"
-            } else {
-                if (avg.length === 3) {
-                    avg = "0" + avg
+                } else {
+                    const navigate = useNavigate();
+                    navigate("/packages")
                 }
-
-                document.getElementById("happiness_num").innerHTML = avg
-            }
+            })
         }
+        if (pkg !== null) {
+            console.log("use effect is run")
+            document.title = pkg.name + " - DEVSHOP"
+            console.log("package banner load: " + pkg.banner)
+            document.querySelector('.banner').style.setProperty("--banner_url", `url('${pkg.banner}')`);
+            // get the length of the ratings map
+            let ratings_length = Object.keys(pkg.ratings).length;
 
-        baseStyle = document.getElementById("screenshot_one").style
+            if (ratings_length === 0) {
+                document.getElementById("happiness_num").innerHTML = "NaN"
+                document.getElementById("review_num").innerHTML = "0"
+            } else {
+                if (ratings_length === 1) {
+                    document.getElementById("review_num_plural").innerHTML = "rating"
+                }
+                document.getElementById("review_num").innerHTML = ratings_length
+                let ratings = pkg.ratings;
+                // set ratings as an array of all the ratings numbers
+                ratings = Object.values(ratings);
+                let sum = 0;
+                for (let i = 0; i < ratings.length; i++) {
+                    sum += parseInt(ratings[i]);
+                }
+                let avg = (sum / ratings.length).toFixed(1)
+                if (parseInt(avg) === 100) {
+                    document.getElementById("happiness_num").innerHTML = "100"
+                } else {
+                    if (avg.length === 3) {
+                        avg = "0" + avg
+                    }
 
+                    document.getElementById("happiness_num").innerHTML = avg
+                }
+            }
 
-    }, []);
+            baseStyle = document.getElementById("screenshot_one").style
+        }
+    }, [pkg]);
+
 
     function fullScreen(img) {
         img.style.position = "fixed";
@@ -130,6 +146,10 @@ export default function PackagePage(props) {
         document.getElementById("screenshot_bg_div").style.display = "block";
         // document.getElementById("screenshot_bg_div").style.backdropFilter = "blur(10px)";
         document.getElementById("screenshot_full_close").style.display = "block";
+    }
+
+    if (pkg === null) {
+        return <Navbar/>
     }
 
     return (
