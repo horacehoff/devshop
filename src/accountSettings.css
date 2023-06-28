@@ -140,19 +140,21 @@
     margin-top: 10px;
 }
 
-.interest:hover {
-    background-color: #fff;
-    color: #000;
-}
-
 .interest-toggled {
     background-color: #fff !important;
     color: #000 !important;
 }
 
-.interest-toggled:hover {
-    background-color: #282828 !important;
-    color: #fff !important;
+@media (hover: hover) {
+    .interest:hover {
+        background-color: #fff;
+        color: #000;
+    }
+
+    .interest-toggled:hover {
+        background-color: #282828 !important;
+        color: #fff !important;
+    }
 }
 
 .section-subtitle {
