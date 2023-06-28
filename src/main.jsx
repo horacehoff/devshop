@@ -1,4 +1,4 @@
-import React, {lazy, Suspense, useEffect, useState} from 'react'
+import React, {lazy, Suspense} from 'react'
 import ReactDOM from 'react-dom/client'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import "./firebase.js"
@@ -21,61 +21,11 @@ import AccountSettings from "./accountSettings.jsx";
 import AccountPage from "./accountPage.jsx";
 import EditPackage from "./editPackage.jsx";
 import SearchPackages from "./searchPackages.jsx";
-// const Packages = lazy(() => import('./packages.jsx'))
-// const About = lazy(() => import('./about.jsx'))
-// const CreatePackage = lazy(() => import('./createPackage.jsx'))
-// const Pricing = lazy(() => import('./pricing.jsx'))
-// const PackagePage = lazy(() => import('./packagePage.jsx'))
-// const SignUp = lazy(() => import('./signup.jsx'))
-// const SignIn = lazy(() => import('./signin.jsx'))
-// const ResetPassword = lazy(() => import('./resetPassword.jsx'))
-// const AccountSettings = lazy(() => import('./accountSettings.jsx'))
-// const AccountPage = lazy(() => import('./accountPage.jsx'))
-// const EditPackage = lazy(() => import('./editPackage.jsx'))
 
 
 const CodeBlocks = lazy(() => import('./codeBlocks.jsx'))
 
-
-async function getPackages(collectionRef) {
-    console.log('getting packages...');
-    try {
-        const {getDocs, query} = await import('firebase/firestore');
-        const q = query(collectionRef);
-        const querySnapshot = await getDocs(q);
-        console.log('packages fetched');
-        return querySnapshot.docs.map((doc) => doc.data());
-    } catch (error) {
-        console.log('Error getting documents: ', error);
-        return [];
-    }
-}
-
-async function fetchUsersData() {
-    try {
-        const {db} = await import('./firebase.js');
-        const {collection} = await import('firebase/firestore');
-        const collectionRef = collection(db, 'users');
-        return await getPackages(collectionRef);
-    } catch (error) {
-        console.log('Error getting users: ', error);
-        return [];
-    }
-}
-
 function App() {
-    const [users, setUsers] = useState([]);
-
-
-    useEffect(() => {
-        console.log('fetching packages (function call)...');
-
-        fetchUsersData().then((data) => {
-            setUsers(data);
-            console.log('users fetched (function call) + setUsers done');
-        });
-    }, []);
-
     return (
         <BrowserRouter>
             <Routes>
@@ -109,12 +59,6 @@ function App() {
                 <Route path="/about" element={<About/>}/>
                 <Route path="/packages/:id" element={<PackagePage/>}/>
                 <Route path="/packages/:id/edit" element={<EditPackage/>}/>
-                {/*{*/}
-                {/*    users.map((user, index) => (*/}
-                {/*        <Route path={"/users/" + fancy_name_to_id(user.username)}*/}
-                {/*               element={<AccountPage user={user}/>}/>*/}
-                {/*    ))*/}
-                {/*}*/}
                 <Route path="/users/:id" element={<AccountPage/>}/>
             </Routes>
         </BrowserRouter>
