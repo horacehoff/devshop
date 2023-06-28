@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {EmailAuthProvider, getAuth, onAuthStateChanged, reauthenticateWithCredential,} from "firebase/auth";
 import {auth, db, storage, user_data} from "./firebase.js";
 import {useNavigate} from "react-router-dom";
-import {interests_data, profanityFilter} from "./utility.js";
+import fancy_name_to_id, {interests_data, profanityFilter} from "./utility.js";
 import {doc, setDoc} from "firebase/firestore";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 
@@ -89,7 +89,7 @@ export default function AccountSettings() {
     const updateAccount = async () => {
         const docRef = doc(db, "users", auth.currentUser.uid);
         await setDoc(docRef, {
-            username: profanityFilter(NewUserName),
+            username: fancy_name_to_id(profanityFilter(NewUserName)),
             bio: profanityFilter(NewBio),
             github: NewGithub
         }, {merge: true}).then(() => {

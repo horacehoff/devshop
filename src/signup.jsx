@@ -5,9 +5,10 @@ import {createUserWithEmailAndPassword} from "firebase/auth";
 import {auth, db} from "./firebase.js";
 import {collection, doc, getDocs, query, setDoc, where} from "firebase/firestore";
 import {useState} from "react";
+import fancy_name_to_id from "./utility.js";
 
 async function checkIfUsernameExists(username) {
-    const q = query(collection(db, "users"), where("username", "==", username));
+    const q = query(collection(db, "users"), where("username", "==", fancy_name_to_id(username)));
     const querySnapshot = await getDocs(q);
     return querySnapshot.size > 0;
 }
@@ -42,7 +43,7 @@ function SignUpUser(username, email, password, {navigate}) {
                 const user = userCredential.user;
                 setDoc(doc(db, "users", user.uid), {
                     uid: user.uid,
-                    username: username,
+                    username: fancy_name_to_id(username),
                     plan: 0,
                     owned_packages: [],
                     owned_code_blocks: [],

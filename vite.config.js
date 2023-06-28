@@ -22,7 +22,10 @@ export default defineConfig({
     react(),
     viteCompression({
       verbose: true,
-      algorithm: "brotliCompress"
+      algorithm: "brotliCompress",
+      compressionOptions: {
+        level: 9
+      }
     }),
     terser({
       compress: {

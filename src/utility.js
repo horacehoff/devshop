@@ -2,9 +2,12 @@ import badwords from "./badwords.txt?raw"
 
 
 export default function fancy_name_to_id(name) {
-    let underscored = name.replace(/ /g, '_');
-    let alphanumeric = underscored.replace(/\W/g, '');
-    return alphanumeric.toLowerCase();
+    let convertedString = name.replace(/[\s_]/g, '-');
+
+    // Remove non-alphanumeric characters
+    convertedString = convertedString.replace(/[^a-zA-Z0-9-]/g, '');
+
+    return convertedString;
 }
 
 

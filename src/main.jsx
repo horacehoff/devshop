@@ -2,7 +2,6 @@ import React, {lazy, Suspense, useEffect, useState} from 'react'
 import ReactDOM from 'react-dom/client'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import "./firebase.js"
-import fancy_name_to_id from "./utility.js";
 
 
 import './index.css'
@@ -110,12 +109,13 @@ function App() {
                 <Route path="/about" element={<About/>}/>
                 <Route path="/packages/:id" element={<PackagePage/>}/>
                 <Route path="/packages/:id/edit" element={<EditPackage/>}/>
-                {
-                    users.map((user, index) => (
-                        <Route path={"/users/" + fancy_name_to_id(user.username)}
-                               element={<AccountPage user={user}/>}/>
-                    ))
-                }
+                {/*{*/}
+                {/*    users.map((user, index) => (*/}
+                {/*        <Route path={"/users/" + fancy_name_to_id(user.username)}*/}
+                {/*               element={<AccountPage user={user}/>}/>*/}
+                {/*    ))*/}
+                {/*}*/}
+                <Route path="/users/:id" element={<AccountPage/>}/>
             </Routes>
         </BrowserRouter>
     )

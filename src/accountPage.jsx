@@ -5,7 +5,7 @@ import fancy_name_to_id from "./utility.js";
 import React, {useEffect, useState} from "react";
 import PackageCard from "./packageCard.jsx";
 import {useNavigate, useParams} from "react-router-dom";
-import {collection, doc, getDoc, getDocs, query, where} from "firebase/firestore";
+import {collection, getDocs, query, where} from "firebase/firestore";
 import {db} from "./firebase.js";
 
 export default function AccountPage(props) {
@@ -17,16 +17,23 @@ export default function AccountPage(props) {
     const params_id = useParams().id;
     useEffect(() => {
         if (usr === null) {
-            getDoc(doc(db, "users", params_id)).then((doc) => {
-                if (doc.exists()) {
-                    setUsr(doc.data());
+            const q = query(collection(db, "users"), where("username", "==", params_id))
+            getDocs(q).then((querysn) => {
+                console.log("heyyy")
+                querysn.forEach((doc) => {
+                    console.log("HEYYYYA")
+                    setUsr(doc.data())
                     console.log("usr: ", usr)
-
-                } else {
-                    const navigate = useNavigate();
-                    navigate("/packages")
-                }
+                })
             })
+            // getDoc(doc(db, "users", params_id)).then((doc) => {
+            //     if (doc.exists()) {
+            //         setUsr(doc.data());
+            //         console.log("usr: ", usr)
+            //     } else {
+            //         navigate("/packages")
+            //     }
+            // })
         }
         if (usr !== null) {
             document.title = usr.username + " - DEVSHOP";
@@ -66,7 +73,9 @@ export default function AccountPage(props) {
     }, [usr]);
 
     if (usr === null) {
-        return <Navbar/>
+        return <>
+            <Navbar/>
+        </>
     }
 
     return (
