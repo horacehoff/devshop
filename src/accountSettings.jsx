@@ -279,7 +279,7 @@ export default function AccountSettings() {
                                     // wait 1 second
                                     setTimeout(() => {
                                         document.getElementById("profile-save-btn").innerHTML = "SAVE";
-                                        window.location.reload();
+                                        navigate("/users/" + fancy_name_to_id(user_data.username))
                                     }, 1000);
                                 })}>SAVE
                         </button>
