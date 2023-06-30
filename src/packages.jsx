@@ -1,7 +1,7 @@
 import "./packages.css"
 import Navbar from "./Navbar.jsx";
 import {collection, getDocs, limit, orderBy, query, setLogLevel, where} from "firebase/firestore";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import PackageCard from "./packageCard.jsx";
 import shortNumber from "short-number";
 import {IoMdSearch} from "react-icons/all.js";
@@ -51,12 +51,15 @@ export default function Packages() {
     const [lastPackagesData, setLastPackagesData] = useState([]);
     const [similarPackagesData, setSimilarPackagesData] = useState([]);
     useEffect(() => {
-            const q = query(collection(db, "packages"), orderBy("downloads", "desc"), limit(9));
-            getDocs(q).then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    setTrendingPackageData(prevState => [...prevState, doc.data()]);
-                })
+        setTrendingPackageData([])
+        setLastPackagesData([])
+        setSimilarPackagesData([])
+        const q = query(collection(db, "packages"), orderBy("downloads", "desc"), limit(9));
+        getDocs(q).then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                setTrendingPackageData(prevState => [...prevState, doc.data()]);
             })
+        })
         const q1 = query(collection(db, "packages"), orderBy("created", "desc"), limit(9));
         getDocs(q1).then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
@@ -86,22 +89,23 @@ export default function Packages() {
         <>
             <Navbar/>
             <h1 className="packages-title">PACKAGES</h1>
-            <button className="package-publish-btn" id="package-publish-btn"
-                    onClick={() => navigate("/publish-package")}>+ PUBLISH A PACKAGE
-            </button>
-            <button className="package-publish-btn" id="package-search-btn" style={{marginLeft: "10px"}}
-                    onClick={() => navigate("/search-packages")}><IoMdSearch
+            <Link className="package-publish-btn" id="package-publish-btn"
+                  to="/publish-package">+ PUBLISH A PACKAGE
+            </Link>
+            <Link className="package-publish-btn" id="package-search-btn" style={{marginLeft: "10px"}}
+                  to="/search-packages"><IoMdSearch
                 style={{position: "relative", top: "1px"}}/> SEARCH PACKAGES
-            </button>
+            </Link>
             <div id="for-you-section">
                 <h2 className="category-title">// FOR YOU</h2>
                 <ul className="packages-card-list" id="packages-card-list-one">
                     {similarPackagesData.map((pkg, index) => (
-                        <li key={index} className="packages-card-list-child" onClick={() => {
-                            navigate("/packages/" + pkg.id)
-                        }}>
-                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
-                                         catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                        <li key={index} className="packages-card-list-child">
+                            <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                                <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username}
+                                             name={pkg.name}
+                                             catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                            </Link>
                         </li>
                     ))}
                 </ul>
@@ -109,11 +113,11 @@ export default function Packages() {
             <h2 className="category-title">// CURRENTLY TRENDING</h2>
             <ul className="packages-card-list" id="packages-card-list-one">
                 {trendingPackageData.map((pkg, index) => (
-                    <li key={index} className="packages-card-list-child" onClick={() => {
-                        navigate("/packages/" + pkg.id)
-                    }}>
-                        <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
-                                     catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                    <li key={index} className="packages-card-list-child">
+                        <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
+                                         catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                        </Link>
                     </li>
                 ))}
             </ul>
@@ -123,8 +127,10 @@ export default function Packages() {
                     <li key={index} className="packages-card-list-child" onClick={() => {
                         navigate("/packages/" + pkg.id)
                     }}>
-                        <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
-                                     catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                        <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
+                                         catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                        </Link>
                     </li>
                 ))}
             </ul>

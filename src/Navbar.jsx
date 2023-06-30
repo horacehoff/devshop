@@ -98,7 +98,7 @@ export default function Navbar() {
                     }
                 }
 
-                document.getElementById("settings").onclick = () => {
+                document.getElementById("settings").to = () => {
                     navigate("/account");
                 }
                 document.getElementById("nav-settings").onclick = () => {
@@ -176,17 +176,17 @@ export default function Navbar() {
         <>
             <div className="nav">
                 <h2 onClick={() => navigate("/")} id="nav-title">DEVSHOP</h2>
-                <Link id="code-blocks" to="/code-blocks">CODE BLOCKS</Link>
-                <h4 id="packages" onClick={() => navigate("/packages")}><a
-                    href="https://dev-shop.vercel.app/packages">PACKAGES</a></h4>
-                <h4 id="pricing" onClick={() => navigate("/pricing")}><a
-                    href="https://dev-shop.vercel.app/pricing">PRICING</a></h4>
-                <h4 id="about" onClick={() => navigate("/about")}><a href="https://dev-shop.vercel.app/about">ABOUT</a>
-                </h4>
-                <h4 id="account">LOADING</h4>
-                <h4 id="profile" style={{position: "absolute", display: "none", color: "#606060"}}>PROFILE</h4>
-                <h4 id="settings" style={{position: "absolute", display: "none", color: "#606060"}}>SETTINGS</h4>
-                <h4 id="sign-out" style={{position: "absolute", display: "none", color: "#606060"}}>SIGN OUT</h4>
+                <Link id="code-blocks" to="/code-blocks" className="nav-link">CODE BLOCKS</Link>
+                <Link id="packages" to="/packages" className="nav-link">PACKAGES</Link>
+                <Link id="pricing" to="/pricing" className="nav-link">PRICING</Link>
+                <Link id="about" to="/about" className="nav-link">ABOUT</Link>
+                <Link id="account" to="/" className="nav-link">LOADING</Link>
+                <Link id="profile" style={{position: "absolute", display: "none", color: "#606060"}} to="/"
+                      className="nav-link">PROFILE</Link>
+                <Link id="settings" style={{position: "absolute", display: "none", color: "#606060"}} to="/"
+                      className="nav-link">SETTINGS</Link>
+                <Link id="sign-out" style={{position: "absolute", display: "none", color: "#606060"}} to="/"
+                      className="nav-link">SIGN OUT</Link>
                 <h4 id="hamburger" onClick={() => {
                     if (document.getElementById("hamburger").innerHTML === "||") {
                         document.getElementById("hamburger").innerHTML = "//"
@@ -199,14 +199,10 @@ export default function Navbar() {
                 }}>||</h4>
                 <div id="full-nav">
                     <ul>
-                        <li onClick={() => navigate("/code-blocks")} id="nav-code-blocks"><a
-                            href="https://dev-shop.vercel.app/code-blocks">CODE BLOCKS</a></li>
-                        <li onClick={() => navigate("/packages")} id="nav-packages"><a
-                            href="https://dev-shop.vercel.app/packages">PACKAGES</a></li>
-                        <li onClick={() => navigate("/pricing")} id="nav-pricing"><a
-                            href="https://dev-shop.vercel.app/pricing">PRICING</a></li>
-                        <li onClick={() => navigate("/about")} id="nav-about"><a
-                            href="https://dev-shop.vercel.app/about">ABOUT</a></li>
+                        <li onClick={() => navigate("/code-blocks")} id="nav-code-blocks">CODE BLOCKS</li>
+                        <li onClick={() => navigate("/packages")} id="nav-packages">PACKAGES</li>
+                        <li onClick={() => navigate("/pricing")} id="nav-pricing">PRICING</li>
+                        <li onClick={() => navigate("/about")} id="nav-about">ABOUT</li>
                         <li id="nav-account">ACCOUNT</li>
                     </ul>
                 </div>

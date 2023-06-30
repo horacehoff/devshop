@@ -8,7 +8,7 @@
     position: fixed
 }
 
-#full-nav, #full-nav-account, #hamburger, #nav-title, .nav h2, .nav h4, .nav Link {
+#full-nav, #full-nav-account, #hamburger, #nav-title, .nav h2, .nav h4, .nav-link {
     position: fixed
 }
 
@@ -52,8 +52,23 @@
     transition: .2s
 }
 
+.nav-link {
+    margin: 0;
+    top: 26px;
+    font-weight: 700;
+    font-size: 16px;
+    color: rgba(255, 255, 255, .75);
+    cursor: pointer;
+    transition: .2s;
+    text-decoration: none;
+}
+
 .nav h4:hover {
     color: #fff
+}
+
+.nav-link:hover {
+    color: #fff;
 }
 
 #nav-title {
