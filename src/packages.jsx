@@ -51,20 +51,20 @@ export default function Packages() {
     const [lastPackagesData, setLastPackagesData] = useState([]);
     const [similarPackagesData, setSimilarPackagesData] = useState([]);
     useEffect(() => {
-        if (user_data) {
             const q = query(collection(db, "packages"), orderBy("downloads", "desc"), limit(9));
             getDocs(q).then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     setTrendingPackageData(prevState => [...prevState, doc.data()]);
                 })
             })
-            const q1 = query(collection(db, "packages"), orderBy("created", "desc"), limit(9));
-            getDocs(q1).then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    setLastPackagesData(prevState => [...prevState, doc.data()]);
-                })
+        const q1 = query(collection(db, "packages"), orderBy("created", "desc"), limit(9));
+        getDocs(q1).then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                setLastPackagesData(prevState => [...prevState, doc.data()]);
             })
-            console.log("HEYYYYA")
+        })
+        console.log("HEYYYYA")
+        if (user_data) {
             console.log(user_data.interests)
             const q2 = query(collection(db, "users"), where("interests", "array-contains-any", Array.from(user_data.interests)), orderBy("downloads", "desc"), limit(9));
             getDocs(q2).then((querySnapshot) => {
@@ -78,6 +78,7 @@ export default function Packages() {
         if (similarPackagesData.length === 0) {
             document.getElementById("for-you-section").style.display = "none";
         }
+
     }, [user_data]);
 
 

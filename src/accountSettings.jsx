@@ -62,10 +62,20 @@ export default function AccountSettings() {
             setNewBio(user_data.bio);
             setBaseBio(user_data.bio);
             setNewGithub(user_data.github || "");
-        } else {
-            console.log("No user data found");
         }
     };
+
+    // useEffect(() => {
+    //     onAuthStateChanged(auth, (user) => {
+    //         if (user) {
+    //             console.log("USER IS LOGGED IN");
+    //             setUid(user.uid);
+    //         } else {
+    //             console.log("USER IS NOT LOGGED IN");
+    //             navigate("/sign-in");
+    //         }
+    //     });
+    // }, [uid, user_data]);
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -77,14 +87,11 @@ export default function AccountSettings() {
                 navigate("/sign-in");
             }
         });
-    }, []);
-
-    useEffect(() => {
         if (user_data) {
             getUserData();
             preInterests(user_data.interests);
         }
-    }, [user_data]);
+    }, [user_data, uid]);
 
     const updateAccount = async () => {
         const docRef = doc(db, "users", auth.currentUser.uid);
