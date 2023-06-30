@@ -1,6 +1,6 @@
 import "./Navbar.css"
 import {onAuthStateChanged} from "firebase/auth"
-import {useLocation, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import fancy_name_to_id from "./utility.js";
 import {user_data} from "./firebase.js";
@@ -176,10 +176,13 @@ export default function Navbar() {
         <>
             <div className="nav">
                 <h2 onClick={() => navigate("/")} id="nav-title">DEVSHOP</h2>
-                <h4 id="code-blocks" onClick={() => navigate("/code-blocks")}>CODE BLOCKS</h4>
-                <h4 id="packages" onClick={() => navigate("/packages")}>PACKAGES</h4>
-                <h4 id="pricing" onClick={() => navigate("/pricing")}>PRICING</h4>
-                <h4 id="about" onClick={() => navigate("/about")}>ABOUT</h4>
+                <Link id="code-blocks" to="/code-blocks">CODE BLOCKS</Link>
+                <h4 id="packages" onClick={() => navigate("/packages")}><a
+                    href="https://dev-shop.vercel.app/packages">PACKAGES</a></h4>
+                <h4 id="pricing" onClick={() => navigate("/pricing")}><a
+                    href="https://dev-shop.vercel.app/pricing">PRICING</a></h4>
+                <h4 id="about" onClick={() => navigate("/about")}><a href="https://dev-shop.vercel.app/about">ABOUT</a>
+                </h4>
                 <h4 id="account">LOADING</h4>
                 <h4 id="profile" style={{position: "absolute", display: "none", color: "#606060"}}>PROFILE</h4>
                 <h4 id="settings" style={{position: "absolute", display: "none", color: "#606060"}}>SETTINGS</h4>
@@ -196,10 +199,14 @@ export default function Navbar() {
                 }}>||</h4>
                 <div id="full-nav">
                     <ul>
-                        <li onClick={() => navigate("/code-blocks")} id="nav-code-blocks">CODE BLOCKS</li>
-                        <li onClick={() => navigate("/packages")} id="nav-packages">PACKAGES</li>
-                        <li onClick={() => navigate("/pricing")} id="nav-pricing">PRICING</li>
-                        <li onClick={() => navigate("/about")} id="nav-about">ABOUT</li>
+                        <li onClick={() => navigate("/code-blocks")} id="nav-code-blocks"><a
+                            href="https://dev-shop.vercel.app/code-blocks">CODE BLOCKS</a></li>
+                        <li onClick={() => navigate("/packages")} id="nav-packages"><a
+                            href="https://dev-shop.vercel.app/packages">PACKAGES</a></li>
+                        <li onClick={() => navigate("/pricing")} id="nav-pricing"><a
+                            href="https://dev-shop.vercel.app/pricing">PRICING</a></li>
+                        <li onClick={() => navigate("/about")} id="nav-about"><a
+                            href="https://dev-shop.vercel.app/about">ABOUT</a></li>
                         <li id="nav-account">ACCOUNT</li>
                     </ul>
                 </div>
