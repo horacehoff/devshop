@@ -98,7 +98,7 @@ export default function Navbar() {
                     }
                 }
 
-                document.getElementById("settings").to = () => {
+                document.getElementById("settings").onclick = () => {
                     navigate("/account");
                 }
                 document.getElementById("nav-settings").onclick = () => {
@@ -180,13 +180,13 @@ export default function Navbar() {
                 <Link id="packages" to="/packages" className="nav-link">PACKAGES</Link>
                 <Link id="pricing" to="/pricing" className="nav-link">PRICING</Link>
                 <Link id="about" to="/about" className="nav-link">ABOUT</Link>
-                <Link id="account" to="/" className="nav-link">LOADING</Link>
-                <Link id="profile" style={{position: "absolute", display: "none", color: "#606060"}} to="/"
-                      className="nav-link">PROFILE</Link>
-                <Link id="settings" style={{position: "absolute", display: "none", color: "#606060"}} to="/"
-                      className="nav-link">SETTINGS</Link>
-                <Link id="sign-out" style={{position: "absolute", display: "none", color: "#606060"}} to="/"
-                      className="nav-link">SIGN OUT</Link>
+                <h4 id="account" className="nav-link">LOADING</h4>
+                <h4 id="profile" style={{position: "absolute", display: "none", color: "#606060"}}
+                    className="nav-link">PROFILE</h4>
+                <h4 id="settings" style={{position: "absolute", display: "none", color: "#606060"}}
+                    className="nav-link">SETTINGS</h4>
+                <h4 id="sign-out" style={{position: "absolute", display: "none", color: "#606060"}}
+                    className="nav-link">SIGN OUT</h4>
                 <h4 id="hamburger" onClick={() => {
                     if (document.getElementById("hamburger").innerHTML === "||") {
                         document.getElementById("hamburger").innerHTML = "//"
