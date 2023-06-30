@@ -1,7 +1,7 @@
 import GenerateSitemap from "react-router-sitemap-maker";
-import {Routes} from "../src/routes.jsx";
+import {MyRoutes} from "../src/routes.jsx";
 
-const sitemapData = await GenerateSitemap(Routes(), {
+const sitemapData = await GenerateSitemap(MyRoutes(), {
     baseUrl: "https://dev-shop.vercel.app",
     hashrouting: true,
     changeFrequency: "monthly"
