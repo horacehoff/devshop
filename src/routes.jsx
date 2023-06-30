@@ -1,19 +1,19 @@
 import {Route, Routes} from "react-router-dom";
-import Home from "../src/Home.jsx";
-import CreatePackage from "../src/createPackage.jsx";
-import Packages from "../src/packages.jsx";
-import SearchPackages from "../src/searchPackages.jsx";
+import Home from "./Home.jsx";
+import CreatePackage from "./createPackage.jsx";
+import Packages from "./packages.jsx";
+import SearchPackages from "./searchPackages.jsx";
 import React from "react";
-import SignUp from "../src/signup.jsx";
-import SignIn from "../src/signin.jsx";
-import AccountSettings from "../src/accountSettings.jsx";
-import ResetPassword from "../src/resetPassword.jsx";
-import Pricing from "../src/pricing.jsx";
-import About from "../src/about.jsx";
-import PackagePage from "../src/packagePage.jsx";
-import EditPackage from "../src/editPackage.jsx";
-import AccountPage from "../src/accountPage.jsx";
-import CodeBlocks from "../src/codeBlocks.jsx";
+import SignUp from "./signup.jsx";
+import SignIn from "./signin.jsx";
+import AccountSettings from "./accountSettings.jsx";
+import ResetPassword from "./resetPassword.jsx";
+import Pricing from "./pricing.jsx";
+import About from "./about.jsx";
+import PackagePage from "./packagePage.jsx";
+import EditPackage from "./editPackage.jsx";
+import AccountPage from "./accountPage.jsx";
+import CodeBlocks from "./codeBlocks.jsx";
 
 export const MyRoutes = () => {
     return (
