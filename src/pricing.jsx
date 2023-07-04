@@ -40,7 +40,6 @@ export default function Pricing() {
                     <ul className="plan-features">
                         <li>Full access to the website</li>
                         <li>No ads</li>
-                        <li><span style={{color: "mediumpurple"}}>More to come...</span></li>
                     </ul>
                     <button className="plan-subscribe" id="plan-subscribe">coming soon</button>
                 </div>
