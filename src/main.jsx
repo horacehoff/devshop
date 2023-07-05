@@ -37,7 +37,7 @@ function App() {
                 }/>
                 <Route path="/search-packages/:query?" element={<SearchPackages/>}/>
                 <Route path="/code-blocks" element={<CodeBlocks/>}/>
-                <Route path="/publish-codeblock" element={
+                <Route path="/publish-code-block" element={
                     <CreateCodeBlock/>
                 }/>
                 <Route path="/sign-up" element={

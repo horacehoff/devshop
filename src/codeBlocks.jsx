@@ -11,12 +11,12 @@ export default function CodeBlocks() {
             <Navbar/>
             <h1 className="packages-title code-blocks-title">CODE<br/>BLOCKS</h1>
             <Link className="package-publish-btn" id="package-publish-btn"
-                  to="/publish-package">+ PUBLISH A PACKAGE
+                  to="/publish-code-block">+ PUBLISH A CODE BLOCK
             </Link>
             <Link className="package-publish-btn" id="package-search-btn"
-                  style={{marginLeft: "10px", maxWidth: "150px"}}
+                  style={{marginLeft: "10px", maxWidth: "173px"}}
                   to="/search-packages"><IoMdSearch
-                style={{position: "relative", top: "1px"}}/> SEARCH PACKAGES
+                style={{position: "relative", top: "1px"}}/> SEARCH CODE BLOCKS
             </Link>
             <h2 className="category-title">// CURRENTLY TRENDING</h2>
             <ul className="packages-card-list">
