@@ -92,7 +92,8 @@ export default function Packages() {
             <Link className="package-publish-btn" id="package-publish-btn"
                   to="/publish-package">+ PUBLISH A PACKAGE
             </Link>
-            <Link className="package-publish-btn" id="package-search-btn" style={{marginLeft: "10px"}}
+            <Link className="package-publish-btn" id="package-search-btn"
+                  style={{marginLeft: "10px", maxWidth: "150px"}}
                   to="/search-packages"><IoMdSearch
                 style={{position: "relative", top: "1px"}}/> SEARCH PACKAGES
             </Link>

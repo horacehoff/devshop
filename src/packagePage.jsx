@@ -137,15 +137,10 @@ export default function PackagePage() {
 
 
     function fullScreen(img) {
-        img.style.position = "fixed";
-        img.style.top = "calc(50% - 42.5%)";
-        img.style.left = "calc(50% - 42.5%)";
-        img.style.width = "85%";
-        img.style.height = "85%";
-        img.style.zIndex = "9999";
-        document.getElementById("screenshot_bg_div").style.display = "block";
-        // document.getElementById("screenshot_bg_div").style.backdropFilter = "blur(10px)";
-        document.getElementById("screenshot_full_close").style.display = "block";
+        document.getElementById("screenshot_bg_div").style.display = "flex";
+        document.getElementById("screenshot-bg-div-img").src = img.src;
+        console.log("full screen shown")
+        document.getElementById("screenshot-bg-div-img").classList.add("full-img-shown")
     }
 
     if (pkg === null) {
@@ -156,11 +151,14 @@ export default function PackagePage() {
         <>
             <Navbar/>
             <div className="screenshot_bg_div" id="screenshot_bg_div" onClick={() => {
+                document.getElementById("screenshot-bg-div-img").classList.remove("full-img-shown")
+
                 const revertChanges = img => {
                     img.style = baseStyle;
                     if (img.id === "screenshot_two" || img.id === "screenshot_four") {
                         img.style.marginLeft = "5px"
                     }
+
                 }
                 let img = document.getElementById("screenshot_one");
                 revertChanges(img);
@@ -171,8 +169,9 @@ export default function PackagePage() {
                 img = document.getElementById("screenshot_four");
                 revertChanges(img);
                 document.getElementById("screenshot_bg_div").style.display = "none";
-                document.getElementById("screenshot_full_close").style.display = "none";
-            }}></div>
+            }}>
+                <img id="screenshot-bg-div-img" alt="Full screen image of the package"/>
+            </div>
             <div className="banner"></div>
             <h2 className="package-title">{pkg.name}</h2>
             <h3 className="package-author">// BY <span style={{color: "#F0EBBA", cursor: "pointer"}}

@@ -222,6 +222,23 @@
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    text-align: center;
+    justify-content: center; /* Horizontally center the image */
+    align-items: center; /* Vertically center the image */
+}
+
+.screenshot_bg_div img {
+    position: fixed;
+    max-width: 90%;
+    max-height: 90%;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 1s !important;
+    object-fit: cover;
+}
+
+.full-img-shown {
+    opacity: 1 !important;
 }
 
 .package-desc-md {
