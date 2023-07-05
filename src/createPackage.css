@@ -128,7 +128,7 @@
 }
 
 .md-editor-container {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding-right: 10px;
 }
 
@@ -200,7 +200,7 @@
         position: relative;
         padding-right: 0;
         margin-left: -15px;
-        width: calc(100vw - 25px);
+        width: calc(100vw - 15px);
     }
 
     .publish-btn {
@@ -221,11 +221,6 @@
     .publish-btn {
         width: 370px;
     }
-
-    /*.centered {*/
-    /*    margin-left: calc(50vw - 185px);*/
-    /*    width: 370px;*/
-    /*}*/
     .centered {
         margin-left: 15px;
     }

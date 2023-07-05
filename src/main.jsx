@@ -1,4 +1,4 @@
-import React, {lazy, Suspense} from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import "./firebase.js"
@@ -21,9 +21,8 @@ import AccountSettings from "./accountSettings.jsx";
 import AccountPage from "./accountPage.jsx";
 import EditPackage from "./editPackage.jsx";
 import SearchPackages from "./searchPackages.jsx";
-
-
-const CodeBlocks = lazy(() => import('./codeBlocks.jsx'))
+import CodeBlocks from "./codeBlocks.jsx";
+import CreateCodeBlock from "./createCodeBlock.jsx";
 
 function App() {
     return (
@@ -37,15 +36,9 @@ function App() {
                     <Packages/>
                 }/>
                 <Route path="/search-packages/:query?" element={<SearchPackages/>}/>
-                <Route path="/code-blocks" element={
-                    <Suspense fallback={
-                        <>
-                            <h1 className="packages-title">CODE<br/>BLOCKS</h1>
-                            <h2 className="category-title">// CURRENTLY TRENDING</h2>
-                        </>
-                    }>
-                        <CodeBlocks/>
-                    </Suspense>
+                <Route path="/code-blocks" element={<CodeBlocks/>}/>
+                <Route path="/publish-codeblock" element={
+                    <CreateCodeBlock/>
                 }/>
                 <Route path="/sign-up" element={
                     <SignUp/>

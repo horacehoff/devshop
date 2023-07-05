@@ -25,6 +25,7 @@
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
     z-index: -9999;
+    overflow-x: hidden;
 }
 
 ::selection {

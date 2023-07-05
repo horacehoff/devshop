@@ -1,0 +1,22 @@
+.code-editor {
+    position: relative;
+    left: 0;
+    width: calc(100% - 42px);
+    margin: 0;
+    outline: 0;
+    border: 1px solid #30363d;
+    border-radius: 4px;
+    background-color: #0d1117;
+    color: white;
+    font-family: "Source Code Pro", monospace;
+    padding: 15px;
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 650px) {
+    .code-editor {
+        width: calc(100% - 15px);
+        margin-left: -15px;
+    }
+}
