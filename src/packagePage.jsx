@@ -84,6 +84,8 @@ export default function PackagePage() {
 
     const params_id = useParams().id;
     useEffect(() => {
+        // document.getElementById("body").style.backgroundImage = "none"
+        // document.getElementById("root").style.backgroundImage = "none"
         if (pkg === null) {
             getDoc(doc(db, "packages", params_id)).then((doc) => {
                 if (doc.exists()) {
