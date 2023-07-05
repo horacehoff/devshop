@@ -131,7 +131,7 @@ export default function Navbar() {
                 document.getElementById("profile").onmouseleave = () => {
                     isMouseHover = false
                     hideAccountPages()
-                    document.getElementById("profile").style.color = "#606060"
+                    document.getElementById("profile").style.color = "#ababab"
                 }
                 document.getElementById("settings").onmouseenter = () => {
                     isMouseHover = true
@@ -141,7 +141,7 @@ export default function Navbar() {
                 document.getElementById("settings").onmouseleave = () => {
                     isMouseHover = false
                     hideAccountPages()
-                    document.getElementById("settings").style.color = "#606060"
+                    document.getElementById("settings").style.color = "#ababab"
                 }
                 document.getElementById("sign-out").onmouseenter = () => {
                     isMouseHover = true
@@ -151,7 +151,7 @@ export default function Navbar() {
                 document.getElementById("sign-out").onmouseleave = () => {
                     isMouseHover = false
                     hideAccountPages()
-                    document.getElementById("sign-out").style.color = "#606060"
+                    document.getElementById("sign-out").style.color = "#ababab"
                 }
 
                 document.getElementById("nav-account").onclick = () => {
@@ -181,11 +181,11 @@ export default function Navbar() {
                 <Link id="pricing" to="/pricing" className="nav-link">PRICING</Link>
                 <Link id="about" to="/about" className="nav-link">ABOUT</Link>
                 <h4 id="account" className="nav-link">LOADING</h4>
-                <h4 id="profile" style={{position: "absolute", display: "none", color: "#606060"}}
+                <h4 id="profile" style={{position: "absolute", display: "none", color: "#ababab"}}
                     className="nav-link">PROFILE</h4>
-                <h4 id="settings" style={{position: "absolute", display: "none", color: "#606060"}}
+                <h4 id="settings" style={{position: "absolute", display: "none", color: "#ababab"}}
                     className="nav-link">SETTINGS</h4>
-                <h4 id="sign-out" style={{position: "absolute", display: "none", color: "#606060"}}
+                <h4 id="sign-out" style={{position: "absolute", display: "none", color: "#ababab"}}
                     className="nav-link">SIGN OUT</h4>
                 <h4 id="hamburger" onClick={() => {
                     if (document.getElementById("hamburger").innerHTML === "||") {
