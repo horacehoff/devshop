@@ -2,7 +2,7 @@ import Navbar from "./Navbar.jsx";
 import "./accountSettings.css";
 import {useEffect, useState} from "react";
 import {EmailAuthProvider, getAuth, onAuthStateChanged, reauthenticateWithCredential,} from "firebase/auth";
-import {auth, db, storage, user_data} from "./firebase.js";
+import {auth, db, forceUpdate, storage, user_data} from "./firebase.js";
 import {useNavigate} from "react-router-dom";
 import fancy_name_to_id, {interests_data, profanityFilter} from "./utility.js";
 import {doc, setDoc} from "firebase/firestore";
@@ -78,20 +78,24 @@ export default function AccountSettings() {
     // }, [uid, user_data]);
 
     useEffect(() => {
+        window.addEventListener("beforeunload", function () {
+            forceUpdate();
+        });
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 console.log("USER IS LOGGED IN");
                 setUid(user.uid);
+                if (user_data) {
+                    getUserData();
+                    preInterests(user_data.interests);
+                }
             } else {
                 console.log("USER IS NOT LOGGED IN");
                 navigate("/sign-in");
             }
         });
-        if (user_data) {
-            getUserData();
-            preInterests(user_data.interests);
-        }
-    }, [user_data, uid]);
+
+    }, [user_data]);
 
     const updateAccount = async () => {
         const docRef = doc(db, "users", auth.currentUser.uid);

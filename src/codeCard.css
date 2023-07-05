@@ -1,90 +1,11 @@
-.code-card, .code-card-author, .code-card-title {
-    position: relative;
-    padding: 0
+.code-card-title {
+    font-size: 23px;
 }
 
 .code-card {
-    height: 334px;
-    width: 468px;
-    border-radius: 14px;
-    background-color: #2d2b57;
-    cursor: pointer;
-    transition: .2s
-}
-
-.code-card:hover > .code-card-read-more {
-    color: rgba(255, 255, 255, .5)
-}
-
-.code-card:hover > .code-card-title {
-    color: #fff
-}
-
-.code-card:hover > .code-card-read-more:after {
-    content: '> READ MORE'
-}
-
-.code-card-title {
-    font-size: 32px;
-    font-weight: 500;
-    left: 15px;
-    top: 8px;
-    margin: 0;
-    color: #ffebcd;
-    transition: .2s
-}
-
-.code-card-author {
-    top: 10px;
-    left: 15px;
-    margin: 0;
-    color: #b9b9b9;
-    font-size: 20px;
-    font-weight: 400
-}
-
-.code-card-downloads {
-    font-size: 14px;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    margin: 0;
-    padding: 0
-}
-
-.code-card-sample {
-    font-size: 18px;
-    line-height: 22px;
-    position: relative;
-    width: 430px;
-    height: 200px;
-    left: 15px;
-    padding-right: 5px;
-    white-space: normal
-}
-
-.code-card-read-more {
-    color: rgba(255, 255, 255, .25);
-    font-size: 16px;
-    font-weight: 500;
-    padding: 0;
-    margin: 0;
-    position: relative;
-    left: 15px;
-    bottom: 15px;
-    transition: .2s
-}
-
-.code-card-read-more:after {
-    content: '+ READ MORE'
-}
-
-@media screen and (max-width: 560px) {
-    .code-card {
-        width: 92vw
-    }
-
-    .code-card-sample {
-        width: calc(92vw - 15px)
-    }
+    background: rgba(11, 14, 43, 0.5);
+    border-radius: 12px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 }

@@ -8,7 +8,7 @@ export default function Pricing() {
 
     useEffect(() => {
         if (document.getElementById("account").innerHTML === "ACCOUNT" || document.getElementById("nav-account").innerHTML === "ACCOUNT") {
-            document.getElementById("plan-subscribe").innerHTML = "UPGRADE(SOON)"
+            document.getElementById("plan-sign-up").innerHTML = "CURRENT"
         }
     }, [])
 
@@ -25,21 +25,21 @@ export default function Pricing() {
                     <h1 className="plan-title">BASIC</h1>
                     <p className="plan-price">FREE</p>
                     <ul className="plan-features">
-                        <li>Full access to the website</li>
-                        <li>Ads</li>
+                        <li>✅ Full access to the website</li>
+                        <li>❌ Ads</li>
                     </ul>
-                    <button className="plan-sign-up" onClick={() => {
+                    <button className="plan-sign-up" id="plan-sign-up" onClick={() => {
                         navigate("/sign-up")
                     }}>Sign Up
                     </button>
                 </div>
 
                 <div className="pro-plan">
-                    <h1 className="plan-title">PRO</h1>
+                    <h1 className="plan-title" style={{color: "mediumpurple"}}>PRO</h1>
                     <p className="plan-price" style={{color: "blanchedalmond"}}>1.99€/month</p>
                     <ul className="plan-features">
-                        <li>Full access to the website</li>
-                        <li>No ads</li>
+                        <li>✅ Full access to the website</li>
+                        <li>✅ No ads</li>
                     </ul>
                     <button className="plan-subscribe" id="plan-subscribe">coming soon</button>
                 </div>

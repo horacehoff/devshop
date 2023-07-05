@@ -48,3 +48,8 @@ onAuthStateChanged(auth, async (user) => {
         return "no-user";
     }
 })
+
+export async function forceUpdate() {
+    user_data = null;
+    window.location.reload();
+}

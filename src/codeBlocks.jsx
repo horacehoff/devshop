@@ -9,7 +9,7 @@ export default function CodeBlocks() {
             <h1 className="packages-title">CODE<br/>BLOCKS</h1>
             <h2 className="category-title">// CURRENTLY TRENDING</h2>
             <ul className="packages-card-list">
-                <li><CodeCard dwnl="55566564" author="hombrewTeam"
+                <li><CodeCard dwnl="55566564" name="Pi number calculator" author="hombrewTeam"
                               desc='print("hello world")'/>
                 </li>
             </ul>

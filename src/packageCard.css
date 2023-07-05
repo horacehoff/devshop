@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&display=swap');
+
+
 .card, .card-author, .card-title {
     position: relative;
     padding: 0
@@ -45,7 +48,7 @@
     left: 15px;
     top: 8px;
     margin: 0;
-    color: #ffebcd;
+    color: #fffaee;
     transition: .2s;
     max-width: 435px;
     overflow: scroll;
@@ -58,12 +61,13 @@
 }
 
 .card-author {
-    top: 10px;
+    top: 0;
     left: 15px;
     margin: 0;
-    color: #b9b9b9;
-    font-size: 20px;
-    font-weight: 400
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 600;
+    font-family: "Inconsolata", monospace;
 }
 
 .card-downloads {
@@ -95,7 +99,7 @@
     margin: 0;
     position: relative;
     left: 15px;
-    bottom: 20px;
+    bottom: 15px;
     /*bottom: 15px;*/
     transition: .2s
 }
