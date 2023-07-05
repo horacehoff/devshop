@@ -13,11 +13,11 @@
     font-weight: 400;
     color: white;
     /*background-color: #161C5B;*/
-    background-color: rgb(49, 46, 129);
-    background-image: radial-gradient(at 22% 68%, rgb(0, 0, 0) 0, transparent 97%), radial-gradient(at 96% 5%, rgb(126, 34, 206) 0, transparent 84%), radial-gradient(at 17% 34%, rgb(55, 48, 163) 0, transparent 42%), radial-gradient(at 33% 33%, rgb(28, 25, 23) 0, transparent 62%), radial-gradient(at 71% 34%, rgb(30, 58, 138) 0, transparent 50%), radial-gradient(at 14% 98%, rgb(67, 56, 202) 0, transparent 57%);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-color: #161C5B;
+    /*background-image: radial-gradient(at 22% 68%, rgb(0, 0, 0) 0, transparent 97%), radial-gradient(at 96% 5%, rgb(126, 34, 206) 0, transparent 84%), radial-gradient(at 17% 34%, rgb(55, 48, 163) 0, transparent 42%), radial-gradient(at 33% 33%, rgb(28, 25, 23) 0, transparent 62%), radial-gradient(at 71% 34%, rgb(30, 58, 138) 0, transparent 50%), radial-gradient(at 14% 98%, rgb(67, 56, 202) 0, transparent 57%);*/
+    /*background-size: cover;*/
+    /*background-repeat: no-repeat;*/
+    /*background-attachment: fixed;*/
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -25,7 +25,6 @@
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
     z-index: -9999;
-    animation: 1s blurIn;
 }
 
 ::selection {
