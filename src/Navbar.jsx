@@ -20,7 +20,7 @@ export default function Navbar() {
             document.getElementById("nav-account").style.textDecoration = "underline"
             document.getElementById("account").style.color = "white"
             document.getElementById("nav-account").style.color = "white"
-        } else if (location.slice(0, 12) === "/code-blocks") {
+        } else if (location.slice(0, 12) === "/code-blocks" || location.slice(0, 11) === "/codeblocks") {
             document.getElementById("code-blocks").style.textDecoration = "underline"
             document.getElementById("nav-code-blocks").style.textDecoration = "underline"
             document.getElementById("code-blocks").style.color = "white"
