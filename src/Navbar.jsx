@@ -33,6 +33,13 @@ export default function Navbar() {
         document.getElementById("pricing").style.color = "rgba(255, 255, 255, .75)"
         document.getElementById("nav-pricing").style.color = "rgba(255, 255, 255, .75)"
 
+        isMouseHover = false
+        document.getElementById("profile").style.display = "none"
+        document.getElementById("settings").style.display = "none"
+        document.getElementById("sign-out").style.display = "none"
+
+        document.getElementById("full-nav").style.left = "-100%"
+        document.getElementById("full-nav-account").style.left = "-100%"
     }
 
     useEffect(() => {
