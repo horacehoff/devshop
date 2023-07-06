@@ -356,6 +356,21 @@
     }
 }
 
+.bottom-block {
+    display: none;
+}
+
+@media screen and (max-width: 560px) {
+    .bottom-block {
+        display: block;
+        position: relative;
+        top: 102vh;
+        left: 0;
+        width: 100%;
+        height: 200Px;
+    }
+}
+
 @media screen and (max-width: 475px) {
     .package-img {
         width: calc(100% - 15px);
