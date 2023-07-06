@@ -4,7 +4,6 @@ import {onAuthStateChanged} from "firebase/auth";
 import {auth, db, storage} from "./firebase.js";
 import fancy_name_to_id, {profanityFilter} from "./utility.js";
 import {useLocation, useNavigate} from "react-router-dom";
-import Navbar from "./Navbar.jsx";
 import MDEditor from "@uiw/react-md-editor";
 import React, {useLayoutEffect, useState} from "react";
 import {deleteObject, getDownloadURL, ref, uploadBytes} from "firebase/storage";
@@ -157,8 +156,6 @@ export default function EditPackage(props) {
 
     return (
         <>
-            <>
-                <Navbar/>
                 <input type="file" id="banner-file" style={{display: "none"}}
                        onChange={(event) => setBannerUpload(event.target.files[0])}
                        required
@@ -406,8 +403,6 @@ export default function EditPackage(props) {
                     </p>
                 </div>
                 <div className="bottom-block"></div>
-            </>
-
         </>
     )
 

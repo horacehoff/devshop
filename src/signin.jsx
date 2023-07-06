@@ -1,4 +1,3 @@
-import Navbar from "./Navbar.jsx";
 import "./sign-up-in.css"
 import {useNavigate} from "react-router-dom";
 import {signInWithEmailAndPassword} from "firebase/auth";
@@ -39,7 +38,6 @@ export default function SignIn() {
     const [password, setPassword] = useState("");
     return (
         <>
-            <Navbar/>
             <br/>
             <br/>
             <br/>

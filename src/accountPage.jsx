@@ -1,5 +1,4 @@
 import "./accountPage.css"
-import Navbar from "./Navbar.jsx";
 import {SiGithub} from "react-icons/si";
 import fancy_name_to_id from "./utility.js";
 import React, {useEffect, useState} from "react";
@@ -88,13 +87,11 @@ export default function AccountPage(props) {
 
     if (usr === null) {
         return <>
-            <Navbar/>
         </>
     }
 
     return (
         <>
-            <Navbar/>
             <div className="user_banner"></div>
             <div className="user_pfp"></div>
             <h1 className="user_name">{usr.username}</h1>

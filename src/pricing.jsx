@@ -1,4 +1,3 @@
-import Navbar from "./Navbar.jsx";
 import "./pricing.css"
 import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
@@ -15,7 +14,6 @@ export default function Pricing() {
 
     return (
         <>
-            <Navbar/>
             <h1 className="pricing-title">PRICING</h1>
             <p className="pricing-subtitle">You can use DEVSHOP for free, or you can pay a small amount of money each
                 month to get rid of all inconvenients and get the full experience</p>

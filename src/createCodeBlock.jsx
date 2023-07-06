@@ -1,6 +1,5 @@
 import "./createPackage.css"
 import "./createCodeBlock.css"
-import Navbar from "./Navbar.jsx";
 import {useState} from "react";
 import {auth, db, storage} from "./firebase.js";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage"
@@ -144,7 +143,6 @@ export default function CreateCodeBlock() {
 
     return (
         <>
-            <Navbar/>
             <h1 className="about-title">PUBLISH A CODE BLOCK</h1>
             <div className="centered">
                 <h2 style={{margin: "0", fontWeight: "400", fontSize: "18px"}}>// GENERAL INFO</h2>

@@ -1,5 +1,4 @@
 import "./packages.css"
-import Navbar from "./Navbar.jsx";
 import {collection, getDocs, limit, orderBy, query, setLogLevel, where} from "firebase/firestore";
 import {Link, useNavigate} from "react-router-dom";
 import PackageCard from "./packageCard.jsx";
@@ -87,7 +86,6 @@ export default function Packages() {
 
     return (
         <>
-            <Navbar/>
             <h1 className="packages-title">PACKAGES</h1>
             <Link className="package-publish-btn" id="package-publish-btn"
                   to="/publish-package">+ PUBLISH A PACKAGE

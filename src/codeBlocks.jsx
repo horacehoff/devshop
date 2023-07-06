@@ -1,6 +1,5 @@
 import "./packages.css"
 import "./codeBlocks.css"
-import Navbar from "./Navbar.jsx";
 import CodeCard from "./codeCard.jsx";
 import {Link, useNavigate} from "react-router-dom";
 import {IoMdSearch} from "react-icons/all.js";
@@ -86,7 +85,6 @@ export default function CodeBlocks() {
 
     return (
         <>
-            <Navbar/>
             <h1 className="packages-title code-blocks-title">CODE<br/>BLOCKS</h1>
             <Link className="package-publish-btn" id="package-publish-btn"
                   to="/publish-code-block">+ PUBLISH A CODE BLOCK

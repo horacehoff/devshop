@@ -6,7 +6,6 @@ import {onAuthStateChanged} from "firebase/auth";
 import {auth, db, storage} from "./firebase.js";
 import fancy_name_to_id, {profanityFilter} from "./utility.js";
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import Navbar from "./Navbar.jsx";
 import MDEditor from "@uiw/react-md-editor";
 import React, {useEffect, useState} from "react";
 import {deleteObject, getDownloadURL, ref, uploadBytes} from "firebase/storage";
@@ -144,8 +143,6 @@ export default function EditCodeBlock(props) {
 
     return (
         <>
-            <>
-                <Navbar/>
                 <h2 className="package-title code-block-title">{codeBlock.name}</h2>
                 <h3 className="package-author">// BY <Link className="package-author-link"
                                                            to={"/users/" + fancy_name_to_id(codeBlock.owner_username)}>{codeBlock.owner_username}</Link>
@@ -376,8 +373,6 @@ export default function EditCodeBlock(props) {
                     </p>
                 </div>
                 <div className="bottom-block"></div>
-            </>
-
         </>
     )
 

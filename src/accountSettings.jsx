@@ -1,4 +1,3 @@
-import Navbar from "./Navbar.jsx";
 import "./accountSettings.css";
 import {useEffect, useState} from "react";
 import {EmailAuthProvider, getAuth, onAuthStateChanged, reauthenticateWithCredential,} from "firebase/auth";
@@ -209,7 +208,6 @@ export default function AccountSettings() {
 
     return (
         <>
-            <Navbar/>
             <h1 className="title">ACCOUNT</h1>
             <h2 className="subtitle">MODIFY YOUR ACCOUNT SETTINGS BELOW</h2>
             <div id="acc-settings">

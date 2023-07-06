@@ -1,5 +1,4 @@
 import "./packagePage.css"
-import Navbar from "./Navbar.jsx";
 import {onAuthStateChanged} from "firebase/auth";
 import {doc, getDoc, updateDoc} from "firebase/firestore";
 import {auth, db, storage} from "./firebase.js";
@@ -146,12 +145,11 @@ export default function PackagePage() {
     }
 
     if (pkg === null) {
-        return <Navbar/>
+        return <></>
     }
 
     return (
         <>
-            <Navbar/>
             <div className="screenshot_bg_div" id="screenshot_bg_div" onClick={() => {
                 document.getElementById("screenshot-bg-div-img").classList.remove("full-img-shown")
 

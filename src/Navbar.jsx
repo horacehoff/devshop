@@ -9,7 +9,34 @@ import {user_data} from "./firebase.js";
 export default function Navbar() {
     const navigate = useNavigate();
     const location = useLocation().pathname;
+    const effectlocation = useLocation();
+
+    const resetStyles = () => {
+        document.getElementById("packages").style.textDecoration = "none"
+        document.getElementById("nav-packages").style.textDecoration = "none"
+        document.getElementById("packages").style.color = "rgba(255, 255, 255, .75)"
+        document.getElementById("nav-packages").style.color = "rgba(255, 255, 255, .75)"
+        document.getElementById("account").style.textDecoration = "none"
+        document.getElementById("nav-account").style.textDecoration = "none"
+        document.getElementById("account").style.color = "rgba(255, 255, 255, .75)"
+        document.getElementById("nav-account").style.color = "rgba(255, 255, 255, .75)"
+        document.getElementById("code-blocks").style.textDecoration = "none"
+        document.getElementById("nav-code-blocks").style.textDecoration = "none"
+        document.getElementById("code-blocks").style.color = "rgba(255, 255, 255, .75)"
+        document.getElementById("nav-code-blocks").style.color = "rgba(255, 255, 255, .75)"
+        document.getElementById("about").style.textDecoration = "none"
+        document.getElementById("nav-about").style.textDecoration = "none"
+        document.getElementById("about").style.color = "rgba(255, 255, 255, .75)"
+        document.getElementById("nav-about").style.color = "rgba(255, 255, 255, .75)"
+        document.getElementById("pricing").style.textDecoration = "none"
+        document.getElementById("nav-pricing").style.textDecoration = "none"
+        document.getElementById("pricing").style.color = "rgba(255, 255, 255, .75)"
+        document.getElementById("nav-pricing").style.color = "rgba(255, 255, 255, .75)"
+
+    }
+
     useEffect(() => {
+        resetStyles()
         if (location.slice(0, 9) === "/packages") {
             document.getElementById("packages").style.textDecoration = "underline"
             document.getElementById("nav-packages").style.textDecoration = "underline"
@@ -20,6 +47,7 @@ export default function Navbar() {
             document.getElementById("nav-account").style.textDecoration = "underline"
             document.getElementById("account").style.color = "white"
             document.getElementById("nav-account").style.color = "white"
+            document.title = "SIGN UP/IN - DEVSHOP"
         } else if (location.slice(0, 12) === "/code-blocks" || location.slice(0, 11) === "/codeblocks") {
             document.getElementById("code-blocks").style.textDecoration = "underline"
             document.getElementById("nav-code-blocks").style.textDecoration = "underline"
@@ -30,17 +58,17 @@ export default function Navbar() {
             document.getElementById("nav-about").style.textDecoration = "underline"
             document.getElementById("about").style.color = "white"
             document.getElementById("nav-about").style.color = "white"
-            document.title = "DEVSHOP"
+            document.title = "ABOUT - DEVSHOP"
         } else if (location.slice(0, 8) === "/pricing") {
             document.getElementById("pricing").style.textDecoration = "underline"
             document.getElementById("pricing").style.color = "white"
             document.getElementById("nav-pricing").style.textDecoration = "underline"
             document.getElementById("nav-pricing").style.color = "white"
-            document.title = "DEVSHOP"
+            document.title = "PRICING - DEVSHOP"
         } else if (location.slice(0, 1) === "/") {
             document.title = "DEVSHOP"
         }
-    }, []);
+    }, [location]);
 
     const showAccountPages = () => {
         console.log("account mouse enter");

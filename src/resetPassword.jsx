@@ -1,4 +1,3 @@
-import Navbar from "./Navbar.jsx";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {sendPasswordResetEmail} from "firebase/auth";
@@ -11,7 +10,6 @@ export default function ResetPassword() {
 
     return (
         <>
-            <Navbar/>
             <br/>
             <br/>
             <br/>

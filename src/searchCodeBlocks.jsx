@@ -1,5 +1,4 @@
 import "./searchPackages.css"
-import Navbar from "./Navbar.jsx";
 import {IoMdSearch} from "react-icons/all.js";
 import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
@@ -39,7 +38,6 @@ export default function SearchCodeBlocks() {
 
     return (
         <>
-            <Navbar/>
             <h1 className="about-title">SEARCH CODE BLOCKS</h1>
             <IoMdSearch className="search-input-icon"/>
             <input type="text" placeholder="Search something..." value={searchInput}

@@ -1,5 +1,4 @@
 import "./searchPackages.css"
-import Navbar from "./Navbar.jsx";
 import {IoMdSearch} from "react-icons/all.js";
 import {useEffect, useState} from "react";
 import PackageCard from "./packageCard.jsx";
@@ -40,7 +39,6 @@ export default function SearchPackages() {
 
     return (
         <>
-            <Navbar/>
             <h1 className="about-title">SEARCH PACKAGES</h1>
             <IoMdSearch className="search-input-icon"/>
             <input type="text" placeholder="Search something..." value={searchInput}
@@ -56,7 +54,6 @@ export default function SearchPackages() {
                     </li>
                 ))}
             </ul>
-
         </>
     )
 }

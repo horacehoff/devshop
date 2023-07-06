@@ -26,10 +26,12 @@ import CreateCodeBlock from "./createCodeBlock.jsx";
 import CodeBlockPage from "./codeBlockPage.jsx";
 import EditCodeBlock from "./editCodeBlock.jsx";
 import SearchCodeBlocks from "./searchCodeBlocks.jsx";
+import Navbar from "./Navbar.jsx";
 
 function App() {
     return (
         <BrowserRouter>
+            <Navbar/>
             <Routes>
                 <Route path="/" element={
                     <Home/>
