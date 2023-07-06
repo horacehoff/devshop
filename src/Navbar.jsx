@@ -38,6 +38,7 @@ export default function Navbar() {
         document.getElementById("settings").style.display = "none"
         document.getElementById("sign-out").style.display = "none"
 
+        document.getElementById("hamburger").innerHTML = "||"
         document.getElementById("full-nav").style.left = "-100%"
         document.getElementById("full-nav-account").style.left = "-100%"
     }
