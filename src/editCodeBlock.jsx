@@ -1,6 +1,7 @@
 import './packagePage.css'
 import "./editPackage.css"
 import "./codeBlockPage.css"
+import "./editCodeBlock.css"
 import {onAuthStateChanged} from "firebase/auth";
 import {auth, db, storage} from "./firebase.js";
 import fancy_name_to_id, {profanityFilter} from "./utility.js";
@@ -19,7 +20,7 @@ export default function EditCodeBlock(props) {
     }
     const {state} = useLocation()
     const codeBlock = state.pkg
-    let uid = "";
+    const [uid, setUid] = useState("")
     const [newDesc, setNewDesc] = useState(codeBlock.description)
 
 
@@ -28,16 +29,16 @@ export default function EditCodeBlock(props) {
     const [imgUploadThree, setImgUploadThree] = useState(null);
     const [imgUploadFour, setImgUploadFour] = useState(null);
     const [newVer, setNewVer] = useState("")
+    const [newCode, setNewCode] = useState(codeBlock.code)
 
 
     useEffect(() => {
-        console.log("HELL YEAAAAA")
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 // check if user id is the package owner_id
                 if (user.uid === codeBlock.owner_id) {
                     console.log("user is owner")
-                    uid = user.uid;
+                    setUid(user.uid)
                     console.log(uid)
                 } else {
                     console.log("user is not owner")
@@ -52,27 +53,32 @@ export default function EditCodeBlock(props) {
 
 
     async function saveChanges() {
+        console.log(uid)
         let screenOneUrl = ""
         let screenTwoUrl = ""
         let screenThreeUrl = ""
         let screenFourUrl = ""
         let currentVer = ""
+        let currentCode = ""
 
         if (imgUpload0ne !== null) {
+            console.log("IMG ONE")
             const imgRef = ref(storage, codeBlock.screenshots[0]);
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
+            console.log("users/" + uid + "/codeblocks/" + codeBlock.id + "/img/one/" + imgUpload0ne.name)
             let uploadRef = ref(storage, "users/" + uid + "/codeblocks/" + codeBlock.id + "/img/one/" + imgUpload0ne.name)
             await uploadBytes(uploadRef, imgUpload0ne).then(() => {
                 console.log("img one uploaded")
             })
             screenOneUrl = await getDownloadURL(uploadRef)
-
         } else {
+            console.log("IMG ONE ELSE")
             screenOneUrl = codeBlock.screenshots[0]
         }
         if (imgUploadTwo !== null) {
+            console.log("IMG TWO")
             const imgRef = ref(storage, codeBlock.screenshots[1]);
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
@@ -83,9 +89,11 @@ export default function EditCodeBlock(props) {
             })
             screenTwoUrl = await getDownloadURL(uploadRef)
         } else {
+            console.log("IMG TWO ELSE")
             screenTwoUrl = codeBlock.screenshots[1]
         }
         if (imgUploadThree !== null) {
+            console.log("IMG THREE")
             const imgRef = ref(storage, codeBlock.screenshots[2]);
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
@@ -96,9 +104,11 @@ export default function EditCodeBlock(props) {
             })
             screenThreeUrl = await getDownloadURL(uploadRef)
         } else {
+            console.log("IMG THREE ELSE")
             screenThreeUrl = codeBlock.screenshots[2]
         }
         if (imgUploadFour !== null) {
+            console.log("IMG FOUR")
             const imgRef = ref(storage, codeBlock.screenshots[3]);
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
@@ -109,13 +119,25 @@ export default function EditCodeBlock(props) {
             })
             screenFourUrl = await getDownloadURL(uploadRef)
         } else {
+            console.log("IMG FOUR ELSE")
             screenFourUrl = codeBlock.screenshots[3]
+        }
+        if (newVer === "") {
+            currentVer = codeBlock.current_version
+        } else {
+            currentVer = newVer
+        }
+        if (newCode === "") {
+            currentCode = codeBlock.code
+        } else {
+            currentCode = newCode
         }
 
         await setDoc(doc(db, "code-blocks", codeBlock.id), {
             screenshots: [screenOneUrl, screenTwoUrl, screenThreeUrl, screenFourUrl],
             description: profanityFilter(newDesc),
             current_version: currentVer,
+            code: currentCode
         }, {merge: true})
     }
 
@@ -149,6 +171,18 @@ export default function EditCodeBlock(props) {
                         onChange={setNewDesc}
                     />
                 }</p>
+                <dialog id="new-ver-dialog">
+                    <h4>NEW VERSION</h4>
+                    <input type="text" placeholder="VERSION ID"
+                           style={{marginTop: "20px", marginBottom: "30px", fontSize: "20px"}} value={newVer}
+                           onChange={e => setNewVer(e.target.value)}/>
+                    <p>// NEW CODE</p>
+                    <textarea className="code-editor" placeholder="⚠️ Place your final code here ⚠️" value={newCode}
+                              onChange={e => setNewCode(e.target.value)}></textarea>
+                    <button onClick={() => document.getElementById("new-ver-dialog").close()}>OK</button>
+                    <p className="dialog-save-reminder">⚠️ DO NOT FORGET TO SAVE ⚠️</p>
+
+                </dialog>
                 <div className="package-screenshots code-screenshots" id="package-screenshots">
                     <input type="file" id="img-file-one" style={{display: "none"}}
                            onChange={(event) => setImgUploadOne(event.target.files[0])}
@@ -172,7 +206,7 @@ export default function EditCodeBlock(props) {
                                 var vals = this.value,
                                     val = vals.length ? vals.split('\\').pop() : '';
                                 let fileup = new File([this.files[0]], this.files[0].name, {type: this.files[0].type})
-                                setImgUploadTwo(fileup)
+                                setImgUploadOne(fileup)
                                 console.log(fileup)
                                 document.getElementById('screenshot_one').src = URL.createObjectURL(fileup);
                             });
@@ -207,7 +241,7 @@ export default function EditCodeBlock(props) {
                                 var vals = this.value,
                                     val = vals.length ? vals.split('\\').pop() : '';
                                 let fileup = new File([this.files[0]], this.files[0].name, {type: this.files[0].type})
-                                setImgUploadTwo(fileup)
+                                setImgUploadThree(fileup)
                                 console.log(fileup)
                                 document.getElementById('screenshot_three').src = URL.createObjectURL(fileup);
                             });
@@ -225,7 +259,7 @@ export default function EditCodeBlock(props) {
                                 var vals = this.value,
                                     val = vals.length ? vals.split('\\').pop() : '';
                                 let fileup = new File([this.files[0]], this.files[0].name, {type: this.files[0].type})
-                                setImgUploadTwo(fileup)
+                                setImgUploadFour(fileup)
                                 console.log(fileup)
                                 document.getElementById('screenshot_four').src = URL.createObjectURL(fileup);
                             });
@@ -233,20 +267,29 @@ export default function EditCodeBlock(props) {
                         }}
                     />
                 </div>
+                <button className="code-forward-btn" id="code-forward-btn" onClick={() => {
+                    if (document.getElementById("code-forward-btn").innerText === "<<") {
+                        document.getElementById("screenshot_one").scrollIntoView({behavior: "smooth", block: "center"})
+                        document.getElementById("code-forward-btn").innerText = ">>"
+                    } else {
+                        document.getElementById("screenshot_four").scrollIntoView({behavior: "smooth", block: "center"})
+                        document.getElementById("code-forward-btn").innerText = "<<"
+                    }
+                }}>{">>"}</button>
                 <p className="package-characteristics-label"></p>
                 <div className="package-characteristics" id="package-characteristics">
                     <p style={{marginRight: "29px"}} id="package-char-p">
-                        TOTAL SIZE: {Math.round(codeBlock.sizeMb * 10) / 10}MB<br/><input type='text'
-                                                                                          id='pkg-version-input'
-                                                                                          className='pkg-version-input'
-                                                                                          placeholder='NEW VERSION'
-                                                                                          style={{display: "none"}}
-                                                                                          value={newVer}
-                                                                                          onChange={e => {
-                                                                                              setNewVer(e.target.value);
-                                                                                              console.log("yup")
-                                                                                          }}/><span
-                        id="package-version" className="current-ver">CURRENT VERSION: {codeBlock.current_version}</span>
+                        {codeBlock.lines} LINES OF CODE<br/><br/><input type='text'
+                                                                        id='pkg-version-input'
+                                                                        className='pkg-version-input'
+                                                                        placeholder='NEW VERSION'
+                                                                        style={{display: "none"}}
+                                                                        value={newVer}
+                                                                        onChange={e => {
+                                                                            setNewVer(e.target.value);
+                                                                            console.log("yup")
+                                                                        }}/><span
+                        id="package-version" className="current-ver">CURRENT VERSION: {codeBlock.current_version}</span><br/>
                         <FcCancel className="revert-upload-pkg" id="revert-upload-pkg" onClick={() => {
                             if (document.getElementById("upload-new-pkg-btn").innerHTML.includes("UPLOAD PACKAGE")) {
                                 document.getElementById("package-version").innerHTML = "CURRENT VERSION: " + codeBlock.current_version
@@ -265,13 +308,8 @@ export default function EditCodeBlock(props) {
 
                         }}></FcCancel><br/>
                         <button className="new-pkg-version-btn" id="new-pkg-version-btn" onClick={() => {
-                            document.getElementById("package-version").innerHTML = "<br/>"
-                            document.getElementById("pkg-version-input").style.display = "block"
-                            document.getElementById("upload-new-pkg-btn").style.display = "block"
-                            document.getElementById("new-pkg-version-btn").style.display = "none"
-                            document.getElementById("revert-upload-pkg").style.display = "block"
-                            document.getElementById("package-char-p").style.marginRight = "22px"
-                            document.getElementById("delete-pkg-btn").style.display = "none"
+                            let dialog = document.getElementById("new-ver-dialog")
+                            dialog.showModal()
                         }}>+ NEW VERSION
                         </button>
                         <br/>

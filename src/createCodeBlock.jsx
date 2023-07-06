@@ -216,7 +216,7 @@ export default function CreateCodeBlock() {
                         document.getElementById("publish-btn").style.pointerEvents = "none"
                         document.getElementById("publish-btn").innerHTML = "UPLOADING... => ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 0%"
                         upload().then(name_id => {
-                            // navigate("/packages/" + codeblock_id)
+                            navigate("/codeblocks/" + codeblock_id)
                             window.location.reload()
                         })
                     }

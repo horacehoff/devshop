@@ -19,7 +19,7 @@ export default function EditPackage(props) {
     }
     const {state} = useLocation()
     const pkg = state.pkg
-    let uid = "";
+    const [uid, setUid] = useState("")
     const [newDesc, setNewDesc] = useState(pkg.description)
 
     const [bannerUpload, setBannerUpload] = useState(null);
@@ -37,7 +37,7 @@ export default function EditPackage(props) {
             // check if user id is the package owner_id
             if (user.uid === pkg.owner_id) {
                 console.log("user is owner")
-                uid = user.uid;
+                setUid(user.uid)
                 console.log(uid)
             } else {
                 console.log("user is not owner")
@@ -225,7 +225,7 @@ export default function EditPackage(props) {
                                 var vals = this.value,
                                     val = vals.length ? vals.split('\\').pop() : '';
                                 let fileup = new File([this.files[0]], this.files[0].name, {type: this.files[0].type})
-                                setImgUploadTwo(fileup)
+                                setImgUploadOne(fileup)
                                 console.log(fileup)
                                 document.getElementById('screenshot_one').src = URL.createObjectURL(fileup);
                             });
@@ -260,7 +260,7 @@ export default function EditPackage(props) {
                                 var vals = this.value,
                                     val = vals.length ? vals.split('\\').pop() : '';
                                 let fileup = new File([this.files[0]], this.files[0].name, {type: this.files[0].type})
-                                setImgUploadTwo(fileup)
+                                setImgUploadThree(fileup)
                                 console.log(fileup)
                                 document.getElementById('screenshot_three').src = URL.createObjectURL(fileup);
                             });
@@ -278,7 +278,7 @@ export default function EditPackage(props) {
                                 var vals = this.value,
                                     val = vals.length ? vals.split('\\').pop() : '';
                                 let fileup = new File([this.files[0]], this.files[0].name, {type: this.files[0].type})
-                                setImgUploadTwo(fileup)
+                                setImgUploadFour(fileup)
                                 console.log(fileup)
                                 document.getElementById('screenshot_four').src = URL.createObjectURL(fileup);
                             });

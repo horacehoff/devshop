@@ -93,7 +93,7 @@ export default function CodeBlocks() {
             </Link>
             <Link className="package-publish-btn" id="package-search-btn"
                   style={{marginLeft: "10px", maxWidth: "173px"}}
-                  to="/search-packages"><IoMdSearch
+                  to="/codeblocks/q/"><IoMdSearch
                 style={{position: "relative", top: "1px"}}/> SEARCH CODE BLOCKS
             </Link>
             <h2 className="category-title">// CURRENTLY TRENDING</h2>
