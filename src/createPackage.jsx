@@ -42,32 +42,32 @@ export default function CreatePackage() {
         let name_id = generateUUID(fancy_name_to_id(name))
         pkg_id = name_id;
         let extension = pkgUpload.type.replace(/(.*)\//g, '')
-        let pkgRef = ref(storage, "users/" + uid + "/" + name_id + "/pkg/" + fancy_name_to_id(name) + "." + extension)
+        let pkgRef = ref(storage, "users/" + uid + "/packages/" + name_id + "/pkg/" + fancy_name_to_id(name) + "." + extension)
         await uploadBytes(pkgRef, pkgUpload).then(() => {
             document.getElementById("publish-btn").innerHTML = "UPLOADING... => █▒▒▒▒▒▒▒▒▒▒▒▒▒ 7%"
         });
 
-        let bannerRef = ref(storage, "users/" + uid + "/" + name_id + "/img/banner/" + banner.name)
+        let bannerRef = ref(storage, "users/" + uid + "/packages/" + name_id + "/img/banner/" + banner.name)
         await uploadBytes(bannerRef, banner).then(() => {
             document.getElementById("publish-btn").innerHTML = "UPLOADING... => ██▒▒▒▒▒▒▒▒▒▒▒▒ 14%"
         })
 
-        let imgRefOne = ref(storage, "users/" + uid + "/" + name_id + "/img/one/" + (imgUpload0ne.name ?? ("screenone" + imgUpload0ne.type)))
+        let imgRefOne = ref(storage, "users/" + uid + "/packages/" + name_id + "/img/one/" + (imgUpload0ne.name ?? ("screenone" + imgUpload0ne.type)))
         await uploadBytes(imgRefOne, imgUpload0ne).then(() => {
             document.getElementById("publish-btn").innerHTML = "UPLOADING... => ███▒▒▒▒▒▒▒▒▒▒▒ 21%"
         })
 
-        let imgRefTwo = ref(storage, "users/" + uid + "/" + name_id + "/img/two/" + imgUploadTwo.name ?? ("screentwo" + imgUpload0ne.type))
+        let imgRefTwo = ref(storage, "users/" + uid + "/packages/" + name_id + "/img/two/" + imgUploadTwo.name ?? ("screentwo" + imgUpload0ne.type))
         await uploadBytes(imgRefTwo, imgUploadTwo).then(() => {
             document.getElementById("publish-btn").innerHTML = "UPLOADING... => ████▒▒▒▒▒▒▒▒▒▒ 28%"
         })
 
-        let imgRefThree = ref(storage, "users/" + uid + "/" + name_id + "/img/three/" + imgUploadThree.name ?? ("screenthree" + imgUpload0ne.type))
+        let imgRefThree = ref(storage, "users/" + uid + "/packages/" + name_id + "/img/three/" + imgUploadThree.name ?? ("screenthree" + imgUpload0ne.type))
         await uploadBytes(imgRefThree, imgUploadThree).then(() => {
             document.getElementById("publish-btn").innerHTML = "UPLOADING... => █████▒▒▒▒▒▒▒▒▒ 35%"
         })
 
-        let imgRefFour = ref(storage, "users/" + uid + "/" + name_id + "/img/four/" + imgUploadFour.name ?? ("screenfour" + imgUpload0ne.type))
+        let imgRefFour = ref(storage, "users/" + uid + "/packages/" + name_id + "/img/four/" + imgUploadFour.name ?? ("screenfour" + imgUpload0ne.type))
         await uploadBytes(imgRefFour, imgUploadFour).then(() => {
             document.getElementById("publish-btn").innerHTML = "UPLOADING... => ██████▒▒▒▒▒▒▒▒ 42%"
         })

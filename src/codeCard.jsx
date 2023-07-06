@@ -7,7 +7,7 @@ export default function CodeCard(props) {
     const navigate = useNavigate();
     let bannerRef = React.createRef();
 
-    function generateRandom(min = 0, max = 100) {
+    function generateRandom(min = 50, max = 100) {
 
         // find diff
         let difference = max - min;
@@ -24,8 +24,32 @@ export default function CodeCard(props) {
         return rand;
     }
 
+    function getDarkColor() {
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += Math.floor(Math.random() * 10);
+        }
+        let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(color);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    }
+
+    // function hexToRgb(hex) {
+    //     let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    //     return result ? {
+    //         r: parseInt(result[1], 16),
+    //         g: parseInt(result[2], 16),
+    //         b: parseInt(result[3], 16)
+    //     } : null;
+    // }
+
     useEffect(() => {
         bannerRef.current.style.backgroundSize = generateRandom() + "%"
+        bannerRef.current.style.backgroundImage = "radial-gradient(at 22% 68%, rgb(" + getDarkColor().r + "," + getDarkColor().g + "," + getDarkColor().b + ") 0, transparent 97%), radial-gradient(at 96% 5%, rgb(24, 41, 227) 0, transparent 84%), radial-gradient(at 17% 34%, rgb(" + getDarkColor().r + "," + getDarkColor().g + "," + getDarkColor().b + ") 0, transparent 42%), radial-gradient(at 33% 33%, rgb(" + getDarkColor().r + "," + getDarkColor().g + "," + getDarkColor().b + ") 0, transparent 62%), radial-gradient(at 71% 34%, rgb(" + getDarkColor().r + "," + getDarkColor().g + "," + getDarkColor().b + ") 0, transparent 50%), radial-gradient(at 14% 98%, rgb(" + getDarkColor().r + "," + getDarkColor().g + "," + getDarkColor().b + ") 0, transparent 57%)"
+        console.log(getDarkColor())
     }, []);
 
     return (

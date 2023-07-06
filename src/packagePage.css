@@ -17,6 +17,16 @@
     position: absolute
 }
 
+.package-author-link {
+    color: #b9c9ff;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.package-author-link:hover {
+    color: white;
+}
+
 .package-title {
     font-weight: 700;
     font-size: 55px;
@@ -130,6 +140,23 @@
     transform-origin: center center;
     border-radius: 8px;
     overflow: hidden;
+}
+
+.package-edit-btn {
+    background-color: white !important;
+    color: black !important;
+    padding: 15px 30px !important;
+    right: 15px !important;
+    bottom: 15px !important;
+    transform-origin: bottom right !important;
+    border: 0 !important;
+    cursor: pointer !important;
+    transition: 0.3s !important;
+}
+
+.package-edit-btn:hover {
+    background-color: black !important;
+    color: white !important;
 }
 
 .package-download-btn:hover {

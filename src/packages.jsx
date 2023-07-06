@@ -69,7 +69,7 @@ export default function Packages() {
         console.log("HEYYYYA")
         if (user_data) {
             console.log(user_data.interests)
-            const q2 = query(collection(db, "users"), where("interests", "array-contains-any", Array.from(user_data.interests)), orderBy("downloads", "desc"), limit(9));
+            const q2 = query(collection(db, "packages"), where("interests", "array-contains-any", Array.from(user_data.interests)), orderBy("downloads", "desc"), limit(9));
             getDocs(q2).then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     console.log("fuck yeah")

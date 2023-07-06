@@ -63,7 +63,7 @@ export default function EditPackage(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/" + pkg.id + "/img/banner/" + bannerUpload.name)
+            let uploadRef = ref(storage, "users/" + uid + "/pkg/" + pkg.id + "/img/banner/" + bannerUpload.name)
             await uploadBytes(uploadRef, bannerUpload).then(() => {
                 console.log("banner uploaded")
             })
@@ -77,7 +77,7 @@ export default function EditPackage(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/" + pkg.id + "/img/one/" + imgUpload0ne.name)
+            let uploadRef = ref(storage, "users/" + uid + "/pkg/" + pkg.id + "/img/one/" + imgUpload0ne.name)
             await uploadBytes(uploadRef, imgUpload0ne).then(() => {
                 console.log("img one uploaded")
             })
@@ -91,7 +91,7 @@ export default function EditPackage(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/" + pkg.id + "/img/two/" + imgUploadTwo.name)
+            let uploadRef = ref(storage, "users/" + uid + "/pkg/" + pkg.id + "/img/two/" + imgUploadTwo.name)
             await uploadBytes(uploadRef, imgUploadTwo).then(() => {
                 console.log("img two uploaded")
             })
@@ -104,7 +104,7 @@ export default function EditPackage(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/" + pkg.id + "/img/three/" + imgUploadThree.name)
+            let uploadRef = ref(storage, "users/" + uid + "/pkg/" + pkg.id + "/img/three/" + imgUploadThree.name)
             await uploadBytes(uploadRef, imgUploadThree).then(() => {
                 console.log("img three uploaded")
             })
@@ -117,7 +117,7 @@ export default function EditPackage(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/" + pkg.id + "/img/four/" + imgUploadFour.name)
+            let uploadRef = ref(storage, "users/" + uid + "/pkg/" + pkg.id + "/img/four/" + imgUploadFour.name)
             await uploadBytes(uploadRef, imgUploadFour).then(() => {
                 console.log("img four uploaded")
             })
@@ -130,7 +130,7 @@ export default function EditPackage(props) {
             await deleteObject(pkgRef).then(() => {
                 console.log("deleted pkg")
             })
-            let pkgUploadRef = ref(storage, "users/" + uid + "/" + pkg.id + "/pkg/" + pkgUpload.name)
+            let pkgUploadRef = ref(storage, "users/" + uid + "/pkg/" + pkg.id + "/pkg/" + pkgUpload.name)
             await uploadBytes(pkgUploadRef, pkgUpload).then(() => {
                 console.log("pkg uploaded")
             })

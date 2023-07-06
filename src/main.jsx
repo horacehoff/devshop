@@ -23,6 +23,7 @@ import EditPackage from "./editPackage.jsx";
 import SearchPackages from "./searchPackages.jsx";
 import CodeBlocks from "./codeBlocks.jsx";
 import CreateCodeBlock from "./createCodeBlock.jsx";
+import CodeBlockPage from "./codeBlockPage.jsx";
 
 function App() {
     return (
@@ -52,6 +53,7 @@ function App() {
                 <Route path="/about" element={<About/>}/>
                 <Route path="/packages/:id" element={<PackagePage/>}/>
                 <Route path="/packages/:id/edit" element={<EditPackage/>}/>
+                <Route path="/codeblocks/:id/" element={<CodeBlockPage/>}/>
                 <Route path="/users/:id" element={<AccountPage/>}/>
             </Routes>
         </BrowserRouter>

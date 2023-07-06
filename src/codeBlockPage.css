@@ -1,0 +1,54 @@
+.code-block-title {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.code-screenshots {
+    top: 75px !important;
+    -ms-overflow-style: none;
+}
+
+.code-forward-btn {
+    position: absolute;
+    top: 330px;
+    right: 0;
+    z-index: 1000;
+    outline: 0;
+    border: 0;
+    background: transparent;
+    color: gainsboro;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.code-forward-btn:hover {
+    color: white;
+    scale: 1.1;
+}
+
+.code-screenshots::-webkit-scrollbar {
+    display: none;
+}
+
+#codescreenshotbreak {
+    display: none;
+}
+
+.code-img:not(:first-child) {
+    margin-left: 10px;
+}
+
+@media screen and (max-width: 1250px) {
+    .code-characteristics-label {
+        top: 810px;
+    }
+
+    .code-characteristics {
+        top: 820px;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .code-forward-btn {
+        display: none !important;
+    }
+}
