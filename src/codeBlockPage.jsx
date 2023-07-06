@@ -12,12 +12,10 @@ import MDEditor from '@uiw/react-md-editor';
 
 export default function CodeBlockPage() {
     const [codeBlock, setCodeBlock] = useState(null);
-
     const [uid, set_uid] = useState("");
     let baseStyle = {}
     const navigate = useNavigate();
 
-    const [is_logged_in, set_is_logged_in] = useState(false);
     const [new_downloads, set_new_downloads] = useState(0);
 
 
@@ -35,30 +33,20 @@ export default function CodeBlockPage() {
     }
 
 
+
     onAuthStateChanged(auth, (user) => {
         if (user && codeBlock !== null) {
-            set_is_logged_in(true);
             set_uid(user.uid)
-            console.log("PKG: " + codeBlock.owner_id)
-            console.log("UID: " + uid)
             if (uid === codeBlock.owner_id) {
                 document.getElementById("package-download-btn").innerHTML = "EDIT"
                 document.getElementById("package-download-btn").classList.add("package-edit-btn")
-                document.getElementById("package-download-btn").onclick = () => {
-                    navigate("/packages/" + codeBlock.id + "/edit", {state: {pkg: codeBlock}})
-                }
                 document.getElementById("package-download-side").style.display = "block"
-
             }
-        } else {
-            set_is_logged_in(false);
         }
     });
 
     const params_id = useParams().id;
     useEffect(() => {
-        // document.getElementById("body").style.backgroundImage = "none"
-        // document.getElementById("root").style.backgroundImage = "none"
         if (codeBlock === null) {
             getDoc(doc(db, "code-blocks", params_id)).then((doc) => {
                 if (doc.exists()) {
@@ -197,7 +185,14 @@ export default function CodeBlockPage() {
                                                        to={"/users/" + fancy_name_to_id(codeBlock.owner_username)}>{codeBlock.owner_username}</Link>
             </h3>
             <button className="package-download-btn" id="package-download-btn"
-                    onClick={() => downloadCode()}>{"DOWNLOAD -> 0$"}</button>
+                    onClick={() => {
+                        if (uid === codeBlock.owner_id) {
+                            navigate("/codeblocks/" + codeBlock.id + "/edit", {state: {pkg: codeBlock}})
+                        } else {
+                            downloadCode()
+                        }
+                    }
+                    }>{"DOWNLOAD -> 0$"}</button>
             <p className="package-description-label">// 01 - DESCRIPTION</p>
             <p className="package-description">{
                 <MDEditor.Markdown source={codeBlock.description} className="package-desc-md"/>
@@ -214,7 +209,7 @@ export default function CodeBlockPage() {
             }}>{">>"}</button>
             <p className="package-characteristics-label code-characteristics-label"></p>
             <div className="package-characteristics code-characteristics">
-                <p>TOTAL DOWNLOADS: {shortNumber(codeBlock.downloads)}<br/>{codeBlock.lines} LINES<br/>AVERAGE
+                <p>TOTAL DOWNLOADS: {shortNumber(codeBlock.downloads)}<br/>{codeBlock.lines} LINES OF CODE<br/>AVERAGE
                     HAPPINESS: <span
                         id="happiness_num">xx.x</span><br/>↳ <span id="review_num">5</span> <span
                         id="review_num_plural">ratings</span>
