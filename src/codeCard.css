@@ -28,4 +28,10 @@
 
 .code-description {
     overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.code-description::-webkit-scrollbar {
+    display: none;
 }
