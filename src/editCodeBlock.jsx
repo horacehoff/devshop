@@ -324,6 +324,7 @@ export default function EditCodeBlock(props) {
                                 document.getElementById("delete-pkg-btn").innerHTML = "CONFIRM (!)"
                             } else if (delete_btn_content === "CONFIRM (!)") {
                                 document.getElementById("delete-pkg-btn").innerHTML = "DELETING..."
+                                console.log("DELETING IMAGES")
                                 // get the ref of every package screenshot and the ref of the package itself
                                 const imgOneRef = ref(storage, codeBlock.screenshots[0]);
                                 await deleteObject(imgOneRef).then(() => {
@@ -344,6 +345,7 @@ export default function EditCodeBlock(props) {
                                 await deleteObject(imgFourRef).then(() => {
                                     console.log("deleted")
                                 })
+                                console.log("DELETED IMAGES")
                                 // remove the package from owned_packages
                                 const userRef = doc(db, "users", uid)
                                 // remove this package from the user's owned_packages
@@ -352,6 +354,7 @@ export default function EditCodeBlock(props) {
                                         const data = doc.data()
                                         let owned_packages = data.owned_codeblocks
                                         owned_packages.splice(owned_packages.indexOf(codeBlock.id), 1)
+                                        console.log("modifiying owned_packages")
                                         await setDoc(userRef, {
                                             owned_packages: owned_packages
                                         }, {merge: true}).then(() => {
@@ -359,11 +362,13 @@ export default function EditCodeBlock(props) {
                                         })
                                     }
                                 })
+                                console.log("got user doc")
                                 // delete the package from the database
+                                console.log("deleting codeblock from db")
                                 await deleteDoc(doc(db, "code-blocks", codeBlock.id)).then(() => {
                                     console.log("deleted codeblock from db")
                                 }).then(() => {
-                                    navigate("/codeblocks")
+                                    navigate("/code-blocks")
                                     window.location.reload()
                                 })
 
