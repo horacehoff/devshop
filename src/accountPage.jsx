@@ -102,7 +102,7 @@ export default function AccountPage(props) {
             }}>{usr.github}</span></span></p>
             <p className="user_bio">{usr.bio}</p>
             <h2 className="user_packages_title">PACKAGES</h2>
-            <ul className="packages-card-list" id="packages-card-list" style={{marginTop: "450px"}}>
+            <ul className="packages-card-list" id="packages-card-list" style={{marginTop: "460px"}}>
                 {usrPackages.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">
                         <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
@@ -112,8 +112,15 @@ export default function AccountPage(props) {
                     </li>
                 ))}
             </ul>
-            <h2 className="user_packages_title">CODE BLOCKS</h2>
-            <ul className="packages-card-list" id="packages-card-list" style={{marginTop: "450px"}}>
+            <br/>
+            <h2 style={{
+                marginLeft: "35px",
+                fontSize: "27px",
+                width: "calc(100% - 50px)",
+                marginBottom: "10px",
+                paddingRight: "15px"
+            }}>CODE BLOCKS</h2>
+            <ul className="packages-card-list" id="packages-card-list">
                 {usrCodeBlocks.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">
                         <Link to={"/codeblocks/" + pkg.id} style={{textDecoration: "none", color: "white"}}>

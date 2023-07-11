@@ -88,12 +88,12 @@
 
 .user_packages_title {
     font-family: "JetBrains Mono", monospace;
-    font-size: 30px;
+    font-size: 27px;
     margin: 0;
     position: relative;
     top: 450px;
     left: 35px;
-    font-weight: 600;
+    font-weight: 700;
     padding: 0 15px 0 0;
     width: calc(100% - 50px);
 }

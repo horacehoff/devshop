@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 import fancy_name_to_id, {interests_data, profanityFilter} from "./utility.js";
 import {doc, setDoc} from "firebase/firestore";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
+import {checkIfUsernameExists} from "./signup.jsx";
 
 export default function AccountSettings() {
     const [NewUserName, setNewUserName] = useState("");
@@ -131,6 +132,12 @@ export default function AccountSettings() {
     }
 
     const updateProfile = async () => {
+        if (baseUserName !== NewUserName) {
+            if (await checkIfUsernameExists(NewUserName)) {
+                document.getElementById("profile-error-txt").style.display = "block";
+                throw new Error("Username already exists");
+            }
+        }
         if (NewBio !== baseBio || NewGithub !== "" || NewUserName !== baseUserName) {
             console.log("PROFILE UPDATED")
             await updateAccount()
@@ -161,9 +168,7 @@ export default function AccountSettings() {
                     });
                 }
             })
-
         }
-
     }
 
 
@@ -282,15 +287,24 @@ export default function AccountSettings() {
                         <input type="text" className="txt-input section-input" placeholder="your-github-username"
                                value={NewGithub} onChange={e => setNewGithub(e.target.value)}/>
                         <br/>
+                        <p className="profile-error-txt" id="profile-error-txt">// USERNAME ALREADY EXISTS</p>
                         <button id="profile-save-btn" className="btn-primary save-btn"
-                                onClick={async () => await updateProfile().then(() => {
-                                    document.getElementById("profile-save-btn").innerHTML = "SAVED ✅";
-                                    // wait 1 second
-                                    setTimeout(() => {
-                                        document.getElementById("profile-save-btn").innerHTML = "SAVE";
-                                        navigate("/users/" + fancy_name_to_id(user_data.username))
-                                    }, 1000);
-                                })}>SAVE
+                                onClick={async () => {
+                                    try {
+                                        await updateProfile().then(() => {
+                                            document.getElementById("profile-save-btn").innerHTML = "SAVED ✅";
+                                            // wait 1 second
+                                            setTimeout(() => {
+                                                document.getElementById("profile-save-btn").innerHTML = "SAVE";
+                                                navigate("/users/" + fancy_name_to_id(user_data.username))
+                                            }, 1000);
+                                        })
+                                    } catch (error) {
+                                        setTimeout(() => {
+                                            document.getElementById("profile-error-txt").style.display = "none";
+                                        }, 5000);
+                                    }
+                                }}>SAVE
                         </button>
                     </div>
                 </div>
