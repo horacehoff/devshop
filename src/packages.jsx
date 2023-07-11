@@ -3,7 +3,7 @@ import {collection, getDocs, limit, orderBy, query, setLogLevel, where} from "fi
 import {Link, useNavigate} from "react-router-dom";
 import PackageCard from "./packageCard.jsx";
 import shortNumber from "short-number";
-import {IoMdSearch} from "react-icons/all.js";
+import {IoMdSearch} from "react-icons/io";
 import {useEffect, useState} from "react";
 import {db, user_data} from "./firebase.js";
 
@@ -92,8 +92,9 @@ export default function Packages() {
             </Link>
             <Link className="package-publish-btn" id="package-search-btn"
                   style={{marginLeft: "10px", maxWidth: "150px"}}
-                  to="/packages/q/"><IoMdSearch
-                style={{position: "relative", top: "1px"}}/> SEARCH PACKAGES
+                  to="/packages/q/">
+                <IoMdSearch
+                    style={{position: "relative", top: "1px"}}/> SEARCH PACKAGES
             </Link>
             <div id="for-you-section">
                 <h2 className="category-title">// FOR YOU</h2>

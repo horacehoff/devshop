@@ -28,14 +28,6 @@ export default function AccountPage(props) {
                     console.log("usr: ", usr)
                 })
             })
-            // getDoc(doc(db, "users", params_id)).then((doc) => {
-            //     if (doc.exists()) {
-            //         setUsr(doc.data());
-            //         console.log("usr: ", usr)
-            //     } else {
-            //         navigate("/packages")
-            //     }
-            // })
         }
         if (usr !== null) {
             document.title = usr.username + " - DEVSHOP";
