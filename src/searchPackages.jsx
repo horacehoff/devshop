@@ -1,5 +1,5 @@
 import "./searchPackages.css"
-import {IoMdSearch} from "react-icons/all.js";
+import {IoMdSearch} from "react-icons/io";
 import {useEffect, useState} from "react";
 import PackageCard from "./packageCard.jsx";
 import shortNumber from "short-number";

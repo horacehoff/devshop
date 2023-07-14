@@ -1,5 +1,5 @@
 import "./searchPackages.css"
-import {IoMdSearch} from "react-icons/all.js";
+import {IoMdSearch} from "react-icons/io";
 import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import {collection, getDocs, query, where} from "firebase/firestore";
