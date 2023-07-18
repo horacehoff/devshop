@@ -295,10 +295,25 @@
     }
 }
 
+@media screen and (max-width: 565px) {
+    .split-two-card {
+        display: none;
+    }
+
+    .about-title {
+        display: block;
+    }
+
+    .about-title-card {
+        display: none !important;
+    }
+}
+
 @media screen and (min-width: 390px) {
     .publish-btn {
         width: 370px;
     }
+
     .centered {
         margin-left: 15px;
     }
