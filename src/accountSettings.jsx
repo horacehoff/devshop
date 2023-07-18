@@ -231,7 +231,7 @@ export default function AccountSettings() {
                         })
                     }
                     <br/>
-                    <button id="interests-save-btn" className="btn-primary save-btn"
+                    <button id="interests-save-btn" className="primary save-btn"
                             onClick={async () => {
                                 let final_interests = [];
                                 let interests = document.getElementsByClassName("interest");
@@ -288,7 +288,7 @@ export default function AccountSettings() {
                                value={NewGithub} onChange={e => setNewGithub(e.target.value)}/>
                         <br/>
                         <p className="profile-error-txt" id="profile-error-txt">// USERNAME ALREADY EXISTS</p>
-                        <button id="profile-save-btn" className="btn-primary save-btn"
+                        <button id="profile-save-btn" className="primary save-btn"
                                 onClick={async () => {
                                     try {
                                         await updateProfile().then(() => {
@@ -320,7 +320,7 @@ export default function AccountSettings() {
                         <input type="text" className="txt-input section-input" value={NewPassword}
                                onChange={e => setNewPassword(e.target.value)}/>
                         <br/>
-                        <button id="pwd-save-btn" className="btn-primary save-btn"
+                        <button id="pwd-save-btn" className="primary save-btn"
                                 onClick={async () => await updatePassword().then(() => {
                                     document.getElementById("pwd-save-btn").innerHTML = "SAVED ✅";
                                     // wait 1 second

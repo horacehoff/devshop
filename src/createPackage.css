@@ -1,3 +1,87 @@
+.split {
+    position: absolute;
+    padding: 0;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+
+.split-one {
+    float: left;
+    width: 65%;
+    z-index: -1;
+}
+
+.split-two {
+    float: right;
+    width: 35%;
+    background-color: #161C5B;
+    height: 113%;
+    right: 0;
+    top: 0;
+    z-index: -1;
+}
+
+.split-two-card {
+    position: fixed;
+    top: calc(50% - 75px);
+    right: 4%;
+}
+
+.about-title-card {
+    display: none;
+}
+
+@media screen and (max-width: 1660px) {
+    .split-two-card {
+        right: 3%
+    }
+}
+
+@media screen and (max-width: 1570px) {
+    .split-two-card {
+        right: 2%
+    }
+}
+
+@media screen and (max-width: 1455px) {
+    .split-one {
+        float: none;
+        display: block;
+        width: 100vw;
+        left: 0;
+    }
+
+    .split-two {
+        float: none;
+        display: block;
+        width: 100%;
+        height: fit-content;
+        margin-bottom: 15px;
+    }
+
+    .split-two-card {
+        position: relative;
+        left: calc(50% - 240px);
+    }
+
+    .about-title {
+        display: none;
+    }
+
+    .about-title-card {
+        display: block !important;
+    }
+}
+
+
+.about-title {
+    text-align: center;
+}
+
+
 .name-input {
     font-size: 70px;
     font-weight: bold;
@@ -83,17 +167,9 @@
 
 .publish-btn {
     width: calc(100vw - 20px);
-    height: 50px;
-    background-color: #282828;
-    border: 0;
-    border-radius: 5px;
-    color: #fff;
-    font-weight: 600;
-    font-size: 16px;
-    top: 440px;
-    cursor: pointer;
-    transition: 0.25s ease-in-out;
-    font-family: 'JetBrains Mono', monospace;
+    height: 50px !important;
+    font-size: 16px !important;
+    top: 440px !important;
 }
 
 /*.publish-btn:before {*/
@@ -154,8 +230,9 @@
 }
 
 .create-package-interest-data {
-    font-size: 17px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 400 !important;
+    font-family: "JetBrains Mono", monospace;
     color: white;
     margin-top: -10px;
 }
@@ -200,11 +277,12 @@
         position: relative;
         padding-right: 0;
         margin-left: -15px;
-        width: calc(100vw - 15px);
+        width: calc(100vw);
     }
 
     .publish-btn {
-        margin-left: calc(50vw - 207px);
+        margin-left: 50%;
+        transform: translate(-50%);
     }
 }
 

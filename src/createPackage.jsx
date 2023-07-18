@@ -8,6 +8,7 @@ import {doc, getDoc, setDoc} from "firebase/firestore";
 import fancy_name_to_id, {generateUUID, interests_data, profanityFilter} from "./utility.js";
 import MDEditor from '@uiw/react-md-editor';
 import {BiCloudUpload} from "react-icons/bi";
+import PackageCard from "./packageCard.jsx";
 
 export default function CreatePackage() {
     const [pkgUpload, setPkgUpload] = useState(null);
@@ -156,106 +157,121 @@ export default function CreatePackage() {
         }
     }
 
+
     return (
         <>
-            <h1 className="about-title">PUBLISH A PACKAGE</h1>
-            <div className="centered">
-                <h2 style={{margin: "0", fontWeight: "400", fontSize: "18px"}}>// GENERAL INFO</h2>
-                <input type="text" className="name-input" placeholder="NAME" value={name}
-                       onChange={e => setName(e.target.value)}/>
-                <input type="text" className="desc-input" placeholder="CATCHPHRASE"
-                       style={{marginBottom: "10px"}} value={desc} onChange={e => setDesc(e.target.value)}/>
+            <div className="split">
+                <div className="split-two" id="split-two">
+                    <h1 className="about-title about-title-card">PUBLISH A PACKAGE</h1>
+                    <div className="split-two-card">
+                        <PackageCard dwnl="0" author="your username" name="placeholder"
+                                     catchphrase="placeholder" banner="test"/>
+                    </div>
+                </div>
+                <div className="split-one">
+                    <h1 className="about-title">PUBLISH A PACKAGE</h1>
+                    <div className="centered">
+                        <h2 style={{margin: "0", fontWeight: "400", fontSize: "18px"}}>// GENERAL INFO</h2>
+                        <input type="text" className="name-input" placeholder="NAME" value={name}
+                               onChange={e => setName(e.target.value)}/>
+                        <input type="text" className="desc-input" placeholder="CATCHPHRASE"
+                               style={{marginBottom: "10px"}} value={desc} onChange={e => setDesc(e.target.value)}/>
 
-                <div className="md-editor-container">
-                    <MDEditor
-                        value={longDesc}
-                        onChange={setLongDesc}
-                        height={350}
-                        style={{borderRadius: "4px", border: "none", outline: "none"}}
-                    />
+                        <div className="md-editor-container">
+                            <MDEditor
+                                value={longDesc}
+                                onChange={setLongDesc}
+                                height={350}
+                                style={{borderRadius: "4px", border: "none", outline: "none"}}
+                            />
+                        </div>
+
+
+                        <input type="file" id="banner-file" style={{display: "none"}} onChange={(event) => {
+                            setBanner(event.target.files[0])
+                            console.log("banner")
+                            document.getElementById("banner-upload").innerHTML = "✅ UPLOAD BANNER"
+                        }} accept=".jpeg,.webp, image/jpeg" required/>
+                        <div className="upload-section">
+                            <label htmlFor="banner-file" className="file-input" id="banner-upload"><BiCloudUpload
+                                className="file-input-icon"></BiCloudUpload>UPLOAD BANNER</label>
+                            <label htmlFor="file" className="file-input" id="file-upload"><BiCloudUpload
+                                className="file-input-icon"></BiCloudUpload>UPLOAD PACKAGE</label>
+                            <label htmlFor="img-file" className="file-input" id="gallery-upload"><BiCloudUpload
+                                className="file-input-icon"></BiCloudUpload>UPLOAD IMAGES(4)</label>
+                            <br/>
+
+                        </div>
+                        <input type="text" className="desc-input" placeholder="PACKAGE VERSION"
+                               style={{marginTop: "20px", marginBottom: "30px", fontSize: "20px"}} value={version}
+                               onChange={e => setVersion(e.target.value)}/>
+                        {/*<h2 style={{margin: "0", marginTop: "40px", marginBottom: "0"}}>// PACKAGE</h2>*/}
+
+                        <input type="file" id="file" style={{display: "none"}} onChange={(event) => {
+                            setPkgUpload(event.target.files[0])
+                            console.log("pkg")
+                            document.getElementById("file-upload").innerHTML = "✅ UPLOAD PACKAGE"
+                        }} accept=".zip, application/zip" required/>
+
+
+                        {/*<h2 style={{margin: "0", marginTop: "25px", marginBottom: "-10px"}}>// GALLERY IMAGES (MAX{'=>'}4)</h2>*/}
+                        <input type="file" id="img-file" style={{display: "none"}} multiple onChange={(event) => {
+                            console.log(event.target.files[0])
+                            setImgUploadOne(event.target.files[0])
+                            setImgUploadTwo(event.target.files[1])
+                            setImgUploadThree(event.target.files[2])
+                            setImgUploadFour(event.target.files[3])
+                            console.log("img")
+                            if (event.target.files.length === 4) {
+                                document.getElementById("gallery-upload").innerHTML = "✅ UPLOAD IMAGES(4)"
+                            }
+                        }} required accept=".png,.jpeg,.webp, image/jpeg, image/png"/>
+                        <br/><br/>
+                        <p className="create-package-interest-data">// CATEGORIES</p>
+                        <div className="create-package-interest-div">
+                            {
+                                interests_data.map((interest, index) => {
+                                    return (
+                                        <div className="interestpkg" id={"interest" + index} onClick={() => {
+                                            handleInterestClick(index);
+                                        }}>
+                                            {interest}
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                        <br/>
+                        <button onMouseEnter={() => {
+                            if (document.getElementById("publish-btn").style.pointerEvents !== "none") {
+                                document.getElementById("publish-btn").innerHTML = ">> PUBLISH PACKAGE <<"
+                            }
+                        }} onMouseLeave={() => {
+                            if (document.getElementById("publish-btn").style.pointerEvents !== "none") {
+                                document.getElementById("publish-btn").innerHTML = "PUBLISH PACKAGE"
+                            }
+                        }} onClick={() => {
+                            if (name === "") {
+                                alert("Invalid name")
+                            } else if (pkgUpload == null) {
+                                alert("Please select a file.")
+                            } else {
+                                document.getElementById("publish-btn").style.pointerEvents = "none"
+                                document.getElementById("publish-btn").innerHTML = "UPLOADING... => ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 0%"
+                                upload().then(name_id => {
+                                    navigate("/packages/" + pkg_id)
+                                    window.location.reload()
+                                })
+                            }
+                        }} className="primary publish-btn" id="publish-btn">
+                            PUBLISH PACKAGE
+                        </button>
+                    </div>
                 </div>
 
-
-                <input type="file" id="banner-file" style={{display: "none"}} onChange={(event) => {
-                    setBanner(event.target.files[0])
-                    console.log("banner")
-                    document.getElementById("banner-upload").innerHTML = "✅ UPLOAD BANNER"
-                }} accept=".jpeg,.webp, image/jpeg" required/>
-                <div className="upload-section">
-                    <label htmlFor="banner-file" className="file-input" id="banner-upload"><BiCloudUpload
-                        className="file-input-icon"></BiCloudUpload>UPLOAD BANNER</label>
-                    <label htmlFor="file" className="file-input" id="file-upload"><BiCloudUpload
-                        className="file-input-icon"></BiCloudUpload>UPLOAD PACKAGE</label>
-                    <label htmlFor="img-file" className="file-input" id="gallery-upload"><BiCloudUpload
-                        className="file-input-icon"></BiCloudUpload>UPLOAD IMAGES(4)</label>
-                    <br/>
-
-                </div>
-                <input type="text" className="desc-input" placeholder="PACKAGE VERSION"
-                       style={{marginTop: "20px", marginBottom: "30px", fontSize: "20px"}} value={version}
-                       onChange={e => setVersion(e.target.value)}/>
-                {/*<h2 style={{margin: "0", marginTop: "40px", marginBottom: "0"}}>// PACKAGE</h2>*/}
-
-                <input type="file" id="file" style={{display: "none"}} onChange={(event) => {
-                    setPkgUpload(event.target.files[0])
-                    console.log("pkg")
-                    document.getElementById("file-upload").innerHTML = "✅ UPLOAD PACKAGE"
-                }} accept=".zip, application/zip" required/>
-
-
-                {/*<h2 style={{margin: "0", marginTop: "25px", marginBottom: "-10px"}}>// GALLERY IMAGES (MAX{'=>'}4)</h2>*/}
-                <input type="file" id="img-file" style={{display: "none"}} multiple onChange={(event) => {
-                    console.log(event.target.files[0])
-                    setImgUploadOne(event.target.files[0])
-                    setImgUploadTwo(event.target.files[1])
-                    setImgUploadThree(event.target.files[2])
-                    setImgUploadFour(event.target.files[3])
-                    console.log("img")
-                    if (event.target.files.length === 4) {
-                        document.getElementById("gallery-upload").innerHTML = "✅ UPLOAD IMAGES(4)"
-                    }
-                }} required accept=".png,.jpeg,.webp, image/jpeg, image/png"/>
-                <br/><br/>
-                <p className="create-package-interest-data">CATEGORIES</p>
-                <div className="create-package-interest-div">
-                    {
-                        interests_data.map((interest, index) => {
-                            return (
-                                <div className="interestpkg" id={"interest" + index} onClick={() => {
-                                    handleInterestClick(index);
-                                }}>
-                                    {interest}
-                                </div>
-                            )
-                        })
-                    }
-                </div>
-                <br/>
-                <button onMouseEnter={() => {
-                    if (document.getElementById("publish-btn").style.pointerEvents !== "none") {
-                        document.getElementById("publish-btn").innerHTML = ">> PUBLISH PACKAGE <<"
-                    }
-                }} onMouseLeave={() => {
-                    if (document.getElementById("publish-btn").style.pointerEvents !== "none") {
-                        document.getElementById("publish-btn").innerHTML = "PUBLISH PACKAGE"
-                    }
-                }} onClick={() => {
-                    if (name === "") {
-                        alert("Invalid name")
-                    } else if (pkgUpload == null) {
-                        alert("Please select a file.")
-                    } else {
-                        document.getElementById("publish-btn").style.pointerEvents = "none"
-                        document.getElementById("publish-btn").innerHTML = "UPLOADING... => ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 0%"
-                        upload().then(name_id => {
-                            navigate("/packages/" + pkg_id)
-                            window.location.reload()
-                        })
-                    }
-                }} className="publish-btn" id="publish-btn">
-                    PUBLISH PACKAGE
-                </button>
             </div>
+
+
         </>
     )
 }

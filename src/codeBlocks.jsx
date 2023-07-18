@@ -86,10 +86,10 @@ export default function CodeBlocks() {
     return (
         <>
             <h1 className="packages-title code-blocks-title">CODE<br/>BLOCKS</h1>
-            <Link className="package-publish-btn" id="package-publish-btn"
+            <Link className="secondary search-btn" id="package-publish-btn"
                   to="/publish-code-block">+ PUBLISH A CODE BLOCK
             </Link>
-            <Link className="package-publish-btn" id="package-search-btn"
+            <Link className="secondary search-btn" id="package-search-btn"
                   style={{marginLeft: "10px", maxWidth: "173px"}}
                   to="/codeblocks/q/"><IoMdSearch
                 style={{position: "relative", top: "1px"}}/> SEARCH CODE BLOCKS
