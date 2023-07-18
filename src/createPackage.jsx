@@ -157,6 +157,8 @@ export default function CreatePackage() {
         }
     }
 
+    const [bannerURL, setBannerURL] = useState("");
+
 
     return (
         <>
@@ -164,8 +166,8 @@ export default function CreatePackage() {
                 <div className="split-two" id="split-two">
                     <h1 className="about-title about-title-card">PUBLISH A PACKAGE</h1>
                     <div className="split-two-card">
-                        <PackageCard dwnl="0" author="your username" name="placeholder"
-                                     catchphrase="placeholder" banner="test"/>
+                        <PackageCard dwnl="0" author="your username" name={name || "placeholder"}
+                                     catchphrase={desc || "placeholder"} banner={bannerURL}/>
                     </div>
                 </div>
                 <div className="split-one">
@@ -189,7 +191,7 @@ export default function CreatePackage() {
 
                         <input type="file" id="banner-file" style={{display: "none"}} onChange={(event) => {
                             setBanner(event.target.files[0])
-                            console.log("banner")
+                            setBannerURL(URL.createObjectURL(event.target.files[0]))
                             document.getElementById("banner-upload").innerHTML = "✅ UPLOAD BANNER"
                         }} accept=".jpeg,.webp, image/jpeg" required/>
                         <div className="upload-section">
