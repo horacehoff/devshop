@@ -9,6 +9,7 @@ import {doc, getDoc, setDoc} from "firebase/firestore";
 import fancy_name_to_id, {generateUUID, interests_data, profanityFilter} from "./utility.js";
 import MDEditor from '@uiw/react-md-editor';
 import {BiCloudUpload} from "react-icons/bi";
+import CodeCard from "./codeCard.jsx";
 
 export default function CreateCodeBlock() {
     const [pkgUpload, setPkgUpload] = useState(null);
@@ -143,84 +144,96 @@ export default function CreateCodeBlock() {
 
     return (
         <>
-            <h1 className="about-title">PUBLISH A CODE BLOCK</h1>
-            <div className="centered">
-                <h2 style={{margin: "0", fontWeight: "400", fontSize: "18px"}}>// GENERAL INFO</h2>
-                <input type="text" className="name-input" placeholder="NAME" value={name}
-                       onChange={e => setName(e.target.value)}/>
-                <input type="text" className="desc-input" placeholder="CATCHPHRASE"
-                       style={{marginBottom: "10px"}} value={desc} onChange={e => setDesc(e.target.value)}/>
-
-                <div className="md-editor-container">
-                    <MDEditor
-                        value={longDesc}
-                        onChange={setLongDesc}
-                        height={350}
-                        style={{borderRadius: "4px", border: "none", outline: "none"}}
-                    />
+            <div className="split">
+                <div className="split-two split-two-height" id="split-two">
+                    <h1 className="about-title about-title-card">PUBLISH A CODE BLOCK</h1>
+                    <div className="split-two-card">
+                        <CodeCard dwnl="0" author="your username" name={name || "placeholder"}
+                                  description={desc || "placeholder"}/>
+                    </div>
                 </div>
-                <textarea className="code-editor" placeholder="⚠️ Place your final code here ⚠️" value={code}
-                          onChange={e => setCode(e.target.value)}></textarea>
-                <div className="upload-section">
-                    <label htmlFor="img-file" className="file-input" id="gallery-upload"><BiCloudUpload
-                        className="file-input-icon"></BiCloudUpload>UPLOAD IMAGES(4)</label>
-                    <br/>
+                <div className="split-one">
+                    <h1 className="about-title">PUBLISH A CODE BLOCK</h1>
+                    <div className="centered">
+                        <h2 style={{margin: "0", fontWeight: "400", fontSize: "18px"}}>// GENERAL INFO</h2>
+                        <input type="text" className="name-input" placeholder="NAME" value={name}
+                               onChange={e => setName(e.target.value)}/>
+                        <input type="text" className="desc-input" placeholder="CATCHPHRASE"
+                               style={{marginBottom: "10px"}} value={desc} onChange={e => setDesc(e.target.value)}/>
 
+                        <div className="md-editor-container">
+                            <MDEditor
+                                value={longDesc}
+                                onChange={setLongDesc}
+                                height={350}
+                                style={{borderRadius: "4px", border: "none", outline: "none"}}
+                            />
+                        </div>
+                        <textarea className="code-editor" placeholder="⚠️ Place your final code here ⚠️" value={code}
+                                  onChange={e => setCode(e.target.value)}></textarea>
+                        <div className="upload-section">
+                            <label htmlFor="img-file" className="file-input" id="gallery-upload"><BiCloudUpload
+                                className="file-input-icon"></BiCloudUpload>UPLOAD IMAGES(4)</label>
+                            <br/>
+
+                        </div>
+                        <input type="text" className="desc-input" placeholder="CODE VERSION"
+                               style={{marginTop: "20px", marginBottom: "30px", fontSize: "20px"}} value={version}
+                               onChange={e => setVersion(e.target.value)}/>
+
+
+                        <input type="file" id="img-file" style={{display: "none"}} multiple onChange={(event) => {
+                            console.log(event.target.files[0])
+                            setImgUploadOne(event.target.files[0])
+                            setImgUploadTwo(event.target.files[1])
+                            setImgUploadThree(event.target.files[2])
+                            setImgUploadFour(event.target.files[3])
+                            console.log("img")
+                            if (event.target.files.length === 4) {
+                                document.getElementById("gallery-upload").innerHTML = "✅ UPLOAD IMAGES(4)"
+                            }
+                        }} required accept=".png,.jpeg,.webp, image/jpeg, image/png"/>
+                        <br/><br/>
+                        <p className="create-package-interest-data">CATEGORIES</p>
+                        <div className="create-package-interest-div">
+                            {
+                                interests_data.map((interest, index) => {
+                                    return (
+                                        <div className="interestpkg" id={"interest" + index} onClick={() => {
+                                            handleInterestClick(index);
+                                        }}>
+                                            {interest}
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                        <br/>
+                        <button onMouseEnter={() => {
+                            if (document.getElementById("publish-btn").style.pointerEvents !== "none") {
+                                document.getElementById("publish-btn").innerHTML = ">> PUBLISH CODE BLOCK <<"
+                            }
+                        }} onMouseLeave={() => {
+                            if (document.getElementById("publish-btn").style.pointerEvents !== "none") {
+                                document.getElementById("publish-btn").innerHTML = "PUBLISH CODE BLOCK"
+                            }
+                        }} onClick={() => {
+                            if (name === "") {
+                                alert("Invalid name")
+                            } else {
+                                document.getElementById("publish-btn").style.pointerEvents = "none"
+                                document.getElementById("publish-btn").innerHTML = "UPLOADING... => ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 0%"
+                                upload().then(name_id => {
+                                    navigate("/codeblocks/" + codeblock_id)
+                                    window.location.reload()
+                                })
+                            }
+                        }} className="primary publish-btn publish-code-block" id="publish-btn">
+                            PUBLISH CODE BLOCK
+                        </button>
+                        <br/>
+                    </div>
                 </div>
-                <input type="text" className="desc-input" placeholder="CODE VERSION"
-                       style={{marginTop: "20px", marginBottom: "30px", fontSize: "20px"}} value={version}
-                       onChange={e => setVersion(e.target.value)}/>
-
-
-                <input type="file" id="img-file" style={{display: "none"}} multiple onChange={(event) => {
-                    console.log(event.target.files[0])
-                    setImgUploadOne(event.target.files[0])
-                    setImgUploadTwo(event.target.files[1])
-                    setImgUploadThree(event.target.files[2])
-                    setImgUploadFour(event.target.files[3])
-                    console.log("img")
-                    if (event.target.files.length === 4) {
-                        document.getElementById("gallery-upload").innerHTML = "✅ UPLOAD IMAGES(4)"
-                    }
-                }} required accept=".png,.jpeg,.webp, image/jpeg, image/png"/>
-                <br/><br/>
-                <p className="create-package-interest-data">CATEGORIES</p>
-                <div className="create-package-interest-div">
-                    {
-                        interests_data.map((interest, index) => {
-                            return (
-                                <div className="interestpkg" id={"interest" + index} onClick={() => {
-                                    handleInterestClick(index);
-                                }}>
-                                    {interest}
-                                </div>
-                            )
-                        })
-                    }
-                </div>
-                <br/>
-                <button onMouseEnter={() => {
-                    if (document.getElementById("publish-btn").style.pointerEvents !== "none") {
-                        document.getElementById("publish-btn").innerHTML = ">> PUBLISH CODE BLOCK <<"
-                    }
-                }} onMouseLeave={() => {
-                    if (document.getElementById("publish-btn").style.pointerEvents !== "none") {
-                        document.getElementById("publish-btn").innerHTML = "PUBLISH CODE BLOCK"
-                    }
-                }} onClick={() => {
-                    if (name === "") {
-                        alert("Invalid name")
-                    } else {
-                        document.getElementById("publish-btn").style.pointerEvents = "none"
-                        document.getElementById("publish-btn").innerHTML = "UPLOADING... => ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 0%"
-                        upload().then(name_id => {
-                            navigate("/codeblocks/" + codeblock_id)
-                            window.location.reload()
-                        })
-                    }
-                }} className="publish-btn" id="publish-btn">
-                    PUBLISH CODE BLOCK
-                </button>
             </div>
         </>
     )
