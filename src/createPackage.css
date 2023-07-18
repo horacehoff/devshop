@@ -34,6 +34,15 @@
     display: none;
 }
 
+.about-title {
+    position: relative !important;
+    left: 0 !important;
+    width: 153.2% !important;
+    margin-left: 0 !important;
+    padding: 0 !important;
+    text-align: center !important;
+}
+
 @media screen and (max-width: 1660px) {
     .split-two-card {
         right: 3%
@@ -69,16 +78,12 @@
 
     .about-title {
         display: none;
+        width: 100% !important;
     }
 
     .about-title-card {
         display: block !important;
     }
-}
-
-
-.about-title {
-    text-align: center;
 }
 
 
