@@ -39,7 +39,7 @@ export default function SearchPackages() {
 
     return (
         <>
-            <h1 className="about-title">SEARCH PACKAGES</h1>
+            <h1 className="search-title">SEARCH PACKAGES</h1>
             <IoMdSearch className="search-input-icon"/>
             <input type="text" placeholder="Search something..." value={searchInput}
                    onChange={e => setSearchInput(e.target.value)} onKeyDown={e => search(e, false)}

@@ -1,3 +1,10 @@
+.search-title {
+    text-align: center;
+    font-size: 90px;
+    position: relative;
+    margin-bottom: 0px;
+}
+
 .search-input {
     padding-left: 30px;
 }
@@ -13,4 +20,10 @@
 
 .search-input-icon:hover {
     filter: brightness(0.25);
+}
+
+@media screen and (max-width: 490px) {
+    .search-title {
+        font-size: 18.367vw;
+    }
 }
