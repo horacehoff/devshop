@@ -15,7 +15,9 @@ export default defineConfig({
       'firebase/storage',
       'short-number',
       'react-icons',
-      '@uiw/react-md-editor'
+      '@uiw/react-md-editor',
+      'react-notifications',
+      'reactjs-popup'
     ],
   },
   plugins: [
@@ -56,6 +58,8 @@ export default defineConfig({
           shortnum: ['short-number'],
           icons: ['react-icons'],
           markdown: ['@uiw/react-md-editor'],
+          notifications: ['react-notifications'],
+          popups: ['reactjs-popup']
         },
         compact: true,
         minifyInternalExports: true,

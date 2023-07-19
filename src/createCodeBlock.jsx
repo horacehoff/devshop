@@ -10,6 +10,7 @@ import fancy_name_to_id, {generateUUID, interests_data, profanityFilter} from ".
 import MDEditor from '@uiw/react-md-editor';
 import {BiCloudUpload} from "react-icons/bi";
 import CodeCard from "./codeCard.jsx";
+import Popup from "reactjs-popup";
 
 export default function CreateCodeBlock() {
     const [pkgUpload, setPkgUpload] = useState(null);
@@ -29,13 +30,15 @@ export default function CreateCodeBlock() {
     const [code, setCode] = useState("");
     let codeblock_id = "";
 
+    const [warning, setWarning] = useState(false);
+
     let uid = "";
     const navigate = useNavigate()
     onAuthStateChanged(auth, (user) => {
         if (user) {
             uid = user.uid;
         } else {
-            navigate("/")
+            setWarning(true)
         }
     });
     const upload = async () => {
@@ -144,6 +147,14 @@ export default function CreateCodeBlock() {
 
     return (
         <>
+            <Popup modal open={warning} onClose={() => {
+                navigate("/code-blocks")
+            }}><span>
+                <h4>WARNING</h4>
+                <p className="popup-signin-txt">You need to sign in to be able to publish packages/code blocks.</p>
+                <button className="secondary popup-signin-btn" onClick={() => navigate("/sign-in")}>SIGN_IN</button>
+                <button className="primary popup-back-btn" onClick={() => navigate("/code-blocks")}>GO BACK</button>
+            </span></Popup>
             <div className="split">
                 <div className="split-two split-two-height" id="split-two">
                     <h1 className="about-title about-title-card">PUBLISH A CODE BLOCK</h1>

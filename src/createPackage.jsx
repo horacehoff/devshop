@@ -9,6 +9,8 @@ import fancy_name_to_id, {generateUUID, interests_data, profanityFilter} from ".
 import MDEditor from '@uiw/react-md-editor';
 import {BiCloudUpload} from "react-icons/bi";
 import PackageCard from "./packageCard.jsx";
+import Popup from "reactjs-popup";
+import "./modal.css"
 
 export default function CreatePackage() {
     const [pkgUpload, setPkgUpload] = useState(null);
@@ -29,13 +31,16 @@ export default function CreatePackage() {
     const [longDesc, setLongDesc] = useState("**This is the detailed description of my awesome package!**");
     let pkg_id = "";
 
+    const [warning, setWarning] = useState(false);
+
     let uid = "";
     const navigate = useNavigate()
     onAuthStateChanged(auth, (user) => {
         if (user) {
             uid = user.uid;
         } else {
-            navigate("/")
+            // navigate("/")
+            setWarning(true)
         }
     });
     const upload = async () => {
@@ -162,6 +167,14 @@ export default function CreatePackage() {
 
     return (
         <>
+            <Popup modal open={warning} onClose={() => {
+                navigate("/packages")
+            }}><span>
+                <h4>WARNING</h4>
+                <p className="popup-signin-txt">You need to sign in to be able to publish packages/code blocks.</p>
+                <button className="secondary popup-signin-btn" onClick={() => navigate("/sign-in")}>SIGN_IN</button>
+                <button className="primary popup-back-btn" onClick={() => navigate("/packages")}>GO BACK</button>
+            </span></Popup>
             <div className="split">
                 <div className="split-two" id="split-two">
                     <h1 className="about-title about-title-card">PUBLISH A PACKAGE</h1>

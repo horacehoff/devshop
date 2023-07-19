@@ -1,0 +1,51 @@
+.popup-content {
+    margin: auto;
+    background: var(--background) !important;
+    width: 300px;
+    padding: 5px;
+    height: fit-content !important;
+}
+
+.popup-arrow {
+    color: rgb(255, 255, 255);
+}
+
+[role='tooltip']
+.popup-content {
+    width: 350px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
+}
+
+.popup-content h4 {
+    color: darkorange !important;
+    text-align: center;
+    font-size: 18px;
+}
+
+.popup-signin-txt {
+    font-size: 14px;
+    text-align: center;
+
+}
+
+.popup-signin-btn {
+    width: 250px !important;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-left: 50%;
+    transform: translate(-50%);
+}
+
+.popup-back-btn {
+    width: 250px !important;
+    margin-left: 50%;
+    transform: translate(-50%);
+}
+
+.popup-overlay {
+    background: rgba(0, 0, 0, 0.75);
+}
+
+[data-popup='tooltip'].popup-overlay {
+    background: transparent;
+}
