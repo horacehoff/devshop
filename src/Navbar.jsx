@@ -4,6 +4,7 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import fancy_name_to_id from "./utility.js";
 import {user_data} from "./firebase.js";
+import navicon from "/naviconwhite.png"
 
 
 export default function Navbar() {
@@ -211,7 +212,10 @@ export default function Navbar() {
     return (
         <>
             <div className="nav">
-                <h2 onClick={() => navigate("/")} id="nav-title">DEVSHOP</h2>
+                <h2 onClick={() => navigate("/")} id="nav-title">
+                    <span className="nav-txt-title">DEVSHOP</span>
+                    <img src={navicon} className="nav-icon-title"/>
+                </h2>
                 <Link id="code-blocks" to="/code-blocks" className="nav-link">CODE BLOCKS</Link>
                 <Link id="packages" to="/packages" className="nav-link">PACKAGES</Link>
                 <Link id="pricing" to="/pricing" className="nav-link">PRICING</Link>

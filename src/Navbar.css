@@ -148,6 +148,12 @@
     margin-bottom: 20px
 }
 
+.nav-icon-title {
+    display: none;
+    width: 22px;
+    margin-top: 13px;
+}
+
 
 @media screen and (max-width: 670px) {
     #about {
@@ -174,5 +180,15 @@
 
     #hamburger {
         visibility: visible
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .nav-txt-title {
+        display: none;
+    }
+
+    .nav-icon-title {
+        display: block;
     }
 }
