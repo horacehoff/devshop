@@ -183,12 +183,12 @@
     }
 }
 
-@media screen and (max-width: 450px) {
-    .nav-txt-title {
-        display: none;
-    }
+/*@media screen and (max-width: 450px) {*/
+/*    .nav-txt-title {*/
+/*        display: none;*/
+/*    }*/
 
-    .nav-icon-title {
-        display: block;
-    }
-}
+/*    .nav-icon-title {*/
+/*        display: block;*/
+/*    }*/
+/*}*/
