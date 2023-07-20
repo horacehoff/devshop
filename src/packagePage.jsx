@@ -8,6 +8,7 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import shortNumber from "short-number";
 import fancy_name_to_id from "./utility.js";
 import MDEditor from '@uiw/react-md-editor';
+import Popup from "reactjs-popup";
 
 export default function PackagePage() {
     const [pkg, setPkg] = useState(null);
@@ -234,35 +235,44 @@ export default function PackagePage() {
             </div>
             <p className="package-characteristics-label"></p>
             <div className="package-characteristics">
-                <p>TOTAL DOWNLOADS: {shortNumber(pkg.downloads)}<br/>AVERAGE HAPPINESS: <span
+                <p>DOWNLOADS: {shortNumber(pkg.downloads)}<br/>AVERAGE HAPPINESS: <span
                     id="happiness_num">xx.x</span><br/>↳ <span id="review_num">5</span> <span
                     id="review_num_plural">ratings</span>
 
-                    {/*<span id="rate_btn"><br/>↳ <span className="rate_btn" onClick={() => {*/}
-                    {/*    document.getElementById("rate_btn").innerHTML = "<br/>RATING: <input type='number' max='100' min='0' maxlength='3' class='rating_input' id='rating_input'/><br/><button class='rating_done_btn' id='rating_done_btn'>SUBMIT</button>"*/}
-                    {/*    document.getElementById("rating_input").oninput = () => {*/}
-                    {/*        if (document.getElementById("rating_input").value > 100) {*/}
-                    {/*            document.getElementById("rating_input").value = 100*/}
-                    {/*        } else if (document.getElementById("rating_input").value < 0) {*/}
-                    {/*            document.getElementById("rating_input").value = 0*/}
-                    {/*        }*/}
-                    {/*    }*/}
+                    <span id="rate_btn"><br/>↳
 
-                    {/*    document.getElementById("rating_done_btn").onclick = async () => {*/}
-                    {/*        // if no map exists on the package firebase doc, create one and add the rating, else add the rating to the map*/}
-                    {/*        await updateDoc(doc(db, "packages", pkg.id), {*/}
-                    {/*            // get all existing ratings of the package using the pkg object, and add the new rating to the map*/}
-                    {/*            ratings: {*/}
-                    {/*                ...pkg.ratings,*/}
-                    {/*                [uid]: document.getElementById("rating_input").value*/}
-                    {/*            }*/}
-                    {/*        }).then(() => {*/}
-                    {/*            // reload the page to update the rating*/}
-                    {/*            window.location.reload();*/}
-                    {/*        })*/}
+                       <Popup trigger={<span className="rate_btn">{">> RATE THIS <<"}</span>} modal>
+                           <h3 className="rating-popup-title">RATE THIS PACKAGE</h3>
+                           <span className="rating-popup-input">RATING: <input type='number' max='100' min='0'
+                                                                               maxLength='3' className='rating_input'
+                                                                               id='rating_input' onInput={() => {
+                               if (document.getElementById("rating_input").value > 100) {
+                                   document.getElementById("rating_input").value = 100
+                               } else if (document.getElementById("rating_input").value < 0) {
+                                   document.getElementById("rating_input").value = 0
+                               }
+                           }}/> /100</span>
+                           <br/><br/>
+                           <button className='secondary rating-popup-btn' id='rating_done_btn' onClick={async () => {
+                               // if no map exists on the package firebase doc, create one and add the rating, else add the rating to the map
+                               await updateDoc(doc(db, "packages", pkg.id), {
+                                   // get all existing ratings of the package using the pkg object, and add the new rating to the map
+                                   ratings: {
+                                       ...pkg.ratings,
+                                       [uid]: document.getElementById("rating_input").value
+                                   }
+                               }).then(() => {
+                                   // reload the page to update the rating
+                                   window.location.reload();
+                               })
+                           }}>SUBMIT</button>
 
-                    {/*    }*/}
-                    {/*}}>{">> RATE THIS <<"}</span></span>*/}
+                       </Popup>
+
+
+
+
+                    </span>
 
                     <br/>
                     DISK SIZE: {Math.round(pkg.sizeMb * 10) / 10}MB<br/><span className="current-ver">

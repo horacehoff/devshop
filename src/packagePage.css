@@ -187,8 +187,6 @@
     border-radius: 2px;
     padding: 0 0 0 5px;
     font-family: 'JetBrains Mono', monospace;
-
-
 }
 
 .rating_input::-webkit-outer-spin-button, .rating_input::-webkit-inner-spin-button {
@@ -300,6 +298,25 @@
 .current-ver {
     width: 80px;
     white-space: break-spaces;
+}
+
+
+.rating-popup-title {
+    text-align: center;
+    font-size: 18px;
+}
+
+.rating-popup-input {
+    left: 22%;
+    position: relative;
+    width: fit-content;
+}
+
+.rating-popup-btn {
+    margin-left: 50%;
+    transform: translate(-50%);
+    padding-left: 35px;
+    padding-right: 35px;
 }
 
 @media screen and (max-width: 1250px) {
