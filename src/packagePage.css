@@ -307,7 +307,7 @@
 }
 
 .rating-popup-input {
-    left: 22%;
+    /*left: 22%;*/
     position: relative;
     width: fit-content;
 }

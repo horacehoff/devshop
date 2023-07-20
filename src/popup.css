@@ -1,7 +1,9 @@
 .popup-content {
     background: #080d2b;
-    width: 325px;
+    width: fit-content;
     height: 150px;
+    padding-left: 30px;
+    padding-right: 30px;
     padding-bottom: 10px;
     border-radius: 5px;
     transition: .2s;
