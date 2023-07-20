@@ -1,7 +1,7 @@
 import "./packagePage.css"
 import {onAuthStateChanged} from "firebase/auth";
 import {doc, getDoc, updateDoc} from "firebase/firestore";
-import {auth, db, storage} from "./firebase.js";
+import {auth, db, storage, user_data} from "./firebase.js";
 import React, {useEffect, useState} from "react";
 import {getDownloadURL, ref} from "firebase/storage";
 import {Link, useNavigate, useParams} from "react-router-dom";
@@ -35,6 +35,11 @@ export default function PackagePage() {
                         set_new_downloads(-1);
                     }
                 })
+                if (!user_data.downloadpkg.includes(pkg.id)) {
+                    updateDoc(doc(db, "users", uid), {
+                        downloadpkg: [...user_data.downloadpkg, pkg.id]
+                    })
+                }
                 if (new_downloads !== -1) {
                     updateDoc(doc(db, "packages", pkg.id), {
                         downloads: new_downloads + 1
@@ -233,34 +238,34 @@ export default function PackagePage() {
                     id="happiness_num">xx.x</span><br/>↳ <span id="review_num">5</span> <span
                     id="review_num_plural">ratings</span>
 
-                    <span id="rate_btn"><br/>↳ <span className="rate_btn" onClick={() => {
-                        document.getElementById("rate_btn").innerHTML = "<br/>RATING: <input type='number' max='100' min='0' maxlength='3' class='rating_input' id='rating_input'/><br/><button class='rating_done_btn' id='rating_done_btn'>SUBMIT</button>"
-                        document.getElementById("rating_input").oninput = () => {
-                            if (document.getElementById("rating_input").value > 100) {
-                                document.getElementById("rating_input").value = 100
-                            } else if (document.getElementById("rating_input").value < 0) {
-                                document.getElementById("rating_input").value = 0
-                            }
-                        }
+                    {/*<span id="rate_btn"><br/>↳ <span className="rate_btn" onClick={() => {*/}
+                    {/*    document.getElementById("rate_btn").innerHTML = "<br/>RATING: <input type='number' max='100' min='0' maxlength='3' class='rating_input' id='rating_input'/><br/><button class='rating_done_btn' id='rating_done_btn'>SUBMIT</button>"*/}
+                    {/*    document.getElementById("rating_input").oninput = () => {*/}
+                    {/*        if (document.getElementById("rating_input").value > 100) {*/}
+                    {/*            document.getElementById("rating_input").value = 100*/}
+                    {/*        } else if (document.getElementById("rating_input").value < 0) {*/}
+                    {/*            document.getElementById("rating_input").value = 0*/}
+                    {/*        }*/}
+                    {/*    }*/}
 
-                        document.getElementById("rating_done_btn").onclick = async () => {
-                            // if no map exists on the package firebase doc, create one and add the rating, else add the rating to the map
-                            await updateDoc(doc(db, "packages", pkg.id), {
-                                // get all existing ratings of the package using the pkg object, and add the new rating to the map
-                                ratings: {
-                                    ...pkg.ratings,
-                                    [uid]: document.getElementById("rating_input").value
-                                }
-                            }).then(() => {
-                                // reload the page to update the rating
-                                window.location.reload();
-                            })
+                    {/*    document.getElementById("rating_done_btn").onclick = async () => {*/}
+                    {/*        // if no map exists on the package firebase doc, create one and add the rating, else add the rating to the map*/}
+                    {/*        await updateDoc(doc(db, "packages", pkg.id), {*/}
+                    {/*            // get all existing ratings of the package using the pkg object, and add the new rating to the map*/}
+                    {/*            ratings: {*/}
+                    {/*                ...pkg.ratings,*/}
+                    {/*                [uid]: document.getElementById("rating_input").value*/}
+                    {/*            }*/}
+                    {/*        }).then(() => {*/}
+                    {/*            // reload the page to update the rating*/}
+                    {/*            window.location.reload();*/}
+                    {/*        })*/}
 
-                        }
-                    }}>{">> RATE THIS <<"}</span></span>
+                    {/*    }*/}
+                    {/*}}>{">> RATE THIS <<"}</span></span>*/}
 
                     <br/>
-                    TOTAL SIZE: {Math.round(pkg.sizeMb * 10) / 10}MB<br/><span className="current-ver">CURRENT
+                    DISK SIZE: {Math.round(pkg.sizeMb * 10) / 10}MB<br/><span className="current-ver">
                         VERSION: {pkg.current_version}</span><br/>
                     <button className="package-download-side" id="package-download-side"
                             onClick={() => downloadPkg()}>DOWNLOAD

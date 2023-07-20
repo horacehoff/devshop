@@ -1,20 +1,19 @@
 import "./pricing.css"
-import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
 
 export default function Pricing() {
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
-    useEffect(() => {
-        if (document.getElementById("account").innerHTML === "ACCOUNT" || document.getElementById("nav-account").innerHTML === "ACCOUNT") {
-            document.getElementById("plan-sign-up").innerHTML = "CURRENT"
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (document.getElementById("account").innerHTML === "ACCOUNT" || document.getElementById("nav-account").innerHTML === "ACCOUNT") {
+    //         document.getElementById("plan-sign-up").innerHTML = "CURRENT"
+    //     }
+    // }, [])
 
 
     return (
         <>
             <h1 className="pricing-title">PRICING</h1>
+            <h3 className="pricing-parentsubtitle">(COMING SOON; AS OF NOW THE WEBSITE IS 100% FREE)</h3>
             <p className="pricing-subtitle">You can use DEVSHOP for free, or you can pay a small amount of money each
                 month to get rid of all inconvenients and get the full experience</p>
 
@@ -26,10 +25,10 @@ export default function Pricing() {
                         <li>✅ Full access to the website</li>
                         <li>❌ Ads</li>
                     </ul>
-                    <button className="plan-sign-up" id="plan-sign-up" onClick={() => {
-                        navigate("/sign-up")
-                    }}>Sign Up
-                    </button>
+                    {/*<button className="plan-sign-up" id="plan-sign-up" onClick={() => {*/}
+                    {/*    navigate("/sign-up")*/}
+                    {/*}}>Sign Up*/}
+                    {/*</button>*/}
                 </div>
 
                 <div className="pro-plan">
@@ -39,7 +38,7 @@ export default function Pricing() {
                         <li>✅ Full access to the website</li>
                         <li>✅ No ads</li>
                     </ul>
-                    <button className="plan-subscribe" id="plan-subscribe">coming soon</button>
+                    {/*<button className="plan-subscribe" id="plan-subscribe">coming soon</button>*/}
                 </div>
             </div>
         </>

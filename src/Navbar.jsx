@@ -143,7 +143,7 @@ export default function Navbar() {
                 }
                 document.getElementById("sign-out").onclick = () => {
                     auth.signOut().then(() => {
-                        navigate("/");
+                        window.location.reload()
                     }).catch((error) => {
                         console.log(error);
                     });
@@ -213,8 +213,9 @@ export default function Navbar() {
         <>
             <div className="nav">
                 <h2 onClick={() => navigate("/")} id="nav-title">
-                    <span className="nav-txt-title">DEVSHOP</span>
-                    <img src={navicon} className="nav-icon-title"/>
+                    <span className="nav-txt-title"><img src={navicon} className="nav-icon-title"/>
+                    EVSHOP
+                    </span>
                 </h2>
                 <Link id="code-blocks" to="/code-blocks" className="nav-link">CODE BLOCKS</Link>
                 <Link id="packages" to="/packages" className="nav-link">PACKAGES</Link>

@@ -149,9 +149,13 @@
 }
 
 .nav-icon-title {
-    display: none;
-    width: 22px;
+    width: 18px;
     margin-top: 13px;
+    margin-right: 2px;
+}
+
+.nav-txt-title {
+    color: white !important;
 }
 
 

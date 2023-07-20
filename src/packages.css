@@ -19,7 +19,8 @@
 }
 
 .packages-card-list > li {
-    display: inline-block
+    display: inline-block;
+    margin-right: 15px !important;
 }
 
 .packages-card-list li {

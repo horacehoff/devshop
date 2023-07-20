@@ -110,8 +110,81 @@ export default function Packages() {
                     ))}
                 </ul>
             </div>
-            <h2 className="category-title">// CURRENTLY TRENDING</h2>
+            <h2 className="category-title">// MOST DOWNLOADED</h2>
             <ul className="packages-card-list" id="packages-card-list-one">
+                {trendingPackageData.map((pkg, index) => (
+                    <li key={index} className="packages-card-list-child">
+                        <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
+                                         catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                        </Link>
+                    </li>
+                ))}
+                {trendingPackageData.map((pkg, index) => (
+                    <li key={index} className="packages-card-list-child">
+                        <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
+                                         catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                        </Link>
+                    </li>
+                ))}
+                {trendingPackageData.map((pkg, index) => (
+                    <li key={index} className="packages-card-list-child">
+                        <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
+                                         catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                        </Link>
+                    </li>
+                ))}
+                {trendingPackageData.map((pkg, index) => (
+                    <li key={index} className="packages-card-list-child">
+                        <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
+                                         catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                        </Link>
+                    </li>
+                ))}
+                {trendingPackageData.map((pkg, index) => (
+                    <li key={index} className="packages-card-list-child">
+                        <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
+                                         catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                        </Link>
+                    </li>
+                ))}
+
+                {trendingPackageData.map((pkg, index) => (
+                    <li key={index} className="packages-card-list-child">
+                        <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
+                                         catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                        </Link>
+                    </li>
+                ))}
+                {trendingPackageData.map((pkg, index) => (
+                    <li key={index} className="packages-card-list-child">
+                        <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
+                                         catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                        </Link>
+                    </li>
+                ))}
+                {trendingPackageData.map((pkg, index) => (
+                    <li key={index} className="packages-card-list-child">
+                        <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
+                                         catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                        </Link>
+                    </li>
+                ))}
+                {trendingPackageData.map((pkg, index) => (
+                    <li key={index} className="packages-card-list-child">
+                        <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
+                                         catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                        </Link>
+                    </li>
+                ))}
                 {trendingPackageData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">
                         <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
