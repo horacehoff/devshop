@@ -2,13 +2,14 @@ import "./packagePage.css"
 import {onAuthStateChanged} from "firebase/auth";
 import {doc, getDoc, updateDoc} from "firebase/firestore";
 import {auth, db, storage, user_data} from "./firebase.js";
-import React, {useEffect, useState} from "react";
+import {createRef, useEffect, useState} from "react";
 import {getDownloadURL, ref} from "firebase/storage";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import shortNumber from "short-number";
 import fancy_name_to_id from "./utility.js";
 import MDEditor from '@uiw/react-md-editor';
 import Popup from "reactjs-popup";
+import "./popup.css"
 
 export default function PackagePage() {
     const [pkg, setPkg] = useState(null);
@@ -19,6 +20,8 @@ export default function PackagePage() {
 
     const [is_logged_in, set_is_logged_in] = useState(false);
     const [new_downloads, set_new_downloads] = useState(0);
+
+    let popupRef = createRef(null);
 
 
     function downloadPkg() {
@@ -241,11 +244,23 @@ export default function PackagePage() {
 
                     <span id="rate_btn"><br/>↳
 
-                       <Popup trigger={<span className="rate_btn">{">> RATE THIS <<"}</span>} modal>
+                       <Popup trigger={<span className="rate_btn">{">> RATE THIS <<"}</span>} modal id="rating-popup"
+                              ref={popupRef} onOpen={() => {
+                           if (!is_logged_in) {
+                               document.getElementById("popup-root").firstChild.firstChild.innerHTML = '<h4>WARNING</h4><p class="popup-signin-txt">You need to sign in to be able to rate packages/code blocks.</p><button class="secondary popup-signin-btn" id="popup-sign-in">SIGN_IN</button><button class="primary popup-back-btn" id="popup-go-back">GO BACK</button>'
+                               document.getElementById("popup-sign-in").onclick = () => {
+                                   navigate("/sign-in")
+                               }
+                               document.getElementById("popup-go-back").onclick = () => {
+                                   popupRef.current.close()
+                               }
+                           }
+                       }}>
                            <h3 className="rating-popup-title">RATE THIS PACKAGE</h3>
                            <span className="rating-popup-input">RATING: <input type='number' max='100' min='0'
                                                                                maxLength='3' className='rating_input'
                                                                                id='rating_input' onInput={() => {
+                               console.log(is_logged_in)
                                if (document.getElementById("rating_input").value > 100) {
                                    document.getElementById("rating_input").value = 100
                                } else if (document.getElementById("rating_input").value < 0) {
