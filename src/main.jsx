@@ -5,7 +5,6 @@ import "./firebase.js"
 
 
 import './index.css'
-import './lazy.css'
 
 
 import Home from "./Home.jsx";
