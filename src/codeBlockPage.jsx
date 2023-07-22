@@ -8,14 +8,18 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import shortNumber from "short-number";
 import fancy_name_to_id from "./utility.js";
 import MDEditor from '@uiw/react-md-editor';
+import Popup from "reactjs-popup";
 
 export default function CodeBlockPage() {
     const [codeBlock, setCodeBlock] = useState(null);
     const [uid, set_uid] = useState("");
+    const [is_logged_in, set_is_logged_in] = useState(false);
     let baseStyle = {}
     const navigate = useNavigate();
 
     const [new_downloads, set_new_downloads] = useState(0);
+
+    let popupRef = React.createRef();
 
 
     function downloadCode() {
@@ -36,11 +40,14 @@ export default function CodeBlockPage() {
     onAuthStateChanged(auth, (user) => {
         if (user && codeBlock !== null) {
             set_uid(user.uid)
+            set_is_logged_in(true)
             if (uid === codeBlock.owner_id) {
                 document.getElementById("package-download-btn").innerHTML = "EDIT"
                 document.getElementById("package-download-btn").classList.add("package-edit-btn")
                 document.getElementById("package-download-side").style.display = "block"
             }
+        } else {
+            set_is_logged_in(false)
         }
     });
 
@@ -212,31 +219,46 @@ export default function CodeBlockPage() {
                         id="happiness_num">xx.x</span><br/>↳ <span id="review_num">5</span> <span
                         id="review_num_plural">ratings</span>
 
-                    <span id="rate_btn"><br/>↳ <span className="rate_btn" onClick={() => {
-                        document.getElementById("rate_btn").innerHTML = "<br/>RATING: <input type='number' max='100' min='0' maxlength='3' class='rating_input' id='rating_input'/><br/><button class='rating_done_btn' id='rating_done_btn'>SUBMIT</button>"
-                        document.getElementById("rating_input").oninput = () => {
-                            if (document.getElementById("rating_input").value > 100) {
-                                document.getElementById("rating_input").value = 100
-                            } else if (document.getElementById("rating_input").value < 0) {
-                                document.getElementById("rating_input").value = 0
+                    <span id="rate_btn"><br/>↳<Popup trigger={<span className="rate_btn">{">> RATE THIS <<"}</span>}
+                                                     modal id="rating-popup"
+                                                     ref={popupRef} onOpen={() => {
+                        if (!is_logged_in) {
+                            document.getElementById("popup-root").firstChild.firstChild.innerHTML = '<h4>WARNING</h4><p class="popup-signin-txt">You need to sign in to be able to rate code blocks.</p><button class="secondary popup-signin-btn" id="popup-sign-in">SIGN_IN</button><button class="primary popup-back-btn" id="popup-go-back">GO BACK</button>'
+                            document.getElementById("popup-sign-in").onclick = () => {
+                                navigate("/sign-in")
+                            }
+                            document.getElementById("popup-go-back").onclick = () => {
+                                popupRef.current.close()
                             }
                         }
+                    }}>
+                           <h3 className="rating-popup-title">RATE THIS PACKAGE</h3>
+                           <span className="rating-popup-input">RATING: <input type='number' max='100' min='0'
+                                                                               maxLength='3' className='rating_input'
+                                                                               id='rating_input' onInput={() => {
+                               console.log(is_logged_in)
+                               if (document.getElementById("rating_input").value > 100) {
+                                   document.getElementById("rating_input").value = 100
+                               } else if (document.getElementById("rating_input").value < 0) {
+                                   document.getElementById("rating_input").value = 0
+                               }
+                           }}/> /100</span>
+                           <br/><br/>
+                           <button className='secondary rating-popup-btn' id='rating_done_btn' onClick={async () => {
+                               // if no map exists on the package firebase doc, create one and add the rating, else add the rating to the map
+                               await updateDoc(doc(db, "code-blocks", codeBlock.id), {
+                                   // get all existing ratings of the package using the pkg object, and add the new rating to the map
+                                   ratings: {
+                                       ...codeBlock.ratings,
+                                       [uid]: document.getElementById("rating_input").value
+                                   }
+                               }).then(() => {
+                                   // reload the page to update the rating
+                                   window.location.reload();
+                               })
+                           }}>SUBMIT</button>
 
-                        document.getElementById("rating_done_btn").onclick = async () => {
-                            // if no map exists on the package firebase doc, create one and add the rating, else add the rating to the map
-                            await updateDoc(doc(db, "code-blocks", codeBlock.id), {
-                                // get all existing ratings of the package using the pkg object, and add the new rating to the map
-                                ratings: {
-                                    ...codeBlock.ratings,
-                                    [uid]: document.getElementById("rating_input").value
-                                }
-                            }).then(() => {
-                                // reload the page to update the rating
-                                window.location.reload();
-                            })
-
-                        }
-                    }}>{">> RATE THIS <<"}</span></span>
+                       </Popup></span>
 
                     <br/><span className="current-ver">CURRENT
                         VERSION: {codeBlock.current_version}</span><br/>

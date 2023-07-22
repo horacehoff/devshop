@@ -247,7 +247,7 @@ export default function PackagePage() {
                        <Popup trigger={<span className="rate_btn">{">> RATE THIS <<"}</span>} modal id="rating-popup"
                               ref={popupRef} onOpen={() => {
                            if (!is_logged_in) {
-                               document.getElementById("popup-root").firstChild.firstChild.innerHTML = '<h4>WARNING</h4><p class="popup-signin-txt">You need to sign in to be able to rate packages/code blocks.</p><button class="secondary popup-signin-btn" id="popup-sign-in">SIGN_IN</button><button class="primary popup-back-btn" id="popup-go-back">GO BACK</button>'
+                               document.getElementById("popup-root").firstChild.firstChild.innerHTML = '<h4>WARNING</h4><p class="popup-signin-txt">You need to sign in to be able to rate packages.</p><button class="secondary popup-signin-btn" id="popup-sign-in">SIGN_IN</button><button class="primary popup-back-btn" id="popup-go-back">GO BACK</button>'
                                document.getElementById("popup-sign-in").onclick = () => {
                                    navigate("/sign-in")
                                }
