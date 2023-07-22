@@ -16,7 +16,6 @@ export default defineConfig({
       'short-number',
       'react-icons',
       '@uiw/react-md-editor',
-      'react-notifications',
       'reactjs-popup'
     ],
   },
@@ -58,7 +57,6 @@ export default defineConfig({
           shortnum: ['short-number'],
           icons: ['react-icons'],
           markdown: ['@uiw/react-md-editor'],
-          notifications: ['react-notifications'],
           popups: ['reactjs-popup']
         },
         compact: true,
