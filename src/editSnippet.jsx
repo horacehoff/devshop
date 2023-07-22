@@ -18,9 +18,9 @@ export default function EditSnippet(props) {
         navigate("/snippets")
     }
     const {state} = useLocation()
-    const codeBlock = state.pkg
+    const snippet = state.pkg
     const [uid, setUid] = useState("")
-    const [newDesc, setNewDesc] = useState(codeBlock.description)
+    const [newDesc, setNewDesc] = useState(snippet.description)
 
 
     const [imgUpload0ne, setImgUploadOne] = useState(null);
@@ -28,24 +28,24 @@ export default function EditSnippet(props) {
     const [imgUploadThree, setImgUploadThree] = useState(null);
     const [imgUploadFour, setImgUploadFour] = useState(null);
     const [newVer, setNewVer] = useState("")
-    const [newCode, setNewCode] = useState(codeBlock.code)
+    const [newCode, setNewCode] = useState(snippet.code)
 
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 // check if user id is the package owner_id
-                if (user.uid === codeBlock.owner_id) {
+                if (user.uid === snippet.owner_id) {
                     console.log("user is owner")
                     setUid(user.uid)
                     console.log(uid)
                 } else {
                     console.log("user is not owner")
-                    navigate("/snippets/" + fancy_name_to_id(codeBlock.id))
+                    navigate("/snippets/" + fancy_name_to_id(snippet.id))
                 }
             } else {
                 console.log("user is not logged in")
-                navigate("/snippets/" + fancy_name_to_id(codeBlock.id))
+                navigate("/snippets/" + fancy_name_to_id(snippet.id))
             }
         })
     }, []);
@@ -62,77 +62,77 @@ export default function EditSnippet(props) {
 
         if (imgUpload0ne !== null) {
             console.log("IMG ONE")
-            const imgRef = ref(storage, codeBlock.screenshots[0]);
+            const imgRef = ref(storage, snippet.screenshots[0]);
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            console.log("users/" + uid + "/snippets/" + codeBlock.id + "/img/one/" + imgUpload0ne.name)
-            let uploadRef = ref(storage, "users/" + uid + "/snippets/" + codeBlock.id + "/img/one/" + imgUpload0ne.name)
+            console.log("users/" + uid + "/snippets/" + snippet.id + "/img/one/" + imgUpload0ne.name)
+            let uploadRef = ref(storage, "users/" + uid + "/snippets/" + snippet.id + "/img/one/" + imgUpload0ne.name)
             await uploadBytes(uploadRef, imgUpload0ne).then(() => {
                 console.log("img one uploaded")
             })
             screenOneUrl = await getDownloadURL(uploadRef)
         } else {
             console.log("IMG ONE ELSE")
-            screenOneUrl = codeBlock.screenshots[0]
+            screenOneUrl = snippet.screenshots[0]
         }
         if (imgUploadTwo !== null) {
             console.log("IMG TWO")
-            const imgRef = ref(storage, codeBlock.screenshots[1]);
+            const imgRef = ref(storage, snippet.screenshots[1]);
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/snippets/" + codeBlock.id + "/img/two/" + imgUploadTwo.name)
+            let uploadRef = ref(storage, "users/" + uid + "/snippets/" + snippet.id + "/img/two/" + imgUploadTwo.name)
             await uploadBytes(uploadRef, imgUploadTwo).then(() => {
                 console.log("img two uploaded")
             })
             screenTwoUrl = await getDownloadURL(uploadRef)
         } else {
             console.log("IMG TWO ELSE")
-            screenTwoUrl = codeBlock.screenshots[1]
+            screenTwoUrl = snippet.screenshots[1]
         }
         if (imgUploadThree !== null) {
             console.log("IMG THREE")
-            const imgRef = ref(storage, codeBlock.screenshots[2]);
+            const imgRef = ref(storage, snippet.screenshots[2]);
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/snippets/" + codeBlock.id + "/img/three/" + imgUploadThree.name)
+            let uploadRef = ref(storage, "users/" + uid + "/snippets/" + snippet.id + "/img/three/" + imgUploadThree.name)
             await uploadBytes(uploadRef, imgUploadThree).then(() => {
                 console.log("img three uploaded")
             })
             screenThreeUrl = await getDownloadURL(uploadRef)
         } else {
             console.log("IMG THREE ELSE")
-            screenThreeUrl = codeBlock.screenshots[2]
+            screenThreeUrl = snippet.screenshots[2]
         }
         if (imgUploadFour !== null) {
             console.log("IMG FOUR")
-            const imgRef = ref(storage, codeBlock.screenshots[3]);
+            const imgRef = ref(storage, snippet.screenshots[3]);
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/snippets/" + codeBlock.id + "/img/four/" + imgUploadFour.name)
+            let uploadRef = ref(storage, "users/" + uid + "/snippets/" + snippet.id + "/img/four/" + imgUploadFour.name)
             await uploadBytes(uploadRef, imgUploadFour).then(() => {
                 console.log("img four uploaded")
             })
             screenFourUrl = await getDownloadURL(uploadRef)
         } else {
             console.log("IMG FOUR ELSE")
-            screenFourUrl = codeBlock.screenshots[3]
+            screenFourUrl = snippet.screenshots[3]
         }
         if (newVer === "") {
-            currentVer = codeBlock.current_version
+            currentVer = snippet.current_version
         } else {
             currentVer = newVer
         }
         if (newCode === "") {
-            currentCode = codeBlock.code
+            currentCode = snippet.code
         } else {
             currentCode = newCode
         }
 
-        await setDoc(doc(db, "snippets", codeBlock.id), {
+        await setDoc(doc(db, "snippets", snippet.id), {
             screenshots: [screenOneUrl, screenTwoUrl, screenThreeUrl, screenFourUrl],
             description: profanityFilter(newDesc),
             current_version: currentVer,
@@ -143,16 +143,16 @@ export default function EditSnippet(props) {
 
     return (
         <>
-            <h2 className="package-title snippet-title">{codeBlock.name}</h2>
+            <h2 className="package-title snippet-title">{snippet.name}</h2>
             <h3 className="package-author">// BY <Link className="package-author-link"
-                                                       to={"/users/" + fancy_name_to_id(codeBlock.owner_username)}>{codeBlock.owner_username}</Link>
+                                                       to={"/users/" + fancy_name_to_id(snippet.owner_username)}>{snippet.owner_username}</Link>
             </h3>
                 <button className="package-download-btn" id="package-download-btn" onClick={async () => {
                     document.getElementById("package-download-btn").innerHTML = "SAVING.."
                     await saveChanges().then(() => {
                         document.getElementById("package-download-btn").innerHTML = "SAVED ✅"
                         setTimeout(() => {
-                            navigate("/snippets/" + codeBlock.id)
+                            navigate("/snippets/" + snippet.id)
                             window.location.reload()
                         }, 1000)
                     })
@@ -196,7 +196,7 @@ export default function EditSnippet(props) {
                            accept=".jpeg,.webp, image/jpeg"/>
                     <img
                         id="screenshot_one"
-                        src={codeBlock.screenshots[0]}
+                        src={snippet.screenshots[0]}
                         className="package-img package-img-edit"
                         onClick={() => {
                             document.getElementById("img-file-one").addEventListener('change', function () {
@@ -212,7 +212,7 @@ export default function EditSnippet(props) {
                         alt="First screenshot"/>
                     <img
                         id="screenshot_two"
-                        src={codeBlock.screenshots[1]}
+                        src={snippet.screenshots[1]}
                         className="package-img package-img-edit"
                         style={{marginLeft: "5px"}}
                         alt="Second screenshot"
@@ -230,7 +230,7 @@ export default function EditSnippet(props) {
                     /><br id="codescreenshotbreak"/>
                     <img
                         id="screenshot_three"
-                        src={codeBlock.screenshots[2]}
+                        src={snippet.screenshots[2]}
                         className="package-img package-img-edit"
                         alt="Third screenshot"
                         onClick={() => {
@@ -247,7 +247,7 @@ export default function EditSnippet(props) {
                     />
                     <img
                         id="screenshot_four"
-                        src={codeBlock.screenshots[3]}
+                        src={snippet.screenshots[3]}
                         className="package-img package-img-edit"
                         style={{marginLeft: "5px"}}
                         alt="Fourth screenshot"
@@ -276,20 +276,21 @@ export default function EditSnippet(props) {
                 <p className="package-characteristics-label"></p>
                 <div className="package-characteristics" id="package-characteristics">
                     <p style={{marginRight: "29px"}} id="package-char-p">
-                        {codeBlock.lines} LINES OF CODE<br/><br/><input type='text'
-                                                                        id='pkg-version-input'
-                                                                        className='pkg-version-input'
-                                                                        placeholder='NEW VERSION'
-                                                                        style={{display: "none"}}
-                                                                        value={newVer}
-                                                                        onChange={e => {
-                                                                            setNewVer(e.target.value);
-                                                                            console.log("yup")
-                                                                        }}/><span
-                        id="package-version" className="current-ver">CURRENT VERSION: {codeBlock.current_version}</span><br/>
+                        {snippet.lines} LINES OF CODE<br/><br/><input type='text'
+                                                                      id='pkg-version-input'
+                                                                      className='pkg-version-input'
+                                                                      placeholder='NEW VERSION'
+                                                                      style={{display: "none"}}
+                                                                      value={newVer}
+                                                                      onChange={e => {
+                                                                          setNewVer(e.target.value);
+                                                                          console.log("yup")
+                                                                      }}/><span
+                        id="package-version"
+                        className="current-ver">CURRENT VERSION: {snippet.current_version}</span><br/>
                         <FcCancel className="revert-upload-pkg" id="revert-upload-pkg" onClick={() => {
                             if (document.getElementById("upload-new-pkg-btn").innerHTML.includes("UPLOAD PACKAGE")) {
-                                document.getElementById("package-version").innerHTML = "CURRENT VERSION: " + codeBlock.current_version
+                                document.getElementById("package-version").innerHTML = "CURRENT VERSION: " + snippet.current_version
                                 document.getElementById("upload-new-pkg-btn").style.display = "none"
                                 document.getElementById("new-pkg-version-btn").style.display = "block"
                                 document.getElementById("revert-upload-pkg").style.display = "none"
@@ -297,7 +298,7 @@ export default function EditSnippet(props) {
                                 document.getElementById("upload-new-pkg-btn").innerHTML = document.getElementById("upload-new-pkg-btn").innerHTML.replace("✅ UPLOAD PACKAGE", "UPLOAD PACKAGE")
                                 // add the icon back
                                 document.getElementById("file-input-icon").style.display = "revert"
-                                document.getElementById("package-version").innerHTML = "CURRENT VERSION: " + codeBlock.current_version
+                                document.getElementById("package-version").innerHTML = "CURRENT VERSION: " + snippet.current_version
                                 document.getElementById("pkg-version-input").style.display = "none"
                                 document.getElementById("delete-pkg-btn").style.display = "revert"
                                 document.getElementById("delete-pkg-btn").style.marginTop = "-35px"
@@ -326,22 +327,22 @@ export default function EditSnippet(props) {
                                 document.getElementById("delete-pkg-btn").innerHTML = "DELETING..."
                                 console.log("DELETING IMAGES")
                                 // get the ref of every package screenshot and the ref of the package itself
-                                const imgOneRef = ref(storage, codeBlock.screenshots[0]);
+                                const imgOneRef = ref(storage, snippet.screenshots[0]);
                                 await deleteObject(imgOneRef).then(() => {
                                     console.log("deleted")
                                 })
 
-                                const imgTwoRef = ref(storage, codeBlock.screenshots[1]);
+                                const imgTwoRef = ref(storage, snippet.screenshots[1]);
                                 await deleteObject(imgTwoRef).then(() => {
                                     console.log("deleted")
                                 })
 
-                                const imgThreeRef = ref(storage, codeBlock.screenshots[2]);
+                                const imgThreeRef = ref(storage, snippet.screenshots[2]);
                                 await deleteObject(imgThreeRef).then(() => {
                                     console.log("deleted")
                                 })
 
-                                const imgFourRef = ref(storage, codeBlock.screenshots[3]);
+                                const imgFourRef = ref(storage, snippet.screenshots[3]);
                                 await deleteObject(imgFourRef).then(() => {
                                     console.log("deleted")
                                 })
@@ -353,7 +354,7 @@ export default function EditSnippet(props) {
                                     if (doc.exists()) {
                                         const data = doc.data()
                                         let owned_packages = data.owned_snippets
-                                        owned_packages.splice(owned_packages.indexOf(codeBlock.id), 1)
+                                        owned_packages.splice(owned_packages.indexOf(snippet.id), 1)
                                         console.log("modifiying owned_packages")
                                         await setDoc(userRef, {
                                             owned_packages: owned_packages
@@ -365,7 +366,7 @@ export default function EditSnippet(props) {
                                 console.log("got user doc")
                                 // delete the package from the database
                                 console.log("deleting codeblock from db")
-                                await deleteDoc(doc(db, "snippets", codeBlock.id)).then(() => {
+                                await deleteDoc(doc(db, "snippets", snippet.id)).then(() => {
                                     console.log("deleted codeblock from db")
                                 }).then(() => {
                                     navigate("/snippets")

@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import {collection, getDocs, query, where} from "firebase/firestore";
 import {db} from "./firebase.js";
-import CodeCard from "./codeCard.jsx";
+import SnippetCard from "./snippetCard.jsx";
 
 export default function SearchCodeBlocks() {
     const [searchInput, setSearchInput] = useState("");
@@ -49,8 +49,8 @@ export default function SearchCodeBlocks() {
                         navigate("/packages/" + pkg.id)
                     }}>
                         <Link to={"/snippets/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
-                            <CodeCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
-                                      description={pkg.catchphrase}/>
+                            <SnippetCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
+                                         description={pkg.catchphrase}/>
                         </Link>
                     </li>
                 ))}

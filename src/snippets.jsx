@@ -1,6 +1,6 @@
 import "./packages.css"
 import "./snippets.css"
-import CodeCard from "./codeCard.jsx";
+import SnippetCard from "./snippetCard.jsx";
 import {Link, useNavigate} from "react-router-dom";
 import {IoMdSearch} from "react-icons/io";
 import {collection, getDocs, limit, orderBy, query, setLogLevel} from "firebase/firestore";
@@ -99,8 +99,8 @@ export default function Snippets() {
                 {trendingCodeBlockData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">
                         <Link to={"/snippets/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
-                            <CodeCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
-                                      description={pkg.catchphrase}/>
+                            <SnippetCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
+                                         description={pkg.catchphrase}/>
                         </Link>
                     </li>
                 ))}
@@ -110,8 +110,8 @@ export default function Snippets() {
                 {lastCodeBlockData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">
                         <Link to={"/snippets/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
-                            <CodeCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
-                                      description={pkg.catchphrase}/>
+                            <SnippetCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
+                                         description={pkg.catchphrase}/>
                         </Link>
                     </li>
                 ))}

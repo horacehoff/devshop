@@ -1,9 +1,9 @@
-import "./codeCard.css"
+import "./snippetCard.css"
 import shortNumber from "short-number"
 import {useNavigate} from "react-router-dom";
 import React, {useEffect} from "react";
 
-export default function CodeCard(props) {
+export default function SnippetCard(props) {
     const navigate = useNavigate();
     let bannerRef = React.createRef();
 

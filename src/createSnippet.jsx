@@ -9,7 +9,7 @@ import {doc, getDoc, setDoc} from "firebase/firestore";
 import fancy_name_to_id, {generateUUID, interests_data, profanityFilter} from "./utility.js";
 import MDEditor from '@uiw/react-md-editor';
 import {BiCloudUpload} from "react-icons/bi";
-import CodeCard from "./codeCard.jsx";
+import SnippetCard from "./snippetCard.jsx";
 import Popup from "reactjs-popup";
 
 export default function CreateSnippet() {
@@ -159,8 +159,8 @@ export default function CreateSnippet() {
                 <div className="split-two split-two-height" id="split-two">
                     <h1 className="about-title about-title-card">PUBLISH A SNIPPET</h1>
                     <div className="split-two-card">
-                        <CodeCard dwnl="0" author="your username" name={name || "placeholder"}
-                                  description={desc || "placeholder"}/>
+                        <SnippetCard dwnl="0" author="your username" name={name || "placeholder"}
+                                     description={desc || "placeholder"}/>
                     </div>
                 </div>
                 <div className="split-one">

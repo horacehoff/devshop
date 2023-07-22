@@ -6,7 +6,7 @@ import PackageCard from "./packageCard.jsx";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {collection, getDocs, query, where} from "firebase/firestore";
 import {db} from "./firebase.js";
-import CodeCard from "./codeCard.jsx";
+import SnippetCard from "./snippetCard.jsx";
 import shortNumber from "short-number";
 
 export default function AccountPage(props) {
@@ -116,8 +116,8 @@ export default function AccountPage(props) {
                 {usrCodeBlocks.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">
                         <Link to={"/snippets/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
-                            <CodeCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
-                                      description={pkg.catchphrase}/>
+                            <SnippetCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
+                                         description={pkg.catchphrase}/>
                         </Link>
                     </li>
                 ))}
