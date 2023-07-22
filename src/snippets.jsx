@@ -1,5 +1,5 @@
 import "./packages.css"
-import "./codeBlocks.css"
+import "./snippets.css"
 import CodeCard from "./codeCard.jsx";
 import {Link, useNavigate} from "react-router-dom";
 import {IoMdSearch} from "react-icons/io";
@@ -7,7 +7,7 @@ import {collection, getDocs, limit, orderBy, query, setLogLevel} from "firebase/
 import {useEffect, useState} from "react";
 import {db, user_data} from "./firebase.js";
 
-export default function CodeBlocks() {
+export default function Snippets() {
     const navigate = useNavigate();
     window.mobileCheck = function () {
         let check = false;
@@ -52,13 +52,13 @@ export default function CodeBlocks() {
         setTrendingCodeBlockData([])
         setLastCodeBlockData([])
         setSimilarCodeBlockData([])
-        const q = query(collection(db, "code-blocks"), orderBy("downloads", "desc"), limit(9));
+        const q = query(collection(db, "snippets"), orderBy("downloads", "desc"), limit(9));
         getDocs(q).then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 setTrendingCodeBlockData(prevState => [...prevState, doc.data()]);
             })
         })
-        const q1 = query(collection(db, "code-blocks"), orderBy("created", "desc"), limit(9));
+        const q1 = query(collection(db, "snippets"), orderBy("created", "desc"), limit(9));
         getDocs(q1).then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 setLastCodeBlockData(prevState => [...prevState, doc.data()]);
@@ -67,7 +67,7 @@ export default function CodeBlocks() {
         console.log("HEYYYYA")
         // if (user_data) {
         //     console.log(user_data.interests)
-        //     const q2 = query(collection(db, "code-blocks"), where("interests", "array-contains-any", Array.from(user_data.interests)), orderBy("downloads", "desc"), limit(9));
+        //     const q2 = query(collection(db, "snippets"), where("interests", "array-contains-any", Array.from(user_data.interests)), orderBy("downloads", "desc"), limit(9));
         //     getDocs(q2).then((querySnapshot) => {
         //         querySnapshot.forEach((doc) => {
         //             console.log("fuck yeah")
@@ -85,20 +85,20 @@ export default function CodeBlocks() {
 
     return (
         <>
-            <h1 className="packages-title code-blocks-title">CODE<br/>BLOCKS</h1>
+            <h1 className="packages-title snippets-title">SNIPPETS</h1>
             <Link className="secondary search-btn" id="package-publish-btn"
-                  to="/publish-code-block">+ PUBLISH A CODE BLOCK
+                  to="/publish-snippet">+ PUBLISH A SNIPPET
             </Link>
             <Link className="secondary search-btn" id="package-search-btn"
                   style={{marginLeft: "10px", maxWidth: "173px"}}
-                  to="/codeblocks/q/"><IoMdSearch
-                style={{position: "relative", top: "1px"}}/> SEARCH CODE BLOCKS
+                  to="/snippets/q/"><IoMdSearch
+                style={{position: "relative", top: "1px"}}/> SEARCH SNIPPETS
             </Link>
             <h2 className="category-title">// CURRENTLY TRENDING</h2>
             <ul className="packages-card-list">
                 {trendingCodeBlockData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">
-                        <Link to={"/codeblocks/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                        <Link to={"/snippets/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
                             <CodeCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
                                       description={pkg.catchphrase}/>
                         </Link>
@@ -109,7 +109,7 @@ export default function CodeBlocks() {
             <ul className="packages-card-list">
                 {lastCodeBlockData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">
-                        <Link to={"/codeblocks/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                        <Link to={"/snippets/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
                             <CodeCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
                                       description={pkg.catchphrase}/>
                         </Link>

@@ -1,5 +1,5 @@
 import "./packagePage.css"
-import "./codeBlockPage.css"
+import "./snippetPage.css"
 import {onAuthStateChanged} from "firebase/auth";
 import {doc, getDoc, updateDoc} from "firebase/firestore";
 import {auth, db} from "./firebase.js";
@@ -10,7 +10,7 @@ import fancy_name_to_id from "./utility.js";
 import MDEditor from '@uiw/react-md-editor';
 import Popup from "reactjs-popup";
 
-export default function CodeBlockPage() {
+export default function SnippetPage() {
     const [codeBlock, setCodeBlock] = useState(null);
     const [uid, set_uid] = useState("");
     const [is_logged_in, set_is_logged_in] = useState(false);
@@ -54,7 +54,7 @@ export default function CodeBlockPage() {
     const params_id = useParams().id;
     useEffect(() => {
         if (codeBlock === null) {
-            getDoc(doc(db, "code-blocks", params_id)).then((doc) => {
+            getDoc(doc(db, "snippets", params_id)).then((doc) => {
                 if (doc.exists()) {
                     setCodeBlock(doc.data());
                     console.log("pkg: ", codeBlock)
@@ -185,14 +185,14 @@ export default function CodeBlockPage() {
                 />
                 <br/>
             </div>
-            <h2 className="package-title code-block-title">{codeBlock.name}</h2>
+            <h2 className="package-title snippet-title">{codeBlock.name}</h2>
             <h3 className="package-author">// BY <Link className="package-author-link"
                                                        to={"/users/" + fancy_name_to_id(codeBlock.owner_username)}>{codeBlock.owner_username}</Link>
             </h3>
             <button className="package-download-btn" id="package-download-btn"
                     onClick={() => {
                         if (uid === codeBlock.owner_id) {
-                            navigate("/codeblocks/" + codeBlock.id + "/edit", {state: {pkg: codeBlock}})
+                            navigate("/snippets/" + codeBlock.id + "/edit", {state: {pkg: codeBlock}})
                         } else {
                             downloadCode()
                         }
@@ -223,7 +223,7 @@ export default function CodeBlockPage() {
                                                      modal id="rating-popup"
                                                      ref={popupRef} onOpen={() => {
                         if (!is_logged_in) {
-                            document.getElementById("popup-root").firstChild.firstChild.innerHTML = '<h4>WARNING</h4><p class="popup-signin-txt">You need to sign in to be able to rate code blocks.</p><button class="secondary popup-signin-btn" id="popup-sign-in">SIGN_IN</button><button class="primary popup-back-btn" id="popup-go-back">GO BACK</button>'
+                            document.getElementById("popup-root").firstChild.firstChild.innerHTML = '<h4>WARNING</h4><p class="popup-signin-txt">You need to sign in to be able to rate snippets.</p><button class="secondary popup-signin-btn" id="popup-sign-in">SIGN_IN</button><button class="primary popup-back-btn" id="popup-go-back">GO BACK</button>'
                             document.getElementById("popup-sign-in").onclick = () => {
                                 navigate("/sign-in")
                             }
@@ -232,7 +232,7 @@ export default function CodeBlockPage() {
                             }
                         }
                     }}>
-                           <h3 className="rating-popup-title">RATE THIS PACKAGE</h3>
+                           <h3 className="rating-popup-title">RATE THIS SNIPPET</h3>
                            <span className="rating-popup-input">RATING: <input type='number' max='100' min='0'
                                                                                maxLength='3' className='rating_input'
                                                                                id='rating_input' onInput={() => {
@@ -246,7 +246,7 @@ export default function CodeBlockPage() {
                            <br/><br/>
                            <button className='secondary rating-popup-btn' id='rating_done_btn' onClick={async () => {
                                // if no map exists on the package firebase doc, create one and add the rating, else add the rating to the map
-                               await updateDoc(doc(db, "code-blocks", codeBlock.id), {
+                               await updateDoc(doc(db, "snippets", codeBlock.id), {
                                    // get all existing ratings of the package using the pkg object, and add the new rating to the map
                                    ratings: {
                                        ...codeBlock.ratings,

@@ -14,7 +14,7 @@ export default function SearchCodeBlocks() {
     async function search(e, forcePass) {
         if ((e.key === "Enter" || forcePass) && searchInput !== "") {
             let search_results = [];
-            const q = query(collection(db, "code-blocks"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'));
+            const q = query(collection(db, "snippets"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'));
             getDocs(q).then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     search_results.push(doc.data());
@@ -38,7 +38,7 @@ export default function SearchCodeBlocks() {
 
     return (
         <>
-            <h1 className="search-title">SEARCH CODE BLOCKS</h1>
+            <h1 className="search-title">SEARCH SNIPPETS</h1>
             <IoMdSearch className="search-input-icon"/>
             <input type="text" placeholder="Search something..." value={searchInput}
                    onChange={e => setSearchInput(e.target.value)} onKeyDown={e => search(e, false)}
@@ -48,7 +48,7 @@ export default function SearchCodeBlocks() {
                     <li key={index} className="packages-card-list-child" onClick={() => {
                         navigate("/packages/" + pkg.id)
                     }}>
-                        <Link to={"/codeblocks/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                        <Link to={"/snippets/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
                             <CodeCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
                                       description={pkg.catchphrase}/>
                         </Link>

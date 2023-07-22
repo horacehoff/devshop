@@ -13,13 +13,13 @@
         <loc>https://dev-shop.vercel.app/packages/q/query</loc>
     </url>
     <url>
-        <loc>https://dev-shop.vercel.app/codeblocks/q/query</loc>
+        <loc>https://dev-shop.vercel.app/snippets/q/query</loc>
     </url>
     <url>
-        <loc>https://dev-shop.vercel.app/code-blocks</loc>
+        <loc>https://dev-shop.vercel.app/snippets</loc>
     </url>
     <url>
-        <loc>https://dev-shop.vercel.app/publish-code-block</loc>
+        <loc>https://dev-shop.vercel.app/publish-snippet</loc>
     </url>
     <url>
         <loc>https://dev-shop.vercel.app/sign-up</loc>
@@ -46,10 +46,10 @@
         <loc>https://dev-shop.vercel.app/packages/id/edit</loc>
     </url>
     <url>
-        <loc>https://dev-shop.vercel.app/codeblocks/id</loc>
+        <loc>https://dev-shop.vercel.app/snippets/id</loc>
     </url>
     <url>
-        <loc>https://dev-shop.vercel.app/codeblocks/id/edit</loc>
+        <loc>https://dev-shop.vercel.app/snippets/id/edit</loc>
     </url>
     <url>
         <loc>https://dev-shop.vercel.app/users/id</loc>

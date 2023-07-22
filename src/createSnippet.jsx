@@ -1,5 +1,5 @@
 import "./createPackage.css"
-import "./createCodeBlock.css"
+import "./createSnippet.css"
 import {useState} from "react";
 import {auth, db, storage} from "./firebase.js";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage"
@@ -12,7 +12,7 @@ import {BiCloudUpload} from "react-icons/bi";
 import CodeCard from "./codeCard.jsx";
 import Popup from "reactjs-popup";
 
-export default function CreateCodeBlock() {
+export default function CreateSnippet() {
     const [pkgUpload, setPkgUpload] = useState(null);
 
     const [imgUpload0ne, setImgUploadOne] = useState(null);
@@ -26,7 +26,7 @@ export default function CreateCodeBlock() {
     const [name, setName] = useState("");
     const [desc, setDesc] = useState("");
     const [version, setVersion] = useState("");
-    const [longDesc, setLongDesc] = useState("**This is the detailed description of my awesome code block!**");
+    const [longDesc, setLongDesc] = useState("**This is the detailed description of my awesome snippet!**");
     const [code, setCode] = useState("");
     let codeblock_id = "";
 
@@ -45,22 +45,22 @@ export default function CreateCodeBlock() {
         let name_id = generateUUID(fancy_name_to_id(name))
         codeblock_id = name_id;
 
-        let imgRefOne = ref(storage, "users/" + uid + "/codeblocks/" + name_id + "/img/one/" + (imgUpload0ne.name ?? ("screenone" + imgUpload0ne.type)))
+        let imgRefOne = ref(storage, "users/" + uid + "/snippets/" + name_id + "/img/one/" + (imgUpload0ne.name ?? ("screenone" + imgUpload0ne.type)))
         await uploadBytes(imgRefOne, imgUpload0ne).then(() => {
             document.getElementById("publish-btn").innerHTML = "UPLOADING... => ███▒▒▒▒▒▒▒▒▒▒▒ 21%"
         })
 
-        let imgRefTwo = ref(storage, "users/" + uid + "/codeblocks/" + name_id + "/img/two/" + imgUploadTwo.name ?? ("screentwo" + imgUpload0ne.type))
+        let imgRefTwo = ref(storage, "users/" + uid + "/snippets/" + name_id + "/img/two/" + imgUploadTwo.name ?? ("screentwo" + imgUpload0ne.type))
         await uploadBytes(imgRefTwo, imgUploadTwo).then(() => {
             document.getElementById("publish-btn").innerHTML = "UPLOADING... => ████▒▒▒▒▒▒▒▒▒▒ 28%"
         })
 
-        let imgRefThree = ref(storage, "users/" + uid + "/codeblocks/" + name_id + "/img/three/" + imgUploadThree.name ?? ("screenthree" + imgUpload0ne.type))
+        let imgRefThree = ref(storage, "users/" + uid + "/snippets/" + name_id + "/img/three/" + imgUploadThree.name ?? ("screenthree" + imgUpload0ne.type))
         await uploadBytes(imgRefThree, imgUploadThree).then(() => {
             document.getElementById("publish-btn").innerHTML = "UPLOADING... => █████▒▒▒▒▒▒▒▒▒ 35%"
         })
 
-        let imgRefFour = ref(storage, "users/" + uid + "/codeblocks/" + name_id + "/img/four/" + imgUploadFour.name ?? ("screenfour" + imgUpload0ne.type))
+        let imgRefFour = ref(storage, "users/" + uid + "/snippets/" + name_id + "/img/four/" + imgUploadFour.name ?? ("screenfour" + imgUpload0ne.type))
         await uploadBytes(imgRefFour, imgUploadFour).then(() => {
             document.getElementById("publish-btn").innerHTML = "UPLOADING... => ██████▒▒▒▒▒▒▒▒ 42%"
         })
@@ -100,7 +100,7 @@ export default function CreateCodeBlock() {
         }
 
 
-        let pkgUrl = await setDoc(doc(db, "code-blocks", name_id), {
+        let pkgUrl = await setDoc(doc(db, "snippets", name_id), {
             name: profanityFilter(name),
             description: profanityFilter(longDesc),
             catchphrase: profanityFilter(desc),
@@ -121,10 +121,10 @@ export default function CreateCodeBlock() {
             const userRef = doc(db, "users", uid);
             await getDoc(userRef).then(async (doc) => {
                 if (doc.exists()) {
-                    let codeblocks = doc.data().owned_packages;
-                    codeblocks.push(name_id);
+                    let snippets = doc.data().owned_packages;
+                    snippets.push(name_id);
                     await setDoc(userRef, {
-                        owned_codeblocks: codeblocks
+                        owned_snippets: snippets
                     }, {merge: true}).then(r => {
                         document.getElementById("publish-btn").innerHTML = "UPLOADING... => ██████████████ 100%"
                         return name_id
@@ -148,23 +148,23 @@ export default function CreateCodeBlock() {
     return (
         <>
             <Popup modal open={warning} onClose={() => {
-                navigate("/code-blocks")
+                navigate("/snippets")
             }}><span>
                 <h4>WARNING</h4>
-                <p className="popup-signin-txt">You need to sign in to be able to publish packages/code blocks.</p>
+                <p className="popup-signin-txt">You need to sign in to be able to publish packages/snippets.</p>
                 <button className="secondary popup-signin-btn" onClick={() => navigate("/sign-in")}>SIGN_IN</button>
-                <button className="primary popup-back-btn" onClick={() => navigate("/code-blocks")}>GO BACK</button>
+                <button className="primary popup-back-btn" onClick={() => navigate("/snippets")}>GO BACK</button>
             </span></Popup>
             <div className="split">
                 <div className="split-two split-two-height" id="split-two">
-                    <h1 className="about-title about-title-card">PUBLISH A CODE BLOCK</h1>
+                    <h1 className="about-title about-title-card">PUBLISH A SNIPPET</h1>
                     <div className="split-two-card">
                         <CodeCard dwnl="0" author="your username" name={name || "placeholder"}
                                   description={desc || "placeholder"}/>
                     </div>
                 </div>
                 <div className="split-one">
-                    <h1 className="about-title">PUBLISH A CODE BLOCK</h1>
+                    <h1 className="about-title">PUBLISH A SNIPPET</h1>
                     <div className="centered">
                         <h2 style={{margin: "0", fontWeight: "400", fontSize: "18px"}}>// GENERAL INFO</h2>
                         <input type="text" className="name-input" placeholder="NAME" value={name}
@@ -222,11 +222,11 @@ export default function CreateCodeBlock() {
                         <br/>
                         <button onMouseEnter={() => {
                             if (document.getElementById("publish-btn").style.pointerEvents !== "none") {
-                                document.getElementById("publish-btn").innerHTML = ">> PUBLISH CODE BLOCK <<"
+                                document.getElementById("publish-btn").innerHTML = ">> PUBLISH SNIPPET <<"
                             }
                         }} onMouseLeave={() => {
                             if (document.getElementById("publish-btn").style.pointerEvents !== "none") {
-                                document.getElementById("publish-btn").innerHTML = "PUBLISH CODE BLOCK"
+                                document.getElementById("publish-btn").innerHTML = "PUBLISH SNIPPET"
                             }
                         }} onClick={() => {
                             if (name === "") {
@@ -235,12 +235,12 @@ export default function CreateCodeBlock() {
                                 document.getElementById("publish-btn").style.pointerEvents = "none"
                                 document.getElementById("publish-btn").innerHTML = "UPLOADING... => ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 0%"
                                 upload().then(name_id => {
-                                    navigate("/codeblocks/" + codeblock_id)
+                                    navigate("/snippets/" + codeblock_id)
                                     window.location.reload()
                                 })
                             }
-                        }} className="primary publish-btn publish-code-block" id="publish-btn">
-                            PUBLISH CODE BLOCK
+                        }} className="primary publish-btn publish-snippet" id="publish-btn">
+                            PUBLISH SNIPPET
                         </button>
                         <br/>
                     </div>

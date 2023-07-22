@@ -63,7 +63,7 @@ export default function AccountPage(props) {
             }
             const getUsrCodeBlocks = () => {
                 let final_packages = []
-                const q = query(collection(db, "code-blocks"), where("owner_username", "==", usr.username));
+                const q = query(collection(db, "snippets"), where("owner_username", "==", usr.username));
                 getDocs(q).then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
                         final_packages.push(new Object(doc.data()))
@@ -111,11 +111,11 @@ export default function AccountPage(props) {
                 width: "calc(100% - 50px)",
                 marginBottom: "10px",
                 paddingRight: "15px"
-            }}>CODE BLOCKS</h2>
+            }}>SNIPPETS</h2>
             <ul className="packages-card-list" id="packages-card-list">
                 {usrCodeBlocks.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">
-                        <Link to={"/codeblocks/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                        <Link to={"/snippets/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
                             <CodeCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
                                       description={pkg.catchphrase}/>
                         </Link>

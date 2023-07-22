@@ -4,7 +4,7 @@
 
 #hamburger, .nav h2 {
     cursor: pointer;
-    z-index: 5000;
+    z-index: 50000;
     position: fixed
 }
 
@@ -76,7 +76,7 @@
     text-shadow: 0px 1px 2px rgb(0 0 0 / 80%);
 }
 
-#code-blocks {
+#snippets {
     right: 359px
 }
 
@@ -172,13 +172,13 @@
         right: 194px
     }
 
-    #code-blocks {
+    #snippets {
         right: 291px
     }
 }
 
 @media screen and (max-width: 600px) {
-    #about, #account, #code-blocks, #packages, #pricing {
+    #about, #account, #snippets, #packages, #pricing {
         visibility: hidden
     }
 

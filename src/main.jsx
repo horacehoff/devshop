@@ -21,10 +21,10 @@ import AccountSettings from "./accountSettings.jsx";
 import AccountPage from "./accountPage.jsx";
 import EditPackage from "./editPackage.jsx";
 import SearchPackages from "./searchPackages.jsx";
-import CodeBlocks from "./codeBlocks.jsx";
-import CreateCodeBlock from "./createCodeBlock.jsx";
-import CodeBlockPage from "./codeBlockPage.jsx";
-import EditCodeBlock from "./editCodeBlock.jsx";
+import Snippets from "./snippets.jsx";
+import CreateSnippet from "./createSnippet.jsx";
+import SnippetPage from "./snippetPage.jsx";
+import EditSnippet from "./editSnippet.jsx";
 import SearchCodeBlocks from "./searchCodeBlocks.jsx";
 import Navbar from "./Navbar.jsx";
 
@@ -41,10 +41,10 @@ function App() {
                     <Packages/>
                 }/>
                 <Route path="/packages/q/:query?" element={<SearchPackages/>}/>
-                <Route path="/codeblocks/q/:query?" element={<SearchCodeBlocks/>}/>
-                <Route path="/code-blocks" element={<CodeBlocks/>}/>
-                <Route path="/publish-code-block" element={
-                    <CreateCodeBlock/>
+                <Route path="/snippets/q/:query?" element={<SearchCodeBlocks/>}/>
+                <Route path="/snippets" element={<Snippets/>}/>
+                <Route path="/publish-snippet" element={
+                    <CreateSnippet/>
                 }/>
                 <Route path="/sign-up" element={
                     <SignUp/>
@@ -58,8 +58,8 @@ function App() {
                 <Route path="/about" element={<About/>}/>
                 <Route path="/packages/:id" element={<PackagePage/>}/>
                 <Route path="/packages/:id/edit" element={<EditPackage/>}/>
-                <Route path="/codeblocks/:id/" element={<CodeBlockPage/>}/>
-                <Route path="/codeblocks/:id/edit" element={<EditCodeBlock/>}/>
+                <Route path="/snippets/:id/" element={<SnippetPage/>}/>
+                <Route path="/snippets/:id/edit" element={<EditSnippet/>}/>
                 <Route path="/users/:id" element={<AccountPage/>}/>
             </Routes>
         </BrowserRouter>

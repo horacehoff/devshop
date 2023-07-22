@@ -21,10 +21,10 @@ export default function Navbar() {
         document.getElementById("nav-account").style.textDecoration = "none"
         document.getElementById("account").style.color = "rgba(255, 255, 255, .75)"
         document.getElementById("nav-account").style.color = "rgba(255, 255, 255, .75)"
-        document.getElementById("code-blocks").style.textDecoration = "none"
-        document.getElementById("nav-code-blocks").style.textDecoration = "none"
-        document.getElementById("code-blocks").style.color = "rgba(255, 255, 255, .75)"
-        document.getElementById("nav-code-blocks").style.color = "rgba(255, 255, 255, .75)"
+        document.getElementById("snippets").style.textDecoration = "none"
+        document.getElementById("nav-snippets").style.textDecoration = "none"
+        document.getElementById("snippets").style.color = "rgba(255, 255, 255, .75)"
+        document.getElementById("nav-snippets").style.color = "rgba(255, 255, 255, .75)"
         document.getElementById("about").style.textDecoration = "none"
         document.getElementById("nav-about").style.textDecoration = "none"
         document.getElementById("about").style.color = "rgba(255, 255, 255, .75)"
@@ -57,11 +57,11 @@ export default function Navbar() {
             document.getElementById("account").style.color = "white"
             document.getElementById("nav-account").style.color = "white"
             document.title = "SIGN UP/IN - DEVSHOP"
-        } else if (location.slice(0, 12) === "/code-blocks" || location.slice(0, 11) === "/codeblocks") {
-            document.getElementById("code-blocks").style.textDecoration = "underline"
-            document.getElementById("nav-code-blocks").style.textDecoration = "underline"
-            document.getElementById("code-blocks").style.color = "white"
-            document.getElementById("nav-code-blocks").style.color = "white"
+        } else if (location.slice(0, 9) === "/snippets") {
+            document.getElementById("snippets").style.textDecoration = "underline"
+            document.getElementById("nav-snippets").style.textDecoration = "underline"
+            document.getElementById("snippets").style.color = "white"
+            document.getElementById("nav-snippets").style.color = "white"
         } else if (location.slice(0, 12) === "/about") {
             document.getElementById("about").style.textDecoration = "underline"
             document.getElementById("nav-about").style.textDecoration = "underline"
@@ -159,7 +159,7 @@ export default function Navbar() {
                 document.getElementById("account").onmouseenter = () => showAccountPages()
                 document.getElementById("account").onmouseleave = () => hideAccountPages()
 
-                // create a code block below that will keep the three account options visible when the mouse is over them and hide them when the mouse is not over them
+                // create a snippet below that will keep the three account options visible when the mouse is over them and hide them when the mouse is not over them
                 document.getElementById("profile").onmouseenter = () => {
                     isMouseHover = true
                     showAccountPages()
@@ -217,7 +217,7 @@ export default function Navbar() {
                     EVSHOP
                     </span>
                 </h2>
-                <Link id="code-blocks" to="/code-blocks" className="nav-link">CODE BLOCKS</Link>
+                <Link id="snippets" to="/snippets" className="nav-link">SNIPPETS</Link>
                 <Link id="packages" to="/packages" className="nav-link">PACKAGES</Link>
                 <Link id="pricing" to="/pricing" className="nav-link">PRICING</Link>
                 <Link id="about" to="/about" className="nav-link">ABOUT</Link>
@@ -240,7 +240,7 @@ export default function Navbar() {
                 }}>||</h4>
                 <div id="full-nav">
                     <ul>
-                        <li onClick={() => navigate("/code-blocks")} id="nav-code-blocks">CODE BLOCKS</li>
+                        <li onClick={() => navigate("/snippets")} id="nav-snippets">SNIPPETS</li>
                         <li onClick={() => navigate("/packages")} id="nav-packages">PACKAGES</li>
                         <li onClick={() => navigate("/pricing")} id="nav-pricing">PRICING</li>
                         <li onClick={() => navigate("/about")} id="nav-about">ABOUT</li>

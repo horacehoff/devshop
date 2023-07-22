@@ -1,7 +1,7 @@
 import './packagePage.css'
 import "./editPackage.css"
-import "./codeBlockPage.css"
-import "./editCodeBlock.css"
+import "./snippetPage.css"
+import "./editSnippet.css"
 import {onAuthStateChanged} from "firebase/auth";
 import {auth, db, storage} from "./firebase.js";
 import fancy_name_to_id, {profanityFilter} from "./utility.js";
@@ -12,10 +12,10 @@ import {deleteObject, getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {deleteDoc, doc, getDoc, setDoc} from "firebase/firestore";
 import {FcCancel} from "react-icons/fc";
 
-export default function EditCodeBlock(props) {
+export default function EditSnippet(props) {
     const navigate = useNavigate()
     if (!useLocation().state) {
-        navigate("/codeblocks")
+        navigate("/snippets")
     }
     const {state} = useLocation()
     const codeBlock = state.pkg
@@ -41,11 +41,11 @@ export default function EditCodeBlock(props) {
                     console.log(uid)
                 } else {
                     console.log("user is not owner")
-                    navigate("/codeblocks/" + fancy_name_to_id(codeBlock.id))
+                    navigate("/snippets/" + fancy_name_to_id(codeBlock.id))
                 }
             } else {
                 console.log("user is not logged in")
-                navigate("/codeblocks/" + fancy_name_to_id(codeBlock.id))
+                navigate("/snippets/" + fancy_name_to_id(codeBlock.id))
             }
         })
     }, []);
@@ -66,8 +66,8 @@ export default function EditCodeBlock(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            console.log("users/" + uid + "/codeblocks/" + codeBlock.id + "/img/one/" + imgUpload0ne.name)
-            let uploadRef = ref(storage, "users/" + uid + "/codeblocks/" + codeBlock.id + "/img/one/" + imgUpload0ne.name)
+            console.log("users/" + uid + "/snippets/" + codeBlock.id + "/img/one/" + imgUpload0ne.name)
+            let uploadRef = ref(storage, "users/" + uid + "/snippets/" + codeBlock.id + "/img/one/" + imgUpload0ne.name)
             await uploadBytes(uploadRef, imgUpload0ne).then(() => {
                 console.log("img one uploaded")
             })
@@ -82,7 +82,7 @@ export default function EditCodeBlock(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/codeblocks/" + codeBlock.id + "/img/two/" + imgUploadTwo.name)
+            let uploadRef = ref(storage, "users/" + uid + "/snippets/" + codeBlock.id + "/img/two/" + imgUploadTwo.name)
             await uploadBytes(uploadRef, imgUploadTwo).then(() => {
                 console.log("img two uploaded")
             })
@@ -97,7 +97,7 @@ export default function EditCodeBlock(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/codeblocks/" + codeBlock.id + "/img/three/" + imgUploadThree.name)
+            let uploadRef = ref(storage, "users/" + uid + "/snippets/" + codeBlock.id + "/img/three/" + imgUploadThree.name)
             await uploadBytes(uploadRef, imgUploadThree).then(() => {
                 console.log("img three uploaded")
             })
@@ -112,7 +112,7 @@ export default function EditCodeBlock(props) {
             await deleteObject(imgRef).then(() => {
                 console.log("deleted")
             })
-            let uploadRef = ref(storage, "users/" + uid + "/codeblocks/" + codeBlock.id + "/img/four/" + imgUploadFour.name)
+            let uploadRef = ref(storage, "users/" + uid + "/snippets/" + codeBlock.id + "/img/four/" + imgUploadFour.name)
             await uploadBytes(uploadRef, imgUploadFour).then(() => {
                 console.log("img four uploaded")
             })
@@ -132,7 +132,7 @@ export default function EditCodeBlock(props) {
             currentCode = newCode
         }
 
-        await setDoc(doc(db, "code-blocks", codeBlock.id), {
+        await setDoc(doc(db, "snippets", codeBlock.id), {
             screenshots: [screenOneUrl, screenTwoUrl, screenThreeUrl, screenFourUrl],
             description: profanityFilter(newDesc),
             current_version: currentVer,
@@ -143,16 +143,16 @@ export default function EditCodeBlock(props) {
 
     return (
         <>
-                <h2 className="package-title code-block-title">{codeBlock.name}</h2>
-                <h3 className="package-author">// BY <Link className="package-author-link"
-                                                           to={"/users/" + fancy_name_to_id(codeBlock.owner_username)}>{codeBlock.owner_username}</Link>
-                </h3>
+            <h2 className="package-title snippet-title">{codeBlock.name}</h2>
+            <h3 className="package-author">// BY <Link className="package-author-link"
+                                                       to={"/users/" + fancy_name_to_id(codeBlock.owner_username)}>{codeBlock.owner_username}</Link>
+            </h3>
                 <button className="package-download-btn" id="package-download-btn" onClick={async () => {
                     document.getElementById("package-download-btn").innerHTML = "SAVING.."
                     await saveChanges().then(() => {
                         document.getElementById("package-download-btn").innerHTML = "SAVED ✅"
                         setTimeout(() => {
-                            navigate("/codeblocks/" + codeBlock.id)
+                            navigate("/snippets/" + codeBlock.id)
                             window.location.reload()
                         }, 1000)
                     })
@@ -313,7 +313,7 @@ export default function EditCodeBlock(props) {
                         <button className="delete-pkg-btn" style={{textAlign: "center", paddingLeft: "15px"}}
                                 id="delete-pkg-btn" onClick={async () => {
                             const delete_btn_content = document.getElementById("delete-pkg-btn").innerHTML
-                            if (delete_btn_content === "DELETE CODE BLOCK") {
+                            if (delete_btn_content === "DELETE SNIPPET") {
                                 document.getElementById("delete-pkg-btn").innerHTML = "CONFIRM (3)"
                                 document.getElementById("delete-pkg-btn").style.paddingLeft = "25px"
                             } else if (delete_btn_content === "CONFIRM (3)") {
@@ -352,28 +352,28 @@ export default function EditCodeBlock(props) {
                                 await getDoc(doc(db, "users", uid)).then(async (doc) => {
                                     if (doc.exists()) {
                                         const data = doc.data()
-                                        let owned_packages = data.owned_codeblocks
+                                        let owned_packages = data.owned_snippets
                                         owned_packages.splice(owned_packages.indexOf(codeBlock.id), 1)
                                         console.log("modifiying owned_packages")
                                         await setDoc(userRef, {
                                             owned_packages: owned_packages
                                         }, {merge: true}).then(() => {
-                                            console.log("removed codeblock from owned_codeblocks")
+                                            console.log("removed codeblock from owned_snippets")
                                         })
                                     }
                                 })
                                 console.log("got user doc")
                                 // delete the package from the database
                                 console.log("deleting codeblock from db")
-                                await deleteDoc(doc(db, "code-blocks", codeBlock.id)).then(() => {
+                                await deleteDoc(doc(db, "snippets", codeBlock.id)).then(() => {
                                     console.log("deleted codeblock from db")
                                 }).then(() => {
-                                    navigate("/code-blocks")
+                                    navigate("/snippets")
                                     window.location.reload()
                                 })
 
                             }
-                        }}>DELETE CODE BLOCK
+                        }}>DELETE SNIPPET
                         </button>
                     </p>
                 </div>
