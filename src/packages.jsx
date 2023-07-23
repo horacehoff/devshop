@@ -86,11 +86,11 @@ export default function Packages() {
 
     return (
         <>
-            <h1 className="packages-title">PACKAGES</h1>
-            <Link className="secondary search-btn" id="package-publish-btn"
+            <h1 className="packages-title snippets-title">PACKAGES</h1>
+            <Link className="search-btn" id="package-publish-btn"
                   to="/publish-package">+ PUBLISH A PACKAGE
             </Link>
-            <Link className="secondary search-btn" id="package-search-btn"
+            <Link className="search-btn" id="package-search-btn"
                   style={{marginLeft: "10px", maxWidth: "150px"}}
                   to="/packages/q/">
                 <IoMdSearch
