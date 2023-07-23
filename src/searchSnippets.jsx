@@ -6,7 +6,7 @@ import {collection, getDocs, query, where} from "firebase/firestore";
 import {db} from "./firebase.js";
 import SnippetCard from "./snippetCard.jsx";
 
-export default function SearchCodeBlocks() {
+export default function SearchSnippets() {
     const [searchInput, setSearchInput] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const {querystr} = useParams();
@@ -39,7 +39,7 @@ export default function SearchCodeBlocks() {
     return (
         <>
             <h1 className="search-title">SEARCH SNIPPETS</h1>
-            <IoMdSearch className="search-input-icon"/>
+            <IoMdSearch className="search-input-icon" color="black"/>
             <input type="text" placeholder="Search something..." value={searchInput}
                    onChange={e => setSearchInput(e.target.value)} onKeyDown={e => search(e, false)}
                    className="txt-input search-input"/>

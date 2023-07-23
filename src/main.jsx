@@ -22,7 +22,7 @@ import Snippets from "./snippets.jsx";
 import CreateSnippet from "./createSnippet.jsx";
 import SnippetPage from "./snippetPage.jsx";
 import EditSnippet from "./editSnippet.jsx";
-import SearchCodeBlocks from "./searchCodeBlocks.jsx";
+import SearchSnippets from "./searchSnippets.jsx";
 import Navbar from "./Navbar.jsx";
 
 function App() {
@@ -38,7 +38,7 @@ function App() {
                     <Packages/>
                 }/>
                 <Route path="/packages/q/:query?" element={<SearchPackages/>}/>
-                <Route path="/snippets/q/:query?" element={<SearchCodeBlocks/>}/>
+                <Route path="/snippets/q/:query?" element={<SearchSnippets/>}/>
                 <Route path="/snippets" element={<Snippets/>}/>
                 <Route path="/publish-snippet" element={
                     <CreateSnippet/>
