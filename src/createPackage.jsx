@@ -170,10 +170,10 @@ export default function CreatePackage() {
             <Popup modal open={warning} onClose={() => {
                 navigate("/packages")
             }}><span>
-                <h4>WARNING</h4>
-                <p className="popup-signin-txt">You need to sign in to be able to publish packages/snippets.</p>
+                <h4>⚠️</h4>
+                <p className="popup-signin-txt">You need to sign in to be able to publish packages.</p>
                 <button className="secondary popup-signin-btn" onClick={() => navigate("/sign-in")}>SIGN_IN</button>
-                <button className="primary popup-back-btn" onClick={() => navigate("/packages")}>GO BACK</button>
+                {/*<button className="primary popup-back-btn" onClick={() => navigate("/packages")}>GO BACK</button>*/}
             </span></Popup>
             <div className="split">
                 <div className="split-two" id="split-two">

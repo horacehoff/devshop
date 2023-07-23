@@ -187,6 +187,7 @@
     border-radius: 2px;
     padding: 0 0 0 5px;
     font-family: 'JetBrains Mono', monospace;
+    transition: 0.2s;
 }
 
 .rating_input::-webkit-outer-spin-button, .rating_input::-webkit-inner-spin-button {
@@ -307,9 +308,9 @@
 }
 
 .rating-popup-input {
-    /*left: 22%;*/
-    position: relative;
     width: fit-content;
+    margin: 0 auto;
+    display: flex;
 }
 
 .rating-popup-btn {

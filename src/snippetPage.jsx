@@ -223,7 +223,7 @@ export default function SnippetPage() {
                                                      modal id="rating-popup"
                                                      ref={popupRef} onOpen={() => {
                         if (!is_logged_in) {
-                            document.getElementById("popup-root").firstChild.firstChild.innerHTML = '<h4>WARNING</h4><p class="popup-signin-txt">You need to sign in to be able to rate snippets.</p><button class="secondary popup-signin-btn" id="popup-sign-in">SIGN_IN</button><button class="primary popup-back-btn" id="popup-go-back">GO BACK</button>'
+                            document.getElementById("popup-root").firstChild.firstChild.innerHTML = '<h4>⚠️</h4><p class="popup-signin-txt">You need to sign in to be able to rate snippets.</p><button class="secondary popup-signin-btn" id="popup-sign-in">SIGN_IN</button>'
                             document.getElementById("popup-sign-in").onclick = () => {
                                 navigate("/sign-in")
                             }
@@ -233,17 +233,17 @@ export default function SnippetPage() {
                         }
                     }}>
                            <h3 className="rating-popup-title">RATE THIS SNIPPET</h3>
-                           <span className="rating-popup-input">RATING: <input type='number' max='100' min='0'
-                                                                               maxLength='3' className='rating_input'
-                                                                               id='rating_input' onInput={() => {
+                           <span className="rating-popup-input"><input type='number' max='100' min='0'
+                                                                       maxLength='3' className='rating_input'
+                                                                       id='rating_input' onInput={() => {
                                console.log(is_logged_in)
                                if (document.getElementById("rating_input").value > 100) {
                                    document.getElementById("rating_input").value = 100
                                } else if (document.getElementById("rating_input").value < 0) {
                                    document.getElementById("rating_input").value = 0
                                }
-                           }}/> /100</span>
-                           <br/><br/>
+                           }}/>&nbsp;/100</span>
+                           <br/>
                            <button className='secondary rating-popup-btn' id='rating_done_btn' onClick={async () => {
                                // if no map exists on the package firebase doc, create one and add the rating, else add the rating to the map
                                await updateDoc(doc(db, "snippets", snippet.id), {
