@@ -39,6 +39,7 @@ export default function SearchPackages() {
 
     return (
         <>
+            <br/><br/>
             <h1 className="search-title">SEARCH PACKAGES</h1>
             <IoMdSearch className="search-input-icon" color="black"/>
             <input type="text" placeholder="@SEARCH" value={searchInput}

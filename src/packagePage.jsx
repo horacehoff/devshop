@@ -183,8 +183,8 @@ export default function PackagePage() {
             </div>
             <div className="banner"></div>
             <h2 className="package-title">{pkg.name}</h2>
-            <h3 className="package-author">// BY <Link className="package-author-link"
-                                                       to={"/users/" + fancy_name_to_id(pkg.owner_username)}>{pkg.owner_username}</Link>
+            <h3 className="package-author">by <Link className="package-author-link"
+                                                    to={"/users/" + fancy_name_to_id(pkg.owner_username)}>{pkg.owner_username}</Link>
             </h3>
             <button className="package-download-btn" id="package-download-btn"
                     onClick={() => downloadPkg()}>{"DOWNLOAD -> 0$"}</button>

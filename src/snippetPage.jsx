@@ -186,8 +186,8 @@ export default function SnippetPage() {
                 <br/>
             </div>
             <h2 className="package-title snippet-title">{snippet.name}</h2>
-            <h3 className="package-author">// BY <Link className="package-author-link"
-                                                       to={"/users/" + fancy_name_to_id(snippet.owner_username)}>{snippet.owner_username}</Link>
+            <h3 className="package-author">by <Link className="package-author-link"
+                                                    to={"/users/" + fancy_name_to_id(snippet.owner_username)}>{snippet.owner_username}</Link>
             </h3>
             <button className="package-download-btn" id="package-download-btn"
                     onClick={() => {
