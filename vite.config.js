@@ -23,8 +23,10 @@ export default defineConfig({
     viteCompression({
       verbose: true,
       algorithm: "brotliCompress",
+      deleteOriginFile: true,
       compressionOptions: {
-        level: 9
+        level: 11,
+        lgwin: 50
       }
     })
   ],
