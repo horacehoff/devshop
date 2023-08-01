@@ -27,7 +27,7 @@ export default defineConfig({
       deleteOriginFile: true,
       compressionOptions: {
         level: 11,
-        lgwin: 50
+        lgwin: 500
       }
     }),
     terser({
