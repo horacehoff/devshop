@@ -24,9 +24,6 @@ export default defineConfig({
     viteCompression({
       verbose: true,
       algorithm: "brotliCompress",
-      compressionOptions: {
-        level: 11,
-      }
     }),
     terser({
       compress: {
