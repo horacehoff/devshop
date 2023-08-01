@@ -1,6 +1,7 @@
 import {defineConfig} from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import viteCompression from 'vite-plugin-compression';
+import terser from "@rollup/plugin-terser";
 
 export default defineConfig({
   optimizeDeps: {
@@ -28,7 +29,18 @@ export default defineConfig({
         level: 11,
         lgwin: 50
       }
-    })
+    }),
+    terser({
+      compress: {
+        passes: 1000,
+        drop_console: true,
+        drop_debugger: true
+      },
+      format: {
+        comments: false,
+        source_map: false,
+      },
+    }),
   ],
   build: {
     cssMinify: 'lightningcss',
@@ -37,9 +49,12 @@ export default defineConfig({
       compress: {
         drop_console: true,
         drop_debugger: true,
-        keep_infinity: true,
         passes: 1000
-      }
+      },
+      format: {
+        comments: false,
+        source_map: false,
+      },
     },
     sourcemap: false,
     rollupOptions: {
@@ -62,5 +77,6 @@ export default defineConfig({
         sourcemap: false,
       },
     },
+    plugins: [terser()],
   },
 });
