@@ -52,3 +52,10 @@
         display: none !important;
     }
 }
+
+@media screen and (max-width: 500px) {
+    .package-download-side {
+        margin-bottom: 75px;
+        /*position: static;*/
+    }
+}

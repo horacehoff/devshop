@@ -267,7 +267,7 @@ export default function SnippetPage() {
                     </button>
                 </p>
             </div>
-            <div className="bottom-block"></div>
+            {/*<div className="bottom-block"></div>*/}
         </>
     )
 }
