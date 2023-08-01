@@ -26,8 +26,7 @@ export default defineConfig({
       algorithm: "brotliCompress",
       deleteOriginFile: true,
       compressionOptions: {
-        level: 11,
-        lgwin: 50
+        level: 11
       }
     }),
     terser({
