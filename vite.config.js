@@ -31,7 +31,7 @@ export default defineConfig({
     })
   ],
   build: {
-    cssMinify: 'terser',
+    cssMinify: 'lightningcss',
     minify: 'terser',
     terserOptions: {
       compress: {
