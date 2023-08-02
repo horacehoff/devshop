@@ -37,9 +37,9 @@ export default defineConfig({
       },
     }),
   ],
-  // build: {
-  //   cssMinify: 'terser',
-  //   minify: 'terser',
+  build: {
+    cssMinify: 'terser',
+    minify: 'terser',
   //   terserOptions: {
   //     compress: {
   //       drop_console: true,
@@ -73,5 +73,5 @@ export default defineConfig({
   //     },
   //   },
   //   plugins: [terser()],
-  // },
+  },
 });
