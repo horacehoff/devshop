@@ -45,11 +45,11 @@ export default defineConfig({
     cssMinify: 'terser',
     minify: 'terser',
     terserOptions: {
-      // compress: {
-      //   drop_console: true,
-      //   drop_debugger: true,
-      //   passes: 1000
-      // },
+      compress: {
+        drop_console: true,
+        // drop_debugger: true,
+        passes: 1000
+      },
       format: {
         comments: false,
         source_map: false,
