@@ -71,11 +71,11 @@ export default defineConfig({
           markdown: ['@uiw/react-md-editor'],
           popups: ['reactjs-popup']
         },
-  //       compact: true,
-  //       minifyInternalExports: true,
-  //       sourcemap: false,
+        compact: true,
+        minifyInternalExports: true,
+        sourcemap: false,
       },
     },
-  //   plugins: [terser()],
+    plugins: [terser()],
   },
 });
