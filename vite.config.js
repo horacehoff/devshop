@@ -4,21 +4,21 @@ import react from '@vitejs/plugin-react-swc';
 // import terser from "@rollup/plugin-terser";
 
 export default defineConfig({
-  // optimizeDeps: {
-  //   include: [
-  //     'react',
-  //     'react-dom',
-  //     'react-router-dom',
-  //     'firebase/app',
-  //     'firebase/auth',
-  //     'firebase/firestore',
-  //     'firebase/storage',
-  //     'short-number',
-  //     'react-icons',
-  //     '@uiw/react-md-editor',
-  //     'reactjs-popup'
-  //   ],
-  // },
+  optimizeDeps: {
+    include: [
+      'react',
+      'react-dom',
+      'react-router-dom',
+      'firebase/app',
+      'firebase/auth',
+      'firebase/firestore',
+      'firebase/storage',
+      'short-number',
+      'react-icons',
+      '@uiw/react-md-editor',
+      'reactjs-popup'
+    ],
+  },
   plugins: [
     react(),
     // viteCompression({
