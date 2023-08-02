@@ -1,7 +1,7 @@
 import {defineConfig} from 'vite';
 import react from '@vitejs/plugin-react-swc';
-// import viteCompression from 'vite-plugin-compression';
-// import terser from "@rollup/plugin-terser";
+import viteCompression from 'vite-plugin-compression';
+import terser from "@rollup/plugin-terser";
 
 export default defineConfig({
   optimizeDeps: {
@@ -21,21 +21,21 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    // viteCompression({
-    //   verbose: true,
-    //   algorithm: "brotliCompress",
-    // }),
-    // terser({
-    //   compress: {
-    //     passes: 1000,
-    //     drop_console: true,
-    //     drop_debugger: true
-    //   },
-    //   format: {
-    //     comments: false,
-    //     source_map: false,
-    //   },
-    // }),
+    viteCompression({
+      verbose: true,
+      algorithm: "brotliCompress",
+    }),
+    terser({
+      compress: {
+        passes: 1000,
+        drop_console: true,
+        drop_debugger: true
+      },
+      format: {
+        comments: false,
+        source_map: false,
+      },
+    }),
   ],
   // build: {
   //   cssMinify: 'terser',
