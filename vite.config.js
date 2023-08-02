@@ -55,27 +55,27 @@ export default defineConfig({
   //       source_map: false,
   //     },
   //   },
-  //   sourcemap: false,
-  //   rollupOptions: {
-  //     output: {
-  //       manualChunks: {
-  //         main: ['react'],
-  //         maindom: ['react-dom'],
-  //         mainrouterdom: ['react-router-dom'],
-  //         app: ['firebase/app'],
-  //         auth: ['firebase/auth'],
-  //         store: ['firebase/firestore'],
-  //         storage: ['firebase/storage'],
-  //         shortnum: ['short-number'],
-  //         icons: ['react-icons'],
-  //         markdown: ['@uiw/react-md-editor'],
-  //         popups: ['reactjs-popup']
-  //       },
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          main: ['react'],
+          maindom: ['react-dom'],
+          mainrouterdom: ['react-router-dom'],
+          app: ['firebase/app'],
+          auth: ['firebase/auth'],
+          store: ['firebase/firestore'],
+          storage: ['firebase/storage'],
+          shortnum: ['short-number'],
+          icons: ['react-icons'],
+          markdown: ['@uiw/react-md-editor'],
+          popups: ['reactjs-popup']
+        },
   //       compact: true,
   //       minifyInternalExports: true,
   //       sourcemap: false,
-  //     },
-  //   },
+      },
+    },
   //   plugins: [terser()],
   },
 });
