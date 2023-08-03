@@ -60,12 +60,10 @@ export default defineConfig({
       output: {
         manualChunks: {
           main: ['react', 'react-dom', 'react-router-dom'],
-          // maindom: ['react-dom'],
-          // mainrouterdom: ['react-router-dom'],
-          app: ['firebase/app'],
-          auth: ['firebase/auth'],
-          store: ['firebase/firestore'],
-          storage: ['firebase/storage'],
+          db: ['firebase/app', 'firebase/auth', 'firebase/firestore', 'firebase/storage'],
+          // auth: ['firebase/auth'],
+          // store: ['firebase/firestore'],
+          // storage: ['firebase/storage'],
           shortnum: ['short-number'],
           icons: ['react-icons'],
           markdown: ['@uiw/react-md-editor'],
