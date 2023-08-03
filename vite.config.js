@@ -4,7 +4,7 @@ import viteCompression from 'vite-plugin-compression';
 import terser from "@rollup/plugin-terser";
 import {dependencies} from './package.json'
 
-var exclVendors = ['react', 'react-router-dom', 'react-dom'];
+var exclVendors = ['react', 'react-router-dom', 'react-dom', 'firebase/app', 'firebase/auth', 'firebase/firestore', 'firebase/storage', 'firebase'];
 
 function renderChunks(deps) {
   var chunks = {};
