@@ -213,7 +213,7 @@ export default function Navbar() {
         <>
             <div className="nav">
                 <h2 onClick={() => navigate("/")} id="nav-title">
-                    <span className="nav-txt-title"><img src={navicon} className="nav-icon-title"/>
+                    <span className="nav-txt-title"><img src={navicon} className="nav-icon-title" alt="D"/>
                     EVSHOP
                     </span>
                 </h2>

@@ -44,6 +44,7 @@ export default defineConfig({
   build: {
     cssMinify: 'terser',
     minify: 'terser',
+    cssCodeSplit: true,
     terserOptions: {
       compress: {
         drop_console: true,
