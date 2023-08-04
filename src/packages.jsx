@@ -32,10 +32,10 @@ export default function Packages() {
             for (let i = 0; i < packagesCardList.length; i++) {
                 packagesCardList[i].style.transform = "translateY(-20px)";
                 packagesCardList[i].style.whiteSpace = "normal";
-                const packagesCardList = document.getElementsByClassName("card-title");
+                const packagesCardListLoop = document.getElementsByClassName("card-title");
                 for (let i = 0; i < packagesCardList.length; i++) {
-                    packagesCardList[i].style.whiteSpace = "nowrap";
-                    packagesCardList[i].style.overflow = "scroll"
+                    packagesCardListLoop[i].style.whiteSpace = "nowrap";
+                    packagesCardListLoop[i].style.overflow = "scroll"
                 }
             }
         }
@@ -112,6 +112,30 @@ export default function Packages() {
             </div>
             <h2 className="category-title">// MOST DOWNLOADED</h2>
             <ul className="packages-card-list" id="packages-card-list-one">
+                {trendingPackageData.map((pkg, index) => (
+                    <li key={index} className="packages-card-list-child">
+                        <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
+                                         catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                        </Link>
+                    </li>
+                ))}
+                {trendingPackageData.map((pkg, index) => (
+                    <li key={index} className="packages-card-list-child">
+                        <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
+                                         catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                        </Link>
+                    </li>
+                ))}
+                {trendingPackageData.map((pkg, index) => (
+                    <li key={index} className="packages-card-list-child">
+                        <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
+                                         catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                        </Link>
+                    </li>
+                ))}
                 {trendingPackageData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">
                         <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
