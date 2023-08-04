@@ -33,7 +33,7 @@ export default function Packages() {
                 packagesCardList[i].style.transform = "translateY(-20px)";
                 packagesCardList[i].style.whiteSpace = "normal";
                 const packagesCardListLoop = document.getElementsByClassName("card-title");
-                for (let i = 0; i < packagesCardList.length; i++) {
+                for (let i = 0; i < packagesCardListLoop.length; i++) {
                     packagesCardListLoop[i].style.whiteSpace = "nowrap";
                     packagesCardListLoop[i].style.overflow = "scroll"
                 }

@@ -31,10 +31,10 @@ export default function Snippets() {
             for (let i = 0; i < packagesCardList.length; i++) {
                 packagesCardList[i].style.transform = "translateY(-20px)";
                 packagesCardList[i].style.whiteSpace = "normal";
-                const packagesCardList = document.getElementsByClassName("card-title");
-                for (let i = 0; i < packagesCardList.length; i++) {
-                    packagesCardList[i].style.whiteSpace = "nowrap";
-                    packagesCardList[i].style.overflow = "scroll"
+                const packagesCardListLoop = document.getElementsByClassName("card-title");
+                for (let i = 0; i < packagesCardListLoop.length; i++) {
+                    packagesCardListLoop[i].style.whiteSpace = "nowrap";
+                    packagesCardListLoop[i].style.overflow = "scroll"
                 }
             }
         }
