@@ -2,6 +2,7 @@ import {defineConfig} from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import viteCompression from 'vite-plugin-compression';
 import terser from "@rollup/plugin-terser";
+import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 
 export default defineConfig({
   optimizeDeps: {
@@ -40,6 +41,7 @@ export default defineConfig({
         source_map: false,
       },
     }),
+    cssInjectedByJsPlugin(),
   ],
   build: {
     cssMinify: 'terser',

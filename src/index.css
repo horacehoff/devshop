@@ -17,7 +17,7 @@
     font-family: 'JetBrains Mono', 'Source Code Pro', monospace;
     line-height: 1.5;
     font-weight: 400;
-    color: var(--text);
+    color: white;
     /*background-color: #161C5B;*/
     background-color: var(--background);
     /*background-image: radial-gradient(at 22% 68%, rgb(0, 0, 0) 0, transparent 97%), radial-gradient(at 96% 5%, rgb(126, 34, 206) 0, transparent 84%), radial-gradient(at 17% 34%, rgb(55, 48, 163) 0, transparent 42%), radial-gradient(at 33% 33%, rgb(28, 25, 23) 0, transparent 62%), radial-gradient(at 71% 34%, rgb(30, 58, 138) 0, transparent 50%), radial-gradient(at 14% 98%, rgb(67, 56, 202) 0, transparent 57%);*/
@@ -32,6 +32,10 @@
     scroll-behavior: smooth;
     z-index: -9999;
     overflow-x: hidden;
+}
+
+p, span {
+    color: var(--text);
 }
 
 /*h1, h2, h3, h4, h5, h6 {*/

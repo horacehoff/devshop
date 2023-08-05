@@ -1,0 +1,15 @@
+.feedback-input {
+    font-size: 15px;
+    margin-top: 50px;
+    resize: none;
+    height: 215px;
+    padding: 8px 9px 8px 8px;
+}
+
+.feedback-submit {
+    position: relative;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-top: 325px;
+    width: 323px !important;
+}

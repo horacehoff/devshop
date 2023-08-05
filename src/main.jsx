@@ -24,6 +24,7 @@ import SnippetPage from "./snippetPage.jsx";
 import EditSnippet from "./editSnippet.jsx";
 import SearchSnippets from "./searchSnippets.jsx";
 import Navbar from "./Navbar.jsx";
+import Feedback from "./Feedback.jsx";
 
 function App() {
     return (
@@ -53,6 +54,7 @@ function App() {
                 <Route path="/reset-password" element={<ResetPassword/>}/>
                 <Route path="/pricing" element={<Pricing/>}/>
                 <Route path="/about" element={<About/>}/>
+                <Route path="/feedback" element={<Feedback/>}/>
                 <Route path="/packages/:id" element={<PackagePage/>}/>
                 <Route path="/packages/:id/edit" element={<EditPackage/>}/>
                 <Route path="/snippets/:id/" element={<SnippetPage/>}/>

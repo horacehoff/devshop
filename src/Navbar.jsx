@@ -44,6 +44,7 @@ export default function Navbar() {
         document.getElementById("full-nav-account").style.left = "-100%"
     }
 
+
     useEffect(() => {
         resetStyles()
         if (location.slice(0, 9) === "/packages") {
@@ -220,7 +221,7 @@ export default function Navbar() {
                 <Link id="snippets" to="/snippets" className="nav-link">SNIPPETS</Link>
                 <Link id="packages" to="/packages" className="nav-link">PACKAGES</Link>
                 <Link id="pricing" to="/pricing" className="nav-link">PRICING</Link>
-                <Link id="about" to="/about" className="nav-link">ABOUT</Link>
+                <Link id="about" to="/feedback" className="nav-link">FEEDBACK</Link>
                 <h4 id="account" className="nav-link">LOADING</h4>
                 <h4 id="profile" style={{position: "absolute", display: "none", color: "#ababab"}}
                     className="nav-link">PROFILE</h4>
