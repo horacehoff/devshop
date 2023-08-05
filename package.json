@@ -16,8 +16,7 @@
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.14.2",
     "reactjs-popup": "^2.0.5",
-    "short-number": "^1.0.7",
-    "vite-plugin-css-injected-by-js": "^3.2.1"
+    "short-number": "^1.0.7"
   },
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.3",
@@ -27,6 +26,7 @@
     "esbuild": "^0.18.18",
     "terser": "^5.19.2",
     "vite": "^4.4.8",
-    "vite-plugin-compression": "^0.5.1"
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-css-injected-by-js": "^3.2.1"
   }
 }
