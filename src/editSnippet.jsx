@@ -53,12 +53,12 @@ export default function EditSnippet(props) {
 
     async function saveChanges() {
         console.log(uid)
-        let screenOneUrl = ""
-        let screenTwoUrl = ""
-        let screenThreeUrl = ""
-        let screenFourUrl = ""
-        let currentVer = ""
-        let currentCode = ""
+        let screenOneUrl
+        let screenTwoUrl
+        let screenThreeUrl
+        let screenFourUrl
+        let currentVer
+        let currentCode
 
         if (imgUpload0ne !== null) {
             console.log("IMG ONE")

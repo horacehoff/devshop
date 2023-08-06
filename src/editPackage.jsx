@@ -49,13 +49,13 @@ export default function EditPackage(props) {
     })
 
     async function saveChanges() {
-        let screenOneUrl = ""
-        let screenTwoUrl = ""
-        let screenThreeUrl = ""
-        let screenFourUrl = ""
-        let bannerUrl = ""
-        let pkgUrl = ""
-        let currentVer = ""
+        let screenOneUrl
+        let screenTwoUrl
+        let screenThreeUrl
+        let screenFourUrl
+        let bannerUrl
+        let pkgUrl
+        let currentVer
 
         if (bannerUpload !== null) {
             const imgRef = ref(storage, pkg.banner);
