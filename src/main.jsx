@@ -61,6 +61,7 @@ function App() {
                 <Route path="/snippets/:id/edit" element={<EditSnippet/>}/>
                 <Route path="/users/:id" element={<AccountPage/>}/>
             </Routes>
+            {/*<Footer/>*/}
         </BrowserRouter>
     )
 }
