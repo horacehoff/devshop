@@ -26,9 +26,9 @@ export default function Navbar() {
         document.getElementById("snippets").style.color = "rgba(255, 255, 255, .75)"
         document.getElementById("nav-snippets").style.color = "rgba(255, 255, 255, .75)"
         document.getElementById("about").style.textDecoration = "none"
-        document.getElementById("nav-about").style.textDecoration = "none"
+        document.getElementById("nav-feedback").style.textDecoration = "none"
         document.getElementById("about").style.color = "rgba(255, 255, 255, .75)"
-        document.getElementById("nav-about").style.color = "rgba(255, 255, 255, .75)"
+        document.getElementById("nav-feedback").style.color = "rgba(255, 255, 255, .75)"
         document.getElementById("pricing").style.textDecoration = "none"
         document.getElementById("nav-pricing").style.textDecoration = "none"
         document.getElementById("pricing").style.color = "rgba(255, 255, 255, .75)"
@@ -64,11 +64,17 @@ export default function Navbar() {
             document.getElementById("snippets").style.color = "white"
             document.getElementById("nav-snippets").style.color = "white"
         } else if (location.slice(0, 12) === "/about") {
-            document.getElementById("about").style.textDecoration = "underline"
+            // document.getElementById("about").style.textDecoration = "underline"
             document.getElementById("nav-about").style.textDecoration = "underline"
-            document.getElementById("about").style.color = "white"
+            // document.getElementById("about").style.color = "white"
             document.getElementById("nav-about").style.color = "white"
             document.title = "ABOUT - DEVSHOP"
+        } else if (location.slice(0, 9) === "/feedback") {
+            document.getElementById("about").style.textDecoration = "underline"
+            document.getElementById("nav-feedback").style.textDecoration = "underline"
+            document.getElementById("about").style.color = "white"
+            document.getElementById("nav-feedback").style.color = "white"
+            document.title = "FEEDBACK - DEVSHOP"
         } else if (location.slice(0, 8) === "/pricing") {
             document.getElementById("pricing").style.textDecoration = "underline"
             document.getElementById("pricing").style.color = "white"
@@ -244,6 +250,7 @@ export default function Navbar() {
                         <li onClick={() => navigate("/snippets")} id="nav-snippets">SNIPPETS</li>
                         <li onClick={() => navigate("/packages")} id="nav-packages">PACKAGES</li>
                         <li onClick={() => navigate("/pricing")} id="nav-pricing">PRICING</li>
+                        <li onClick={() => navigate("/feedback")} id="nav-feedback">FEEDBACK</li>
                         <li onClick={() => navigate("/about")} id="nav-about">ABOUT</li>
                         <li id="nav-account">ACCOUNT</li>
                     </ul>
