@@ -52,11 +52,11 @@ export default function Feedback() {
             <h1 className="pricing-title">Feedback</h1>
             <h3 className="pricing-parentsubtitle">Help build the site by sharing your feedback</h3>
             <br/>
-            <div>
+            <div className="feedback-container">
                 <input type="email" placeholder="@EMAIL" className="txt-input" value={email}
-                       onChange={e => setEmail(e.target.value)}/>
+                       onChange={e => setEmail(e.target.value)} style={{margin: "0"}}/>
                 <textarea placeholder="@FEEDBACK" className="txt-input feedback-input" value={feedback}
-                          onChange={e => setFeedback(e.target.value)}></textarea>
+                          onChange={e => setFeedback(e.target.value)} style={{marginLeft: "0"}}></textarea>
                 <button className="primary feedback-submit" onClick={() => {
                     if (email !== "" || feedback !== "") {
                         if (validateEmail(email)) {

@@ -8,8 +8,15 @@
 
 .feedback-submit {
     position: relative;
-    margin-left: 50%;
-    transform: translateX(-50%);
+    /*margin-left: 50%;*/
+    /*transform: translateX(-50%);*/
     margin-top: 325px;
     width: 323px !important;
+}
+
+.feedback-container {
+    height: fit-content;
+    width: fit-content;
+    margin-left: 50%;
+    transform: translate(-50%);
 }
