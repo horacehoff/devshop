@@ -2,6 +2,8 @@
     font-size: 96px;
     font-weight: 900;
     padding-left: 3vw;
+    margin-top: 70px;
+    margin-bottom: 40px;
 }
 
 .one-catchphrase {
@@ -13,4 +15,5 @@
     padding-left: 3vw;
     font-size: 20px;
     line-height: 28px;
+    margin: 0;
 }

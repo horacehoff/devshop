@@ -6,7 +6,7 @@ export default function Footer() {
         <div className="footer">
             <div className="footer-sep"></div>
             <p>
-                © 2023 DEVSHOP | <Link to="/about" className="footer-about-link">ABOUT</Link>
+                © 2023 DEVSHOP | <Link to="/about" className="footer-about-link">ABOUT</Link> | horace.hoff@gmail.com
             </p>
         </div>
     )
