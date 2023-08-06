@@ -1,4 +1,5 @@
 import "./Home.css"
+import Footer from "./Footer.jsx";
 
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
                 <li>DEVSHOP is developer-friendly</li>
                 <li>DEVSHOP will never sell your personal information</li>
             </ul>
+            <Footer/>
         </>
     )
 }

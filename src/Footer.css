@@ -1,7 +1,7 @@
 .footer {
     position: relative;
     left: 0;
-    bottom: 0;
+    bottom: -10px;
     width: 100%;
     height: 20px;
     text-align: center;
@@ -20,6 +20,7 @@
 
 .footer p {
     color: white !important;
+    font-size: 14px;
 }
 
 .footer-about-link {
@@ -30,4 +31,16 @@
 
 .footer-about-link:hover {
     color: #ffffff !important;
+}
+
+
+.footer-about-sep:before {
+    content: "|"
+}
+
+
+@media screen and (max-width: 402px) {
+    .footer-about-sep:before {
+        content: "‎‎";
+    }
 }

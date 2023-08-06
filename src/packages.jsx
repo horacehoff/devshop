@@ -6,6 +6,7 @@ import shortNumber from "short-number";
 import {IoMdSearch} from "react-icons/io";
 import {useEffect, useState} from "react";
 import {db, user_data} from "./firebase.js";
+import Footer from "./Footer.jsx";
 
 
 export default function Packages() {
@@ -158,6 +159,7 @@ export default function Packages() {
                     </li>
                 ))}
             </ul>
+            <Footer/>
         </>
     )
 }

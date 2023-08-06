@@ -6,6 +6,7 @@ import {IoMdSearch} from "react-icons/io";
 import {collection, getDocs, limit, orderBy, query, setLogLevel} from "firebase/firestore";
 import {useEffect, useState} from "react";
 import {db, user_data} from "./firebase.js";
+import Footer from "./Footer.jsx";
 
 export default function Snippets() {
     const navigate = useNavigate();
@@ -116,6 +117,7 @@ export default function Snippets() {
                     </li>
                 ))}
             </ul>
+            <Footer/>
         </>
     )
 }
