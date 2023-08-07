@@ -13,7 +13,7 @@ export default function Pricing() {
     return (
         <>
             <h1 className="pricing-title">PRICING</h1>
-            <h3 className="pricing-parentsubtitle">(COMING SOON; AS OF NOW THE WEBSITE IS 100% FREE)</h3>
+            <h3 className="pricing-parentsubtitle">(COMING SOON; AS OF NOW THE WEBSITE IS 100% FREE TO USE)</h3>
             <p className="pricing-subtitle">You can use DEVSHOP for free, or you can pay a small amount of money each
                 month to get rid of all inconvenients and get the full experience</p>
 
