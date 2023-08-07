@@ -59,6 +59,10 @@ export default function AccountPage(props) {
                         final_packages.push(new Object(doc.data()))
                     })
                     setUsrPackages(final_packages)
+                    if (final_packages.length === 0) {
+                        document.getElementById("user-pkgss").style.display = "none";
+                        document.getElementById("user-snippets").style.marginTop = "400px"
+                    }
                 })
             }
             const getUsrCodeBlocks = () => {
@@ -69,6 +73,10 @@ export default function AccountPage(props) {
                         final_packages.push(new Object(doc.data()))
                     })
                     setUsrCodeBlocks(final_packages)
+                    if (final_packages.length === 0) {
+                        document.getElementById("user-snippets").style.display = "none";
+                        // document.getElementById("user-pkgss").style.marginTop = "400px"
+                    }
                 })
             }
             getUsrPackages();
@@ -93,35 +101,41 @@ export default function AccountPage(props) {
                 window.open("https://github.com/" + usr.github, '_blank').focus();
             }}>{usr.github}</span></span></p>
             <p className="user_bio">{usr.bio}</p>
-            <h2 className="user_packages_title">PACKAGES</h2>
-            <ul className="packages-card-list" id="packages-card-list" style={{marginTop: "460px"}}>
-                {usrPackages.map((pkg, index) => (
-                    <li key={index} className="packages-card-list-child">
-                        <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
-                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
-                                         catchphrase={pkg.catchphrase} banner={pkg.banner}/>
-                        </Link>
-                    </li>
-                ))}
-            </ul>
-            <br/>
-            <h2 style={{
-                marginLeft: "35px",
-                fontSize: "27px",
-                width: "calc(100% - 50px)",
-                marginBottom: "10px",
-                paddingRight: "15px"
-            }}>SNIPPETS</h2>
-            <ul className="packages-card-list" id="packages-card-list">
-                {usrCodeBlocks.map((pkg, index) => (
-                    <li key={index} className="packages-card-list-child">
-                        <Link to={"/snippets/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
-                            <SnippetCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
-                                         description={pkg.catchphrase}/>
-                        </Link>
-                    </li>
-                ))}
-            </ul>
+            <div id="user-pkgss">
+                <h2 className="user_packages_title" id="user-pkgs">PACKAGES</h2>
+                <ul className="packages-card-list" id="packages-card-list" style={{marginTop: "460px"}}>
+                    {usrPackages.map((pkg, index) => (
+                        <li key={index} className="packages-card-list-child">
+                            <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                                <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username}
+                                             name={pkg.name}
+                                             catchphrase={pkg.catchphrase} banner={pkg.banner}/>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+            <div id="user-snippets">
+                <br/>
+                <h2 style={{
+                    marginLeft: "35px",
+                    fontSize: "27px",
+                    width: "calc(100% - 50px)",
+                    marginBottom: "10px",
+                    paddingRight: "15px"
+                }} id="user-snippets-title">SNIPPETS</h2>
+                <ul className="packages-card-list" id="packages-card-list">
+                    {usrCodeBlocks.map((pkg, index) => (
+                        <li key={index} className="packages-card-list-child">
+                            <Link to={"/snippets/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                                <SnippetCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
+                                             description={pkg.catchphrase}/>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
         </>
     )
 
