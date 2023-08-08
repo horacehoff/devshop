@@ -27,6 +27,9 @@ import Navbar from "./Navbar.jsx";
 import Feedback from "./Feedback.jsx";
 
 function App() {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/worker.js")
+    })
     return (
         <BrowserRouter>
             <Navbar/>
