@@ -18,7 +18,6 @@ Copyright 2015, 2019, 2020, 2021 Google LLC. All Rights Reserved.
 // eslint-disable-next-line no-unused-vars
 const OFFLINE_VERSION = 1;
 const CACHE_NAME = "offline";
-// Customize this with a different URL if needed.
 const OFFLINE_URL = "/offline.html";
 self.addEventListener("install", (event) => {
     event.waitUntil(
@@ -71,8 +70,6 @@ self.addEventListener("fetch", (event) => {
                     // likely due to a network error.
                     // If fetch() returns a valid HTTP response with a response code in
                     // the 4xx or 5xx range, the catch() will NOT be called.
-                    console.log("Fetch failed; returning offline page instead.", error);
-
                     const cache = await caches.open(CACHE_NAME);
                     const cachedResponse = await cache.match(OFFLINE_URL);
                     return cachedResponse;

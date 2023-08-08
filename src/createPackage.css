@@ -277,10 +277,13 @@
     clear: left;
 }
 
-.interestpkg:hover {
-    background-color: #fff;
-    color: #000;
+@media (hover: hover) {
+    .interestpkg:hover {
+        background-color: #fff;
+        color: #000;
+    }
 }
+
 
 @media screen and (max-width: 650px) {
     .md-editor-container {
