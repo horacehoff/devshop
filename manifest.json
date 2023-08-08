@@ -8,6 +8,7 @@
   "display": "standalone",
   "background_color": "#161C5B",
   "orientation": "portrait",
+  "scope": "/",
   "icons": [
     {
       "src": "https://dev-shop.vercel.app/icon.png",
@@ -17,10 +18,9 @@
   ],
   "shortcuts": [
     {
-      "name": "Publish a package",
-      "short_name": "Publish",
+      "name": "Publish package",
       "description": "Publish a package",
-      "url": "https://dev-shop.vercel.app/publish-package",
+      "url": "/publish-package",
       "icons": [
         {
           "src": "https://dev-shop.vercel.app/icon.png",
