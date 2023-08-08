@@ -275,6 +275,7 @@ export default function AccountSettings() {
                     </div>
                     <br/>
                     <div className="section-inputs">
+                        <p className="profile-error-txt" id="profile-error-txt">// USERNAME ALREADY EXISTS</p>
                         <p className="section-input-name">USERNAME</p>
                         <input type="text" className="txt-input section-input" placeholder={baseUserName}
                                value={NewUserName} onChange={e => setNewUserName(e.target.value)}/>
@@ -287,7 +288,7 @@ export default function AccountSettings() {
                         <input type="text" className="txt-input section-input" placeholder="your-github-username"
                                value={NewGithub} onChange={e => setNewGithub(e.target.value)}/>
                         <br/>
-                        <p className="profile-error-txt" id="profile-error-txt">// USERNAME ALREADY EXISTS</p>
+                        {/*<p className="profile-error-txt" id="profile-error-txt">// USERNAME ALREADY EXISTS</p>*/}
                         <button id="profile-save-btn" className="primary save-btn"
                                 onClick={async () => {
                                     try {

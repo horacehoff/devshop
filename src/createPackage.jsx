@@ -1,6 +1,6 @@
 import "./createPackage.css"
 import {useState} from "react";
-import {auth, db, storage} from "./firebase.js";
+import {auth, db, storage, user_data} from "./firebase.js";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage"
 import {onAuthStateChanged} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
@@ -179,7 +179,7 @@ export default function CreatePackage() {
                 <div className="split-two" id="split-two">
                     <h1 className="about-title about-title-card">PUBLISH A PACKAGE</h1>
                     <div className="split-two-card">
-                        <PackageCard dwnl="0" author="your username" name={name || "placeholder"}
+                        <PackageCard dwnl="0" author={user_data.username} name={name || "placeholder"}
                                      catchphrase={desc || "placeholder"} banner={bannerURL}/>
                     </div>
                 </div>

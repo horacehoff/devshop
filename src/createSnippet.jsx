@@ -1,7 +1,7 @@
 import "./createPackage.css"
 import "./createSnippet.css"
 import {useState} from "react";
-import {auth, db, storage} from "./firebase.js";
+import {auth, db, storage, user_data} from "./firebase.js";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage"
 import {onAuthStateChanged} from "firebase/auth";
 import {useNavigate} from "react-router-dom";
@@ -158,7 +158,7 @@ export default function CreateSnippet() {
                 <div className="split-two split-two-height" id="split-two">
                     <h1 className="about-title about-title-card">PUBLISH A SNIPPET</h1>
                     <div className="split-two-card">
-                        <SnippetCard dwnl="0" author="your username" name={name || "placeholder"}
+                        <SnippetCard dwnl="0" author={user_data.username} name={name || "placeholder"}
                                      description={desc || "placeholder"}/>
                     </div>
                 </div>
