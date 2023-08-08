@@ -1,5 +1,6 @@
 {
   "name": "DEVSHOP",
+  "short_name": "DEVSHOP",
   "description": "An online marketplace for selling code snippets and programs",
   "start_url": "https://dev-shop.vercel.app/",
   "lang": "en-US",
@@ -12,6 +13,20 @@
       "src": "https://dev-shop.vercel.app/icon.png",
       "sizes": "1080x1080",
       "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Publish a package",
+      "short_name": "Publish",
+      "description": "Publish a package",
+      "url": "https://dev-shop.vercel.app/publish-package",
+      "icons": [
+        {
+          "src": "https://dev-shop.vercel.app/icon.png",
+          "sizes": "1080x1080"
+        }
+      ]
     }
   ]
 }
