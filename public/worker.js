@@ -20,7 +20,6 @@ const OFFLINE_VERSION = 1;
 const CACHE_NAME = "offline";
 // Customize this with a different URL if needed.
 const OFFLINE_URL = "/offline.html";
-
 self.addEventListener("install", (event) => {
     event.waitUntil(
         (async () => {
@@ -29,6 +28,7 @@ self.addEventListener("install", (event) => {
             // response isn't fulfilled from the HTTP cache; i.e., it will be
             // from the network.
             await cache.add(new Request(OFFLINE_URL, {cache: "reload"}));
+            await cache.add(new Request("/banner.png"));
         })()
     );
     // Force the waiting service worker to become the active service worker.
