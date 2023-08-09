@@ -198,7 +198,7 @@ export default function CreatePackage() {
                                 value={longDesc}
                                 onChange={setLongDesc}
                                 height={350}
-                                style={{borderRadius: "4px", border: "none", outline: "none"}}
+                                style={{borderRadius: "4px", border: "none", outline: "none", color: "black"}}
                             />
                         </div>
 
