@@ -15,17 +15,13 @@ export default function AccountPage(props) {
     const [usrCodeBlocks, setUsrCodeBlocks] = useState([])
     const navigate = useNavigate();
 
-
     const params_id = useParams().id;
     useEffect(() => {
         if (usr === null) {
             const q = query(collection(db, "users"), where("username", "==", params_id))
             getDocs(q).then((querysn) => {
-                console.log("heyyy")
                 querysn.forEach((doc) => {
-                    console.log("HEYYYYA")
                     setUsr(doc.data())
-                    console.log("usr: ", usr)
                 })
             })
         }
@@ -82,7 +78,6 @@ export default function AccountPage(props) {
             getUsrPackages();
             getUsrCodeBlocks();
         }
-
     }, [usr]);
 
     if (usr === null) {
