@@ -1,7 +1,7 @@
 import "./accountSettings.css";
 import {useEffect, useState} from "react";
 import {EmailAuthProvider, getAuth, onAuthStateChanged, reauthenticateWithCredential,} from "firebase/auth";
-import {auth, db, forceUpdate, storage, user_data} from "./firebase.js";
+import {auth, db, storage, user_data} from "./firebase.js";
 import {useNavigate} from "react-router-dom";
 import fancy_name_to_id, {interests_data, profanityFilter} from "./utility.js";
 import {doc, setDoc} from "firebase/firestore";
@@ -31,6 +31,7 @@ export default function AccountSettings() {
 
     const getUserData = () => {
         if (user_data) {
+            console.log("User data");
             setNewUserName(user_data.username);
             setBaseUserName(user_data.username);
 
@@ -62,33 +63,26 @@ export default function AccountSettings() {
             setNewBio(user_data.bio);
             setBaseBio(user_data.bio);
             setNewGithub(user_data.github || "");
+        } else {
+            console.log("No user data");
         }
     };
 
-    // useEffect(() => {
-    //     onAuthStateChanged(auth, (user) => {
-    //         if (user) {
-    //             console.log("USER IS LOGGED IN");
-    //             setUid(user.uid);
-    //         } else {
-    //             console.log("USER IS NOT LOGGED IN");
-    //             navigate("/sign-in");
-    //         }
-    //     });
-    // }, [uid, user_data]);
+    function waitForData() {
+        if (user_data) {
+            getUserData();
+            preInterests(user_data.interests);
+        } else {
+            setTimeout(waitForData, 50);
+        }
+    }
 
     useEffect(() => {
-        window.addEventListener("beforeunload", function () {
-            forceUpdate();
-        });
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 console.log("USER IS LOGGED IN");
                 setUid(user.uid);
-                if (user_data) {
-                    getUserData();
-                    preInterests(user_data.interests);
-                }
+                waitForData();
             } else {
                 console.log("USER IS NOT LOGGED IN");
                 navigate("/sign-in");

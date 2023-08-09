@@ -160,6 +160,11 @@
 }
 
 
+#profile, #settings, #sign-out {
+    z-index: 1000000000;
+}
+
+
 @media screen and (max-width: 670px) {
     #about {
         visibility: hidden
