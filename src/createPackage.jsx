@@ -38,6 +38,7 @@ export default function CreatePackage() {
     onAuthStateChanged(auth, (user) => {
         if (user) {
             uid = user.uid;
+            document.body.style.overflow = "hidden";
         } else {
             // navigate("/")
             setWarning(true)
@@ -163,8 +164,6 @@ export default function CreatePackage() {
     }
 
     const [bannerURL, setBannerURL] = useState("");
-
-
     return (
         <>
             <Popup modal open={warning} onClose={() => {
