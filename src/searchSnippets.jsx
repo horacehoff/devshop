@@ -40,7 +40,7 @@ export default function SearchSnippets() {
         <>
             <h1 className="search-title">SEARCH SNIPPETS</h1>
             <IoMdSearch className="search-input-icon" color="black"/>
-            <input type="text" placeholder="Search something..." value={searchInput}
+            <input type="text" placeholder="@SEARCH" value={searchInput}
                    onChange={e => setSearchInput(e.target.value)} onKeyDown={e => search(e, false)}
                    className="txt-input search-input"/>
             <ul className="packages-card-list" id="packages-card-list-one" style={{marginTop: "60px"}}>

@@ -18,7 +18,8 @@
     transition: .2s;
     background-color: #f8f8ff;
     color: #000;
-    padding-left: 15px
+    padding-left: 15px;
+    font-family: "JetBrains Mono", monospace;
 }
 
 .txt-input::placeholder {

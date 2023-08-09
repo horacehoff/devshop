@@ -1,4 +1,5 @@
 import "./pricing.css"
+import Footer from "./Footer.jsx";
 
 export default function Pricing() {
     // const navigate = useNavigate()
@@ -41,6 +42,7 @@ export default function Pricing() {
                     {/*<button className="plan-subscribe" id="plan-subscribe">coming soon</button>*/}
                 </div>
             </div>
+            <Footer/>
         </>
     )
 }

@@ -83,6 +83,19 @@ button.primary:hover {
     color: white;
 }
 
+
+@media (hover: hover) {
+    button.primary:hover {
+        background-color: #fff;
+        color: #000
+    }
+
+    .secondary:hover {
+        background-color: #282828;
+        color: white;
+    }
+}
+
 ::selection {
     background-color: #002bff;
     color: #ffffff;
