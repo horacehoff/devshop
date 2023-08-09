@@ -179,7 +179,8 @@ export default function CreatePackage() {
                 <div className="split-two" id="split-two">
                     <h1 className="about-title about-title-card">PUBLISH A PACKAGE</h1>
                     <div className="split-two-card">
-                        <PackageCard dwnl="0" author={user_data.username} name={name || "placeholder"}
+                        <PackageCard dwnl="0" author={user_data ? user_data.username : "placeholder"}
+                                     name={name || "placeholder"}
                                      catchphrase={desc || "placeholder"} banner={bannerURL}/>
                     </div>
                 </div>

@@ -277,15 +277,17 @@ export default function AccountSettings() {
                     <div className="section-inputs">
                         <p className="profile-error-txt" id="profile-error-txt">// USERNAME ALREADY EXISTS</p>
                         <p className="section-input-name">USERNAME</p>
-                        <input type="text" className="txt-input section-input" placeholder={baseUserName}
+                        <input type="text" className="txt-input section-input glassinput" placeholder={baseUserName}
                                value={NewUserName} onChange={e => setNewUserName(e.target.value)}/>
                         <br/>
                         <p className="section-input-name" data-name-content="bio">BIO</p>
-                        <input type="text" className="txt-input section-input" placeholder="Hi, I'm new to DEVSHOP!"
+                        <input type="text" className="txt-input section-input glassinput"
+                               placeholder="Hi, I'm new to DEVSHOP!"
                                value={NewBio} onChange={e => setNewBio(e.target.value)}/>
                         <br/>
                         <p className="section-input-name" data-name-content="github">GITHUB USERNAME</p>
-                        <input type="text" className="txt-input section-input" placeholder="your-github-username"
+                        <input type="text" className="txt-input section-input glassinput"
+                               placeholder="your-github-username"
                                value={NewGithub} onChange={e => setNewGithub(e.target.value)}/>
                         <br/>
                         {/*<p className="profile-error-txt" id="profile-error-txt">// USERNAME ALREADY EXISTS</p>*/}

@@ -158,7 +158,8 @@ export default function CreateSnippet() {
                 <div className="split-two split-two-height" id="split-two">
                     <h1 className="about-title about-title-card">PUBLISH A SNIPPET</h1>
                     <div className="split-two-card">
-                        <SnippetCard dwnl="0" author={user_data.username} name={name || "placeholder"}
+                        <SnippetCard dwnl="0" author={user_data ? user_data.username : "placeholder"}
+                                     name={name || "placeholder"}
                                      description={desc || "placeholder"}/>
                     </div>
                 </div>
