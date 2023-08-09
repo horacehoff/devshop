@@ -101,7 +101,7 @@ export default function SignUp() {
                        onChange={e => setEmail(e.target.value)} autoComplete="email"/><br/><br/>
                 <input type="password" id="password" className="txt-input" placeholder="@PASSWORD" value={password}
                        onChange={e => setPassword(e.target.value)} autoComplete="new-password"/>
-                <button className="signup-button" id="signup-button"
+                <button className="primary signup-button" id="signup-button" style={{marginTop: "65px"}}
                         onClick={() => SignUpUser(username, email, password, {navigate})} type="button">SIGN_UP
                 </button>
             </form>

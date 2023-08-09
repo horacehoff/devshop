@@ -30,20 +30,6 @@
     border: 3px solid #1e90ff
 }
 
-.signup-button {
-    width: 325px;
-    height: 40px;
-    background-color: #282828;
-    border: 0;
-    border-radius: 5px;
-    color: #fff;
-    font-weight: 800;
-    font-size: 14px;
-    top: 485px;
-    cursor: pointer;
-    transition: .3s ease-in-out
-}
-
 .signup-forgot, .signup-signin {
     left: 50%;
     transform: translate(-50%);
@@ -51,11 +37,6 @@
     width: fit-content;
     cursor: pointer;
     transition: .2s
-}
-
-.signup-button:hover {
-    background-color: #fff;
-    color: #000
 }
 
 .signup-signin {

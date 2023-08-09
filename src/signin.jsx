@@ -51,7 +51,7 @@ export default function SignIn() {
                 <input type="password" id="password" className="txt-input" placeholder="@PASSWORD" value={password}
                        onChange={e => setPassword(e.target.value)} autoComplete="password"/>
                 <p className="signup-forgot" onClick={() => navigate("/reset-password")}>FORGOT PASSWORD?</p>
-                <button className="signup-button" id="sign-in-btn" style={{top: "460px"}}
+                <button className="primary signup-button" id="sign-in-btn" style={{top: "460px"}}
                         onClick={() => SignInUser({navigate}, email, password)} type="button">SIGN_IN
                 </button>
             </form>

@@ -22,7 +22,7 @@ export default function ResetPassword() {
             <p className="signup-error" id="error-msg">// AN ERROR OCCURED</p>
             <input type="email" id="email" className="txt-input" placeholder="@EMAIL" value={email}
                    onChange={e => setEmail(e.target.value)}/><br/><br/>
-            <button className="signup-button" style={{top: "460px"}}
+            <button className="primary signup-button" style={{top: "460px"}}
                     onClick={async () => {
                         await sendPasswordResetEmail(auth, email).then(() => {
                             navigate("/sign-in")

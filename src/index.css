@@ -84,7 +84,7 @@ button.primary:hover {
 }
 
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
     button.primary:hover {
         background-color: #fff;
         color: #000
