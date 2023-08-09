@@ -9,6 +9,7 @@
 .one-catchphrase {
     padding-left: 3vw;
     font-size: 20px;
+    color: var(--text)
 }
 
 .one-desc {
