@@ -16,7 +16,7 @@ function SignUpUser(username, email, password, {navigate}) {
     let usernameExistsPromise = checkIfUsernameExists(username).then(e => {
         if (username === "") {
             document.getElementById("error-msg").style.visibility = "visible";
-            document.getElementById("error-msg").innerHTML = "// INVALID USERNAME";
+            document.getElementById("error-msg").innerHTML = "INVALID USERNAME";
             return;
         } else if (e) {
             document.getElementById("error-msg").style.visibility = "visible";
@@ -95,11 +95,13 @@ export default function SignUp() {
             <p className="signup-signin" onClick={() => navigate("/sign-in")}>// SIGN_IN INSTEAD</p>
             <p className="signup-error" id="error-msg">// AN ERROR OCCURED</p>
             <form>
-                <input type="text" id="username" className="txt-input" placeholder="@USERNAME" value={username}
+                <input type="text" id="username" className="txt-input glassinput" placeholder="@USERNAME"
+                       value={username}
                        onChange={e => setUsername(e.target.value)} autoComplete="username"/><br/><br/>
-                <input type="email" id="email" className="txt-input" placeholder="@EMAIL" value={email}
+                <input type="email" id="email" className="txt-input glassinput" placeholder="@EMAIL" value={email}
                        onChange={e => setEmail(e.target.value)} autoComplete="email"/><br/><br/>
-                <input type="password" id="password" className="txt-input" placeholder="@PASSWORD" value={password}
+                <input type="password" id="password" className="txt-input glassinput" placeholder="@PASSWORD"
+                       value={password}
                        onChange={e => setPassword(e.target.value)} autoComplete="new-password"/>
                 <button className="primary signup-button" id="signup-button" style={{marginTop: "65px"}}
                         onClick={() => SignUpUser(username, email, password, {navigate})} type="button">SIGN_UP

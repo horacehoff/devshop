@@ -44,7 +44,7 @@ export default function SearchPackages() {
             <IoMdSearch className="search-input-icon" color="black"/>
             <input type="text" placeholder="@SEARCH" value={searchInput}
                    onChange={e => setSearchInput(e.target.value)} onKeyDown={e => search(e, false)}
-                   className="txt-input search-input"/>
+                   className="txt-input search-input glassinput"/>
             <ul className="packages-card-list" id="packages-card-list-one" style={{marginTop: "60px"}}>
                 {searchResults.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child" onClick={() => {

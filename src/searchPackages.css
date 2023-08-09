@@ -6,7 +6,7 @@
 }
 
 .search-input {
-    padding-left: 30px;
+    padding-left: 30px !important;
     position: absolute !important;
     left: 50% !important;
     transform: translate(-50%) !important;
@@ -15,11 +15,12 @@
 
 .search-input-icon {
     position: absolute;
-    margin: 11px 0px 0 calc(50% - 165px);
+    margin: 11px 0px 0 calc(50% - 167px);
     z-index: 10;
     filter: brightness(0.5);
     cursor: pointer;
     transition: 0.2s;
+    fill: white;
 }
 
 .search-input-icon:hover {
