@@ -85,6 +85,12 @@ export default function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
+
+    const onBtnSubmit = (e) => {
+        e.preventDefault();
+        SignUpUser(username, email, password, {navigate})
+    }
+
     return (
         <>
             <br/>
@@ -104,7 +110,7 @@ export default function SignUp() {
                        value={password}
                        onChange={e => setPassword(e.target.value)} autoComplete="new-password"/>
                 <button className="primary signup-button" id="signup-button" style={{marginTop: "65px"}}
-                        onClick={() => SignUpUser(username, email, password, {navigate})} type="button">SIGN_UP
+                        onClick={onBtnSubmit} type="button">SIGN_UP
                 </button>
             </form>
         </>

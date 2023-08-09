@@ -31,11 +31,16 @@ function SignInUser({navigate}, email, password) {
         });
 }
 
-
 export default function SignIn() {
     const navigate = useNavigate()
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const onBtnSubmit = (e) => {
+        e.preventDefault();
+        SignInUser({navigate}, email, password)
+    }
+
     return (
         <>
             <br/>
@@ -53,7 +58,7 @@ export default function SignIn() {
                        onChange={e => setPassword(e.target.value)} autoComplete="password"/>
                 <p className="signup-forgot" onClick={() => navigate("/reset-password")}>FORGOT PASSWORD?</p>
                 <button className="primary signup-button" id="sign-in-btn" style={{top: "460px"}}
-                        onClick={() => SignInUser({navigate}, email, password)} type="button">SIGN_IN
+                        onClick={onBtnSubmit} type="submit">SIGN_IN
                 </button>
             </form>
         </>
