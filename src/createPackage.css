@@ -166,10 +166,6 @@
     color: white;
 }
 
-.file-input:hover {
-    background-color: white;
-    color: #1e1e1e;
-}
 
 .publish-btn {
     width: calc(100vw - 20px);
@@ -278,10 +274,15 @@
     clear: left;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
     .interestpkg:hover {
         background-color: #fff;
         color: #000;
+    }
+
+    .file-input:hover {
+        background-color: white;
+        color: #1e1e1e;
     }
 }
 
