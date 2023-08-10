@@ -1,6 +1,6 @@
 import {initializeApp} from "firebase/app";
 import {getStorage} from "firebase/storage"
-import {doc, getDoc, initializeFirestore, setLogLevel} from "firebase/firestore"
+import {doc, getDoc, initializeFirestore} from "firebase/firestore"
 import {browserLocalPersistence, indexedDBLocalPersistence, initializeAuth, onAuthStateChanged} from "firebase/auth";
 
 const firebaseConfig = {
@@ -31,7 +31,7 @@ export const db = initializeFirestore(app, {
 console.log("init storage")
 export const storage = getStorage(app);
 
-setLogLevel("debug");
+// setLogLevel("debug");
 
 
 export let user_data = null;
