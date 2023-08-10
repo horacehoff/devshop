@@ -20,7 +20,7 @@
     {
       "name": "Publish package",
       "description": "Publish a package",
-      "url": "/publish-package",
+      "url": "https://dev-shop.vercel.app/publish-package",
       "icons": [
         {
           "src": "https://dev-shop.vercel.app/icon.png",
