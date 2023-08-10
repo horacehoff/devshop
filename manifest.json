@@ -8,7 +8,7 @@
   "display": "standalone",
   "background_color": "#161C5B",
   "orientation": "portrait",
-  "scope": "/",
+  "scope": "https://dev-shop.vercel.app/",
   "icons": [
     {
       "src": "https://dev-shop.vercel.app/icon.png",
