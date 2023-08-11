@@ -70,9 +70,10 @@
     position: absolute;
     margin-left: 34px;
     margin-top: 7px;
-    width: calc(100% - 150px);
+    /*width: calc(100% - 150px);*/
     overflow-wrap: break-word;
     line-height: 10px;
+    width: fit-content;
 }
 
 .user_bio {
