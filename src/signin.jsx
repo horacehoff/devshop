@@ -51,9 +51,9 @@ export default function SignIn() {
             <p className="signup-signin" onClick={() => navigate("/sign-up")}>// SIGN_UP INSTEAD</p>
             <p className="signup-error" id="error-msg">// AN ERROR OCCURED</p>
             <form>
-                <input type="email" id="email" className="txt-input glassinput" placeholder="@EMAIL" value={email}
+                <input type="email" id="email" className="txt-input" placeholder="@EMAIL" value={email}
                        onChange={e => setEmail(e.target.value)} autoComplete="email"/><br/><br/>
-                <input type="password" id="password" className="txt-input glassinput" placeholder="@PASSWORD"
+                <input type="password" id="password" className="txt-input" placeholder="@PASSWORD"
                        value={password}
                        onChange={e => setPassword(e.target.value)} autoComplete="password"/>
                 <p className="signup-forgot" onClick={() => navigate("/reset-password")}>FORGOT PASSWORD?</p>

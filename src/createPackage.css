@@ -89,52 +89,59 @@
 
 
 .name-input {
-    font-size: 70px;
+    font-size: 70px !important;
     font-weight: bold;
-    background-color: transparent;
+    background-color: transparent !important;
     font-family: 'JetBrains Mono', monospace;
-    border: 0;
-    outline: 0;
+    border: 0 !important;
+    outline: 0 !important;
     color: white;
     width: 100%;
     overflow-x: scroll;
     margin: 0;
     padding: 0;
+    box-shadow: none !important;
 }
 
 .name-input::placeholder {
-    color: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.25) !important;
 }
 
 .name-input::-webkit-input-placeholder {
-    color: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.25) !important;
 }
 
 .desc-input {
-    font-size: 35px;
-    font-weight: bold;
-    background-color: transparent;
+    font-size: 35px !important;
+    font-weight: bold !important;
+    background-color: transparent !important;
     font-family: 'JetBrains Mono', monospace;
-    border: 0;
-    outline: 0;
+    border: 0 !important;
+    outline: 0 !important;
     color: white;
     width: 100%;
     overflow-x: scroll;
     margin: 0;
     padding: 0;
+    box-shadow: none !important;
+}
+
+.name-input:focus {
+    box-shadow: none !important;
+    border: none !important;
 }
 
 .desc-input::placeholder {
-    color: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.25) !important;
 }
 
 .desc-input::-webkit-input-placeholder {
-    color: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.25) !important;
 }
 
 .img-input {
     font-size: 30px;
-    font-weight: bold;
+    font-weight: bold !important;
     background-color: transparent;
     font-family: 'JetBrains Mono', monospace;
     border: 0;

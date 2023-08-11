@@ -4,13 +4,11 @@
     resize: none;
     height: 215px !important;
     padding: 9px !important;
-    width: 299px;
+    width: 303px !important;
 }
 
 .feedback-submit {
     position: relative;
-    /*margin-left: 50%;*/
-    /*transform: translateX(-50%);*/
     margin-top: 325px;
     width: 323px !important;
 }
@@ -20,33 +18,4 @@
     width: fit-content;
     margin-left: 50%;
     transform: translate(-50%);
-}
-
-
-.glassinput {
-    /*width: 299px;*/
-    /*height: 34px;*/
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    background: rgba(255, 255, 255, 0.10);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
-    padding-left: 15px;
-    font-size: 14px;
-    font-weight: 500;
-    transition: 0.15s;
-    color: white !important;
-    font-family: "JetBrains Mono", monospace;
-}
-
-.glassinput:hover {
-    background: rgba(154, 154, 154, 0.15);
-}
-
-.glassinput:focus {
-    border: 1px solid white;
-    outline: 0;
-}
-
-.glassinput::placeholder {
-    color: #b4b4b4;
 }
