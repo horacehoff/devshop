@@ -47,6 +47,7 @@
     outline: 2px solid mediumpurple;
     margin-left: 25px;
     box-shadow: 0 0 100px 20px #2d2b57;
+    -webkit-box-shadow: 0 0 100px 20px #2d2b57;
 }
 
 .plan-title {
