@@ -48,49 +48,49 @@ export default function CreatePackage() {
         let extension = pkgUpload.type.replace(/(.*)\//g, '')
         let pkgRef = ref(storage, "users/" + uid + "/packages/" + name_id + "/pkg/" + fancy_name_to_id(name) + "." + extension)
         await uploadBytes(pkgRef, pkgUpload).then(() => {
-            document.getElementById("publish-btn").innerHTML = "UPLOADING... => █▒▒▒▒▒▒▒▒▒▒▒▒▒ 7%"
+            document.getElementById("publish-btn").innerHTML = "UPLOADING => █▒▒▒▒▒▒▒▒▒▒▒▒▒ 7%"
         });
 
         let bannerRef = ref(storage, "users/" + uid + "/packages/" + name_id + "/img/banner/" + banner.name)
         await uploadBytes(bannerRef, banner).then(() => {
-            document.getElementById("publish-btn").innerHTML = "UPLOADING... => ██▒▒▒▒▒▒▒▒▒▒▒▒ 14%"
+            document.getElementById("publish-btn").innerHTML = "UPLOADING => ██▒▒▒▒▒▒▒▒▒▒▒▒ 14%"
         })
 
         let imgRefOne = ref(storage, "users/" + uid + "/packages/" + name_id + "/img/one/" + (imgUpload0ne.name ?? ("screenone" + imgUpload0ne.type)))
         await uploadBytes(imgRefOne, imgUpload0ne).then(() => {
-            document.getElementById("publish-btn").innerHTML = "UPLOADING... => ███▒▒▒▒▒▒▒▒▒▒▒ 21%"
+            document.getElementById("publish-btn").innerHTML = "UPLOADING => ███▒▒▒▒▒▒▒▒▒▒▒ 21%"
         })
 
         let imgRefTwo = ref(storage, "users/" + uid + "/packages/" + name_id + "/img/two/" + imgUploadTwo.name ?? ("screentwo" + imgUpload0ne.type))
         await uploadBytes(imgRefTwo, imgUploadTwo).then(() => {
-            document.getElementById("publish-btn").innerHTML = "UPLOADING... => ████▒▒▒▒▒▒▒▒▒▒ 28%"
+            document.getElementById("publish-btn").innerHTML = "UPLOADING => ████▒▒▒▒▒▒▒▒▒▒ 28%"
         })
 
         let imgRefThree = ref(storage, "users/" + uid + "/packages/" + name_id + "/img/three/" + imgUploadThree.name ?? ("screenthree" + imgUpload0ne.type))
         await uploadBytes(imgRefThree, imgUploadThree).then(() => {
-            document.getElementById("publish-btn").innerHTML = "UPLOADING... => █████▒▒▒▒▒▒▒▒▒ 35%"
+            document.getElementById("publish-btn").innerHTML = "UPLOADING => █████▒▒▒▒▒▒▒▒▒ 35%"
         })
 
         let imgRefFour = ref(storage, "users/" + uid + "/packages/" + name_id + "/img/four/" + imgUploadFour.name ?? ("screenfour" + imgUpload0ne.type))
         await uploadBytes(imgRefFour, imgUploadFour).then(() => {
-            document.getElementById("publish-btn").innerHTML = "UPLOADING... => ██████▒▒▒▒▒▒▒▒ 42%"
+            document.getElementById("publish-btn").innerHTML = "UPLOADING => ██████▒▒▒▒▒▒▒▒ 42%"
         })
 
         let bannerUrl = await getDownloadURL(bannerRef);
         console.log("uploaded banner")
-        document.getElementById("publish-btn").innerHTML = "UPLOADING... => ███████▒▒▒▒▒▒▒ 49%"
+        document.getElementById("publish-btn").innerHTML = "UPLOADING => ███████▒▒▒▒▒▒▒ 49%"
         let screenOneUrl = await getDownloadURL(imgRefOne);
         console.log("uploaded screen one")
-        document.getElementById("publish-btn").innerHTML = "UPLOADING... => ████████▒▒▒▒▒▒ 56%"
+        document.getElementById("publish-btn").innerHTML = "UPLOADING => ████████▒▒▒▒▒▒ 56%"
         let screenTwoUrl = await getDownloadURL(imgRefTwo);
         console.log("uploaded screen two")
-        document.getElementById("publish-btn").innerHTML = "UPLOADING... => █████████▒▒▒▒▒ 63%"
+        document.getElementById("publish-btn").innerHTML = "UPLOADING => █████████▒▒▒▒▒ 63%"
         let screenThreeUrl = await getDownloadURL(imgRefThree);
         console.log("uploaded screen three")
-        document.getElementById("publish-btn").innerHTML = "UPLOADING... => ██████████▒▒▒▒ 70%"
+        document.getElementById("publish-btn").innerHTML = "UPLOADING => ██████████▒▒▒▒ 70%"
         let screenFourUrl = await getDownloadURL(imgRefFour);
         console.log("uploaded screen four")
-        document.getElementById("publish-btn").innerHTML = "UPLOADING... => ███████████▒▒▒ 77%"
+        document.getElementById("publish-btn").innerHTML = "UPLOADING => ███████████▒▒▒ 77%"
 
 
         let own_username = "";
@@ -98,7 +98,7 @@ export default function CreatePackage() {
         await getDoc(userRef).then((doc) => {
             if (doc.exists()) {
                 own_username = doc.data().username;
-                document.getElementById("publish-btn").innerHTML = "UPLOADING... => ████████████▒▒ 84%"
+                document.getElementById("publish-btn").innerHTML = "UPLOADING => ████████████▒▒ 84%"
 
             } else {
                 console.log("No such document!");
@@ -131,7 +131,7 @@ export default function CreatePackage() {
                 created: new Date().getTime(),
                 id: name_id
             }).then(async r => {
-                document.getElementById("publish-btn").innerHTML = "UPLOADING... => █████████████▒ 91%"
+                document.getElementById("publish-btn").innerHTML = "UPLOADING => █████████████▒ 91%"
                 // update user packages array with the new package
                 const userRef = doc(db, "users", uid);
                 await getDoc(userRef).then(async (doc) => {
@@ -141,7 +141,7 @@ export default function CreatePackage() {
                         await setDoc(userRef, {
                             owned_packages: packages
                         }, {merge: true}).then(r => {
-                            document.getElementById("publish-btn").innerHTML = "UPLOADING... => ██████████████ 100%"
+                            document.getElementById("publish-btn").innerHTML = "UPLOADING => ██████████████ 100%"
                             return name_id
                         })
                     } else {
@@ -162,6 +162,7 @@ export default function CreatePackage() {
     }
 
     const [bannerURL, setBannerURL] = useState("");
+
     return (
         <>
             <Popup modal open={warning} onClose={() => {
@@ -270,7 +271,7 @@ export default function CreatePackage() {
                                 alert("Please select a file.")
                             } else {
                                 document.getElementById("publish-btn").style.pointerEvents = "none"
-                                document.getElementById("publish-btn").innerHTML = "UPLOADING... => ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 0%"
+                                document.getElementById("publish-btn").innerHTML = "UPLOADING => ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 0%"
                                 upload().then(name_id => {
                                     navigate("/packages/" + pkg_id)
                                     window.location.reload()

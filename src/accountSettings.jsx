@@ -21,7 +21,7 @@ export default function AccountSettings() {
     const [uid, setUid] = useState("");
     const navigate = useNavigate();
 
-    function preInterests(interests) {
+    function initInterests(interests) {
         for (let i = 0; i < interests_data.length; i++) {
             if (interests.includes(interests_data[i])) {
                 document.getElementById("interest" + i).classList.add("interest-toggled");
@@ -31,31 +31,31 @@ export default function AccountSettings() {
 
     const getUserData = () => {
         if (user_data) {
-            console.log("User data");
+            console.log("USER DATA EXISTS");
             setNewUserName(user_data.username);
             setBaseUserName(user_data.username);
 
             if (!user_data.pfp_path) {
-                console.log("No profile picture");
+                console.log("NO PROFILE PICTURE - SWITCHING TO BORINGAVATARS");
                 document.getElementById("profile-picture").style.backgroundImage =
                     "url('https://source.boringavatars.com/pixel/120/" +
                     baseUserName +
                     "?colors=6E00FF,0300FF,000000,FC7600,FFFFFF')";
             } else {
-                console.log("Profile picture");
+                console.log("PROFILE PICTURE EXISTS");
                 document.getElementById("profile-picture").style.backgroundImage =
                     "url('" + user_data.pfp_path + "')";
             }
 
             console.log(user_data.banner_path);
             if (!user_data.banner_path) {
-                console.log("No banner image");
+                console.log("NO BANNER IMAGE - SWITCHING TO BORINGAVATARS");
                 document.getElementById("banner-img").style.backgroundImage =
                     "url('https://source.boringavatars.com/marble/850/" +
                     baseUserName +
                     "?square')";
             } else {
-                console.log("Banner image");
+                console.log("BANNER IMAGE EXISTS");
                 document.getElementById("banner-img").style.backgroundImage =
                     "url('" + user_data.banner_path + "')";
             }
@@ -64,14 +64,14 @@ export default function AccountSettings() {
             setBaseBio(user_data.bio);
             setNewGithub(user_data.github || "");
         } else {
-            console.log("No user data");
+            console.log("NO USER DATA");
         }
     };
 
     function waitForData() {
         if (user_data) {
             getUserData();
-            preInterests(user_data.interests);
+            initInterests(user_data.interests);
         } else {
             setTimeout(waitForData, 50);
         }
@@ -109,7 +109,7 @@ export default function AccountSettings() {
             let extension = pfpUpload.type.replace(/(.*)\//g, '')
             let pfpRef = ref(storage, "users/" + uid + "/" + "pfp." + extension)
             await uploadBytes(pfpRef, pfpUpload).then(() => {
-                console.log("pfp uploaded")
+                console.log("PFP UPLOADED")
             });
             pfpUrl = await getDownloadURL(pfpRef);
         }
@@ -117,7 +117,7 @@ export default function AccountSettings() {
             let extension = bannerUpload.type.replace(/(.*)\//g, '')
             let bannerRef = ref(storage, "users/" + uid + "/" + "banner." + extension)
             await uploadBytes(bannerRef, bannerUpload).then(() => {
-                console.log("banner uploaded")
+                console.log("BANNER UPLOADED")
             })
             bannerUrl = await getDownloadURL(bannerRef);
         }
@@ -143,7 +143,7 @@ export default function AccountSettings() {
                     setDoc(docRef, {
                         pfp_path: urls[0]
                     }, {merge: true}).then(() => {
-                        console.log("pfp user updated");
+                        console.log("PFP UPDATED");
                     });
                 } else if (urls[0] !== "" && urls[1] !== "") {
                     const docRef = doc(db, "users", auth.currentUser.uid);
@@ -151,14 +151,14 @@ export default function AccountSettings() {
                         pfp_path: urls[0],
                         banner_path: urls[1]
                     }, {merge: true}).then(() => {
-                        console.log("pfp and banner user updated");
+                        console.log("PFP+BANNER UPDATED");
                     });
                 } else if (urls[0] === "" && urls[1] !== "") {
                     const docRef = doc(db, "users", auth.currentUser.uid);
                     setDoc(docRef, {
                         banner_path: urls[1]
                     }, {merge: true}).then(() => {
-                        console.log("banner user updated");
+                        console.log("BANNER UPDATED");
                     });
                 }
             })
@@ -216,7 +216,7 @@ export default function AccountSettings() {
                     {
                         interests_data.map((interest, index) => {
                             return (
-                                <div className="interest" id={"interest" + index} onClick={() => {
+                                <div className="interest" id={"interest" + index} key={index} onClick={() => {
                                     handleInterestClick(index);
                                 }}>
                                     {interest}

@@ -1,5 +1,5 @@
 import "./packages.css"
-import {collection, getDocs, limit, orderBy, query, setLogLevel, where} from "firebase/firestore";
+import {collection, getDocs, limit, orderBy, query, where} from "firebase/firestore";
 import {Link, useNavigate} from "react-router-dom";
 import PackageCard from "./packageCard.jsx";
 import shortNumber from "short-number";
@@ -44,7 +44,7 @@ export default function Packages() {
     }
 
     document.addEventListener("wheel", handler, {passive: false});
-    setLogLevel("debug");
+    // setLogLevel("debug");
 
 
     const [trendingPackageData, setTrendingPackageData] = useState([]);
@@ -66,20 +66,15 @@ export default function Packages() {
                 setLastPackagesData(prevState => [...prevState, doc.data()]);
             })
         })
-        console.log("HEYYYYA")
         if (user_data) {
-            console.log(user_data.interests)
-            const q2 = query(collection(db, "packages"), where("interests", "array-contains-any", Array.from(user_data.interests)), orderBy("downloads", "desc"), limit(9));
+            const q2 = query(collection(db, "packages"), where("interests", "array-contains-any", Array.from(user_data.interests)), limit(9));
             getDocs(q2).then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     console.log("fuck yeah")
                     setSimilarPackagesData(prevState => [...prevState, doc.data()]);
+                    document.getElementById("for-you-section").style.display = "block"
                 })
-                console.log(similarPackagesData)
             })
-        }
-        if (similarPackagesData.length === 0) {
-            document.getElementById("for-you-section").style.display = "none";
         }
 
     }, [user_data]);
@@ -97,7 +92,7 @@ export default function Packages() {
                 <IoMdSearch
                     style={{position: "relative", top: "1px"}}/> SEARCH PACKAGES
             </Link>
-            <div id="for-you-section">
+            <div id="for-you-section" style={{display: "none"}}>
                 <h2 className="category-title">// FOR YOU</h2>
                 <ul className="packages-card-list" id="packages-card-list-one">
                     {similarPackagesData.map((pkg, index) => (
@@ -113,30 +108,6 @@ export default function Packages() {
             </div>
             <h2 className="category-title">// MOST DOWNLOADED</h2>
             <ul className="packages-card-list" id="packages-card-list-one">
-                {trendingPackageData.map((pkg, index) => (
-                    <li key={index} className="packages-card-list-child">
-                        <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
-                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
-                                         catchphrase={pkg.catchphrase} banner={pkg.banner}/>
-                        </Link>
-                    </li>
-                ))}
-                {trendingPackageData.map((pkg, index) => (
-                    <li key={index} className="packages-card-list-child">
-                        <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
-                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
-                                         catchphrase={pkg.catchphrase} banner={pkg.banner}/>
-                        </Link>
-                    </li>
-                ))}
-                {trendingPackageData.map((pkg, index) => (
-                    <li key={index} className="packages-card-list-child">
-                        <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
-                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
-                                         catchphrase={pkg.catchphrase} banner={pkg.banner}/>
-                        </Link>
-                    </li>
-                ))}
                 {trendingPackageData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">
                         <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>

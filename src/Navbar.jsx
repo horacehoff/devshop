@@ -54,7 +54,7 @@ export default function Navbar() {
             document.getElementById("nav-packages").style.textDecoration = "underline"
             document.getElementById("packages").style.color = "white"
             document.getElementById("nav-packages").style.color = "white"
-        } else if (location.slice(0, 8) === "/sign-up" || location.slice(0, 8) === "/sign-in") {
+        } else if (location.slice(0, 8) === "/sign-up" || location.slice(0, 8) === "/sign-in" || location.slice(0, 8) === "/account") {
             document.getElementById("account").style.textDecoration = "underline"
             document.getElementById("nav-account").style.textDecoration = "underline"
             document.getElementById("account").style.color = "white"

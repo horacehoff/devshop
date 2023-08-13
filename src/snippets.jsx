@@ -3,7 +3,7 @@ import "./snippets.css"
 import SnippetCard from "./snippetCard.jsx";
 import {Link, useNavigate} from "react-router-dom";
 import {IoMdSearch} from "react-icons/io";
-import {collection, getDocs, limit, orderBy, query, setLogLevel} from "firebase/firestore";
+import {collection, getDocs, limit, orderBy, query, where} from "firebase/firestore";
 import {useEffect, useState} from "react";
 import {db, user_data} from "./firebase.js";
 import Footer from "./Footer.jsx";
@@ -43,7 +43,7 @@ export default function Snippets() {
     }
 
     document.addEventListener("wheel", handler, {passive: false});
-    setLogLevel("debug");
+    // setLogLevel("debug");
 
 
     const [trendingCodeBlockData, setTrendingCodeBlockData] = useState([]);
@@ -65,22 +65,16 @@ export default function Snippets() {
                 setLastCodeBlockData(prevState => [...prevState, doc.data()]);
             })
         })
-        console.log("HEYYYYA")
-        // if (user_data) {
-        //     console.log(user_data.interests)
-        //     const q2 = query(collection(db, "snippets"), where("interests", "array-contains-any", Array.from(user_data.interests)), orderBy("downloads", "desc"), limit(9));
-        //     getDocs(q2).then((querySnapshot) => {
-        //         querySnapshot.forEach((doc) => {
-        //             console.log("fuck yeah")
-        //             setSimilarCodeBlockData(prevState => [...prevState, doc.data()]);
-        //         })
-        //         console.log(similarCodeBlockData)
-        //     })
-        // }
-        // if (similarCodeBlockData.length === 0) {
-        //     document.getElementById("for-you-section").style.display = "none";
-        // }
-
+        if (user_data) {
+            const q2 = query(collection(db, "snippets"), where("interests", "array-contains-any", Array.from(user_data.interests)), limit(9));
+            getDocs(q2).then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    console.log("fuck yeah")
+                    setSimilarCodeBlockData(prevState => [...prevState, doc.data()]);
+                    document.getElementById("for-you-section").style.display = "block"
+                })
+            })
+        }
     }, [user_data]);
 
 
@@ -95,6 +89,19 @@ export default function Snippets() {
                   to="/snippets/q/"><IoMdSearch
                 style={{position: "relative", top: "1px"}}/> SEARCH SNIPPETS
             </Link>
+            <div id="for-you-section" style={{display: "none"}}>
+                <h2 className="category-title">// FOR YOU</h2>
+                <ul className="packages-card-list">
+                    {similarCodeBlockData.map((pkg, index) => (
+                        <li key={index} className="packages-card-list-child">
+                            <Link to={"/snippets/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                                <SnippetCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
+                                             description={pkg.catchphrase}/>
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </div>
             <h2 className="category-title">// CURRENTLY TRENDING</h2>
             <ul className="packages-card-list">
                 {trendingCodeBlockData.map((pkg, index) => (
