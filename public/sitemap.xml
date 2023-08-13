@@ -39,19 +39,4 @@
     <url>
         <loc>https://dev-shop.vercel.app/feedback</loc>
     </url>
-    <url>
-        <loc>https://dev-shop.vercel.app/packages/id</loc>
-    </url>
-    <url>
-        <loc>https://dev-shop.vercel.app/packages/id/edit</loc>
-    </url>
-    <url>
-        <loc>https://dev-shop.vercel.app/snippets/id</loc>
-    </url>
-    <url>
-        <loc>https://dev-shop.vercel.app/snippets/id/edit</loc>
-    </url>
-    <url>
-        <loc>https://dev-shop.vercel.app/users/id</loc>
-    </url>
 </urlset>
