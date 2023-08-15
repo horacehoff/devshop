@@ -256,22 +256,22 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     text-align: center;
-    justify-content: center; /* Horizontally center the image */
-    align-items: center; /* Vertically center the image */
 }
 
 .screenshot_bg_div img {
-    position: fixed;
+    position: relative;
     max-width: 90%;
     max-height: 90%;
+    margin-left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     z-index: 9999;
     opacity: 0;
-    transition: opacity 1s !important;
     object-fit: cover;
-}
-
-.full-img-shown {
-    opacity: 1 !important;
+    scale: 0.99;
+    transition: 0.25s;
+    transform-origin: top left;
+    animation-fill-mode: forwards;
 }
 
 .package-desc-md {

@@ -147,10 +147,22 @@ export default function PackagePage() {
 
 
     function fullScreen(img) {
-        document.getElementById("screenshot_bg_div").style.display = "flex";
+        document.getElementById("screenshot_bg_div").style.display = "block";
         document.getElementById("screenshot-bg-div-img").src = img.src;
         console.log("full screen shown")
-        document.getElementById("screenshot-bg-div-img").classList.add("full-img-shown")
+        const keyframes = [
+            {opacity: "0", scale: "0.99", filter: "blur(7px)"},
+            {opacity: "1", scale: "1", filter: "blur(0px)"},
+        ];
+
+        const timing = {
+            duration: 250,
+            iterations: 1,
+        };
+        document.getElementById("screenshot-bg-div-img").animate(keyframes, timing)
+        document.getElementById("screenshot-bg-div-img").style.opacity = "1"
+        document.getElementById("screenshot-bg-div-img").style.scale = "1"
+        document.getElementById("screenshot-bg-div-img").style.filter = "blur(0px)"
     }
 
     if (pkg === null) {
@@ -160,7 +172,10 @@ export default function PackagePage() {
     return (
         <>
             <div className="screenshot_bg_div" id="screenshot_bg_div" onClick={() => {
-                document.getElementById("screenshot-bg-div-img").classList.remove("full-img-shown")
+                document.getElementById("screenshot-bg-div-img").style.opacity = "0"
+                document.getElementById("screenshot-bg-div-img").style.scale = "0.99"
+                document.getElementById("screenshot-bg-div-img").style.filter = "blur(7px)"
+
 
                 const revertChanges = img => {
                     img.style = baseStyle;
