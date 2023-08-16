@@ -23,11 +23,14 @@ export default function PackagePage() {
 
     let popupRef = createRef(null);
 
+    const [screenshotOne, setScreenshotOne] = useState(null);
+    const [screenshotTwo, setScreenshotTwo] = useState(null);
+    const [screenshotThree, setScreenshotThree] = useState(null);
+    const [screenshotFour, setScreenshotFour] = useState(null);
+
+
 
     function downloadPkg() {
-        // if (!is_logged_in) {
-        //     navigate("/sign-in")
-        // }
         let pkgRef = ref(storage, pkg.package);
         getDownloadURL(pkgRef).then((url) => {
             window.location.assign(url);
@@ -66,20 +69,6 @@ export default function PackagePage() {
             if (uid === pkg.owner_id) {
                 document.getElementById("package-download-btn").innerHTML = "EDIT"
                 document.getElementById("package-download-btn").classList.add("package-edit-btn")
-                // document.getElementById("package-download-btn").style.backgroundColor = "#F0EBBA"
-                // // fix the text not being centered
-                // document.getElementById("package-download-btn").style.paddingLeft = "30px"
-                // document.getElementById("package-download-btn").style.paddingRight = "30px"
-                // document.getElementById("package-download-btn").style.paddingTop = "15px"
-                // document.getElementById("package-download-btn").style.paddingBottom = "15px"
-                // // fix the margins
-                // document.getElementById("package-download-btn").style.right = "15px"
-                // document.getElementById("package-download-btn").style.bottom = "15px"
-                // // change transform origin
-                // document.getElementById("package-download-btn").style.transformOrigin = "bottom right"
-                // document.getElementById("package-download-btn").style.color = "#000000"
-                // document.getElementById("package-download-btn").style.border = "none"
-                // document.getElementById("package-download-btn").style.cursor = "pointer"
                 document.getElementById("package-download-btn").onclick = () => {
                     navigate("/packages/" + pkg.id + "/edit", {state: {pkg: pkg}})
                 }
@@ -92,14 +81,11 @@ export default function PackagePage() {
 
     const params_id = useParams().id;
     useEffect(() => {
-        // document.getElementById("body").style.backgroundImage = "none"
-        // document.getElementById("root").style.backgroundImage = "none"
         if (pkg === null) {
             getDoc(doc(db, "packages", params_id)).then((doc) => {
                 if (doc.exists()) {
                     setPkg(doc.data());
                     console.log("pkg: ", pkg)
-
                 } else {
                     const navigate = useNavigate();
                     navigate("/packages")
@@ -107,6 +93,12 @@ export default function PackagePage() {
             })
         }
         if (pkg !== null) {
+            localStorage.setItem("screenshot_one", pkg.screenshots[0]);
+            localStorage.setItem("screenshot_two", pkg.screenshots[1]);
+            localStorage.setItem("screenshot_three", pkg.screenshots[2]);
+            localStorage.setItem("screenshot_four", pkg.screenshots[3]);
+
+
             console.log("use effect is run")
             document.title = pkg.name + " - DEVSHOP"
             console.log("package banner load: " + pkg.banner)
@@ -155,7 +147,7 @@ export default function PackagePage() {
                 document.getElementById("full-screen-img").style.scale = "0.5"
                 document.getElementById("full-screen").style.opacity = "0"
                 document.getElementById("full-screen").style.zIndex = "-1"
-                document.getElementById("full-screen-img").style.scale = "0.8"
+                document.getElementById("full-screen-img").style.scale = "0.9"
             }}>
                 <img src={pkg.screenshots[0]} id="full-screen-img" alt="full screen image"></img>
             </div>
@@ -174,7 +166,7 @@ export default function PackagePage() {
             <div className="package-screenshots" id="package-screenshots">
                 <img
                     id="screenshot_one"
-                    src={pkg.screenshots[0]}
+                    src={localStorage.getItem("screenshot_one")}
                     className="package-img"
                     alt="First screenshot" onMouseEnter={() => {
                     document.getElementById("full-screen-img").src = pkg.screenshots[0]
@@ -185,7 +177,7 @@ export default function PackagePage() {
                 }}/>
                 <img
                     id="screenshot_two"
-                    src={pkg.screenshots[1]}
+                    src={localStorage.getItem("screenshot_two")}
                     className="package-img"
                     style={{marginLeft: "5px"}}
                     alt="Second screenshot" onMouseEnter={() => {
@@ -198,7 +190,7 @@ export default function PackagePage() {
                 /><br id="screenshotbreak"/>
                 <img
                     id="screenshot_three"
-                    src={pkg.screenshots[2]}
+                    src={localStorage.getItem("screenshot_three")}
                     className="package-img"
                     alt="Third screenshot" onMouseEnter={() => {
                     document.getElementById("full-screen-img").src = pkg.screenshots[2]
@@ -210,7 +202,7 @@ export default function PackagePage() {
                 />
                 <img
                     id="screenshot_four"
-                    src={pkg.screenshots[3]}
+                    src={localStorage.getItem("screenshot_four")}
                     className="package-img"
                     style={{marginLeft: "5px"}}
                     alt="Fourth screenshot" onMouseEnter={() => {
@@ -283,7 +275,7 @@ export default function PackagePage() {
                     </button>
                 </p>
             </div>
-            <div className="bottom-block"></div>
+            {/*<div className="bottom-block"></div>*/}
         </>
     )
 }
