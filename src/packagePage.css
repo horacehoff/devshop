@@ -244,34 +244,33 @@
     color: #b4b4b4;
 }
 
-.screenshot_bg_div {
+.full-screen-img {
     position: fixed;
-    display: none;
-    top: 0;
     left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
-    z-index: 9998;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    text-align: center;
+    backdrop-filter: grayscale(1) blur(5px);
+    -webkit-backdrop-filter: grayscale(1) blur(5px);
+    z-index: -1;
+    opacity: 0;
+    /*display: none;*/
+    transition: 0.2s ease;
 }
 
-.screenshot_bg_div img {
-    position: relative;
-    max-width: 90%;
-    max-height: 90%;
-    margin-left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-    opacity: 0;
-    object-fit: cover;
-    scale: 0.99;
-    transition: 0.25s;
-    transform-origin: top left;
-    animation-fill-mode: forwards;
+.full-screen-img img {
+    width: 80%;
+    height: 80%;
+    z-index: 15;
+    position: fixed;
+    left: 10%;
+    top: 10%;
+    border-radius: 10px;
+    scale: 0.8;
+    transition: 0.4s;
+    object-fit: contain;
+    object-position: center center;
+    cursor: pointer;
 }
 
 .package-desc-md {

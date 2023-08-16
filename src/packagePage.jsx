@@ -145,56 +145,19 @@ export default function PackagePage() {
         }
     }, [pkg]);
 
-
-    function fullScreen(img) {
-        document.getElementById("screenshot_bg_div").style.display = "block";
-        document.getElementById("screenshot-bg-div-img").src = img.src;
-        console.log("full screen shown")
-        const keyframes = [
-            {opacity: "0", scale: "0.99", filter: "blur(7px)"},
-            {opacity: "1", scale: "1", filter: "blur(0px)"},
-        ];
-
-        const timing = {
-            duration: 250,
-            iterations: 1,
-        };
-        document.getElementById("screenshot-bg-div-img").animate(keyframes, timing)
-        document.getElementById("screenshot-bg-div-img").style.opacity = "1"
-        document.getElementById("screenshot-bg-div-img").style.scale = "1"
-        document.getElementById("screenshot-bg-div-img").style.filter = "blur(0px)"
-    }
-
     if (pkg === null) {
         return <></>
     }
 
     return (
         <>
-            <div className="screenshot_bg_div" id="screenshot_bg_div" onClick={() => {
-                document.getElementById("screenshot-bg-div-img").style.opacity = "0"
-                document.getElementById("screenshot-bg-div-img").style.scale = "0.99"
-                document.getElementById("screenshot-bg-div-img").style.filter = "blur(7px)"
-
-
-                const revertChanges = img => {
-                    img.style = baseStyle;
-                    if (img.id === "screenshot_two" || img.id === "screenshot_four") {
-                        img.style.marginLeft = "5px"
-                    }
-
-                }
-                let img = document.getElementById("screenshot_one");
-                revertChanges(img);
-                img = document.getElementById("screenshot_two");
-                revertChanges(img);
-                img = document.getElementById("screenshot_three");
-                revertChanges(img);
-                img = document.getElementById("screenshot_four");
-                revertChanges(img);
-                document.getElementById("screenshot_bg_div").style.display = "none";
+            <div className="full-screen-img" id="full-screen" onClick={() => {
+                document.getElementById("full-screen-img").style.scale = "0.5"
+                document.getElementById("full-screen").style.opacity = "0"
+                document.getElementById("full-screen").style.zIndex = "-1"
+                document.getElementById("full-screen-img").style.scale = "0.8"
             }}>
-                <img id="screenshot-bg-div-img" alt="Full screen image of the package"/>
+                <img src={pkg.screenshots[0]} id="full-screen-img" alt="full screen image"></img>
             </div>
             <div className="banner"></div>
             <h2 className="package-title">{pkg.name}</h2>
@@ -213,30 +176,36 @@ export default function PackagePage() {
                     id="screenshot_one"
                     src={pkg.screenshots[0]}
                     className="package-img"
-                    alt="First screenshot" onClick={() => {
-                    // animate the image to full screen
-                    let img = document.getElementById("screenshot_one");
-                    fullScreen(img);
+                    alt="First screenshot" onMouseEnter={() => {
+                    document.getElementById("full-screen-img").src = pkg.screenshots[0]
+                }} onClick={() => {
+                    document.getElementById("full-screen").style.zIndex = "15"
+                    document.getElementById("full-screen").style.opacity = "1"
+                    document.getElementById("full-screen-img").style.scale = "1"
                 }}/>
                 <img
                     id="screenshot_two"
                     src={pkg.screenshots[1]}
                     className="package-img"
                     style={{marginLeft: "5px"}}
-                    alt="Second screenshot" onClick={() => {
-                    // animate the image to full screen
-                    let img = document.getElementById("screenshot_two");
-                    fullScreen(img);
+                    alt="Second screenshot" onMouseEnter={() => {
+                    document.getElementById("full-screen-img").src = pkg.screenshots[1]
+                }} onClick={() => {
+                    document.getElementById("full-screen").style.zIndex = "15"
+                    document.getElementById("full-screen").style.opacity = "1"
+                    document.getElementById("full-screen-img").style.scale = "1"
                 }}
                 /><br id="screenshotbreak"/>
                 <img
                     id="screenshot_three"
                     src={pkg.screenshots[2]}
                     className="package-img"
-                    alt="Third screenshot" onClick={() => {
-                    // animate the image to full screen
-                    let img = document.getElementById("screenshot_three");
-                    fullScreen(img);
+                    alt="Third screenshot" onMouseEnter={() => {
+                    document.getElementById("full-screen-img").src = pkg.screenshots[2]
+                }} onClick={() => {
+                    document.getElementById("full-screen").style.zIndex = "15"
+                    document.getElementById("full-screen").style.opacity = "1"
+                    document.getElementById("full-screen-img").style.scale = "1"
                 }}
                 />
                 <img
@@ -244,10 +213,12 @@ export default function PackagePage() {
                     src={pkg.screenshots[3]}
                     className="package-img"
                     style={{marginLeft: "5px"}}
-                    alt="Fourth screenshot" onClick={() => {
-                    // animate the image to full screen
-                    let img = document.getElementById("screenshot_four");
-                    fullScreen(img);
+                    alt="Fourth screenshot" onMouseEnter={() => {
+                    document.getElementById("full-screen-img").src = pkg.screenshots[3]
+                }} onClick={() => {
+                    document.getElementById("full-screen").style.zIndex = "15"
+                    document.getElementById("full-screen").style.opacity = "1"
+                    document.getElementById("full-screen-img").style.scale = "1"
                 }}
                 />
             </div>
