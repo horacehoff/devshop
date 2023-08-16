@@ -23,11 +23,6 @@ export default function PackagePage() {
 
     let popupRef = createRef(null);
 
-    const [screenshotOne, setScreenshotOne] = useState(null);
-    const [screenshotTwo, setScreenshotTwo] = useState(null);
-    const [screenshotThree, setScreenshotThree] = useState(null);
-    const [screenshotFour, setScreenshotFour] = useState(null);
-
 
 
     function downloadPkg() {
@@ -50,7 +45,7 @@ export default function PackagePage() {
                 if (new_downloads !== -1) {
                     updateDoc(doc(db, "packages", pkg.id), {
                         downloads: new_downloads + 1
-                    }).then(r => {
+                    }).then(() => {
                         console.log("updated");
                     });
                 }
@@ -93,12 +88,6 @@ export default function PackagePage() {
             })
         }
         if (pkg !== null) {
-            localStorage.setItem("screenshot_one", pkg.screenshots[0]);
-            localStorage.setItem("screenshot_two", pkg.screenshots[1]);
-            localStorage.setItem("screenshot_three", pkg.screenshots[2]);
-            localStorage.setItem("screenshot_four", pkg.screenshots[3]);
-
-
             console.log("use effect is run")
             document.title = pkg.name + " - DEVSHOP"
             console.log("package banner load: " + pkg.banner)
@@ -166,7 +155,7 @@ export default function PackagePage() {
             <div className="package-screenshots" id="package-screenshots">
                 <img
                     id="screenshot_one"
-                    src={localStorage.getItem("screenshot_one")}
+                    src={pkg.screenshots[0]}
                     className="package-img"
                     alt="First screenshot" onMouseEnter={() => {
                     document.getElementById("full-screen-img").src = pkg.screenshots[0]
@@ -177,7 +166,7 @@ export default function PackagePage() {
                 }}/>
                 <img
                     id="screenshot_two"
-                    src={localStorage.getItem("screenshot_two")}
+                    src={pkg.screenshots[1]}
                     className="package-img"
                     style={{marginLeft: "5px"}}
                     alt="Second screenshot" onMouseEnter={() => {
@@ -190,7 +179,7 @@ export default function PackagePage() {
                 /><br id="screenshotbreak"/>
                 <img
                     id="screenshot_three"
-                    src={localStorage.getItem("screenshot_three")}
+                    src={pkg.screenshots[2]}
                     className="package-img"
                     alt="Third screenshot" onMouseEnter={() => {
                     document.getElementById("full-screen-img").src = pkg.screenshots[2]
@@ -202,7 +191,7 @@ export default function PackagePage() {
                 />
                 <img
                     id="screenshot_four"
-                    src={localStorage.getItem("screenshot_four")}
+                    src={pkg.screenshots[3]}
                     className="package-img"
                     style={{marginLeft: "5px"}}
                     alt="Fourth screenshot" onMouseEnter={() => {
