@@ -20,6 +20,7 @@ export default function PackagePage() {
 
     const [is_logged_in, set_is_logged_in] = useState(false);
     const [new_downloads, set_new_downloads] = useState(0);
+    const [mobile, setMobile] = useState(false)
 
     let popupRef = createRef(null);
 
@@ -88,6 +89,8 @@ export default function PackagePage() {
             })
         }
         if (pkg !== null) {
+            setMobile(window.matchMedia("(pointer: fine) and (hover: hover)").matches)
+
             console.log("use effect is run")
             document.title = pkg.name + " - DEVSHOP"
             console.log("package banner load: " + pkg.banner)
@@ -160,6 +163,10 @@ export default function PackagePage() {
                     alt="First screenshot" onMouseEnter={() => {
                     document.getElementById("full-screen-img").src = pkg.screenshots[0]
                 }} onClick={() => {
+                    if (!mobile) {
+                        console.log('click')
+                        document.getElementById("full-screen-img").src = pkg.screenshots[0]
+                    }
                     document.getElementById("full-screen").style.zIndex = "15"
                     document.getElementById("full-screen").style.opacity = "1"
                     document.getElementById("full-screen-img").style.scale = "1"
@@ -172,6 +179,9 @@ export default function PackagePage() {
                     alt="Second screenshot" onMouseEnter={() => {
                     document.getElementById("full-screen-img").src = pkg.screenshots[1]
                 }} onClick={() => {
+                    if (!mobile) {
+                        document.getElementById("full-screen-img").src = pkg.screenshots[1]
+                    }
                     document.getElementById("full-screen").style.zIndex = "15"
                     document.getElementById("full-screen").style.opacity = "1"
                     document.getElementById("full-screen-img").style.scale = "1"
@@ -184,6 +194,9 @@ export default function PackagePage() {
                     alt="Third screenshot" onMouseEnter={() => {
                     document.getElementById("full-screen-img").src = pkg.screenshots[2]
                 }} onClick={() => {
+                    if (!mobile) {
+                        document.getElementById("full-screen-img").src = pkg.screenshots[2]
+                    }
                     document.getElementById("full-screen").style.zIndex = "15"
                     document.getElementById("full-screen").style.opacity = "1"
                     document.getElementById("full-screen-img").style.scale = "1"
@@ -197,6 +210,9 @@ export default function PackagePage() {
                     alt="Fourth screenshot" onMouseEnter={() => {
                     document.getElementById("full-screen-img").src = pkg.screenshots[3]
                 }} onClick={() => {
+                    if (!mobile) {
+                        document.getElementById("full-screen-img").src = pkg.screenshots[3]
+                    }
                     document.getElementById("full-screen").style.zIndex = "15"
                     document.getElementById("full-screen").style.opacity = "1"
                     document.getElementById("full-screen-img").style.scale = "1"
