@@ -19,6 +19,9 @@ export default function SnippetPage() {
 
     const [new_downloads, set_new_downloads] = useState(0);
 
+    const [mobile, setMobile] = useState(false)
+
+
     let popupRef = React.createRef();
 
 
@@ -66,6 +69,9 @@ export default function SnippetPage() {
             })
         }
         if (snippet !== null) {
+            setMobile(window.matchMedia("(pointer: fine) and (hover: hover)").matches)
+
+
             console.log("use effect is run")
             document.title = snippet.name + " - DEVSHOP"
             console.log("package banner load: " + snippet.banner)
@@ -104,26 +110,6 @@ export default function SnippetPage() {
         }
     }, [snippet]);
 
-
-    function fullScreen(img) {
-        document.getElementById("screenshot_bg_div").style.display = "flex";
-        document.getElementById("screenshot-bg-div-img").src = img.src;
-        console.log("full screen shown")
-        const keyframes = [
-            {opacity: "0", scale: "0.99", filter: "blur(7px)"},
-            {opacity: "1", scale: "1", filter: "blur(0px)"},
-        ];
-
-        const timing = {
-            duration: 250,
-            iterations: 1,
-        };
-        document.getElementById("screenshot-bg-div-img").animate(keyframes, timing)
-        document.getElementById("screenshot-bg-div-img").style.opacity = "1"
-        document.getElementById("screenshot-bg-div-img").style.scale = "1"
-        document.getElementById("screenshot-bg-div-img").style.filter = "blur(0px)"
-    }
-
     if (snippet === null) {
         return <></>
     }
@@ -131,59 +117,59 @@ export default function SnippetPage() {
 
     return (
         <>
-            <div className="screenshot_bg_div" id="screenshot_bg_div" onClick={() => {
-                document.getElementById("screenshot-bg-div-img").style.opacity = "0"
-                document.getElementById("screenshot-bg-div-img").style.scale = "0.99"
-                document.getElementById("screenshot-bg-div-img").style.filter = "blur(7px)"
-
-                const revertChanges = img => {
-                    img.style = baseStyle;
-                    if (img.id === "screenshot_two" || img.id === "screenshot_four") {
-                        img.style.marginLeft = "5px"
-                    }
-
-                }
-                let img = document.getElementById("screenshot_one");
-                revertChanges(img);
-                img = document.getElementById("screenshot_two");
-                revertChanges(img);
-                img = document.getElementById("screenshot_three");
-                revertChanges(img);
-                img = document.getElementById("screenshot_four");
-                revertChanges(img);
-                document.getElementById("screenshot_bg_div").style.display = "none";
+            <div className="full-screen-img" id="full-screen" onClick={() => {
+                document.getElementById("full-screen-img").style.scale = "0.5"
+                document.getElementById("full-screen").style.opacity = "0"
+                document.getElementById("full-screen").style.zIndex = "-1"
+                document.getElementById("full-screen-img").style.scale = "0.9"
             }}>
-                <img id="screenshot-bg-div-img" alt="Full screen image of the package"/>
+                <img src={snippet.screenshots[0]} id="full-screen-img" alt="full screen image"></img>
             </div>
             <div className="package-screenshots code-screenshots" id="package-screenshots">
                 <img
                     id="screenshot_one"
                     src={snippet.screenshots[0]}
                     className="package-img code-img"
-                    alt="First screenshot" onClick={() => {
-                    // animate the image to full screen
-                    let img = document.getElementById("screenshot_one");
-                    fullScreen(img);
+                    alt="First screenshot" onMouseEnter={() => {
+                    document.getElementById("full-screen-img").src = snippet.screenshots[0]
+                }} onClick={() => {
+                    if (!mobile) {
+                        console.log('click')
+                        document.getElementById("full-screen-img").src = snippet.screenshots[0]
+                    }
+                    document.getElementById("full-screen").style.zIndex = "15"
+                    document.getElementById("full-screen").style.opacity = "1"
+                    document.getElementById("full-screen-img").style.scale = "1"
                 }}/>
                 <img
                     id="screenshot_two"
                     src={snippet.screenshots[1]}
                     className="package-img code-img"
                     style={{marginLeft: "5px"}}
-                    alt="Second screenshot" onClick={() => {
-                    // animate the image to full screen
-                    let img = document.getElementById("screenshot_two");
-                    fullScreen(img);
+                    alt="Second screenshot" onMouseEnter={() => {
+                    document.getElementById("full-screen-img").src = snippet.screenshots[1]
+                }} onClick={() => {
+                    if (!mobile) {
+                        document.getElementById("full-screen-img").src = snippet.screenshots[1]
+                    }
+                    document.getElementById("full-screen").style.zIndex = "15"
+                    document.getElementById("full-screen").style.opacity = "1"
+                    document.getElementById("full-screen-img").style.scale = "1"
                 }}
                 /><br id="codescreenshotbreak"/>
                 <img
                     id="screenshot_three"
                     src={snippet.screenshots[2]}
                     className="package-img code-img"
-                    alt="Third screenshot" onClick={() => {
-                    // animate the image to full screen
-                    let img = document.getElementById("screenshot_three");
-                    fullScreen(img);
+                    alt="Third screenshot" onMouseEnter={() => {
+                    document.getElementById("full-screen-img").src = snippet.screenshots[2]
+                }} onClick={() => {
+                    if (!mobile) {
+                        document.getElementById("full-screen-img").src = snippet.screenshots[2]
+                    }
+                    document.getElementById("full-screen").style.zIndex = "15"
+                    document.getElementById("full-screen").style.opacity = "1"
+                    document.getElementById("full-screen-img").style.scale = "1"
                 }}
                 />
                 <img
@@ -191,10 +177,15 @@ export default function SnippetPage() {
                     src={snippet.screenshots[3]}
                     className="package-img code-img"
                     style={{marginLeft: "5px"}}
-                    alt="Fourth screenshot" onClick={() => {
-                    // animate the image to full screen
-                    let img = document.getElementById("screenshot_four");
-                    fullScreen(img);
+                    alt="Fourth screenshot" onMouseEnter={() => {
+                    document.getElementById("full-screen-img").src = snippet.screenshots[3]
+                }} onClick={() => {
+                    if (!mobile) {
+                        document.getElementById("full-screen-img").src = snippet.screenshots[3]
+                    }
+                    document.getElementById("full-screen").style.zIndex = "15"
+                    document.getElementById("full-screen").style.opacity = "1"
+                    document.getElementById("full-screen-img").style.scale = "1"
                 }}
                 />
                 <br/>
