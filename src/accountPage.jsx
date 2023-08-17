@@ -8,6 +8,7 @@ import {collection, getDocs, query, where} from "firebase/firestore";
 import {db} from "./firebase.js";
 import SnippetCard from "./snippetCard.jsx";
 import shortNumber from "short-number";
+import {BiUserCheck, BiUserMinus, BiUserPlus} from "react-icons/bi";
 
 export default function AccountPage(props) {
     const [usr, setUsr] = useState(null)
@@ -96,6 +97,21 @@ export default function AccountPage(props) {
                 window.open("https://github.com/" + usr.github, '_blank').focus();
             }}>{usr.github}</span></span></p>
             <p className="user_bio">{usr.bio}</p>
+            <button className="user_follow_btn search-btn" id="follow_btn" onClick={() => {
+                document.getElementById("follow_btn").style.display = "none"
+                document.getElementById("user_following").style.display = "block"
+            }}><BiUserPlus className="user_follow_btn_icon"/>FOLLOW <span className="user_follow_btn_num">· 576</span>
+            </button>
+            <div className="user_following" id="user_following">
+                <button className="search-btn" id="following_btn" style={{cursor: "pointer"}}><BiUserCheck
+                    className="user_follow_btn_icon"/>FOLLOWING <span className="user_follow_btn_num">· 576</span>
+                </button>
+                <button className="user_unfollow_btn search-btn" style={{cursor: "pointer"}} onClick={() => {
+                    document.getElementById("follow_btn").style.display = "block"
+                    document.getElementById("user_following").style.display = "none"
+                }}><BiUserMinus className="user_follow_btn_icon" style={{marginRight: "0"}}/> UNFOLLOW
+                </button>
+            </div>
             <div id="user-pkgss">
                 <h2 className="user_packages_title" id="user-pkgs">PACKAGES</h2>
                 <ul className="packages-card-list" id="packages-card-list" style={{marginTop: "460px"}}>

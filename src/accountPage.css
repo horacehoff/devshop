@@ -87,6 +87,55 @@
     width: calc(100% - 50px);
 }
 
+.user_following {
+    position: relative;
+    top: 405px;
+    left: 35px;
+    margin: 0;
+    padding: 0;
+    display: none;
+    width: fit-content;
+}
+
+.user_following button {
+    margin: 0;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.user_unfollow_btn {
+    position: relative;
+    left: 5px !important;
+    transition: 0.2s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .user_unfollow_btn:hover {
+        background: rgba(255, 0, 0, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+}
+
+
+.user_follow_btn {
+    margin: 0;
+    position: relative;
+    top: 405px;
+    left: 35px;
+    cursor: pointer;
+}
+
+.user_follow_btn_icon {
+    position: relative;
+    top: 2px;
+    margin-right: 7px;
+}
+
+.user_follow_btn_num {
+    color: #bbbbbb;
+}
+
 .user_packages_title {
     font-family: "JetBrains Mono", monospace;
     font-size: 27px;
@@ -114,6 +163,18 @@
     }
 
     .user_bio {
+        left: 20px;
+    }
+
+    .user_following {
+        left: 20px;
+    }
+
+    .user_packages_title {
+        left: 20px;
+    }
+
+    .user_follow_btn {
         left: 20px;
     }
 }
