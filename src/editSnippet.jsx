@@ -355,9 +355,9 @@ export default function EditSnippet(props) {
                                         const data = doc.data()
                                         let owned_packages = data.owned_snippets
                                         owned_packages.splice(owned_packages.indexOf(snippet.id), 1)
-                                        console.log("modifiying owned_packages")
+                                        console.log("modifiying owned_snippets")
                                         await setDoc(userRef, {
-                                            owned_packages: owned_packages
+                                            owned_snippets: owned_packages
                                         }, {merge: true}).then(() => {
                                             console.log("removed codeblock from owned_snippets")
                                         })
