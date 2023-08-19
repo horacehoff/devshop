@@ -161,31 +161,7 @@
 
 
 @media screen and (max-width: 500px) {
-    .user_name {
-        left: 20px;
-    }
-
-    .user_pfp {
-        left: 20px;
-    }
-
-    .user_id {
-        left: 20px;
-    }
-
-    .user_bio {
-        left: 20px;
-    }
-
-    .user_following {
-        left: 20px;
-    }
-
-    .user_packages_title {
-        left: 20px;
-    }
-
-    .user_follow_btn {
-        left: 20px;
+    .user_bio, .user_follow_btn, .user_following, .user_id, .user_name, .user_packages_title, .user_pfp {
+        left: 20px
     }
 }
