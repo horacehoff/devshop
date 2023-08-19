@@ -35,15 +35,28 @@ export default function AccountPage(props) {
             let card = document.querySelector('.user_pfp');
             let banner = document.querySelector('.user_banner');
 
-            if (usr.followers.includes(user_data.uid) && user_data.following.includes(usr.uid)) {
+            if (usr.uid === user_data.uid) {
                 document.getElementById("follow_btn").style.display = "none"
-                document.getElementById("user_following").style.display = "block"
                 document.getElementById("follow_btn").onclick = () => {
                 }
-                document.getElementById("follow_num_2").innerText = shortNumber(usr.followers.length)
+                document.getElementById("usr_unfollow_btn").onclick = () => {
+                }
+                document.getElementById("user_following").style.display = "none"
+                document.getElementById("user_followers").style.display = "block"
+                document.getElementById("user_followers").innerText = user_data.followers.length + " followers"
+                document.getElementById("user_bio").style.top = "412px"
             } else {
-                document.getElementById("follow_num_1").innerText = shortNumber(usr.followers.length)
+                if (usr.followers.includes(user_data.uid) && user_data.following.includes(usr.uid)) {
+                    document.getElementById("follow_btn").style.display = "none"
+                    document.getElementById("user_following").style.display = "block"
+                    document.getElementById("follow_btn").onclick = () => {
+                    }
+                    document.getElementById("follow_num_2").innerText = shortNumber(usr.followers.length)
+                } else {
+                    document.getElementById("follow_num_1").innerText = shortNumber(usr.followers.length)
+                }
             }
+
 
             let pfp_url = "https://source.boringavatars.com/pixel/120/" + usr.username + "?colors=6E00FF,0300FF,000000,FC7600,FFFFFF";
             let banner_url = "https://source.boringavatars.com/marble/850/" + usr.username + "?square"
@@ -105,7 +118,7 @@ export default function AccountPage(props) {
                 className="user_github_id" onClick={() => {
                 window.open("https://github.com/" + usr.github, '_blank').focus();
             }}>{usr.github}</span></span></p>
-            <p className="user_bio">{usr.bio}</p>
+            <p className="user_bio" id="user_bio">{usr.bio}</p>
             <button className="user_follow_btn search-btn" id="follow_btn" onClick={async () => {
                 let new_following = user_data.following;
                 if (!new_following) {
@@ -134,7 +147,8 @@ export default function AccountPage(props) {
                     className="user_follow_btn_icon"/>FOLLOWING <span className="user_follow_btn_num">· <span
                     id="follow_num_2">...</span></span>
                 </button>
-                <button className="user_unfollow_btn search-btn" style={{cursor: "pointer"}} onClick={async () => {
+                <button className="user_unfollow_btn search-btn" id="usr_unfollow_btn" style={{cursor: "pointer"}}
+                        onClick={async () => {
                     if (usr.followers.includes(user_data.uid) && user_data.following.includes(usr.uid) && user_data.following.length > 0 && usr.followers.length > 0) {
                         let new_following = user_data.following;
                         new_following.splice(new_following.indexOf(usr.uid), 1)
@@ -151,6 +165,7 @@ export default function AccountPage(props) {
                 }}><BiUserMinus className="user_follow_btn_icon" style={{marginRight: "0"}}/> UNFOLLOW
                 </button>
             </div>
+            <p className="user_followers" id="user_followers">405 followers</p>
             <div id="user-pkgss">
                 <h2 className="user_packages_title" id="user-pkgs">PACKAGES</h2>
                 <ul className="packages-card-list" id="packages-card-list" style={{marginTop: "460px"}}>
