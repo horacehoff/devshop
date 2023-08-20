@@ -35,7 +35,29 @@ export default function AccountPage(props) {
             let card = document.querySelector('.user_pfp');
             let banner = document.querySelector('.user_banner');
 
-            if (usr.uid === user_data.uid) {
+            if (user_data) {
+                if (usr.uid === user_data.uid) {
+                    document.getElementById("follow_btn").style.display = "none"
+                    document.getElementById("follow_btn").onclick = () => {
+                    }
+                    document.getElementById("usr_unfollow_btn").onclick = () => {
+                    }
+                    document.getElementById("user_following").style.display = "none"
+                    document.getElementById("user_followers").style.display = "block"
+                    document.getElementById("user_followers").innerText = user_data.followers.length + " followers"
+                    document.getElementById("user_bio").style.top = "412px"
+                } else {
+                    if (usr.followers.includes(user_data.uid) && user_data.following.includes(usr.uid)) {
+                        document.getElementById("follow_btn").style.display = "none"
+                        document.getElementById("user_following").style.display = "block"
+                        document.getElementById("follow_btn").onclick = () => {
+                        }
+                        document.getElementById("follow_num_2").innerText = shortNumber(usr.followers.length)
+                    } else {
+                        document.getElementById("follow_num_1").innerText = shortNumber(usr.followers.length)
+                    }
+                }
+            } else {
                 document.getElementById("follow_btn").style.display = "none"
                 document.getElementById("follow_btn").onclick = () => {
                 }
@@ -43,19 +65,10 @@ export default function AccountPage(props) {
                 }
                 document.getElementById("user_following").style.display = "none"
                 document.getElementById("user_followers").style.display = "block"
-                document.getElementById("user_followers").innerText = user_data.followers.length + " followers"
+                document.getElementById("user_followers").innerText = usr.followers.length + " followers"
                 document.getElementById("user_bio").style.top = "412px"
-            } else {
-                if (usr.followers.includes(user_data.uid) && user_data.following.includes(usr.uid)) {
-                    document.getElementById("follow_btn").style.display = "none"
-                    document.getElementById("user_following").style.display = "block"
-                    document.getElementById("follow_btn").onclick = () => {
-                    }
-                    document.getElementById("follow_num_2").innerText = shortNumber(usr.followers.length)
-                } else {
-                    document.getElementById("follow_num_1").innerText = shortNumber(usr.followers.length)
-                }
             }
+
 
 
             let pfp_url = "https://source.boringavatars.com/pixel/120/" + usr.username + "?colors=6E00FF,0300FF,000000,FC7600,FFFFFF";
