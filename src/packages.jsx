@@ -83,11 +83,25 @@ export default function Packages() {
     return (
         <>
             <Helmet>
-                <meta name="title" content="Packages - DEVSHOP"/>
-                <meta name="description"
-                      content="Find full programs/projects here on DEVSHOP and save countless hours of coding!"/>
-                <meta name="keywords"
-                      content="packages, code, devshop, marketplace, projects, code projects, code-projects, scripts, modules, libraries, plugins, templates, documentation, tutorials, examples, demos, source code, binaries, datasets, APIs, tools, frameworks, platforms, services, solutions, products"/>
+                <meta
+                    content="Find full programs/projects here on DEVSHOP and save yourself countless hours of coding"
+                    name="description"/>
+                <meta
+                    content="packages, code, devshop, marketplace, projects, code projects, code-projects, scripts, modules, libraries, plugins, templates, documentation, tutorials, examples, demos, source code, binaries, datasets, APIs, tools, frameworks, platforms, services, solutions, products"
+                    name="keywords"/>
+                <meta content="Packages - DEVSHOP" name="title"/>
+
+
+                <meta content="https://dev-shop.vercel.app/packages" property="twitter:url"/>
+                <meta content="Packages - DEVSHOP" property="twitter:title"/>
+                <meta content="Find full programs/projects here on DEVSHOP and save yourself countless hours of coding"
+                      property="twitter:description"/>
+
+
+                <meta content="https://dev-shop.vercel.app/packages" property="og:url"/>
+                <meta content="Packages - DEVSHOP" property="og:title"/>
+                <meta content="Find full programs/projects here on DEVSHOP and save yourself countless hours of coding"
+                      property="og:description"/>
             </Helmet>
             <h1 className="packages-title snippets-title">PACKAGES</h1>
             <Link className="search-btn" id="package-publish-btn"
