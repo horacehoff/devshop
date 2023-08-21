@@ -17,7 +17,8 @@ export default defineConfig({
       'short-number',
       'react-icons',
       '@uiw/react-md-editor',
-      'reactjs-popup'
+      'reactjs-popup',
+      'react-helmet'
     ],
   },
   plugins: [
@@ -61,11 +62,8 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          main: ['react', 'react-dom', 'react-router-dom'],
+          main: ['react', 'react-dom', 'react-router-dom', 'react-helmet'],
           db: ['firebase/app', 'firebase/auth', 'firebase/firestore', 'firebase/storage'],
-          // auth: ['firebase/auth'],
-          // store: ['firebase/firestore'],
-          // storage: ['firebase/storage'],
           shortnum: ['short-number'],
           icons: ['react-icons'],
           markdown: ['@uiw/react-md-editor'],

@@ -6,6 +6,7 @@ import shortNumber from "short-number";
 import {IoMdSearch} from "react-icons/io";
 import {useEffect, useState} from "react";
 import {db, user_data} from "./firebase.js";
+import {Helmet} from "react-helmet";
 
 
 export default function Packages() {
@@ -81,6 +82,13 @@ export default function Packages() {
 
     return (
         <>
+            <Helmet>
+                <meta name="title" content="Packages - DEVSHOP"/>
+                <meta name="description"
+                      content="Find full programs/projects here on DEVSHOP and save countless hours of coding!"/>
+                <meta name="keywords"
+                      content="packages, code, devshop, marketplace, projects, code projects, code-projects, scripts, modules, libraries, plugins, templates, documentation, tutorials, examples, demos, source code, binaries, datasets, APIs, tools, frameworks, platforms, services, solutions, products"/>
+            </Helmet>
             <h1 className="packages-title snippets-title">PACKAGES</h1>
             <Link className="search-btn" id="package-publish-btn"
                   to="/publish-package">+ PUBLISH A PACKAGE
