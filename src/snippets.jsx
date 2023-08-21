@@ -64,7 +64,7 @@ export default function Snippets() {
                 setLastCodeBlockData(prevState => [...prevState, doc.data()]);
             })
         })
-        if (user_data) {
+        if (user_data && user_data.interests.length > 0) {
             const q2 = query(collection(db, "snippets"), where("interests", "array-contains-any", Array.from(user_data.interests)), limit(9));
             getDocs(q2).then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
