@@ -6,6 +6,7 @@ import {IoMdSearch} from "react-icons/io";
 import {collection, getDocs, limit, orderBy, query, where} from "firebase/firestore";
 import {useEffect, useState} from "react";
 import {db, user_data} from "./firebase.js";
+import {Helmet} from "react-helmet";
 
 export default function Snippets() {
     const navigate = useNavigate();
@@ -79,6 +80,24 @@ export default function Snippets() {
 
     return (
         <>
+            <Helmet>
+                <meta
+                    content="Find code snippets here on DEVSHOP and save yourself countless hours of coding"
+                    name="description"/>
+                <meta content="Snippets" name="title"/>
+
+
+                <meta content="https://dev-shop.vercel.app/snippets" property="twitter:url"/>
+                <meta content="Snippets" property="twitter:title"/>
+                <meta content="Find code snippets here on DEVSHOP and save yourself countless hours of coding"
+                      property="twitter:description"/>
+
+
+                <meta content="https://dev-shop.vercel.app/snippets" property="og:url"/>
+                <meta content="Snippets" property="og:title"/>
+                <meta content="Find code snippets here on DEVSHOP and save yourself countless hours of coding"
+                      property="og:description"/>
+            </Helmet>
             <h1 className="packages-title snippets-title">SNIPPETS</h1>
             <Link className="secondary search-btn" id="package-publish-btn"
                   to="/publish-snippet">+ PUBLISH A SNIPPET

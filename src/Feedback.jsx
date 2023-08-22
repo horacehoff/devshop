@@ -4,6 +4,7 @@ import Popup from "reactjs-popup";
 import {doc, setDoc} from "firebase/firestore";
 import {db} from "./firebase.js";
 import {useNavigate} from "react-router-dom";
+import {Helmet} from "react-helmet";
 
 function validateEmail(input) {
     const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -29,6 +30,24 @@ export default function Feedback() {
     const navigate = useNavigate();
     return (
         <>
+            <Helmet>
+                <meta
+                    content="Provide feedback about DEVSHOP and help build the site"
+                    name="description"/>
+                <meta content="Feedback" name="title"/>
+
+
+                <meta content="https://dev-shop.vercel.app/feedback" property="twitter:url"/>
+                <meta content="Feedback" property="twitter:title"/>
+                <meta content="Provide feedback about DEVSHOP and help build the site"
+                      property="twitter:description"/>
+
+
+                <meta content="https://dev-shop.vercel.app/feedback" property="og:url"/>
+                <meta content="Feedback" property="og:title"/>
+                <meta content="Provide feedback about DEVSHOP and help build the site"
+                      property="og:description"/>
+            </Helmet>
             <Popup ref={emailpopupref}>
                 <h3 className="rating-popup-title">ERROR</h3>
                 <h5 className="popup-signin-txt"

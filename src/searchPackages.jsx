@@ -21,7 +21,9 @@ export default function SearchPackages() {
                     search_results.push(doc.data());
                 });
                 setSearchResults(Array.from(search_results));
-                console.log(search_results)
+                if (search_results.length === 0) {
+                    document.getElementById("search-failed").style.display = "block"
+                }
             })
         }
     }
@@ -45,6 +47,7 @@ export default function SearchPackages() {
             <input type="text" placeholder="@SEARCH" value={searchInput}
                    onChange={e => setSearchInput(e.target.value)} onKeyDown={e => search(e, false)}
                    className="txt-input search-input "/>
+            <p className="search-failed" id="search-failed">No search results</p>
             <ul className="packages-card-list" id="packages-card-list-one" style={{marginTop: "60px"}}>
                 {searchResults.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child" onClick={() => {

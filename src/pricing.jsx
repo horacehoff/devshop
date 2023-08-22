@@ -1,5 +1,6 @@
 import "./pricing.css"
 import Footer from "./Footer.jsx";
+import {Helmet} from "react-helmet";
 
 export default function Pricing() {
     // const navigate = useNavigate()
@@ -13,6 +14,24 @@ export default function Pricing() {
 
     return (
         <>
+            <Helmet>
+                <meta
+                    content="The soon-to-be pricing of DEVSHOP"
+                    name="description"/>
+                <meta content="Pricing" name="title"/>
+
+
+                <meta content="https://dev-shop.vercel.app/pricing" property="twitter:url"/>
+                <meta content="Pricing" property="twitter:title"/>
+                <meta content="The soon-to-be pricing of DEVSHOP"
+                      property="twitter:description"/>
+
+
+                <meta content="https://dev-shop.vercel.app/pricing" property="og:url"/>
+                <meta content="Pricing" property="og:title"/>
+                <meta content="The soon-to-be pricing of DEVSHOP"
+                      property="og:description"/>
+            </Helmet>
             <h1 className="pricing-title">PRICING</h1>
             <h3 className="pricing-parentsubtitle">(COMING SOON; AS OF NOW THE WEBSITE IS 100% FREE TO USE)</h3>
             <p className="pricing-subtitle">You can use DEVSHOP for free, or you can pay a small amount of money each
