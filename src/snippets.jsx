@@ -130,7 +130,7 @@ export default function Snippets() {
             </div>
             <h2 className="category-title">// CURRENTLY TRENDING</h2>
             <ul className="packages-card-list">
-                <p id="empty-txt">{"NO PACKAGES - PUBLISH THE FIRST ONE ?"}</p>
+                <p id="empty-txt">{"NO SNIPPETS - PUBLISH THE FIRST ONE ?"}</p>
                 <button className="primary" id="empty-btn" onClick={() => navigate("/publish-snippet")}>MAKE HISTORY
                 </button>
                 {trendingCodeBlockData.map((pkg, index) => (
