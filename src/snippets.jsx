@@ -61,9 +61,16 @@ export default function Snippets() {
         })
         const q1 = query(collection(db, "snippets"), orderBy("created", "desc"), limit(9));
         getDocs(q1).then((querySnapshot) => {
+            let run = false
             querySnapshot.forEach((doc) => {
                 setLastCodeBlockData(prevState => [...prevState, doc.data()]);
+                run = true
             })
+            if (!run) {
+                document.getElementById("category-title").style.display = "none"
+                document.getElementById("empty-txt").style.display = "block"
+                document.getElementById("empty-btn").style.display = "block"
+            }
         })
         if (user_data && user_data.interests.length > 0) {
             const q2 = query(collection(db, "snippets"), where("interests", "array-contains-any", Array.from(user_data.interests)), limit(9));
@@ -99,6 +106,7 @@ export default function Snippets() {
                       property="og:description"/>
             </Helmet>
             <h1 className="packages-title snippets-title">SNIPPETS</h1>
+            <h4 className="packages-subtitle">FIND AND PUBLISH CODE SNIPPETS</h4>
             <Link className="secondary search-btn" id="package-publish-btn"
                   to="/publish-snippet">+ PUBLISH A SNIPPET
             </Link>
@@ -122,6 +130,9 @@ export default function Snippets() {
             </div>
             <h2 className="category-title">// CURRENTLY TRENDING</h2>
             <ul className="packages-card-list">
+                <p id="empty-txt">{"NO PACKAGES - PUBLISH THE FIRST ONE ?"}</p>
+                <button className="primary" id="empty-btn" onClick={() => navigate("/publish-snippet")}>MAKE HISTORY
+                </button>
                 {trendingCodeBlockData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">
                         <Link to={"/snippets/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
@@ -131,7 +142,7 @@ export default function Snippets() {
                     </li>
                 ))}
             </ul>
-            <h2 className="category-title">// RECENTLY CREATED</h2>
+            <h2 className="category-title" id="category-title">// RECENTLY CREATED</h2>
             <ul className="packages-card-list">
                 {lastCodeBlockData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">

@@ -62,9 +62,16 @@ export default function Packages() {
         })
         const q1 = query(collection(db, "packages"), orderBy("created", "desc"), limit(9));
         getDocs(q1).then((querySnapshot) => {
+            let run = false
             querySnapshot.forEach((doc) => {
                 setLastPackagesData(prevState => [...prevState, doc.data()]);
+                run = true
             })
+            if (!run) {
+                document.getElementById("category-title").style.display = "none"
+                document.getElementById("empty-txt").style.display = "block"
+                document.getElementById("empty-btn").style.display = "block"
+            }
         })
         if (user_data && user_data.interests.length > 0) {
             const q2 = query(collection(db, "packages"), where("interests", "array-contains-any", Array.from(user_data.interests)), limit(9));
@@ -101,6 +108,7 @@ export default function Packages() {
                       property="og:description"/>
             </Helmet>
             <h1 className="packages-title snippets-title">PACKAGES</h1>
+            <h4 className="packages-subtitle snippets-subtitle">FIND AND PUBLISH COMPLETE PROJECTS/PROGRAMS</h4>
             <Link className="search-btn" id="package-publish-btn"
                   to="/publish-package">+ PUBLISH A PACKAGE
             </Link>
@@ -126,6 +134,10 @@ export default function Packages() {
             </div>
             <h2 className="category-title">// MOST DOWNLOADED</h2>
             <ul className="packages-card-list" id="packages-card-list-one">
+                <p id="empty-txt" style={{display: "none"}}>{"NO PACKAGES - PUBLISH THE FIRST ONE ?"}</p>
+                <button className="primary" id="empty-btn" style={{display: "none"}}
+                        onClick={() => navigate("/publish-package")}>MAKE HISTORY
+                </button>
                 {trendingPackageData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">
                         <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
@@ -135,7 +147,7 @@ export default function Packages() {
                     </li>
                 ))}
             </ul>
-            <h2 className="category-title">// RECENTLY CREATED</h2>
+            <h2 className="category-title" id="category-title">// RECENTLY CREATED</h2>
             <ul className="packages-card-list" id="packages-card-list">
                 {lastPackagesData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child" onClick={() => {
