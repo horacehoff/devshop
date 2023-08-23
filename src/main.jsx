@@ -37,6 +37,10 @@ function App() {
                 <Route path="/" element={
                     <Home/>
                 }/>
+                <Route path="/home" element={<>
+                    <h1>TEST</h1>
+                </>
+                }/>
                 <Route path="/publish-package" element={<CreatePackage/>}></Route>
                 <Route path="/packages" element={
                     <Packages/>

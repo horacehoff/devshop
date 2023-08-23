@@ -1,5 +1,4 @@
 import "./searchPackages.css"
-import {IoMdSearch} from "react-icons/io";
 import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import {collection, getDocs, query, where} from "firebase/firestore";
@@ -24,6 +23,9 @@ export default function SearchSnippets() {
                     document.getElementById("search-failed").style.display = "block"
                 }
             })
+        } else if (searchInput === "" && e.key === "Enter") {
+            document.getElementById("search-input").style.borderColor = "rgba(255, 0, 0, 1)"
+            setTimeout(() => document.getElementById("search-input").style.borderColor = "rgba(255, 255, 255, 0.18)", 2000)
         }
     }
 
@@ -41,10 +43,20 @@ export default function SearchSnippets() {
     return (
         <>
             <h1 className="search-title">SEARCH SNIPPETS</h1>
-            <IoMdSearch className="search-input-icon" color="black"/>
-            <input type="text" placeholder="@SEARCH" value={searchInput}
-                   onChange={e => setSearchInput(e.target.value)} onKeyDown={e => search(e, false)}
-                   className="txt-input search-input"/>
+            <div className="search-group">
+                <input type="text" placeholder="@SEARCH" value={searchInput}
+                       onChange={e => setSearchInput(e.target.value)} onKeyDown={e => search(e, false)}
+                       className="txt-input search-input " id="search-input"/>
+                <button onClick={() => {
+                    if (searchInput === "") {
+                        document.getElementById("search-input").style.borderColor = "rgba(255, 0, 0, 1)"
+                        setTimeout(() => document.getElementById("search-input").style.borderColor = "rgba(255, 255, 255, 0.18)", 2000)
+                    } else {
+                        search("", true)
+                    }
+                }}>🔍
+                </button>
+            </div>
             <p className="search-failed" id="search-failed">No search results</p>
             <ul className="packages-card-list" id="packages-card-list-one" style={{marginTop: "60px"}}>
                 {searchResults.map((pkg, index) => (

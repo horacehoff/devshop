@@ -1,5 +1,4 @@
 import "./searchPackages.css"
-import {IoMdSearch} from "react-icons/io";
 import {useEffect, useState} from "react";
 import PackageCard from "./packageCard.jsx";
 import shortNumber from "short-number";
@@ -25,6 +24,9 @@ export default function SearchPackages() {
                     document.getElementById("search-failed").style.display = "block"
                 }
             })
+        } else if (searchInput === "" && e.key === "Enter") {
+            document.getElementById("search-input").style.borderColor = "rgba(255, 0, 0, 1)"
+            setTimeout(() => document.getElementById("search-input").style.borderColor = "rgba(255, 255, 255, 0.18)", 2000)
         }
     }
 
@@ -43,10 +45,20 @@ export default function SearchPackages() {
         <>
             <br/><br/>
             <h1 className="search-title">SEARCH PACKAGES</h1>
-            <IoMdSearch className="search-input-icon" color="black"/>
-            <input type="text" placeholder="@SEARCH" value={searchInput}
-                   onChange={e => setSearchInput(e.target.value)} onKeyDown={e => search(e, false)}
-                   className="txt-input search-input "/>
+            <div className="search-group">
+                <input type="text" placeholder="@SEARCH" value={searchInput}
+                       onChange={e => setSearchInput(e.target.value)} onKeyDown={e => search(e, false)}
+                       className="txt-input search-input " id="search-input"/>
+                <button onClick={() => {
+                    if (searchInput === "") {
+                        document.getElementById("search-input").style.borderColor = "rgba(255, 0, 0, 1)"
+                        setTimeout(() => document.getElementById("search-input").style.borderColor = "rgba(255, 255, 255, 0.18)", 2000)
+                    } else {
+                        search("", true)
+                    }
+                }}>🔍
+                </button>
+            </div>
             <p className="search-failed" id="search-failed">No search results</p>
             <ul className="packages-card-list" id="packages-card-list-one" style={{marginTop: "60px"}}>
                 {searchResults.map((pkg, index) => (

@@ -113,12 +113,13 @@
 .user_followers {
     display: none;
     position: relative;
-    top: 365px;
+    top: 363px;
     left: 35px;
     margin: 0;
     padding: 0;
     font-size: 15px;
     color: #a8a8a8;
+    width: fit-content;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -161,7 +162,7 @@
 
 
 @media screen and (max-width: 500px) {
-    .user_bio, .user_follow_btn, .user_following, .user_id, .user_name, .user_packages_title, .user_pfp {
+    .user_bio, .user_follow_btn, .user_following, .user_id, .user_name, .user_packages_title, .user_pfp, .user_followers {
         left: 20px
     }
 }
