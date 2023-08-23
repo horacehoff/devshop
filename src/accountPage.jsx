@@ -24,6 +24,9 @@ export default function AccountPage(props) {
                 querysn.forEach((doc) => {
                     setUsr(doc.data())
                 })
+                if (querysn.empty) {
+                    navigate("/")
+                }
             })
         }
         if (usr !== null) {

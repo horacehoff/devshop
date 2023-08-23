@@ -26,7 +26,7 @@ export default function SearchPackages() {
             })
         } else if (searchInput === "" && e.key === "Enter") {
             document.getElementById("search-input").style.borderColor = "rgba(255, 0, 0, 1)"
-            setTimeout(() => document.getElementById("search-input").style.borderColor = "rgba(255, 255, 255, 0.18)", 2000)
+            setTimeout(() => document.getElementById("search-input").style.borderColor = "", 2000)
         }
     }
 
@@ -52,7 +52,7 @@ export default function SearchPackages() {
                 <button onClick={() => {
                     if (searchInput === "") {
                         document.getElementById("search-input").style.borderColor = "rgba(255, 0, 0, 1)"
-                        setTimeout(() => document.getElementById("search-input").style.borderColor = "rgba(255, 255, 255, 0.18)", 2000)
+                        setTimeout(() => document.getElementById("search-input").style.borderColor = "", 2000)
                     } else {
                         search("", true)
                     }

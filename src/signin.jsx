@@ -38,7 +38,17 @@ export default function SignIn() {
 
     const onBtnSubmit = (e) => {
         e.preventDefault();
-        SignInUser({navigate}, email, password)
+        if (email === "") {
+            document.getElementById("email").style.borderColor = "rgba(255, 0, 0, 1)"
+            setTimeout(() => document.getElementById("email").style.borderColor = "", 2000)
+        }
+        if (password === "") {
+            document.getElementById("password").style.borderColor = "rgba(255, 0, 0, 1)"
+            setTimeout(() => document.getElementById("password").style.borderColor = "", 2000)
+        }
+        if (email !== "" && password !== "") {
+            SignInUser({navigate}, email, password)
+        }
     }
 
     return (

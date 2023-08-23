@@ -90,7 +90,21 @@ export default function SignUp() {
 
     const onBtnSubmit = (e) => {
         e.preventDefault();
-        SignUpUser(username, email, password, {navigate})
+        if (username === "") {
+            document.getElementById("username").style.borderColor = "rgba(255, 0, 0, 1)"
+            setTimeout(() => document.getElementById("username").style.borderColor = "", 2000)
+        }
+        if (email === "") {
+            document.getElementById("email").style.borderColor = "rgba(255, 0, 0, 1)"
+            setTimeout(() => document.getElementById("email").style.borderColor = "", 2000)
+        }
+        if (password === "") {
+            document.getElementById("password").style.borderColor = "rgba(255, 0, 0, 1)"
+            setTimeout(() => document.getElementById("password").style.borderColor = "", 2000)
+        }
+        if (username !== "" && email !== "" && password !== "") {
+            SignUpUser(username, email, password, {navigate})
+        }
     }
 
     return (
