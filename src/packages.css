@@ -11,6 +11,7 @@
     position: relative;
     top: -30px;
     left: 25px;
+    width: fit-content;
 }
 
 .packages-card-list {
@@ -40,6 +41,8 @@
     font-size: 16px;
     margin-top: 0;
     display: none;
+    width: fit-content !important;
+    padding: 0 !important;
 }
 
 .packages-card-list button {
