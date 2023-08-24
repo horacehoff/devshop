@@ -34,7 +34,8 @@
 
 .packages-card-list li {
     height: fit-content;
-    scroll-snap-align: start
+    scroll-snap-align: start;
+
 }
 
 #empty-txt {
