@@ -22,11 +22,11 @@ export default function About() {
                 <meta content="Learn about DEVSHOP"
                       property="og:description"/>
             </Helmet>
-            <h2 className="about-ttl">ABOUT ‘DEVSHOP’</h2>
-            <p className="about-subtitle">BY <span className="about-linktree"
-                                                   onClick={() => window.open("https://linktr.ee/just_a_mango", '_blank').focus()}>@JUST_A_MANGO</span>
-            </p>
-            <p className="about-subtitle" style={{marginTop: "15px"}}>DEVELOPMENT STARTED IN FEBRUARY 2023</p>
+            <img src="/banner.png" loading="lazy" className="about-banner"/>
+            <p className="about-desc"><strong>DEVSHOP</strong>, initially called Publish My Package, was created
+                By <span className="about-linktree"
+                         onClick={() => window.open("https://linktr.ee/just_a_mango", '_blank').focus()}>@JUST_A_MANGO</span> (<span
+                    className="about-email">horace.hoff@gmail.com</span>), development started in Feburary 2023.</p>
         </>
     )
 }
