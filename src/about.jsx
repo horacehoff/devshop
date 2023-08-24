@@ -1,21 +1,7 @@
 import "./about.css";
 import {Helmet} from "react-helmet";
-import {useEffect} from "react";
 
 export default function About() {
-    useEffect(() => {
-        let docWidth = document.documentElement.offsetWidth;
-
-        [].forEach.call(
-            document.querySelectorAll('*'),
-            function (el) {
-                if (el.offsetWidth > docWidth) {
-                    console.log(el);
-                }
-            }
-        );
-
-    }, [])
     return (
         <>
             <Helmet>
