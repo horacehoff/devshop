@@ -4,6 +4,7 @@
     margin: 100px 0 0 50%;
     transform: translate(-50%);
     position: relative;
+    display: block;
 }
 
 .about-desc {
@@ -29,6 +30,7 @@
 @media screen and (max-width: 510px) {
     .about-banner {
         width: 100%;
+        margin-right: 0;
         padding: 0;
     }
 }
