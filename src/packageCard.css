@@ -32,7 +32,7 @@
 
 .card:hover {
     animation: bg-infinite 30s infinite linear;
-    border: 1px solid #9d9d9d;
+    border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .card:hover > .card-read-more {
