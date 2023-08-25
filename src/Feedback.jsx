@@ -23,9 +23,7 @@ export default function Feedback() {
     const [email, setEmail] = useState("");
     const [feedback, setFeedback] = useState("");
     let emailpopupref = createRef();
-    let fieldpopupref = createRef();
     let successpopupref = createRef();
-    let descref = createRef();
 
     const navigate = useNavigate();
     return (
@@ -51,14 +49,7 @@ export default function Feedback() {
             <Popup ref={emailpopupref}>
                 <h3 className="rating-popup-title">ERROR</h3>
                 <h5 className="popup-signin-txt"
-                    style={{fontWeight: "400", fontSize: "16px", margin: "0", marginBottom: "10px"}}>Your email looks
-                    invalid.</h5>
-            </Popup>
-            <Popup ref={fieldpopupref}>
-                <h3 className="rating-popup-title">ERROR</h3>
-                <h5 className="popup-signin-txt"
-                    style={{fontWeight: "400", fontSize: "16px", margin: "0", marginBottom: "10px"}}>Please fill in the
-                    required fields.</h5>
+                    style={{fontWeight: "400", fontSize: "16px", margin: "0", marginBottom: "10px"}}>INVALID EMAIL</h5>
             </Popup>
             <Popup ref={successpopupref} onClose={() => {
                 navigate("/")
@@ -69,15 +60,23 @@ export default function Feedback() {
                     greatly appreciated. It helps improve the site. Thank you!</h5>
             </Popup>
             <h1 className="pricing-title">Feedback</h1>
-            <h3 className="pricing-parentsubtitle">Help build the site by sharing your feedback</h3>
+            <h3 className="pricing-parentsubtitle">HELP BUILD THE SITE BY SHARING YOUR FEEDBACK</h3>
             <br/>
             <div className="feedback-container">
-                <input type="email" placeholder="@EMAIL" className="txt-input" value={email}
+                <input type="email" placeholder="@EMAIL" id="email" className="txt-input" value={email}
                        onChange={e => setEmail(e.target.value)} style={{margin: "0"}}/>
-                <textarea placeholder="@FEEDBACK" className="txt-input feedback-input" value={feedback}
+                <textarea placeholder="@FEEDBACK" id="feedback" className="txt-input feedback-input" value={feedback}
                           onChange={e => setFeedback(e.target.value)} style={{marginLeft: "0"}}></textarea>
                 <button className="primary feedback-submit" onClick={() => {
-                    if (email !== "" || feedback !== "") {
+                    if (email === "") {
+                        document.getElementById("email").style.borderColor = "rgba(255, 0, 0, 1)"
+                        setTimeout(() => document.getElementById("email").style.borderColor = "", 2000)
+                    }
+                    if (feedback === "") {
+                        document.getElementById("feedback").style.borderColor = "rgba(255, 0, 0, 1)"
+                        setTimeout(() => document.getElementById("feedback").style.borderColor = "", 2000)
+                    }
+                    if (email !== "" && feedback !== "") {
                         if (validateEmail(email)) {
                             document.getElementById("feedback-submit-btn").innerHTML = "SUBMITTING...";
                             submitFeedback(email, feedback).then(() => {
@@ -89,8 +88,6 @@ export default function Feedback() {
                         } else {
                             emailpopupref.current.open();
                         }
-                    } else {
-                        fieldpopupref.current.open();
                     }
                 }} id="feedback-submit-btn">SUBMIT
                 </button>
