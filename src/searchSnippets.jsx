@@ -11,6 +11,7 @@ export default function SearchSnippets() {
     const {querystr} = useParams();
 
     async function search(e, forcePass) {
+        document.getElementById("search-failed").style.display = "none"
         if ((e.key === "Enter" || forcePass) && searchInput !== "") {
             let search_results = [];
             const q = query(collection(db, "snippets"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'));
