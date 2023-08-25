@@ -26,7 +26,7 @@ export default function About() {
             <p className="about-desc"><strong>DEVSHOP</strong>, initially called Publish My Package, was created
                 By <span className="about-linktree"
                          onClick={() => window.open("https://linktr.ee/just_a_mango", '_blank').focus()}>@JUST_A_MANGO</span> (horace.hoff@gmail.com),
-                development started in Feburary 2023.</p>
+                with development starting in February 2023.</p>
         </>
     )
 }
