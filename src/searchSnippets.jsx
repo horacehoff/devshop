@@ -1,7 +1,7 @@
 import "./searchPackages.css"
 import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
-import {collection, getDocs, query, where} from "firebase/firestore";
+import {collection, getDocs, limit, query, where} from "firebase/firestore";
 import {db} from "./firebase.js";
 import SnippetCard from "./snippetCard.jsx";
 
@@ -14,7 +14,7 @@ export default function SearchSnippets() {
         document.getElementById("search-failed").style.display = "none"
         if ((e.key === "Enter" || forcePass) && searchInput !== "") {
             let search_results = [];
-            const q = query(collection(db, "snippets"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'));
+            const q = query(collection(db, "snippets"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), limit(9));
             getDocs(q).then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     search_results.push(doc.data());

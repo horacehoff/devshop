@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import PackageCard from "./packageCard.jsx";
 import shortNumber from "short-number";
 import {useParams} from "react-router-dom";
-import {collection, getDocs, query, where} from "firebase/firestore";
+import {collection, getDocs, limit, query, where} from "firebase/firestore";
 import {db} from "./firebase.js";
 
 export default function SearchPackages() {
@@ -15,7 +15,7 @@ export default function SearchPackages() {
         document.getElementById("search-failed").style.display = "none"
         if ((e.key === "Enter" || forcePass) && searchInput !== "") {
             let search_results = [];
-            const q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'));
+            const q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), limit(9));
             getDocs(q).then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     search_results.push(doc.data());
