@@ -19,6 +19,7 @@ export default function EditPackage(props) {
     const {state} = useLocation()
     const pkg = state.pkg
     const [uid, setUid] = useState("")
+    const [newName, setNewName] = useState()
     const [newDesc, setNewDesc] = useState(pkg.description)
 
     const [bannerUpload, setBannerUpload] = useState(null);
@@ -146,11 +147,13 @@ export default function EditPackage(props) {
             description: profanityFilter(newDesc),
             package: pkgUrl,
             current_version: currentVer,
+            name: profanityFilter(newName)
         }, {merge: true})
     }
 
     useLayoutEffect(() => {
         document.querySelector('.banner').style.setProperty("--banner_url", `url('${pkg.banner}')`);
+        setNewName(pkg.name)
     }, []);
 
 
@@ -173,8 +176,10 @@ export default function EditPackage(props) {
                     });
                     document.getElementById("banner-file").click()
                 }}></div>
-                <h2 className="package-title">{pkg.name}</h2>
-                <h3 className="package-author">// BY <span
+            <input type="text" className="package-title" placeholder="@NAME"
+                   style={{height: "60px", width: "90%", fontSize: "25px"}} value={newName}
+                   onChange={e => setNewName(e.target.value)}/>
+            <h3 className="package-author">by <span
                     style={{color: "#F0EBBA", cursor: "pointer"}}>{pkg.owner_username}</span>
                 </h3>
                 <button className="package-download-btn" id="package-download-btn" onClick={async () => {

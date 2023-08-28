@@ -20,6 +20,7 @@ export default function EditSnippet(props) {
     const {state} = useLocation()
     const snippet = state.pkg
     const [uid, setUid] = useState("")
+    const [newName, setNewName] = useState()
     const [newDesc, setNewDesc] = useState(snippet.description)
 
 
@@ -38,6 +39,7 @@ export default function EditSnippet(props) {
                 if (user.uid === snippet.owner_id) {
                     console.log("user is owner")
                     setUid(user.uid)
+                    setNewName(snippet.name)
                     console.log(uid)
                 } else {
                     console.log("user is not owner")
@@ -136,15 +138,19 @@ export default function EditSnippet(props) {
             screenshots: [screenOneUrl, screenTwoUrl, screenThreeUrl, screenFourUrl],
             description: profanityFilter(newDesc),
             current_version: currentVer,
-            code: currentCode
+            code: currentCode,
+            name: newName
         }, {merge: true})
     }
 
 
     return (
         <>
-            <h2 className="package-title snippet-title">{snippet.name}</h2>
-            <h3 className="package-author">// BY <Link className="package-author-link"
+            <input type="text" className="package-title" placeholder="@NAME"
+                   style={{height: "60px", width: "90%", fontSize: "25px"}} value={newName}
+                   onChange={e => setNewName(e.target.value)}/>
+
+            <h3 className="package-author">by <Link className="package-author-link"
                                                        to={"/users/" + fancy_name_to_id(snippet.owner_username)}>{snippet.owner_username}</Link>
             </h3>
                 <button className="package-download-btn" id="package-download-btn" onClick={async () => {
