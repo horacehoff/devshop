@@ -214,7 +214,6 @@ export default function CreatePackage() {
                             <label htmlFor="img-file" className="file-input" id="gallery-upload"><BiCloudUpload
                                 className="file-input-icon"></BiCloudUpload>UPLOAD IMAGES(4)</label>
                             <br/>
-
                         </div>
                         <input type="text" className="desc-input" placeholder="PACKAGE VERSION"
                                style={{marginTop: "20px", marginBottom: "30px", fontSize: "20px"}} value={version}
