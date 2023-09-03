@@ -43,6 +43,7 @@ export default function SearchSnippets() {
 
     return (
         <>
+            <br/><br/>
             <h1 className="search-title">SEARCH SNIPPETS</h1>
             <div className="search-group">
                 <input type="text" placeholder="@SEARCH" value={searchInput}
