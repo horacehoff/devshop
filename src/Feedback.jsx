@@ -5,6 +5,7 @@ import {doc, setDoc} from "firebase/firestore";
 import {db} from "./firebase.js";
 import {useNavigate} from "react-router-dom";
 import {Helmet} from "react-helmet";
+import Footer from "./Footer.jsx";
 
 function validateEmail(input) {
     const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -92,6 +93,8 @@ export default function Feedback() {
                 }} id="feedback-submit-btn">SUBMIT
                 </button>
             </div>
+            <br/><br/>
+            <Footer/>
         </>
     )
 }

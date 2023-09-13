@@ -16,6 +16,7 @@
     margin: 0;
     padding: 0;
     background-position: center center;
+    cursor: pointer;
 }
 
 .package-author, .package-description, .package-description-label, .package-screenshots, .package-screenshots-label, .package-title {

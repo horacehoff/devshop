@@ -32,7 +32,7 @@
 .basic-plan {
     background-color: #2d2b57;
     width: 320px;
-    height: 220px;
+    height: 260px;
     border-radius: 14px;
     outline: 1px solid white;
     margin-right: 25px;
@@ -42,7 +42,7 @@
 .pro-plan {
     background-color: #2d2b57;
     width: 320px;
-    height: 220px;
+    height: 260px;
     border-radius: 14px;
     outline: 2px solid mediumpurple;
     margin-left: 25px;
@@ -132,6 +132,40 @@
     margin-bottom: 50px;
     color: white;
     font-size: 16px;
+}
+
+.pricing-exp-title {
+    text-align: center;
+    font-size: 35px;
+    margin: 0;
+}
+
+.pricing-exp-plan {
+    margin-top: 5px;
+    text-align: center;
+    /*padding-right: 50px;*/
+    font-size: 22px;
+}
+
+.pricing-exp-plan-characteristics {
+    text-align: left;
+    height: fit-content;
+    font-weight: 400;
+    color: #737373;
+    font-size: 16px;
+    position: relative;
+    left: 0;
+    width: calc(100% - 50px);
+    padding-left: 2.5vw;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+
+}
+
+.pricing-exp-plan-characteristics-title {
+    font-weight: 800;
+    color: white;
+    font-size: 21px;
 }
 
 @media screen and (max-width: 770px) {

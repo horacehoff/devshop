@@ -44,6 +44,7 @@ export default function Pricing() {
                     <ul className="plan-features">
                         <li>✅ Full access to the website</li>
                         <li>❌ Ads</li>
+                        <li>❌ Set categories for packages/snippets</li>
                     </ul>
                     {/*<button className="plan-sign-up" id="plan-sign-up" onClick={() => {*/}
                     {/*    navigate("/sign-up")*/}
@@ -57,10 +58,27 @@ export default function Pricing() {
                     <ul className="plan-features">
                         <li>✅ Full access to the website</li>
                         <li>✅ No ads</li>
+                        <li>✅ Set categories for packages/snippets</li>
                     </ul>
                     {/*<button className="plan-subscribe" id="plan-subscribe">coming soon</button>*/}
                 </div>
             </div>
+            {/*<br/>*/}
+            {/*<h3 className="pricing-exp-title">WHAT THIS MEANS</h3>*/}
+            {/*<h4 className="pricing-exp-plan">With the BASIC plan, you get:</h4>*/}
+            {/*<span className="pricing-exp-plan-characteristics">*/}
+            {/*    <span className="pricing-exp-plan-characteristics-title">FULL ACCESS TO THE WEBSITE</span>, meaning you get access to all of the website's pages/sections, without limits nor restrictions, the website is yours to explore!*/}
+            {/*</span>*/}
+            {/*<br/><br/>*/}
+            {/*<br/><br/>*/}
+            {/*<h4 className="pricing-exp-plan">With the <span style={{color: "mediumpurple"}}>PRO</span> plan, you get:</h4>*/}
+            {/*<span className="pricing-exp-plan-characteristics">*/}
+            {/*    <span><span className="pricing-exp-plan-characteristics-title">FULL ACCESS TO THE WEBSITE</span>, meaning you get access to all of the website's pages/sections, without limits nor restrictions, the website is yours to explore!</span>*/}
+            {/*    <br/><br/>*/}
+            {/*    <span style={{position: "relative", marginTop: "10px"}}><span className="pricing-exp-plan-characteristics-title">NO ADS</span>, that is to say you'll never be annoyed by advertisements on the website, ever.</span>*/}
+            {/*    <br/><br/>*/}
+            {/*    <span style={{position: "relative", marginTop: "10px"}}><span className="pricing-exp-plan-characteristics-title">SET CATEGORIES FOR PACKAGES/SNIPPETS</span>, this means, for each package/snippet that you publish, you can set custom "categories" for each one of them, to better target your user base.</span>*/}
+            {/*</span>*/}
             <Footer/>
         </>
     )

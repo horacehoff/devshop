@@ -143,7 +143,17 @@ export default function PackagePage() {
             }}>
                 <img src={pkg.screenshots[0]} id="full-screen-img" alt="full screen image"></img>
             </div>
-            <div className="banner"></div>
+            <div className="banner" onMouseEnter={() => {
+                document.getElementById("full-screen-img").src = pkg.banner
+            }} onClick={() => {
+                if (!mobile) {
+                    console.log('click')
+                    document.getElementById("full-screen-img").src = pkg.banner
+                }
+                document.getElementById("full-screen").style.zIndex = "15"
+                document.getElementById("full-screen").style.opacity = "1"
+                document.getElementById("full-screen-img").style.scale = "1"
+            }}></div>
             <h2 className="package-title">{pkg.name}</h2>
             <h3 className="package-author">by <Link className="package-author-link"
                                                     to={"/users/" + fancy_name_to_id(pkg.owner_username)}>{pkg.owner_username}</Link>
