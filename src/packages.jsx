@@ -114,7 +114,7 @@ export default function Packages() {
             </Link>
             <Link className="search-btn" id="package-search-btn"
                   style={{marginLeft: "10px", maxWidth: "150px"}}
-                  to="/packages/q/">
+                  to="/search/">
                 <IoMdSearch
                     style={{position: "relative", top: "1px"}}/> SEARCH PACKAGES
             </Link>

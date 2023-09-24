@@ -112,7 +112,7 @@ export default function Snippets() {
             </Link>
             <Link className="secondary search-btn" id="package-search-btn"
                   style={{marginLeft: "10px", maxWidth: "173px"}}
-                  to="/snippets/q/"><IoMdSearch
+                  to="/search/"><IoMdSearch
                 style={{position: "relative", top: "1px"}}/> SEARCH SNIPPETS
             </Link>
             <div id="for-you-section" style={{display: "none"}}>

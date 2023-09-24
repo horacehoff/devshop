@@ -22,7 +22,6 @@ import Snippets from "./snippets.jsx";
 import CreateSnippet from "./createSnippet.jsx";
 import SnippetPage from "./snippetPage.jsx";
 import EditSnippet from "./editSnippet.jsx";
-import SearchSnippets from "./searchSnippets.jsx";
 import Navbar from "./Navbar.jsx";
 import Feedback from "./Feedback.jsx";
 
@@ -45,8 +44,8 @@ function App() {
                 <Route path="/packages" element={
                     <Packages/>
                 }/>
-                <Route path="/packages/q/:query?" element={<SearchPackages/>}/>
-                <Route path="/snippets/q/:query?" element={<SearchSnippets/>}/>
+                <Route path="/search/:query?" element={<SearchPackages/>}/>
+                {/*<Route path="/snippets/q/:query?" element={<SearchSnippets/>}/>*/}
                 <Route path="/snippets" element={<Snippets/>}/>
                 <Route path="/publish-snippet" element={
                     <CreateSnippet/>

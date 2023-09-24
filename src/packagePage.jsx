@@ -154,6 +154,7 @@ export default function PackagePage() {
                 document.getElementById("full-screen").style.opacity = "1"
                 document.getElementById("full-screen-img").style.scale = "1"
             }}></div>
+            {/*<div className="banner-blur"></div>*/}
             <h2 className="package-title">{pkg.name}</h2>
             <h3 className="package-author">by <Link className="package-author-link"
                                                     to={"/users/" + fancy_name_to_id(pkg.owner_username)}>{pkg.owner_username}</Link>

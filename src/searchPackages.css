@@ -18,26 +18,26 @@
 }
 
 .search-group button {
-    display: inline-block;
     position: relative;
-    border-radius: 4px;
+    border-radius: 14px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     background: rgba(255, 255, 255, 0.10);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
-    padding: 10px 20px;
+    padding: 10px 125px;
     line-height: 16px;
     vertical-align: bottom;
-    margin: 0 0 0 5px;
+    margin: 0 0 0 0px;
     transition: 0.2s;
     cursor: pointer;
+    color: white;
+    font-family: "JetBrains Mono", monospace;
 }
-
 .search-group button:hover {
     background: rgba(255, 255, 255, 0.15);
 }
 
 .search-input {
-    display: inline-block;
+    display: block;
     position: relative;
     padding-left: 15px;
     margin: 0;
@@ -57,14 +57,71 @@
     display: none;
 }
 
+
+.search-filters {
+    position: relative;
+    border-radius: 20px !important;
+    height: 35px;
+    color: rgb(175, 175, 175) !important;
+    font-family: "JetBrains Mono", monospace;
+    transition: 0.4s !important;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.10);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+    padding: 10px 31px !important;
+    line-height: 16px;
+    vertical-align: bottom;
+    display: inline-block;
+    margin: 0 0 0 5px;
+    cursor: pointer;
+    margin-bottom: 15px !important;
+    margin-top: -17px !important;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.search-filters:first-of-type {
+    margin-right: 10px !important;
+}
+
+.search-filters-option {
+    transition: 0.3s;
+}
+
+.search-filters svg {
+    scale: 0.7;
+    position: relative;
+    margin: 0;
+    top: -5px;
+    transition: 0.2s;
+}
+
+.search-filters:hover {
+    color: white;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .search-filters-type:hover {
+        background: rgba(255, 255, 255, 0.10) !important;
+    }
+
+    .search-filters-type-hover:hover {
+        color: white !important;
+    }
+
+    .search-filters-option:hover {
+        color: white !important;
+    }
+}
+
 @media screen and (max-width: 490px) {
     .search-title {
         font-size: 18.367vw;
     }
 }
 
-@media screen and (max-width: 430px) {
-    .search-group button {
-        display: none;
-    }
-}
+/*@media screen and (max-width: 430px) {*/
+/*    .search-group button {*/
+/*        display: none;*/
+/*    }*/
+/*}*/

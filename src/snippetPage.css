@@ -1,5 +1,6 @@
 .snippet-title {
-    font-family: 'JetBrains Mono', monospace;
+    /*font-family: 'JetBrains Mono', monospace;*/
+    font-family: Inter, sans-serif;
 }
 
 .code-screenshots {
