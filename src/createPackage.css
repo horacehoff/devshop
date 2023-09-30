@@ -40,8 +40,17 @@
     left: 0 !important;
     width: 153.2% !important;
     margin-left: 0 !important;
+    margin-bottom: 0 !important;
     padding: 0 !important;
     text-align: center !important;
+    font-size: 7vw;
+}
+
+@media screen and (max-width: 800px) {
+    .about-title {
+        font-size: 10vw;
+        margin-bottom: revert !important;
+    }
 }
 
 @media screen and (max-width: 1660px) {
