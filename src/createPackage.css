@@ -28,6 +28,7 @@
     position: fixed;
     top: calc(50% - 75px);
     right: 4%;
+    width: fit-content;
 }
 
 .about-title-card {
