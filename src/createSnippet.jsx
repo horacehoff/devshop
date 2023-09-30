@@ -231,8 +231,8 @@ export default function CreateSnippet() {
                                 document.getElementById("gallery-upload").innerHTML = "✅ UPLOAD IMAGES(4)"
                             }
                         }} required accept=".png,.jpeg,.webp, image/jpeg, image/png"/>
-                        <br/><br/>
-                        <p className="create-package-interest-data">CATEGORIES</p>
+                        <br/><br/><br/>
+                        <p className="create-package-interest-data">// CATEGORIES</p>
                         <div className="create-package-interest-div">
                             {
                                 interests_data.map((interest, index) => {
