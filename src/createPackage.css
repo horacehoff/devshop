@@ -296,7 +296,7 @@
 }
 
 @media screen and (max-width: 400px) {
-    .upload-section {
+    .upload-section:not(.snippet-upload-section) {
         margin-top: -10px;
         white-space: normal;
         line-height: 40px;

@@ -167,11 +167,24 @@ export default function CreateSnippet() {
                     <h1 className="about-title">PUBLISH A SNIPPET</h1>
                     <div className="centered">
                         <h2 style={{margin: "0", fontWeight: "400", fontSize: "18px"}}>// GENERAL INFO</h2>
-                        <input type="text" className="name-input" placeholder="NAME" value={name}
+                        <br/>
+                        <label htmlFor="pkg-name" className="name-input-label">NAME</label><br/>
+                        <label htmlFor="pkg-name" className="name-input-label-desc">A good, and preferably short name
+                            for your code snippet</label><br/>
+                        <input type="text" className="proto-input" placeholder="@awesome_name" id="pkg-name"
+                               value={name}
                                onChange={e => setName(e.target.value)}/>
-                        <input type="text" className="desc-input" placeholder="CATCHPHRASE"
+                        <br/><br/>
+                        <label htmlFor="catch-input" className="name-input-label">CATCHPHRASE</label><br/>
+                        <label htmlFor="catch-input" className="name-input-label-desc">A quick, short, and concise
+                            description for your code snippet</label><br/>
+                        <input type="text" className="proto-input" id="catch-input" placeholder="@awesome_catchphrase"
                                style={{marginBottom: "10px"}} value={desc} onChange={e => setDesc(e.target.value)}/>
 
+                        <br/><br/>
+                        <label className="name-input-label">DESCRIPTION</label><br/>
+                        <label className="name-input-label-desc">A longer, more precise description for your
+                            code snippet</label><br/>
                         <div className="md-editor-container">
                             <MDEditor
                                 value={longDesc}
@@ -180,16 +193,30 @@ export default function CreateSnippet() {
                                 style={{borderRadius: "4px", border: "none", outline: "none"}}
                             />
                         </div>
-                        <textarea className="code-editor" placeholder="⚠️ Place your final code here ⚠️" value={code}
+                        <br/>
+                        <label className="name-input-label">SNIPPET CODE</label><br/>
+                        <label className="name-input-label-desc">The code of your code snippet, this is the one that
+                            will be downloaded by other users</label><br/>
+                        <textarea className="code-editor" placeholder="⚠️ FINAL SNIPPET CODE HERE ⚠️" value={code}
                                   onChange={e => setCode(e.target.value)}></textarea>
-                        <div className="upload-section">
+
+                        <br/>
+                        <label className="name-input-label">IMAGES</label><br/>
+                        <label className="name-input-label-desc">Upload the gallery images for your code snippet</label><br/>
+                        <div className="upload-section snippet-upload-section">
                             <label htmlFor="img-file" className="file-input" id="gallery-upload"><BiCloudUpload
                                 className="file-input-icon"></BiCloudUpload>UPLOAD IMAGES(4)</label>
                             <br/>
-
                         </div>
-                        <input type="text" className="desc-input" placeholder="CODE VERSION"
-                               style={{marginTop: "20px", marginBottom: "30px", fontSize: "20px"}} value={version}
+
+
+                        <br/><br/>
+                        <label className="name-input-label" htmlFor="snippet-version">BASE VERSION</label><br/>
+                        <label className="name-input-label-desc" htmlFor="snippet-version">The base version of your code
+                            snippet
+                            (e.g. 1.0, ALPHA, 1.0.0A)</label><br/>
+                        <input type="text" className="proto-input" id="snippet-version" placeholder="@base_code_version"
+                               style={{marginTop: "0px"}} value={version}
                                onChange={e => setVersion(e.target.value)}/>
 
 

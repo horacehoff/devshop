@@ -19,9 +19,9 @@
     margin-bottom: 20px;
 }
 
-@media screen and (max-width: 650px) {
-    .code-editor {
-        width: calc(100% - 15px);
-        margin-left: -15px;
-    }
-}
+/*@media screen and (max-width: 650px) {*/
+/*    .code-editor {*/
+/*        width: calc(100% - 15px);*/
+/*        margin-left: -15px;*/
+/*    }*/
+/*}*/
