@@ -164,7 +164,7 @@ export default function SearchPackages() {
                     } else {
                         search("", true)
                     }
-                }}>SEARCH 🔍
+                }} className="search-btn-group">SEARCH 🔍
                 </button>
             </div>
             <p className="search-failed" id="search-failed">No search results</p>

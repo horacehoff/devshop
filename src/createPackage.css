@@ -88,6 +88,50 @@
 }
 
 
+.proto-input {
+    font-size: 15px !important;
+    font-family: "JetBrains Mono", monospace !important;
+    border: solid 1px #2d2d2d !important;
+    background-color: rgba(24, 24, 24, 0.75) !important;
+    color: white !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 8px !important;
+    /*padding-right: 75px;*/
+    width: 70%;
+    position: relative !important;
+    top: -3px !important;
+}
+
+@media screen and (min-width: 600px) {
+    .proto-input {
+        width: 410px;
+    }
+}
+
+.proto-input:focus {
+    border: solid 1px white !important;
+
+}
+
+.proto-input::placeholder {
+    color: #ababab !important;
+}
+
+.name-input-label {
+    font-size: 20px;
+    margin-left: 5px;
+    font-weight: 700;
+}
+
+.name-input-label-desc {
+    position: relative;
+    top: -5px;
+    font-size: 14px;
+    left: 5px;
+}
+
+
 .name-input {
     font-size: 70px !important;
     font-weight: bold;
@@ -214,7 +258,14 @@
 
 .md-editor-container {
     margin-bottom: 15px;
+    padding-left: 0px;
     padding-right: 10px;
+}
+
+@media screen and (min-width: 800px) {
+    .md-editor-container {
+        width: 750px;
+    }
 }
 
 .file-input-icon {
@@ -228,10 +279,19 @@
     white-space: nowrap;
     height: 33px;
     padding-top: 7px;
-    margin-top: -10px;
+    margin-top: -5px;
     margin-bottom: -10px;
     -ms-overflow-style: none;
     scrollbar-width: none;
+}
+
+@media screen and (max-width: 400px) {
+    .upload-section {
+        margin-top: -10px;
+        white-space: normal;
+        line-height: 40px;
+        height: 80px;
+    }
 }
 
 .upload-section::-webkit-scrollbar {
@@ -295,12 +355,12 @@
 
 
 @media screen and (max-width: 650px) {
-    .md-editor-container {
-        position: relative;
-        padding-right: 0;
-        margin-left: -15px;
-        width: calc(100vw);
-    }
+    /*.md-editor-container {*/
+    /*    position: relative;*/
+    /*    padding-right: 0;*/
+    /*    margin-left: -15px;*/
+    /*    width: calc(100vw);*/
+    /*}*/
 
     .publish-btn {
         margin-left: 50%;
@@ -309,12 +369,12 @@
 }
 
 @media screen and (max-width: 650px) and (min-width: 580px) {
-    .upload-section {
-        position: relative;
-        left: 50%;
-        transform: translateX(-51.5%);
-        width: fit-content;
-    }
+    /*.upload-section {*/
+    /*    position: relative;*/
+    /*    left: 50%;*/
+    /*    transform: translateX(-51.5%);*/
+    /*    width: fit-content;*/
+    /*}*/
 }
 
 @media screen and (max-width: 565px) {

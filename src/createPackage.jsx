@@ -186,11 +186,24 @@ export default function CreatePackage() {
                     <h1 className="about-title">PUBLISH A PACKAGE</h1>
                     <div className="centered">
                         <h2 style={{margin: "0", fontWeight: "400", fontSize: "18px"}}>// GENERAL INFO</h2>
-                        <input type="text" className="name-input" placeholder="NAME" value={name}
+                        <br/>
+                        <label htmlFor="name-input" className="name-input-label">NAME</label><br/>
+                        <label htmlFor="name-input" className="name-input-label-desc">A good, and preferably short name
+                            for your package</label><br/>
+                        <input type="text" className="proto-input" id="name-input" placeholder="@awesome_name"
+                               value={name}
                                onChange={e => setName(e.target.value)}/>
-                        <input type="text" className="desc-input" placeholder="CATCHPHRASE"
+                        <br/><br/>
+                        <label htmlFor="catch-input" className="name-input-label">CATCHPHRASE</label><br/>
+                        <label htmlFor="catch-input" className="name-input-label-desc">A quick, short, and concise
+                            description for your package</label><br/>
+                        <input type="text" className="proto-input" id="catch-input" placeholder="@awesome_catchphrase"
                                style={{marginBottom: "10px"}} value={desc} onChange={e => setDesc(e.target.value)}/>
 
+                        <br/><br/>
+                        <label className="name-input-label">DESCRIPTION</label><br/>
+                        <label className="name-input-label-desc">A longer, more precise description for your
+                            package</label><br/>
                         <div className="md-editor-container">
                             <MDEditor
                                 value={longDesc}
@@ -200,7 +213,9 @@ export default function CreatePackage() {
                             />
                         </div>
 
-
+                        <br/>
+                        <label className="name-input-label">UPLOADS</label><br/>
+                        <label className="name-input-label-desc">Upload the needed files for your package</label><br/>
                         <input type="file" id="banner-file" style={{display: "none"}} onChange={(event) => {
                             setBanner(event.target.files[0])
                             setBannerURL(URL.createObjectURL(event.target.files[0]))
@@ -215,11 +230,15 @@ export default function CreatePackage() {
                                 className="file-input-icon"></BiCloudUpload>UPLOAD IMAGES(4)</label>
                             <br/>
                         </div>
-                        <input type="text" className="desc-input" placeholder="PACKAGE VERSION"
-                               style={{marginTop: "20px", marginBottom: "30px", fontSize: "20px"}} value={version}
+                        <br/><br/>
+                        <label className="name-input-label" htmlFor="pkg-version">BASE VERSION</label><br/>
+                        <label className="name-input-label-desc" htmlFor="pkg-version">The base version of your package
+                            (e.g. 1.0, ALPHA, 1.0.0A)</label><br/>
+                        <input type="text" className="proto-input" id="pkg-version" placeholder="@base_pkg_version"
+                               style={{marginTop: "0px"}} value={version}
                                onChange={e => setVersion(e.target.value)}/>
                         {/*<h2 style={{margin: "0", marginTop: "40px", marginBottom: "0"}}>// PACKAGE</h2>*/}
-
+                        <br/>
                         <input type="file" id="file" style={{display: "none"}} onChange={(event) => {
                             setPkgUpload(event.target.files[0])
                             console.log("pkg")

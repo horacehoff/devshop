@@ -32,6 +32,21 @@
     color: white;
     font-family: "JetBrains Mono", monospace;
 }
+
+.search-btn-group {
+    background-color: #000000 !important;
+    color: white !important;
+    border: solid 1px rgba(255, 255, 255, 0.15) !important;
+    transition: 0.3s !important;
+}
+
+.search-btn-group:hover {
+    border: solid 1px rgba(255, 255, 255, 0.6) !important;
+}
+
+.search-btn-group:active {
+    border: solid 1px rgba(255, 255, 255, 1) !important;
+}
 .search-group button:hover {
     background: rgba(255, 255, 255, 0.15);
 }
