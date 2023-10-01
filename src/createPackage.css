@@ -43,7 +43,7 @@
     margin-bottom: 0 !important;
     padding: 0 !important;
     text-align: center !important;
-    font-size: 7vw;
+    font-size: 7vh;
 }
 
 @media screen and (max-width: 800px) {
@@ -387,7 +387,7 @@
     /*}*/
 }
 
-@media screen and (max-width: 565px) and (orientation: portrait) {
+@media screen and (max-width: 565px) {
     .split-two-card {
         display: none;
     }
