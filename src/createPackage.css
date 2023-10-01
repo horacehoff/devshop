@@ -43,7 +43,13 @@
     margin-bottom: 0 !important;
     padding: 0 !important;
     text-align: center !important;
-    font-size: 7vh;
+    font-size: 7vw;
+}
+
+@media screen and (orientation: landscape) and (max-height: 400px) {
+    .about-title {
+        font-size: 60px !important;
+    }
 }
 
 @media screen and (max-width: 800px) {
