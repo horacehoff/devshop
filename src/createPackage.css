@@ -387,7 +387,7 @@
     /*}*/
 }
 
-@media screen and (max-width: 565px) {
+@media screen and (max-width: 565px) and (orientation: portrait) {
     .split-two-card {
         display: none;
     }
