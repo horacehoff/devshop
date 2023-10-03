@@ -117,7 +117,7 @@
     color: white;
 }
 
-@media (hover: hover) and (pointer: fine) {
+@media all and (hover: hover) and (pointer: fine) {
     .search-filters-type:hover {
         background: rgba(255, 255, 255, 0.10) !important;
     }
@@ -127,6 +127,16 @@
     }
 
     .search-filters-option:hover {
+        color: white !important;
+    }
+}
+
+@media not all and (hover: hover) and (pointer: fine) {
+    .search-filters-type-hover {
+        color: white !important;
+    }
+
+    .search-filters-option {
         color: white !important;
     }
 }
