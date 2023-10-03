@@ -133,7 +133,7 @@ export default function SearchPackages() {
                         <span id="search-filters-pkg-hover">PACKAGES</span>
                     ) : (
                         <span id="search-filters-pkg-hover">SNIPPETS</span>
-                    )}</span><br/><br/><span style={{position: "relative", left: "15px"}} id="search-filters-snippets"
+                    )}</span><br/><br/><span style={{position: "relative", left: "13px"}} id="search-filters-snippets"
                                              onClick={() => {
                                                  if (height === "67px") {
                                                      document.getElementById("search-filters-type-icon").style.rotate = "0deg"

@@ -38,6 +38,7 @@
     color: white !important;
     border: solid 1px rgba(255, 255, 255, 0.15) !important;
     transition: 0.3s !important;
+    font-size: 14px;
 }
 
 .search-btn-group:hover {
