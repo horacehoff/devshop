@@ -62,8 +62,8 @@ export default function Snippets() {
                 setTrendingCodeBlockData(prevState => [...prevState, doc.data()]);
             })
             setLastTrendingCodeBlockData(querySnapshot.docs.pop())
-            if (querySnapshot.docs.length < 9) {
-                document.getElementById("trending-load-more").style.display = "none"
+            if (querySnapshot.docs.length === 9) {
+                document.getElementById("trending-load-more").style.display = "block"
             }
         })
         const q1 = query(collection(db, "snippets"), orderBy("created", "desc"), limit(9));
@@ -79,8 +79,8 @@ export default function Snippets() {
                 document.getElementById("empty-txt").style.display = "block"
                 document.getElementById("empty-btn").style.display = "block"
             }
-            if (querySnapshot.docs.length < 9) {
-                document.getElementById("recent-load-more").style.display = "none"
+            if (querySnapshot.docs.length === 9) {
+                document.getElementById("recent-load-more").style.display = "block"
             }
         })
         if (user_data && user_data.interests.length > 0) {
@@ -92,8 +92,8 @@ export default function Snippets() {
                     document.getElementById("for-you-section").style.display = "block"
                 })
                 setLastSimilarCodeBlockData(querySnapshot.docs.pop())
-                if (querySnapshot.docs.length < 9) {
-                    document.getElementById("similar-load-more").style.display = "none"
+                if (querySnapshot.docs.length === 9) {
+                    document.getElementById("similar-load-more").style.display = "block"
                 }
             })
         }
@@ -141,8 +141,9 @@ export default function Snippets() {
                             </Link>
                         </li>
                     ))}
-                    <li className="packages-card-list-child" id="similar-load-more">
-                        <div className="pkg-load-more" style={{position: "relative", top: "13px"}} onClick={() => {
+                    <li className="packages-card-list-child" id="similar-load-more" style={{display: "none"}}>
+                        <div className="pkg-load-more" style={{position: "relative", top: "13px", display: "none"}}
+                             onClick={() => {
                             if (lastSimilarCodeBlockData) {
                                 const q2 = query(collection(db, "snippets"), where("interests", "array-contains-any", Array.from(user_data.interests)), limit(9), startAt(lastSimilarCodeBlockData));
                                 getDocs(q2).then((querySnapshot) => {
@@ -152,8 +153,8 @@ export default function Snippets() {
                                         document.getElementById("for-you-section").style.display = "block"
                                     })
                                     setLastSimilarCodeBlockData(querySnapshot.docs.pop())
-                                    if (querySnapshot.docs.length < 9) {
-                                        document.getElementById("similar-load-more").style.display = "none"
+                                    if (querySnapshot.docs.length === 9) {
+                                        document.getElementById("similar-load-more").style.display = "block"
                                     }
                                 })
                             }
@@ -181,8 +182,9 @@ export default function Snippets() {
                         </Link>
                     </li>
                 ))}
-                <li className="packages-card-list-child" id="trending-load-more">
-                    <div className="pkg-load-more" style={{position: "relative", top: "13px"}} onClick={() => {
+                <li className="packages-card-list-child" id="trending-load-more" style={{display: "none"}}>
+                    <div className="pkg-load-more" style={{position: "relative", top: "13px", display: "none"}}
+                         onClick={() => {
                         if (lastSimilarCodeBlockData) {
                             const q = query(collection(db, "snippets"), orderBy("downloads", "desc"), limit(9), startAt(lastTrendingCodeBlockData));
                             getDocs(q).then((querySnapshot) => {
@@ -190,8 +192,8 @@ export default function Snippets() {
                                     setTrendingCodeBlockData(prevState => [...prevState, doc.data()]);
                                 })
                                 setLastTrendingCodeBlockData(querySnapshot.docs.pop())
-                                if (querySnapshot.docs.length < 9) {
-                                    document.getElementById("trending-load-more").style.display = "none"
+                                if (querySnapshot.docs.length === 9) {
+                                    document.getElementById("trending-load-more").style.display = "block"
                                 }
                             })
                         }
@@ -215,7 +217,7 @@ export default function Snippets() {
                         </Link>
                     </li>
                 ))}
-                <li className="packages-card-list-child" id="recent-load-more">
+                <li className="packages-card-list-child" id="recent-load-more" style={{display: "none"}}>
                     <div className="pkg-load-more" style={{position: "relative", top: "13px"}} onClick={() => {
                         if (lastSimilarCodeBlockData) {
                             const q1 = query(collection(db, "snippets"), orderBy("created", "desc"), limit(9), startAt(lastLastCodeBlockData));
@@ -231,8 +233,8 @@ export default function Snippets() {
                                     document.getElementById("empty-txt").style.display = "block"
                                     document.getElementById("empty-btn").style.display = "block"
                                 }
-                                if (querySnapshot.docs.length < 9) {
-                                    document.getElementById("recent-load-more").style.display = "none"
+                                if (querySnapshot.docs.length === 9) {
+                                    document.getElementById("recent-load-more").style.display = "block"
                                 }
                             })
                         }

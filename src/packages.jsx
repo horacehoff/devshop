@@ -63,8 +63,8 @@ export default function Packages() {
                 setTrendingPackageData(prevState => [...prevState, doc.data()]);
             })
             setLastTrendingPackageData(querySnapshot.docs.pop())
-            if (querySnapshot.docs.length < 9) {
-                document.getElementById("trending-load-more").style.display = "none"
+            if (querySnapshot.docs.length === 9) {
+                document.getElementById("trending-load-more").style.display = "block"
             }
         })
         const q1 = query(collection(db, "packages"), orderBy("created", "desc"), limit(9));
@@ -80,8 +80,8 @@ export default function Packages() {
                 document.getElementById("empty-txt").style.display = "block"
                 document.getElementById("empty-btn").style.display = "block"
             }
-            if (querySnapshot.docs.length < 9) {
-                document.getElementById("recent-load-more").style.display = "none"
+            if (querySnapshot.docs.length === 9) {
+                document.getElementById("recent-load-more").style.display = "block"
             }
         })
         if (user_data && user_data.interests.length > 0) {
@@ -93,8 +93,8 @@ export default function Packages() {
                     document.getElementById("for-you-section").style.display = "block"
                 })
                 setLastSimilarPackagesData(querySnapshot.docs.pop())
-                if (querySnapshot.docs.length < 9) {
-                    document.getElementById("similar-load-more").style.display = "none"
+                if (querySnapshot.docs.length === 9) {
+                    document.getElementById("similar-load-more").style.display = "block"
                 }
             })
         }
@@ -145,7 +145,7 @@ export default function Packages() {
                             </Link>
                         </li>
                     ))}
-                    <li className="packages-card-list-child" id="similar-load-more">
+                    <li className="packages-card-list-child" id="similar-load-more" style={{display: "none"}}>
                         <div className="pkg-load-more" onClick={() => {
                             if (lastSimilarPackagesData) {
                                 const q2 = query(collection(db, "packages"), where("interests", "array-contains-any", Array.from(user_data.interests)), limit(9), startAt(lastSimilarPackagesData));
@@ -156,6 +156,9 @@ export default function Packages() {
                                         document.getElementById("for-you-section").style.display = "block"
                                     })
                                     setLastSimilarPackagesData(querySnapshot.docs.pop())
+                                    if (querySnapshot.docs.length === 9) {
+                                        document.getElementById("similar-load-more").style.display = "block"
+                                    }
                                 })
                             }
                         }}>
@@ -183,7 +186,7 @@ export default function Packages() {
                         </Link>
                     </li>
                 ))}
-                <li className="packages-card-list-child" id="trending-load-more">
+                <li className="packages-card-list-child" id="trending-load-more" style={{display: "none"}}>
                     <div className="pkg-load-more" onClick={() => {
                         if (lastTrendingPackageData) {
                             console.log("eh yep")
@@ -193,6 +196,9 @@ export default function Packages() {
                                     setTrendingPackageData(prevState => [...prevState, doc.data()]);
                                 })
                                 setLastTrendingPackageData(querySnapshot.docs.pop())
+                                if (querySnapshot.docs.length === 9) {
+                                    document.getElementById("trending-load-more").style.display = "block"
+                                }
                             })
                         }
                     }}>
@@ -217,7 +223,7 @@ export default function Packages() {
                         </Link>
                     </li>
                 ))}
-                <li className="packages-card-list-child" id="recent-load-more">
+                <li className="packages-card-list-child" id="recent-load-more" style={{display: "none"}}>
                     <div className="pkg-load-more" onClick={() => {
                         if (lastLastPackageData) {
                             const q1 = query(collection(db, "packages"), orderBy("created", "desc"), limit(9), startAt(lastLastPackageData));
@@ -232,6 +238,9 @@ export default function Packages() {
                                     document.getElementById("category-title").style.display = "none"
                                     document.getElementById("empty-txt").style.display = "block"
                                     document.getElementById("empty-btn").style.display = "block"
+                                }
+                                if (querySnapshot.docs.length === 9) {
+                                    document.getElementById("recent-load-more").style.display = "block"
                                 }
                             })
                         }
