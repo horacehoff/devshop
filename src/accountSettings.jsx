@@ -209,103 +209,107 @@ export default function AccountSettings() {
         <>
             <h1 className="title">ACCOUNT</h1>
             <h2 className="subtitle">MODIFY YOUR ACCOUNT SETTINGS BELOW</h2>
-            <div id="acc-settings">
-                <h4 className="section-title">INTERESTS</h4>
-                <p className="section-subtitle">What do you like ?</p>
-                <div className="interest-center">
-                    {
-                        interests_data.map((interest, index) => {
-                            return (
-                                <div className="interest" id={"interest" + index} key={index} onClick={() => {
-                                    handleInterestClick(index);
-                                }}>
-                                    {interest}
-                                </div>
-                            )
-                        })
-                    }
-                    <br/>
-                    <button id="interests-save-btn" className="primary save-btn"
-                            onClick={async () => {
-                                let final_interests = [];
-                                let interests = document.getElementsByClassName("interest");
-                                for (let i = 0; i < interests.length; i++) {
-                                    if (interests[i].classList.contains("interest-toggled")) {
-                                        final_interests.push(interests[i].innerHTML);
-                                    }
-                                }
-                                await updateInterests(final_interests).then(() => {
-                                    document.getElementById("interests-save-btn").innerHTML = "SAVED ✅";
-                                    // wait 1 second
-                                    setTimeout(() => {
-                                        document.getElementById("interests-save-btn").innerHTML = "SAVE";
-                                        window.location.reload();
-                                    }, 1000);
-                                })
-                            }}>SAVE
-                    </button>
-                </div>
-
-                <br/><br/>
-                <h4 className="section-title">PROFILE</h4>
-                <div className="avatar-section">
-                    <input type="file" id="img-file" style={{display: "none"}} onChange={(event) => {
-                        setPfpUpload(event.target.files[0])
-                        document.getElementById("profile-picture").style.backgroundImage = "url('" + URL.createObjectURL(event.target.files[0]) + "')";
-                    }} required accept="image/png, image/jpeg, image/jpg, image/webp"/>
-                    <label className="profile-picture" id="profile-picture" htmlFor="img-file"/>
-                    <div className="avatar-text">
-                        AVATAR<br/><span className="avatar-size">.PNG/.JPG/.WEBP</span>
-                    </div>
-                    <br/>
-                    <input type="file" id="banner-file" style={{display: "none"}} onChange={(event) => {
-                        setBannerUpload(event.target.files[0])
-                        document.getElementById("banner-img").style.backgroundImage = "url('" + URL.createObjectURL(event.target.files[0]) + "')";
-                    }} required accept="image/png, image/jpeg, image/jpg, image/webp"/>
-                    <label className="profile-picture" style={{width: "100px", borderRadius: "6px"}} id="banner-img"
-                           htmlFor="banner-file"/>
-                    <div className="avatar-text">
-                        BANNER<br/><span className="avatar-size">.PNG/.JPG/.WEBP</span>
-                    </div>
-                    <br/>
-                    <div className="section-inputs">
-                        <p className="profile-error-txt" id="profile-error-txt">// USERNAME ALREADY EXISTS</p>
-                        <p className="section-input-name">USERNAME</p>
-                        <input type="text" className="txt-input section-input" placeholder={baseUserName}
-                               value={NewUserName} onChange={e => setNewUserName(e.target.value)}/>
+            <div id="acc-settings" className="acc-settings">
+                <div className="acc-side-one">
+                    <h4 className="section-title">INTERESTS</h4>
+                    <p className="section-subtitle">What do you like ?</p>
+                    <div className="interest-center">
+                        {
+                            interests_data.map((interest, index) => {
+                                return (
+                                    <div className="interest" id={"interest" + index} key={index} onClick={() => {
+                                        handleInterestClick(index);
+                                    }}>
+                                        {interest}
+                                    </div>
+                                )
+                            })
+                        }
                         <br/>
-                        <p className="section-input-name" data-name-content="bio">BIO</p>
-                        <input type="text" className="txt-input section-input"
-                               placeholder="Hi, I'm new to DEVSHOP!"
-                               value={NewBio} onChange={e => setNewBio(e.target.value)}/>
-                        <br/>
-                        <p className="section-input-name" data-name-content="github">GITHUB USERNAME</p>
-                        <input type="text" className="txt-input section-input"
-                               placeholder="your-github-username"
-                               value={NewGithub} onChange={e => setNewGithub(e.target.value)}/>
-                        <br/>
-                        {/*<p className="profile-error-txt" id="profile-error-txt">// USERNAME ALREADY EXISTS</p>*/}
-                        <button id="profile-save-btn" className="primary save-btn"
+                        <button id="interests-save-btn" className="primary save-btn"
                                 onClick={async () => {
-                                    try {
-                                        await updateProfile().then(() => {
-                                            document.getElementById("profile-save-btn").innerHTML = "SAVED ✅";
-                                            // wait 1 second
-                                            setTimeout(() => {
-                                                document.getElementById("profile-save-btn").innerHTML = "SAVE";
-                                                navigate("/users/" + fancy_name_to_id(user_data.username))
-                                            }, 1000);
-                                        })
-                                    } catch (error) {
-                                        setTimeout(() => {
-                                            document.getElementById("profile-error-txt").style.display = "none";
-                                        }, 5000);
+                                    let final_interests = [];
+                                    let interests = document.getElementsByClassName("interest");
+                                    for (let i = 0; i < interests.length; i++) {
+                                        if (interests[i].classList.contains("interest-toggled")) {
+                                            final_interests.push(interests[i].innerHTML);
+                                        }
                                     }
+                                    await updateInterests(final_interests).then(() => {
+                                        document.getElementById("interests-save-btn").innerHTML = "SAVED ✅";
+                                        // wait 1 second
+                                        setTimeout(() => {
+                                            document.getElementById("interests-save-btn").innerHTML = "SAVE";
+                                            window.location.reload();
+                                        }, 1000);
+                                    })
                                 }}>SAVE
                         </button>
                     </div>
+                    <br/><br/>
                 </div>
-                <br/><br/>
+                <div className="acc-side-two">
+                    <h4 className="section-title">PROFILE</h4>
+                    <div className="avatar-section">
+                        <input type="file" id="img-file" style={{display: "none"}} onChange={(event) => {
+                            setPfpUpload(event.target.files[0])
+                            document.getElementById("profile-picture").style.backgroundImage = "url('" + URL.createObjectURL(event.target.files[0]) + "')";
+                        }} required accept="image/png, image/jpeg, image/jpg, image/webp"/>
+                        <label className="profile-picture" id="profile-picture" htmlFor="img-file"/>
+                        <div className="avatar-text">
+                            AVATAR<br/><span className="avatar-size">.PNG/.JPG/.WEBP</span>
+                        </div>
+                        <br/>
+                        <input type="file" id="banner-file" style={{display: "none"}} onChange={(event) => {
+                            setBannerUpload(event.target.files[0])
+                            document.getElementById("banner-img").style.backgroundImage = "url('" + URL.createObjectURL(event.target.files[0]) + "')";
+                        }} required accept="image/png, image/jpeg, image/jpg, image/webp"/>
+                        <label className="profile-picture" style={{width: "100px", borderRadius: "6px"}} id="banner-img"
+                               htmlFor="banner-file"/>
+                        <div className="avatar-text">
+                            BANNER<br/><span className="avatar-size">.PNG/.JPG/.WEBP</span>
+                        </div>
+                        <br/>
+                        <div className="section-inputs">
+                            <p className="profile-error-txt" id="profile-error-txt">// USERNAME ALREADY EXISTS</p>
+                            <p className="section-input-name">USERNAME</p>
+                            <input type="text" className="txt-input section-input" placeholder={baseUserName}
+                                   value={NewUserName} onChange={e => setNewUserName(e.target.value)}/>
+                            <br/>
+                            <p className="section-input-name" data-name-content="bio">BIO</p>
+                            <input type="text" className="txt-input section-input"
+                                   placeholder="Hi, I'm new to DEVSHOP!"
+                                   value={NewBio} onChange={e => setNewBio(e.target.value)}/>
+                            <br/>
+                            <p className="section-input-name" data-name-content="github">GITHUB USERNAME</p>
+                            <input type="text" className="txt-input section-input"
+                                   placeholder="your-github-username"
+                                   value={NewGithub} onChange={e => setNewGithub(e.target.value)}/>
+                            <br/>
+                            {/*<p className="profile-error-txt" id="profile-error-txt">// USERNAME ALREADY EXISTS</p>*/}
+                            <button id="profile-save-btn" className="primary save-btn"
+                                    onClick={async () => {
+                                        try {
+                                            await updateProfile().then(() => {
+                                                document.getElementById("profile-save-btn").innerHTML = "SAVED ✅";
+                                                // wait 1 second
+                                                setTimeout(() => {
+                                                    document.getElementById("profile-save-btn").innerHTML = "SAVE";
+                                                    navigate("/users/" + fancy_name_to_id(user_data.username))
+                                                }, 1000);
+                                            })
+                                        } catch (error) {
+                                            setTimeout(() => {
+                                                document.getElementById("profile-error-txt").style.display = "none";
+                                            }, 5000);
+                                        }
+                                    }}>SAVE
+                            </button>
+                        </div>
+                    </div>
+                    <br/><br/>
+                </div>
+
                 <h4 className="section-title" style={{marginBottom: "-15px"}}>PASSWORD</h4>
                 <div className="avatar-section">
                     <div className="section-inputs">

@@ -137,6 +137,23 @@
     color: #000 !important;
 }
 
+
+@media screen and (min-width: 780px) {
+    .acc-side-one {
+        display: inline-block;
+        width: 325px;
+        margin-right: 70px;
+    }
+
+    .acc-side-two {
+        display: inline-block;
+    }
+
+    .acc-settings {
+        text-align: center;
+    }
+}
+
 @media (hover: hover) {
     .interest:hover {
         background-color: #fff;
