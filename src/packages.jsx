@@ -1,5 +1,5 @@
 import "./packages.css"
-import {collection, getDocs, limit, orderBy, query, where} from "firebase/firestore";
+import {collection, getDocs, limit, orderBy, query, startAt, where} from "firebase/firestore";
 import {Link, useNavigate} from "react-router-dom";
 import PackageCard from "./packageCard.jsx";
 import shortNumber from "short-number";
@@ -48,8 +48,11 @@ export default function Packages() {
 
 
     const [trendingPackageData, setTrendingPackageData] = useState([]);
+    const [lastTrendingPackageData, setLastTrendingPackageData] = useState(null);
     const [lastPackagesData, setLastPackagesData] = useState([]);
+    const [lastLastPackageData, setLastLastPackageData] = useState(null);
     const [similarPackagesData, setSimilarPackagesData] = useState([]);
+    const [lastSimilarPackagesData, setLastSimilarPackagesData] = useState([]);
     useEffect(() => {
         setTrendingPackageData([])
         setLastPackagesData([])
@@ -59,6 +62,10 @@ export default function Packages() {
             querySnapshot.forEach((doc) => {
                 setTrendingPackageData(prevState => [...prevState, doc.data()]);
             })
+            setLastTrendingPackageData(querySnapshot.docs.pop())
+            if (querySnapshot.docs.length < 9) {
+                document.getElementById("trending-load-more").style.display = "none"
+            }
         })
         const q1 = query(collection(db, "packages"), orderBy("created", "desc"), limit(9));
         getDocs(q1).then((querySnapshot) => {
@@ -67,10 +74,14 @@ export default function Packages() {
                 setLastPackagesData(prevState => [...prevState, doc.data()]);
                 run = true
             })
+            setLastLastPackageData(querySnapshot.docs.pop())
             if (!run) {
                 document.getElementById("category-title").style.display = "none"
                 document.getElementById("empty-txt").style.display = "block"
                 document.getElementById("empty-btn").style.display = "block"
+            }
+            if (querySnapshot.docs.length < 9) {
+                document.getElementById("recent-load-more").style.display = "none"
             }
         })
         if (user_data && user_data.interests.length > 0) {
@@ -81,6 +92,10 @@ export default function Packages() {
                     setSimilarPackagesData(prevState => [...prevState, doc.data()]);
                     document.getElementById("for-you-section").style.display = "block"
                 })
+                setLastSimilarPackagesData(querySnapshot.docs.pop())
+                if (querySnapshot.docs.length < 9) {
+                    document.getElementById("similar-load-more").style.display = "none"
+                }
             })
         }
 
@@ -130,6 +145,28 @@ export default function Packages() {
                             </Link>
                         </li>
                     ))}
+                    <li className="packages-card-list-child" id="similar-load-more">
+                        <div className="pkg-load-more" onClick={() => {
+                            if (lastSimilarPackagesData) {
+                                const q2 = query(collection(db, "packages"), where("interests", "array-contains-any", Array.from(user_data.interests)), limit(9), startAt(lastSimilarPackagesData));
+                                getDocs(q2).then((querySnapshot) => {
+                                    querySnapshot.forEach((doc) => {
+                                        console.log("fuck yeah")
+                                        setSimilarPackagesData(prevState => [...prevState, doc.data()]);
+                                        document.getElementById("for-you-section").style.display = "block"
+                                    })
+                                    setLastSimilarPackagesData(querySnapshot.docs.pop())
+                                })
+                            }
+                        }}>
+                            <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 5V3m0 18v-2m-7-7H3m18 0h-2m-.5-6.5L17 7M7 17l-1.5 1.5M17 17l1.5 1.5M7 7L5.5 5.5"
+                                    stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
+                            </svg>
+                            <p>LOAD MORE</p>
+                        </div>
+                    </li>
                 </ul>
             </div>
             <h2 className="category-title">// MOST DOWNLOADED</h2>
@@ -146,6 +183,27 @@ export default function Packages() {
                         </Link>
                     </li>
                 ))}
+                <li className="packages-card-list-child" id="trending-load-more">
+                    <div className="pkg-load-more" onClick={() => {
+                        if (lastTrendingPackageData) {
+                            console.log("eh yep")
+                            const q = query(collection(db, "packages"), orderBy("downloads", "desc"), limit(9), startAt(lastTrendingPackageData));
+                            getDocs(q).then((querySnapshot) => {
+                                querySnapshot.forEach((doc) => {
+                                    setTrendingPackageData(prevState => [...prevState, doc.data()]);
+                                })
+                                setLastTrendingPackageData(querySnapshot.docs.pop())
+                            })
+                        }
+                    }}>
+                        <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 5V3m0 18v-2m-7-7H3m18 0h-2m-.5-6.5L17 7M7 17l-1.5 1.5M17 17l1.5 1.5M7 7L5.5 5.5"
+                                stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
+                        </svg>
+                        <p>LOAD MORE</p>
+                    </div>
+                </li>
             </ul>
             <h2 className="category-title" id="category-title">// RECENTLY CREATED</h2>
             <ul className="packages-card-list" id="packages-card-list">
@@ -159,6 +217,33 @@ export default function Packages() {
                         </Link>
                     </li>
                 ))}
+                <li className="packages-card-list-child" id="recent-load-more">
+                    <div className="pkg-load-more" onClick={() => {
+                        if (lastLastPackageData) {
+                            const q1 = query(collection(db, "packages"), orderBy("created", "desc"), limit(9), startAt(lastLastPackageData));
+                            getDocs(q1).then((querySnapshot) => {
+                                let run = false
+                                querySnapshot.forEach((doc) => {
+                                    setLastPackagesData(prevState => [...prevState, doc.data()]);
+                                    run = true
+                                })
+                                setLastLastPackageData(querySnapshot.docs.pop())
+                                if (!run) {
+                                    document.getElementById("category-title").style.display = "none"
+                                    document.getElementById("empty-txt").style.display = "block"
+                                    document.getElementById("empty-btn").style.display = "block"
+                                }
+                            })
+                        }
+                    }}>
+                        <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 5V3m0 18v-2m-7-7H3m18 0h-2m-.5-6.5L17 7M7 17l-1.5 1.5M17 17l1.5 1.5M7 7L5.5 5.5"
+                                stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
+                        </svg>
+                        <p>LOAD MORE</p>
+                    </div>
+                </li>
             </ul>
         </>
     )

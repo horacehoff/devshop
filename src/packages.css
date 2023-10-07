@@ -85,7 +85,50 @@
     transition: 0.2s;
 }
 
+@keyframes svg-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(90deg);
+    }
+}
+
+.pkg-load-more {
+    width: 125px;
+    height: 225px;
+    background-color: #151515;
+    border-radius: 8px;
+    filter: opacity(1);
+    transition: 0.25s;
+    cursor: pointer;
+    display: block;
+    bottom: 0;
+}
+
+.pkg-load-more svg {
+    width: 50px;
+    height: 50px;
+    scale: 2;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+}
+
+.pkg-load-more p {
+    position: absolute;
+    top: 50%;
+    left: 15%;
+}
+
+.pkg-load-more:hover {
+    filter: opacity(1);
+}
+
 @media (hover: hover) and (pointer: fine) {
+    .pkg-load-more {
+        filter: opacity(0.25);
+    }
     .search-btn:hover {
         background: rgba(255, 255, 255, 0.15);
     }
