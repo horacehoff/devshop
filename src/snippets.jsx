@@ -3,7 +3,7 @@ import "./snippets.css"
 import SnippetCard from "./snippetCard.jsx";
 import {Link, useNavigate} from "react-router-dom";
 import {IoMdSearch} from "react-icons/io";
-import {collection, getDocs, limit, orderBy, query, where} from "firebase/firestore";
+import {collection, getDocs, limit, orderBy, query, startAt, where} from "firebase/firestore";
 import {useEffect, useState} from "react";
 import {db, user_data} from "./firebase.js";
 import {Helmet} from "react-helmet";
@@ -47,8 +47,11 @@ export default function Snippets() {
 
 
     const [trendingCodeBlockData, setTrendingCodeBlockData] = useState([]);
+    const [lastTrendingCodeBlockData, setLastTrendingCodeBlockData] = useState(null);
     const [lastCodeBlockData, setLastCodeBlockData] = useState([]);
+    const [lastLastCodeBlockData, setLastLastCodeBlockData] = useState([]);
     const [similarCodeBlockData, setSimilarCodeBlockData] = useState([]);
+    const [lastSimilarCodeBlockData, setLastSimilarCodeBlockData] = useState([]);
     useEffect(() => {
         setTrendingCodeBlockData([])
         setLastCodeBlockData([])
@@ -58,6 +61,10 @@ export default function Snippets() {
             querySnapshot.forEach((doc) => {
                 setTrendingCodeBlockData(prevState => [...prevState, doc.data()]);
             })
+            setLastTrendingCodeBlockData(querySnapshot.docs.pop())
+            if (querySnapshot.docs.length < 9) {
+                document.getElementById("trending-load-more").style.display = "none"
+            }
         })
         const q1 = query(collection(db, "snippets"), orderBy("created", "desc"), limit(9));
         getDocs(q1).then((querySnapshot) => {
@@ -66,10 +73,14 @@ export default function Snippets() {
                 setLastCodeBlockData(prevState => [...prevState, doc.data()]);
                 run = true
             })
+            setLastLastCodeBlockData(querySnapshot.docs.pop())
             if (!run) {
                 document.getElementById("category-title").style.display = "none"
                 document.getElementById("empty-txt").style.display = "block"
                 document.getElementById("empty-btn").style.display = "block"
+            }
+            if (querySnapshot.docs.length < 9) {
+                document.getElementById("recent-load-more").style.display = "none"
             }
         })
         if (user_data && user_data.interests.length > 0) {
@@ -80,6 +91,10 @@ export default function Snippets() {
                     setSimilarCodeBlockData(prevState => [...prevState, doc.data()]);
                     document.getElementById("for-you-section").style.display = "block"
                 })
+                setLastSimilarCodeBlockData(querySnapshot.docs.pop())
+                if (querySnapshot.docs.length < 9) {
+                    document.getElementById("similar-load-more").style.display = "none"
+                }
             })
         }
     }, [user_data]);
@@ -126,6 +141,31 @@ export default function Snippets() {
                             </Link>
                         </li>
                     ))}
+                    <li className="packages-card-list-child" id="similar-load-more">
+                        <div className="pkg-load-more" style={{position: "relative", top: "13px"}} onClick={() => {
+                            if (lastSimilarCodeBlockData) {
+                                const q2 = query(collection(db, "snippets"), where("interests", "array-contains-any", Array.from(user_data.interests)), limit(9), startAt(lastSimilarCodeBlockData));
+                                getDocs(q2).then((querySnapshot) => {
+                                    querySnapshot.forEach((doc) => {
+                                        console.log("fuck yeah")
+                                        setSimilarCodeBlockData(prevState => [...prevState, doc.data()]);
+                                        document.getElementById("for-you-section").style.display = "block"
+                                    })
+                                    setLastSimilarCodeBlockData(querySnapshot.docs.pop())
+                                    if (querySnapshot.docs.length < 9) {
+                                        document.getElementById("similar-load-more").style.display = "none"
+                                    }
+                                })
+                            }
+                        }}>
+                            <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M12 5V3m0 18v-2m-7-7H3m18 0h-2m-.5-6.5L17 7M7 17l-1.5 1.5M17 17l1.5 1.5M7 7L5.5 5.5"
+                                    stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
+                            </svg>
+                            <p>LOAD MORE</p>
+                        </div>
+                    </li>
                 </ul>
             </div>
             <h2 className="category-title">// CURRENTLY TRENDING</h2>
@@ -141,6 +181,29 @@ export default function Snippets() {
                         </Link>
                     </li>
                 ))}
+                <li className="packages-card-list-child" id="trending-load-more">
+                    <div className="pkg-load-more" style={{position: "relative", top: "13px"}} onClick={() => {
+                        if (lastSimilarCodeBlockData) {
+                            const q = query(collection(db, "snippets"), orderBy("downloads", "desc"), limit(9), startAt(lastTrendingCodeBlockData));
+                            getDocs(q).then((querySnapshot) => {
+                                querySnapshot.forEach((doc) => {
+                                    setTrendingCodeBlockData(prevState => [...prevState, doc.data()]);
+                                })
+                                setLastTrendingCodeBlockData(querySnapshot.docs.pop())
+                                if (querySnapshot.docs.length < 9) {
+                                    document.getElementById("trending-load-more").style.display = "none"
+                                }
+                            })
+                        }
+                    }}>
+                        <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 5V3m0 18v-2m-7-7H3m18 0h-2m-.5-6.5L17 7M7 17l-1.5 1.5M17 17l1.5 1.5M7 7L5.5 5.5"
+                                stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
+                        </svg>
+                        <p>LOAD MORE</p>
+                    </div>
+                </li>
             </ul>
             <h2 className="category-title" id="category-title">// RECENTLY CREATED</h2>
             <ul className="packages-card-list">
@@ -152,6 +215,36 @@ export default function Snippets() {
                         </Link>
                     </li>
                 ))}
+                <li className="packages-card-list-child" id="recent-load-more">
+                    <div className="pkg-load-more" style={{position: "relative", top: "13px"}} onClick={() => {
+                        if (lastSimilarCodeBlockData) {
+                            const q1 = query(collection(db, "snippets"), orderBy("created", "desc"), limit(9), startAt(lastLastCodeBlockData));
+                            getDocs(q1).then((querySnapshot) => {
+                                let run = false
+                                querySnapshot.forEach((doc) => {
+                                    setLastCodeBlockData(prevState => [...prevState, doc.data()]);
+                                    run = true
+                                })
+                                setLastLastCodeBlockData(querySnapshot.docs.pop())
+                                if (!run) {
+                                    document.getElementById("category-title").style.display = "none"
+                                    document.getElementById("empty-txt").style.display = "block"
+                                    document.getElementById("empty-btn").style.display = "block"
+                                }
+                                if (querySnapshot.docs.length < 9) {
+                                    document.getElementById("recent-load-more").style.display = "none"
+                                }
+                            })
+                        }
+                    }}>
+                        <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 5V3m0 18v-2m-7-7H3m18 0h-2m-.5-6.5L17 7M7 17l-1.5 1.5M17 17l1.5 1.5M7 7L5.5 5.5"
+                                stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
+                        </svg>
+                        <p>LOAD MORE</p>
+                    </div>
+                </li>
             </ul>
         </>
     )
