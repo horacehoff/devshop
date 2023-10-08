@@ -96,7 +96,7 @@
     font-size: 15px;
     position: relative;
     top: 7px;
-    -webkit-appearance: initial !important;
+    /*-webkit-appearance: initial !important;*/
 }
 
 .search-parameters-type select:focus {
