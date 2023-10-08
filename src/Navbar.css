@@ -63,13 +63,6 @@
     text-decoration: none;
 }
 
-.nav h4:hover {
-    color: #fff
-}
-
-.nav-link:hover {
-    color: #fff !important;
-}
 
 #nav-title {
     top: 8px;
@@ -157,11 +150,26 @@
 
 .nav-txt-title {
     color: white !important;
+    transition: 0.25s;
 }
 
 
 #profile, #settings, #sign-out {
     z-index: 1000000000;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .nav-txt-title:hover {
+        filter: brightness(0.65);
+    }
+
+    .nav h4:hover {
+        color: #fff
+    }
+
+    .nav-link:hover {
+        color: #fff !important;
+    }
 }
 
 

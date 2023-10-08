@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Code+Pro:wght@600;900&display=swap');
+
 @keyframes blurIn {
     0% {
         filter: blur(10px);
@@ -7,6 +8,7 @@
         filter: blur(0px);
     }
 }
+
 :root {
     --text: #FAEBD7;
     --btn-text: white;
@@ -108,7 +110,6 @@ input[type="text"]::placeholder, input[type="email"]::placeholder, input[type="p
 input[type="text"]::-webkit-input-placeholder, input[type="email"]::-webkit-input-placeholder, input[type="password"]::-webkit-input-placeholder, .feedback-input::-webkit-input-placeholder {
     color: #b4b4b4;
 }
-
 
 
 @media (hover: hover) and (pointer: fine) {

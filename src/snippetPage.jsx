@@ -39,7 +39,6 @@ export default function SnippetPage() {
     }
 
 
-
     onAuthStateChanged(auth, (user) => {
         if (user && snippet !== null) {
             set_uid(user.uid)

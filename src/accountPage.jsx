@@ -73,7 +73,6 @@ export default function AccountPage(props) {
             }
 
 
-
             let pfp_url = "https://source.boringavatars.com/pixel/120/" + usr.username + "?colors=6E00FF,0300FF,000000,FC7600,FFFFFF";
             let banner_url = "https://source.boringavatars.com/marble/850/" + usr.username + "?square"
             if (usr.pfp_path !== "" && usr.pfp_path !== undefined) {
@@ -165,20 +164,20 @@ export default function AccountPage(props) {
                 </button>
                 <button className="user_unfollow_btn search-btn" id="usr_unfollow_btn" style={{cursor: "pointer"}}
                         onClick={async () => {
-                    if (usr.followers.includes(user_data.uid) && user_data.following.includes(usr.uid) && user_data.following.length > 0 && usr.followers.length > 0) {
-                        let new_following = user_data.following;
-                        new_following.splice(new_following.indexOf(usr.uid), 1)
-                        await updateDoc(doc(db, "users", user_data.uid), {
-                            following: new_following
-                        })
-                        let new_followers = usr.followers;
-                        new_followers.splice(new_followers.indexOf(user_data.uid), 1)
-                        await updateDoc(doc(db, "users", usr.uid), {
-                            followers: new_followers
-                        })
-                        window.location.reload()
-                    }
-                }}><BiUserMinus className="user_follow_btn_icon" style={{marginRight: "0"}}/> UNFOLLOW
+                            if (usr.followers.includes(user_data.uid) && user_data.following.includes(usr.uid) && user_data.following.length > 0 && usr.followers.length > 0) {
+                                let new_following = user_data.following;
+                                new_following.splice(new_following.indexOf(usr.uid), 1)
+                                await updateDoc(doc(db, "users", user_data.uid), {
+                                    following: new_following
+                                })
+                                let new_followers = usr.followers;
+                                new_followers.splice(new_followers.indexOf(user_data.uid), 1)
+                                await updateDoc(doc(db, "users", usr.uid), {
+                                    followers: new_followers
+                                })
+                                window.location.reload()
+                            }
+                        }}><BiUserMinus className="user_follow_btn_icon" style={{marginRight: "0"}}/> UNFOLLOW
                 </button>
             </div>
             <p className="user_followers" id="user_followers">405 followers</p>

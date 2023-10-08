@@ -144,21 +144,21 @@ export default function Snippets() {
                     <li className="packages-card-list-child" id="similar-load-more" style={{display: "none"}}>
                         <div className="pkg-load-more" style={{position: "relative", top: "13px", display: "none"}}
                              onClick={() => {
-                            if (lastSimilarCodeBlockData) {
-                                const q2 = query(collection(db, "snippets"), where("interests", "array-contains-any", Array.from(user_data.interests)), limit(9), startAt(lastSimilarCodeBlockData));
-                                getDocs(q2).then((querySnapshot) => {
-                                    querySnapshot.forEach((doc) => {
-                                        console.log("fuck yeah")
-                                        setSimilarCodeBlockData(prevState => [...prevState, doc.data()]);
-                                        document.getElementById("for-you-section").style.display = "block"
-                                    })
-                                    setLastSimilarCodeBlockData(querySnapshot.docs.pop())
-                                    if (querySnapshot.docs.length === 9) {
-                                        document.getElementById("similar-load-more").style.display = "block"
-                                    }
-                                })
-                            }
-                        }}>
+                                 if (lastSimilarCodeBlockData) {
+                                     const q2 = query(collection(db, "snippets"), where("interests", "array-contains-any", Array.from(user_data.interests)), limit(9), startAt(lastSimilarCodeBlockData));
+                                     getDocs(q2).then((querySnapshot) => {
+                                         querySnapshot.forEach((doc) => {
+                                             console.log("fuck yeah")
+                                             setSimilarCodeBlockData(prevState => [...prevState, doc.data()]);
+                                             document.getElementById("for-you-section").style.display = "block"
+                                         })
+                                         setLastSimilarCodeBlockData(querySnapshot.docs.pop())
+                                         if (querySnapshot.docs.length === 9) {
+                                             document.getElementById("similar-load-more").style.display = "block"
+                                         }
+                                     })
+                                 }
+                             }}>
                             <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M12 5V3m0 18v-2m-7-7H3m18 0h-2m-.5-6.5L17 7M7 17l-1.5 1.5M17 17l1.5 1.5M7 7L5.5 5.5"
@@ -185,19 +185,19 @@ export default function Snippets() {
                 <li className="packages-card-list-child" id="trending-load-more" style={{display: "none"}}>
                     <div className="pkg-load-more" style={{position: "relative", top: "13px", display: "none"}}
                          onClick={() => {
-                        if (lastSimilarCodeBlockData) {
-                            const q = query(collection(db, "snippets"), orderBy("downloads", "desc"), limit(9), startAt(lastTrendingCodeBlockData));
-                            getDocs(q).then((querySnapshot) => {
-                                querySnapshot.forEach((doc) => {
-                                    setTrendingCodeBlockData(prevState => [...prevState, doc.data()]);
-                                })
-                                setLastTrendingCodeBlockData(querySnapshot.docs.pop())
-                                if (querySnapshot.docs.length === 9) {
-                                    document.getElementById("trending-load-more").style.display = "block"
-                                }
-                            })
-                        }
-                    }}>
+                             if (lastSimilarCodeBlockData) {
+                                 const q = query(collection(db, "snippets"), orderBy("downloads", "desc"), limit(9), startAt(lastTrendingCodeBlockData));
+                                 getDocs(q).then((querySnapshot) => {
+                                     querySnapshot.forEach((doc) => {
+                                         setTrendingCodeBlockData(prevState => [...prevState, doc.data()]);
+                                     })
+                                     setLastTrendingCodeBlockData(querySnapshot.docs.pop())
+                                     if (querySnapshot.docs.length === 9) {
+                                         document.getElementById("trending-load-more").style.display = "block"
+                                     }
+                                 })
+                             }
+                         }}>
                         <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M12 5V3m0 18v-2m-7-7H3m18 0h-2m-.5-6.5L17 7M7 17l-1.5 1.5M17 17l1.5 1.5M7 7L5.5 5.5"

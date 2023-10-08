@@ -129,11 +129,11 @@
     .pkg-load-more {
         filter: opacity(0.25);
     }
+
     .search-btn:hover {
         background: rgba(255, 255, 255, 0.15);
     }
 }
-
 
 
 @media screen and (min-width: 1860px) {

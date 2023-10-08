@@ -22,11 +22,11 @@
     border-radius: 14px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     background: rgba(255, 255, 255, 0.10);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
     padding: 10px 125px;
     line-height: 16px;
     vertical-align: bottom;
-    margin: 0 0 0 0px;
+    margin: 0 0 0 0;
     transition: 0.2s;
     cursor: pointer;
     color: white;
@@ -48,6 +48,7 @@
 .search-btn-group:active {
     border: solid 1px rgba(255, 255, 255, 1) !important;
 }
+
 .search-group button:hover {
     background: rgba(255, 255, 255, 0.15);
 }
@@ -57,7 +58,6 @@
     position: relative;
     padding-left: 15px;
     margin: 0;
-
 }
 
 
@@ -74,72 +74,36 @@
 }
 
 
-.search-filters {
+.search-parameters {
     position: relative;
-    border-radius: 20px !important;
-    height: 35px;
-    color: rgb(175, 175, 175) !important;
-    font-family: "JetBrains Mono", monospace;
-    transition: 0.4s !important;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    background: rgba(255, 255, 255, 0.10);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
-    padding: 10px 35px !important;
-    line-height: 16px;
-    vertical-align: bottom;
-    display: inline-block;
-    margin: 0 0 0 5px;
-    cursor: pointer;
-    margin-bottom: 15px !important;
-    margin-top: -17px !important;
-    overflow: hidden;
-    white-space: nowrap;
-    font-size: 14px;
+    margin-bottom: 10px;
 }
 
-.search-filters:first-of-type {
-    margin-right: 10px !important;
+.search-parameters-type {
+    width: 154px;
+    height: 38px;
+    border-radius: 8px;
+    border: 1px solid #2D2D2D;
+    background: rgba(24, 24, 24, 0.75);
+    text-align: center;
 }
 
-.search-filters-option {
-    transition: 0.3s;
-}
-
-.search-filters svg {
-    scale: 0.7;
-    position: relative;
-    margin: 0;
-    top: -5px;
-    transition: 0.2s;
-}
-
-.search-filters:hover {
+.search-parameters-type select {
+    background-color: transparent;
+    border: 0;
     color: white;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 15px;
+    position: relative;
+    top: 7px;
 }
 
-@media all and (hover: hover) and (pointer: fine) {
-    .search-filters-type:hover {
-        background: rgba(255, 255, 255, 0.10) !important;
-    }
-
-    .search-filters-type-hover:hover {
-        color: white !important;
-    }
-
-    .search-filters-option:hover {
-        color: white !important;
-    }
+.search-parameters-type select:focus {
+    border: 0;
+    outline: 0;
 }
 
-@media not all and (hover: hover) and (pointer: fine) {
-    .search-filters-type-hover {
-        color: white !important;
-    }
 
-    .search-filters-option {
-        color: white !important;
-    }
-}
 
 @media screen and (max-width: 490px) {
     .search-title {

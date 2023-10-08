@@ -66,97 +66,19 @@ export default function SearchPackages() {
             <br/><br/>
             <h1 className="search-title">SEARCH</h1>
             <div className="search-group">
-                <input type="text" placeholder="@SEARCH" value={searchInput}
+                <input type="text" placeholder="@search_query" value={searchInput}
                        onChange={e => setSearchInput(e.target.value)} onKeyDown={e => search(e, false)}
-                       className="txt-input search-input " id="search-input"/>
-                <br/>
-                <button className="search-filters">
-                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 8h9m9 0h-3M3 16h3m15 0h-9" stroke="currentColor" strokeWidth="2"
-                              strokeLinecap="round"></path>
-                        <circle cx="15" cy="8" r="3" stroke="currentColor" strokeWidth="2"></circle>
-                        <circle cx="9" cy="16" r="3" stroke="currentColor" strokeWidth="2"></circle>
-                    </svg>
-                    <span style={{position: "relative", top: "-12px"}}>FILTERS</span></button>
-                <button className="search-filters search-filters-type search-filters-type-hover"
-                        id="search-filters-type" onClick={() => {
-                    if (height === "35px") {
-                        document.getElementById("search-filters-type").classList.remove("search-filters-type-hover")
-                        document.getElementById("search-filters-type-icon").style.rotate = "180deg"
-                        document.getElementById("search-filters-type-icon").style.opacity = "0"
-                        document.getElementById("search-filters-pkg").style.right = "10px"
-                        document.getElementById("search-filters-type").style.height = "67px"
-                        setHeight("67px")
-                        document.getElementById("search-filters-type").classList.remove("search-filters-type-hover")
-                        document.getElementById("search-filters-pkg-hover").classList.add("search-filters-option")
-                        document.getElementById("search-filters-snippets").classList.add("search-filters-option")
-                    }
-                }}>
-                    <svg id="search-filters-type-icon" width="24" height="24" opacity="1" fill="none"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <g clipPath="url(#clip0_489_191278)">
-                            <g clipPath="url(#clip1_489_191278)" stroke="currentColor" strokeWidth="2"
-                               strokeLinecap="round" strokeLinejoin="round">
-                                <path
-                                    d="M4 9l5.172 5.172c1.333 1.333 2 2 2.828 2 .828 0 1.495-.667 2.828-2L20 9"></path>
-                                <path
-                                    d="M4 9l5.172 5.172c1.333 1.333 2 2 2.828 2 .828 0 1.495-.667 2.828-2L20 9"></path>
-                            </g>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_489_191278">
-                                <path fill="currentColor" d="M0 0H24V24H0z"></path>
-                            </clipPath>
-                            <clipPath id="clip1_489_191278">
-                                <path fill="currentColor" transform="rotate(180 12 12)" d="M0 0H24V24H0z"></path>
-                            </clipPath>
-                        </defs>
-                    </svg>
-                    <span style={{position: "relative", top: "-12px"}} id="search-filters-pkg"><span
-                        id="search-filters-pkg-hover" onClick={() => {
-                        if (height === "67px") {
-                            document.getElementById("search-filters-type-icon").style.rotate = "0deg"
-                            document.getElementById("search-filters-type-icon").style.opacity = "1"
-                            document.getElementById("search-filters-pkg").style.right = "0px"
-                            document.getElementById("search-filters-type").style.height = "35px"
-                            setHeight("35px")
-                            document.getElementById("search-filters-type").classList.add("search-filters-type-hover")
-                            document.getElementById("search-filters-pkg-hover").classList.remove("search-filters-option")
-                            document.getElementById("search-filters-snippets").classList.remove("search-filters-option")
-                            if (pkgType === "PACKAGES") {
-                                setPkgType("PACKAGES")
-                            } else {
-                                setPkgType("SNIPPETS")
-                            }
-                        }
-                    }}>{pkgType === "PACKAGES" ? (
-                        <span id="search-filters-pkg-hover">PACKAGES</span>
-                    ) : (
-                        <span id="search-filters-pkg-hover">SNIPPETS</span>
-                    )}</span><br/><br/><span style={{position: "relative", left: "12px"}} id="search-filters-snippets"
-                                             onClick={() => {
-                                                 if (height === "67px") {
-                                                     document.getElementById("search-filters-type-icon").style.rotate = "0deg"
-                                                     document.getElementById("search-filters-type-icon").style.opacity = "1"
-                                                     document.getElementById("search-filters-pkg").style.right = "0px"
-                                                     document.getElementById("search-filters-type").style.height = "35px"
-                                                     setHeight("35px")
-                                                     document.getElementById("search-filters-type").classList.add("search-filters-type-hover")
-                                                     document.getElementById("search-filters-pkg-hover").classList.remove("search-filters-option")
-                                                     document.getElementById("search-filters-snippets").classList.remove("search-filters-option")
-                                                 }
-                                                 if (pkgType === "PACKAGES") {
-                                                     setPkgType("SNIPPETS")
-                                                 } else {
-                                                     setPkgType("PACKAGES")
-                                                 }
+                       className="txt-input search-input proto-input" id="search-input"/>
+                {/*<br/>*/}
+                <div className="search-parameters">
+                    <div className="search-parameters-type">
+                        <select>
+                            <option value="pkg">PACKAGES</option>
+                            <option value="code">CODE SNIPPET</option>
+                        </select>
 
-                                             }}>{pkgType === "PACKAGES" ? (
-                        <span id="search-filters-pkg-hover">SNIPPETS</span>
-                    ) : (
-                        <span id="search-filters-pkg-hover">PACKAGES</span>
-                    )}</span></span></button>
-                <br/>
+                    </div>
+                </div>
                 <button onClick={() => {
                     if (searchInput === "") {
                         document.getElementById("search-input").style.borderColor = "rgba(255, 0, 0, 1)"
