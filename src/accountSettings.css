@@ -143,6 +143,8 @@
         display: inline-block;
         width: 325px;
         margin-right: 70px;
+        position: relative;
+        top: -75px;
     }
 
     .acc-side-two {
