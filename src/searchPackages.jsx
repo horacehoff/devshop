@@ -4,8 +4,8 @@ import shortNumber from "short-number";
 import {Link, useParams} from "react-router-dom";
 import {collection, getDocs, limit, query, where} from "firebase/firestore";
 import {db} from "./firebase.js";
-import PackageListItem from "./packageListItem.jsx";
 import SnippetCard from "./snippetCard.jsx";
+import PackageCard from "./packageCard.jsx";
 
 export default function SearchPackages() {
     const [searchInput, setSearchInput] = useState("");
@@ -72,11 +72,29 @@ export default function SearchPackages() {
                 {/*<br/>*/}
                 <div className="search-parameters">
                     <div className="search-parameters-type">
-                        <select>
-                            <option value="pkg">PACKAGES</option>
-                            <option value="code">CODE SNIPPET</option>
+                        <select id="search-parameters-type-select" onChange={e => {
+                            setPkgType(e.target.value)
+                            setSearchResults([])
+                            console.log(e.target.value)
+                        }}>
+                            <option value="PACKAGES">PACKAGES</option>
+                            <option value="SNIPPETS">CODE SNIPPET</option>
                         </select>
-
+                    </div>
+                    <div className="search-parameters-filters">
+                        <span><svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path
+                            d="M3 8h9m9 0h-3M3 16h3m15 0h-9" stroke="currentColor" strokeWidth="2"
+                            strokeLinecap="round"></path><circle cx="15" cy="8" r="3" stroke="currentColor"
+                                                                 strokeWidth="2"></circle><circle cx="9" cy="16" r="3"
+                                                                                                  stroke="currentColor"
+                                                                                                  strokeWidth="2"></circle></svg> FILTERS</span>
+                        <div className="search-parameters-filters-screen">
+                            <p className="search-parameters-filters-screen-title">AUTHOR</p>
+                            <input type="text" placeholder="@user_id"
+                                   className="txt-input search-input proto-input search-parameters-filters-screen-input"/>
+                            <p className="search-parameters-filters-screen-title">DOWNLOADS</p>
+                            <input type="range" className="search-parameters-filters-screen-slider"/>
+                        </div>
                     </div>
                 </div>
                 <button onClick={() => {
@@ -90,7 +108,7 @@ export default function SearchPackages() {
                 </button>
             </div>
             <p className="search-failed" id="search-failed">No search results</p>
-            <ul className="packages-card-list" id="packages-card-list-one" style={{marginTop: "60px"}}>
+            <ul className="packages-card-list" id="packages-card-list-one" style={{marginTop: "170px"}}>
                 {/*{*/}
                 {/*    pkgType === "PACKAGES" && {searchResults.map((pkg, index) => (*/}
                 {/*            <li key={index} className="packages-card-list-child" onClick={() => {*/}
@@ -104,15 +122,13 @@ export default function SearchPackages() {
                 {pkgType === "PACKAGES" && (
                     <div>
                         {searchResults.map((pkg, index) => (
-                            <li key={index} className="packages-card-list-child">
+                            <li key={index} className="packages-card-list-child" onClick={() => {
+                                navigate("/packages/" + pkg.id)
+                            }}>
                                 <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
-                                    <PackageListItem
-                                        dwnl={shortNumber(pkg.downloads)}
-                                        author={pkg.owner_username}
-                                        name={pkg.name}
-                                        catchphrase={pkg.catchphrase}
-                                        banner={pkg.banner}
-                                    />
+                                    <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username}
+                                                 name={pkg.name}
+                                                 catchphrase={pkg.catchphrase} banner={pkg.banner}/>
                                 </Link>
                             </li>
                         ))}
