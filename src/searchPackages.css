@@ -31,6 +31,8 @@
     cursor: pointer;
     color: white;
     font-family: "JetBrains Mono", monospace;
+    width: 326px;
+    right: 1px;
 }
 
 .search-btn-group {
