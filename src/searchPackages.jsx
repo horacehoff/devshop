@@ -82,19 +82,22 @@ export default function SearchPackages() {
                             <option value="SNIPPETS">CODE SNIPPET</option>
                         </select>
                     </div>
-                    <div className="search-parameters-filters" onClick={() => {
+                    <div className="search-parameters-filters" id="search-parameters-filters-btn" onClick={() => {
                         if (!isFiltersOpen) {
-
                             document.getElementById("search-filters-screen").style.height = "0px"
                             document.getElementById("search-filters-screen").style.display = "block"
                             window.setTimeout(() => {
                                 document.getElementById("search-filters-screen").style.height = "300px"
+                                document.getElementById("search-filters-btn").style.pointerEvents = "none"
+                                document.getElementById("search-filters-btn").style.filter = "brightness(0.75)"
+                                document.getElementById("search-parameters-filters-btn").style.color = "white"
                             }, 1)
                             setIsFiltersOpen(true)
-
-
                         } else {
                             document.getElementById("search-filters-screen").style.height = "0px"
+                            document.getElementById("search-filters-btn").style.pointerEvents = "all"
+                            document.getElementById("search-filters-btn").style.filter = "brightness(1)"
+                            document.getElementById("search-parameters-filters-btn").style.color = null
                             window.setTimeout(() => {
                                 document.getElementById("search-filters-screen").style.display = "none"
                             }, 500)
