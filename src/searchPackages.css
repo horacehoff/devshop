@@ -100,7 +100,7 @@
     text-align: center;
     vertical-align: middle;
     line-height: 38px;
-    display: none;
+    display: inline-block;
     margin-left: 10px;
     cursor: pointer;
     color: #b7b7b7;
@@ -121,17 +121,18 @@
 .search-parameters-filters-screen {
     display: block;
     /*width: 320px;*/
-    width: 303px;
+    width: 300px;
     height: 300px;
     position: relative;
-    top: 5px;
+    /*top: 5px;*/
     z-index: 15;
     color: white !important;
     border-radius: 8px;
     border: 1px solid #2D2D2D;
     background-color: #181928;
     cursor: initial !important;
-    right: 168px;
+    /*right: 168px;*/
+    right: 0;
     overflow: hidden;
     text-align: left;
     padding-left: 20px;

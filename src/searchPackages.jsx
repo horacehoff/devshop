@@ -88,15 +88,15 @@ export default function SearchPackages() {
                                                                  strokeWidth="2"></circle><circle cx="9" cy="16" r="3"
                                                                                                   stroke="currentColor"
                                                                                                   strokeWidth="2"></circle></svg> FILTERS</span>
-                        <div className="search-parameters-filters-screen">
-                            <p className="search-parameters-filters-screen-title">AUTHOR</p>
-                            <input type="text" placeholder="@user_id"
-                                   className="txt-input search-input proto-input search-parameters-filters-screen-input"/>
-                            <p className="search-parameters-filters-screen-title">DOWNLOADS</p>
-                            <input type="range" className="search-parameters-filters-screen-slider"/>
-                            <input type="range" className="search-parameters-filters-screen-slider"
-                                   style={{position: "absolute"}}/>
-                        </div>
+                    </div>
+                    <div className="search-parameters-filters-screen">
+                        <p className="search-parameters-filters-screen-title">AUTHOR</p>
+                        <input type="text" placeholder="@user_id"
+                               className="txt-input search-input proto-input search-parameters-filters-screen-input"/>
+                        <p className="search-parameters-filters-screen-title">DOWNLOADS</p>
+                        <input type="range" className="search-parameters-filters-screen-slider"/>
+                        <input type="range" className="search-parameters-filters-screen-slider"
+                               style={{position: "absolute"}}/>
                     </div>
                 </div>
                 <button onClick={() => {
