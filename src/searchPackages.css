@@ -27,7 +27,7 @@
     line-height: 16px;
     vertical-align: bottom;
     margin: 0 0 0 0;
-    transition: 0.2s;
+    transition: 0.25s;
     cursor: pointer;
     color: white;
     font-family: "JetBrains Mono", monospace;
@@ -110,9 +110,12 @@
     font-size: 15px;
 }
 
-.search-parameters-filters:hover {
-    color: white;
+@media (hover: hover) and (pointer: fine) {
+    .search-parameters-filters:hover {
+        color: white;
+    }
 }
+
 
 .search-parameters-filters span svg {
     scale: 0.75;
@@ -121,7 +124,7 @@
 }
 
 .search-parameters-filters-screen {
-    display: block;
+    display: none;
     /*width: 320px;*/
     width: 300px;
     height: 300px;
@@ -138,6 +141,7 @@
     overflow: hidden;
     text-align: left;
     padding-left: 20px;
+    transition: 0.5s;
 }
 
 .search-parameters-filters-screen-title {

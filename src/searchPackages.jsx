@@ -12,6 +12,7 @@ export default function SearchPackages() {
     const [searchResults, setSearchResults] = useState([]);
     const [height, setHeight] = useState("35px")
     const [pkgType, setPkgType] = useState("PACKAGES")
+    const [isFiltersOpen, setIsFiltersOpen] = useState(false)
     const {querystr} = useParams();
 
     async function search(e, forcePass) {
@@ -81,7 +82,25 @@ export default function SearchPackages() {
                             <option value="SNIPPETS">CODE SNIPPET</option>
                         </select>
                     </div>
-                    <div className="search-parameters-filters">
+                    <div className="search-parameters-filters" onClick={() => {
+                        if (!isFiltersOpen) {
+
+                            document.getElementById("search-filters-screen").style.height = "0px"
+                            document.getElementById("search-filters-screen").style.display = "block"
+                            window.setTimeout(() => {
+                                document.getElementById("search-filters-screen").style.height = "300px"
+                            }, 1)
+                            setIsFiltersOpen(true)
+
+
+                        } else {
+                            document.getElementById("search-filters-screen").style.height = "0px"
+                            window.setTimeout(() => {
+                                document.getElementById("search-filters-screen").style.display = "none"
+                            }, 500)
+                            setIsFiltersOpen(false)
+                        }
+                    }}>
                         <span><svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path
                             d="M3 8h9m9 0h-3M3 16h3m15 0h-9" stroke="currentColor" strokeWidth="2"
                             strokeLinecap="round"></path><circle cx="15" cy="8" r="3" stroke="currentColor"
@@ -89,7 +108,7 @@ export default function SearchPackages() {
                                                                                                   stroke="currentColor"
                                                                                                   strokeWidth="2"></circle></svg> FILTERS</span>
                     </div>
-                    <div className="search-parameters-filters-screen">
+                    <div className="search-parameters-filters-screen" id="search-filters-screen">
                         <p className="search-parameters-filters-screen-title">AUTHOR</p>
                         <input type="text" placeholder="@user_id"
                                className="txt-input search-input proto-input search-parameters-filters-screen-input"/>
@@ -106,7 +125,7 @@ export default function SearchPackages() {
                     } else {
                         search("", true)
                     }
-                }} className="search-btn-group">SEARCH 🔍
+                }} className="search-btn-group" id="search-filters-btn">SEARCH 🔍
                 </button>
             </div>
             <p className="search-failed" id="search-failed">No search results</p>
