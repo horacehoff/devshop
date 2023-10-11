@@ -94,6 +94,8 @@ export default function SearchPackages() {
                                    className="txt-input search-input proto-input search-parameters-filters-screen-input"/>
                             <p className="search-parameters-filters-screen-title">DOWNLOADS</p>
                             <input type="range" className="search-parameters-filters-screen-slider"/>
+                            <input type="range" className="search-parameters-filters-screen-slider"
+                                   style={{position: "absolute"}}/>
                         </div>
                     </div>
                 </div>
