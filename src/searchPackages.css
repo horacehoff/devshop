@@ -146,21 +146,21 @@
 
 .search-parameters-filters-screen-title {
     position: relative;
-    top: -7px;
+    top: -5px;
     font-size: 16px;
 }
 
 .search-parameters-filters-screen-input {
     width: 250px !important;
     position: relative;
-    margin-top: -25px;
+    margin-top: -20px;
     right: 2px;
 }
 
 .search-parameters-filters-screen-slider {
     width: 250px;
     position: relative;
-    top: -35px;
+    top: -27px;
     -webkit-appearance: none;
     border-radius: 25px;
 }
