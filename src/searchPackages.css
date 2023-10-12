@@ -153,9 +153,25 @@
 .search-parameters-filters-screen-input {
     width: 250px !important;
     position: relative;
-    margin-top: -20px;
+    margin-top: -17px;
     right: 2px;
 }
+
+.search-parameters-filters-screen-input-inline {
+    width: 125px !important;
+    display: inline-block;
+    top: -18px !important;
+    left: 10px;
+    -moz-appearance: textfield;
+    transition: 0.15s;
+}
+
+.search-parameters-filters-screen-input-inline::-webkit-outer-spin-button,
+.search-parameters-filters-screen-input-inline::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 
 .search-parameters-filters-screen-slider {
     width: 250px;
@@ -189,8 +205,7 @@
 }
 
 
-
-.search-parameters-type select {
+.search-parameters-type select, .search-parameters-filters-screen-select {
     background-color: transparent;
     border: 0;
     color: white;
@@ -201,7 +216,7 @@
     -webkit-appearance: menulist;
 }
 
-.search-parameters-type select:focus {
+.search-parameters-type select:focus, .search-parameters-filters-screen-select:focus {
     border: 0;
     outline: 0;
 }

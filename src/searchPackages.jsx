@@ -112,13 +112,28 @@ export default function SearchPackages() {
                                                                                                   strokeWidth="2"></circle></svg> FILTERS</span>
                     </div>
                     <div className="search-parameters-filters-screen" id="search-filters-screen">
-                        <p className="search-parameters-filters-screen-title">AUTHOR</p>
+                        <p className="search-parameters-filters-screen-title">-- AUTHOR --------------------</p>
                         <input type="text" placeholder="@user_id"
                                className="txt-input search-input proto-input search-parameters-filters-screen-input"/>
-                        <p className="search-parameters-filters-screen-title">DOWNLOADS</p>
-                        <input type="range" className="search-parameters-filters-screen-slider"/>
-                        <input type="range" className="search-parameters-filters-screen-slider"
-                               style={{position: "absolute"}}/>
+                        <p className="search-parameters-filters-screen-title">-- DOWNLOADS -----------------</p>
+                        {/*<input type="range" className="search-parameters-filters-screen-slider"/>*/}
+                        {/*<input type="range" className="search-parameters-filters-screen-slider"*/}
+                        {/*       style={{position: "absolute"}}/>*/}
+                        <select className="search-parameters-filters-screen-select" style={{
+                            border: "solid 1px #2D2D2D",
+                            paddingLeft: "5px",
+                            paddingRight: "5px",
+                            paddingTop: "7px",
+                            paddingBottom: "7px",
+                            borderRadius: "8px",
+                            top: "-18px",
+                            display: "inline"
+                        }}>
+                            <option>{"MORE THAN"}</option>
+                            <option>{"LESS THAN"}</option>
+                        </select>
+                        <input type="number" placeholder="N/A"
+                               className="txt-input search-input proto-input search-parameters-filters-screen-input search-parameters-filters-screen-input-inline"/>
                     </div>
                 </div>
                 <button onClick={() => {
