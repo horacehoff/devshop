@@ -26,11 +26,89 @@ export default function SearchPackages() {
             let search_results = [];
             let q = null;
             if (pkgType === "PACKAGES") {
-                if (userId && downloadLimit > 0) {
+                if (downloadLimit > 0 && userId) {
                     if (downloadMoreThan) {
-                        q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), where('owner_username', '<=', userId + '\uf8ff'), where("downloads", "<=", downloadLimit), limit(9));
+                        q = query(collection(db, "packages"), where('owner_username', '>=', userId), where('owner_username', '<=', userId + '\uf8ff'));
+                        getDocs(q).then((querySnapshot) => {
+                            let q_results = []
+                            querySnapshot.forEach((doc) => {
+                                q_results.push(doc.data())
+                            });
+
+                            let final_results = []
+                            q_results.forEach((doc) => {
+                                if (doc.name.includes(searchInput) && doc.downloads >= downloadLimit) {
+                                    final_results.push(doc)
+                                }
+                            })
+
+                            setSearchResults(Array.from(final_results));
+                            if (search_results.length === 0) {
+                                document.getElementById("search-failed").style.display = "block"
+                            }
+                        })
                     } else {
-                        q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), where('owner_username', '<=', userId + '\uf8ff'), where("downloads", ">=", downloadLimit), limit(9));
+                        q = query(collection(db, "packages"), where('owner_username', '>=', userId), where('owner_username', '<=', userId + '\uf8ff'));
+                        getDocs(q).then((querySnapshot) => {
+                            let q_results = []
+                            querySnapshot.forEach((doc) => {
+                                q_results.push(doc.data())
+                            });
+
+                            let final_results = []
+                            q_results.forEach((doc) => {
+                                if (doc.name.includes(searchInput) && doc.downloads <= downloadLimit) {
+                                    final_results.push(doc)
+                                }
+                            })
+
+                            setSearchResults(Array.from(final_results));
+                            if (search_results.length === 0) {
+                                document.getElementById("search-failed").style.display = "block"
+                            }
+                        })
+                    }
+                } else if (downloadLimit > 0) {
+                    if (downloadMoreThan) {
+                        q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'));
+                        getDocs(q).then((querySnapshot) => {
+                            let q_results = []
+                            querySnapshot.forEach((doc) => {
+                                q_results.push(doc.data())
+                            });
+
+                            let final_results = []
+                            q_results.forEach((doc) => {
+                                if (doc.downloads >= downloadLimit && final_results.length < 18) {
+                                    final_results.push(doc)
+                                }
+                            })
+
+                            setSearchResults(Array.from(final_results));
+                            if (search_results.length === 0) {
+                                document.getElementById("search-failed").style.display = "block"
+                            }
+                        })
+                    } else {
+                        q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'));
+                        getDocs(q).then((querySnapshot) => {
+                            let q_results = []
+                            querySnapshot.forEach((doc) => {
+                                q_results.push(doc.data())
+                            });
+
+                            let final_results = []
+                            q_results.forEach((doc) => {
+                                if (doc.downloads <= downloadLimit) {
+                                    final_results.push(doc)
+                                }
+                            })
+
+                            setSearchResults(Array.from(final_results));
+                            if (search_results.length === 0) {
+                                document.getElementById("search-failed").style.display = "block"
+                            }
+                        })
                     }
                 } else if (userId) {
                     q = query(collection(db, "packages"), where('owner_username', '>=', userId), where('owner_username', '<=', userId + '\uf8ff'));
@@ -42,7 +120,7 @@ export default function SearchPackages() {
 
                         let final_results = []
                         q_results.forEach((doc) => {
-                            if (doc.owner_username.includes(userId)) {
+                            if (doc.name.includes(searchInput) && final_results.length < 9) {
                                 final_results.push(doc)
                             }
                         })
@@ -52,12 +130,6 @@ export default function SearchPackages() {
                             document.getElementById("search-failed").style.display = "block"
                         }
                     })
-                } else if (downloadLimit > 0) {
-                    if (downloadMoreThan) {
-                        q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), where("downloads", "<=", downloadLimit), limit(9));
-                    } else {
-                        q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), where("downloads", ">=", downloadLimit), limit(9));
-                    }
                 } else {
                     q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), limit(9));
                     getDocs(q).then((querySnapshot) => {
@@ -71,16 +143,122 @@ export default function SearchPackages() {
                     })
                 }
             } else {
-                q = query(collection(db, "snippets"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), limit(9));
-                getDocs(q).then((querySnapshot) => {
-                    querySnapshot.forEach((doc) => {
-                        search_results.push(doc.data());
-                    });
-                    setSearchResults(Array.from(search_results));
-                    if (search_results.length === 0) {
-                        document.getElementById("search-failed").style.display = "block"
+                if (downloadLimit > 0 && userId) {
+                    if (downloadMoreThan) {
+                        q = query(collection(db, "snippets"), where('owner_username', '>=', userId), where('owner_username', '<=', userId + '\uf8ff'));
+                        getDocs(q).then((querySnapshot) => {
+                            let q_results = []
+                            querySnapshot.forEach((doc) => {
+                                q_results.push(doc.data())
+                            });
+
+                            let final_results = []
+                            q_results.forEach((doc) => {
+                                if (doc.name.includes(searchInput) && doc.downloads >= downloadLimit) {
+                                    final_results.push(doc)
+                                }
+                            })
+
+                            setSearchResults(Array.from(final_results));
+                            if (search_results.length === 0) {
+                                document.getElementById("search-failed").style.display = "block"
+                            }
+                        })
+                    } else {
+                        q = query(collection(db, "snippets"), where('owner_username', '>=', userId), where('owner_username', '<=', userId + '\uf8ff'));
+                        getDocs(q).then((querySnapshot) => {
+                            let q_results = []
+                            querySnapshot.forEach((doc) => {
+                                q_results.push(doc.data())
+                            });
+
+                            let final_results = []
+                            q_results.forEach((doc) => {
+                                if (doc.name.includes(searchInput) && doc.downloads <= downloadLimit) {
+                                    final_results.push(doc)
+                                }
+                            })
+
+                            setSearchResults(Array.from(final_results));
+                            if (search_results.length === 0) {
+                                document.getElementById("search-failed").style.display = "block"
+                            }
+                        })
                     }
-                })
+                } else if (downloadLimit > 0) {
+                    if (downloadMoreThan) {
+                        q = query(collection(db, "snippets"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'));
+                        getDocs(q).then((querySnapshot) => {
+                            let q_results = []
+                            querySnapshot.forEach((doc) => {
+                                q_results.push(doc.data())
+                            });
+
+                            let final_results = []
+                            q_results.forEach((doc) => {
+                                if (doc.downloads >= downloadLimit && final_results.length < 18) {
+                                    final_results.push(doc)
+                                }
+                            })
+
+                            setSearchResults(Array.from(final_results));
+                            if (search_results.length === 0) {
+                                document.getElementById("search-failed").style.display = "block"
+                            }
+                        })
+                    } else {
+                        q = query(collection(db, "snippets"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'));
+                        getDocs(q).then((querySnapshot) => {
+                            let q_results = []
+                            querySnapshot.forEach((doc) => {
+                                q_results.push(doc.data())
+                            });
+
+                            let final_results = []
+                            q_results.forEach((doc) => {
+                                if (doc.downloads <= downloadLimit) {
+                                    final_results.push(doc)
+                                }
+                            })
+
+                            setSearchResults(Array.from(final_results));
+                            if (search_results.length === 0) {
+                                document.getElementById("search-failed").style.display = "block"
+                            }
+                        })
+                    }
+                } else if (userId) {
+                    q = query(collection(db, "snippets"), where('owner_username', '>=', userId), where('owner_username', '<=', userId + '\uf8ff'));
+                    getDocs(q).then((querySnapshot) => {
+                        let q_results = []
+                        querySnapshot.forEach((doc) => {
+                            q_results.push(doc.data())
+                        });
+
+                        let final_results = []
+                        q_results.forEach((doc) => {
+                            if (doc.name.includes(searchInput) && final_results.length < 9) {
+                                final_results.push(doc)
+                            }
+                        })
+
+                        setSearchResults(Array.from(final_results));
+                        if (search_results.length === 0) {
+                            document.getElementById("search-failed").style.display = "block"
+                        }
+                    })
+                } else {
+                    q = query(collection(db, "snippets"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), limit(9));
+                    getDocs(q).then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            search_results.push(doc.data());
+                        });
+                        setSearchResults(Array.from(search_results));
+                        if (search_results.length === 0) {
+                            document.getElementById("search-failed").style.display = "block"
+                        }
+                    })
+                }
             }
 
         } else if (searchInput === "" && e.key === "Enter") {
