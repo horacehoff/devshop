@@ -44,7 +44,7 @@ export default function SearchPackages() {
 
                             setSearchResults(Array.from(final_results));
                             if (search_results.length === 0) {
-                                document.getElementById("search-failed").style.display = "block"
+                                // document.getElementById("search-failed").style.display = "block"
                             }
                         })
                     } else {
@@ -64,7 +64,7 @@ export default function SearchPackages() {
 
                             setSearchResults(Array.from(final_results));
                             if (search_results.length === 0) {
-                                document.getElementById("search-failed").style.display = "block"
+                                // document.getElementById("search-failed").style.display = "block"
                             }
                         })
                     }
@@ -86,7 +86,7 @@ export default function SearchPackages() {
 
                             setSearchResults(Array.from(final_results));
                             if (search_results.length === 0) {
-                                document.getElementById("search-failed").style.display = "block"
+                                // document.getElementById("search-failed").style.display = "block"
                             }
                         })
                     } else {
@@ -106,7 +106,7 @@ export default function SearchPackages() {
 
                             setSearchResults(Array.from(final_results));
                             if (search_results.length === 0) {
-                                document.getElementById("search-failed").style.display = "block"
+                                // document.getElementById("search-failed").style.display = "block"
                             }
                         })
                     }
@@ -127,7 +127,7 @@ export default function SearchPackages() {
 
                         setSearchResults(Array.from(final_results));
                         if (search_results.length === 0) {
-                            document.getElementById("search-failed").style.display = "block"
+                            // document.getElementById("search-failed").style.display = "block"
                         }
                     })
                 } else {
@@ -138,7 +138,7 @@ export default function SearchPackages() {
                         });
                         setSearchResults(Array.from(search_results));
                         if (search_results.length === 0) {
-                            document.getElementById("search-failed").style.display = "block"
+                            // document.getElementById("search-failed").style.display = "block"
                         }
                     })
                 }
@@ -161,7 +161,7 @@ export default function SearchPackages() {
 
                             setSearchResults(Array.from(final_results));
                             if (search_results.length === 0) {
-                                document.getElementById("search-failed").style.display = "block"
+                                // document.getElementById("search-failed").style.display = "block"
                             }
                         })
                     } else {
@@ -181,7 +181,7 @@ export default function SearchPackages() {
 
                             setSearchResults(Array.from(final_results));
                             if (search_results.length === 0) {
-                                document.getElementById("search-failed").style.display = "block"
+                                // document.getElementById("search-failed").style.display = "block"
                             }
                         })
                     }
@@ -203,7 +203,7 @@ export default function SearchPackages() {
 
                             setSearchResults(Array.from(final_results));
                             if (search_results.length === 0) {
-                                document.getElementById("search-failed").style.display = "block"
+                                // document.getElementById("search-failed").style.display = "block"
                             }
                         })
                     } else {
@@ -223,7 +223,7 @@ export default function SearchPackages() {
 
                             setSearchResults(Array.from(final_results));
                             if (search_results.length === 0) {
-                                document.getElementById("search-failed").style.display = "block"
+                                // document.getElementById("search-failed").style.display = "block"
                             }
                         })
                     }
@@ -244,7 +244,7 @@ export default function SearchPackages() {
 
                         setSearchResults(Array.from(final_results));
                         if (search_results.length === 0) {
-                            document.getElementById("search-failed").style.display = "block"
+                            // document.getElementById("search-failed").style.display = "block"
                         }
                     })
                 } else {
@@ -255,7 +255,7 @@ export default function SearchPackages() {
                         });
                         setSearchResults(Array.from(search_results));
                         if (search_results.length === 0) {
-                            document.getElementById("search-failed").style.display = "block"
+                            // document.getElementById("search-failed").style.display = "block"
                         }
                     })
                 }
