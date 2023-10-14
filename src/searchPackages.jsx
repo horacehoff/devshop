@@ -130,6 +130,14 @@ export default function SearchPackages() {
                             <option value="PACKAGES">PACKAGES</option>
                             <option value="SNIPPETS">CODE SNIPPET</option>
                         </select>
+                        <img style={{
+                            position: "absolute",
+                            scale: "0.6",
+                            top: "6px"
+                        }}
+                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABiSURBVHgB7Y7bDYAwDAMzAiN0dDZhFEZgBEOlIh5S27jNp0/Kp+9iJoT4AGAvl4wkb+59LwA28pKjF0hshN4wg5GH3MNhuUcwLW+JwuSVyFEuRv6LrHjYrlssmiwN+1oINyfgwyAP2XO9oQAAAABJRU5ErkJggg=="
+                             alt=""/>
+
                     </div>
                     <div className="search-parameters-filters" id="search-parameters-filters-btn" onClick={() => {
                         if (!isFiltersOpen) {
@@ -178,7 +186,8 @@ export default function SearchPackages() {
                             paddingBottom: "7px",
                             borderRadius: "8px",
                             top: "-18px",
-                            display: "inline"
+                            display: "inline",
+                            appearance: "none"
                         }} onChange={e => {
                             if (e.target.value === "more") {
                                 setDownloadMoreThan(true)

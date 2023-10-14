@@ -88,10 +88,17 @@
     border-radius: 8px;
     border: 1px solid #2D2D2D;
     background: rgba(24, 24, 24, 0.75);
-    text-align: center;
+    text-align: left;
     display: inline-block;
     position: relative;
     top: -5px;
+}
+
+#search-parameters-type-select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    padding-left: 15px;
 }
 
 .search-parameters-filters {
