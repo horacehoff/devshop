@@ -13,6 +13,11 @@ export default function SearchPackages() {
     const [height, setHeight] = useState("35px")
     const [pkgType, setPkgType] = useState("PACKAGES")
     const [isFiltersOpen, setIsFiltersOpen] = useState(false)
+    const [userId, setUserId] = useState("")
+    const [downloadMoreThan, setDownloadMoreThan] = useState(true)
+    const [downloadLimit, setDownloadLimit] = useState(0);
+
+
     const {querystr} = useParams();
 
     async function search(e, forcePass) {
@@ -21,19 +26,63 @@ export default function SearchPackages() {
             let search_results = [];
             let q = null;
             if (pkgType === "PACKAGES") {
-                q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), limit(9));
+                if (userId && downloadLimit > 0) {
+                    if (downloadMoreThan) {
+                        q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), where('owner_username', '<=', userId + '\uf8ff'), where("downloads", "<=", downloadLimit), limit(9));
+                    } else {
+                        q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), where('owner_username', '<=', userId + '\uf8ff'), where("downloads", ">=", downloadLimit), limit(9));
+                    }
+                } else if (userId) {
+                    q = query(collection(db, "packages"), where('owner_username', '>=', userId), where('owner_username', '<=', userId + '\uf8ff'));
+                    getDocs(q).then((querySnapshot) => {
+                        let q_results = []
+                        querySnapshot.forEach((doc) => {
+                            q_results.push(doc.data())
+                        });
+
+                        let final_results = []
+                        q_results.forEach((doc) => {
+                            if (doc.owner_username.includes(userId)) {
+                                final_results.push(doc)
+                            }
+                        })
+
+                        setSearchResults(Array.from(final_results));
+                        if (search_results.length === 0) {
+                            document.getElementById("search-failed").style.display = "block"
+                        }
+                    })
+                } else if (downloadLimit > 0) {
+                    if (downloadMoreThan) {
+                        q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), where("downloads", "<=", downloadLimit), limit(9));
+                    } else {
+                        q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), where("downloads", ">=", downloadLimit), limit(9));
+                    }
+                } else {
+                    q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), limit(9));
+                    getDocs(q).then((querySnapshot) => {
+                        querySnapshot.forEach((doc) => {
+                            search_results.push(doc.data());
+                        });
+                        setSearchResults(Array.from(search_results));
+                        if (search_results.length === 0) {
+                            document.getElementById("search-failed").style.display = "block"
+                        }
+                    })
+                }
             } else {
                 q = query(collection(db, "snippets"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), limit(9));
+                getDocs(q).then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        search_results.push(doc.data());
+                    });
+                    setSearchResults(Array.from(search_results));
+                    if (search_results.length === 0) {
+                        document.getElementById("search-failed").style.display = "block"
+                    }
+                })
             }
-            getDocs(q).then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    search_results.push(doc.data());
-                });
-                setSearchResults(Array.from(search_results));
-                if (search_results.length === 0) {
-                    document.getElementById("search-failed").style.display = "block"
-                }
-            })
+
         } else if (searchInput === "" && e.key === "Enter") {
             document.getElementById("search-input").style.borderColor = "rgba(255, 0, 0, 1)"
             setTimeout(() => document.getElementById("search-input").style.borderColor = "", 2000)
@@ -51,15 +100,15 @@ export default function SearchPackages() {
         }
     }, [searchResults]);
 
-    function close_button() {
-        document.getElementById("search-filters-type-icon").style.rotate = "0deg"
-        document.getElementById("search-filters-type-icon").style.opacity = "1"
-        document.getElementById("search-filters-pkg").style.right = "0"
-        document.getElementById("search-filters-type").style.height = "35px"
-        document.getElementById("search-filters-type").classList.add("search-filters-type-hover")
-        document.getElementById("search-filters-pkg-hover").classList.remove("search-filters-option")
-        document.getElementById("search-filters-snippets").classList.remove("search-filters-option")
-    }
+    // function close_button() {
+    //     document.getElementById("search-filters-type-icon").style.rotate = "0deg"
+    //     document.getElementById("search-filters-type-icon").style.opacity = "1"
+    //     document.getElementById("search-filters-pkg").style.right = "0"
+    //     document.getElementById("search-filters-type").style.height = "35px"
+    //     document.getElementById("search-filters-type").classList.add("search-filters-type-hover")
+    //     document.getElementById("search-filters-pkg-hover").classList.remove("search-filters-option")
+    //     document.getElementById("search-filters-snippets").classList.remove("search-filters-option")
+    // }
 
 
     return (
@@ -114,7 +163,9 @@ export default function SearchPackages() {
                     <div className="search-parameters-filters-screen" id="search-filters-screen">
                         <p className="search-parameters-filters-screen-title">-- AUTHOR --------------------</p>
                         <input type="text" placeholder="@user_id"
-                               className="txt-input search-input proto-input search-parameters-filters-screen-input"/>
+                               className="txt-input search-input proto-input search-parameters-filters-screen-input"
+                               value={userId} onChange={e => setUserId(e.target.value)}
+                        />
                         <p className="search-parameters-filters-screen-title">-- DOWNLOADS -----------------</p>
                         {/*<input type="range" className="search-parameters-filters-screen-slider"/>*/}
                         {/*<input type="range" className="search-parameters-filters-screen-slider"*/}
@@ -128,12 +179,20 @@ export default function SearchPackages() {
                             borderRadius: "8px",
                             top: "-18px",
                             display: "inline"
+                        }} onChange={e => {
+                            if (e.target.value === "more") {
+                                setDownloadMoreThan(true)
+                            } else if (e.target.value === "less") {
+                                setDownloadMoreThan(false)
+                            }
                         }}>
-                            <option>{"MORE THAN"}</option>
-                            <option>{"LESS THAN"}</option>
+                            <option value="more">{"MORE THAN"}</option>
+                            <option value="less">{"LESS THAN"}</option>
                         </select>
                         <input type="number" placeholder="N/A"
-                               className="txt-input search-input proto-input search-parameters-filters-screen-input search-parameters-filters-screen-input-inline"/>
+                               className="txt-input search-input proto-input search-parameters-filters-screen-input search-parameters-filters-screen-input-inline"
+                               value={downloadLimit} onChange={e => setDownloadLimit(e.target.value)}
+                        />
                     </div>
                 </div>
                 <button onClick={() => {

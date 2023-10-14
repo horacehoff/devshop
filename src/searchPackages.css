@@ -79,6 +79,7 @@
 .search-parameters {
     position: relative;
     margin-bottom: 10px;
+    z-index: 100000;
 }
 
 .search-parameters-type {
@@ -130,7 +131,7 @@
     height: 300px;
     position: relative;
     /*top: 5px;*/
-    z-index: 15;
+    z-index: 150;
     color: white !important;
     border-radius: 8px;
     border: 1px solid #2D2D2D;
@@ -142,6 +143,7 @@
     text-align: left;
     padding-left: 20px;
     transition: 0.5s;
+
 }
 
 .search-parameters-filters-screen-title {
@@ -219,6 +221,12 @@
 .search-parameters-type select:focus, .search-parameters-filters-screen-select:focus {
     border: 0;
     outline: 0;
+}
+
+
+.disabled {
+    filter: brightness(0.5);
+    pointer-events: none;
 }
 
 
