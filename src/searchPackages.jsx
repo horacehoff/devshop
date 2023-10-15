@@ -365,7 +365,8 @@ export default function SearchPackages() {
                             borderRadius: "8px",
                             top: "-18px",
                             display: "inline",
-                            appearance: "none"
+                            appearance: "none",
+                            cursor: "pointer"
                         }} onChange={e => {
                             if (e.target.value === "more") {
                                 setDownloadMoreThan(true)
@@ -393,17 +394,8 @@ export default function SearchPackages() {
                 </button>
             </div>
             <p className="search-failed" id="search-failed">No search results</p>
-            <ul className="packages-card-list" id="packages-card-list-one" style={{marginTop: "170px"}}>
-                {/*{*/}
-                {/*    pkgType === "PACKAGES" && {searchResults.map((pkg, index) => (*/}
-                {/*            <li key={index} className="packages-card-list-child" onClick={() => {*/}
-                {/*                navigate("/packages/" + pkg.id)*/}
-                {/*            }}>*/}
-                {/*                <PackageListItem dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}*/}
-                {/*                                 catchphrase={pkg.catchphrase} banner={pkg.banner}/>*/}
-                {/*            </li>*/}
-                {/*        ))}*/}
-                {/*}*/}
+            <ul className="packages-card-list" id="packages-card-list-one"
+                style={{marginTop: "170px", position: "relative", zIndex: "-1"}}>
                 {pkgType === "PACKAGES" && (
                     <div>
                         {searchResults.map((pkg, index) => (
