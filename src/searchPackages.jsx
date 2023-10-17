@@ -126,9 +126,7 @@ export default function SearchPackages() {
                         })
 
                         setSearchResults(Array.from(final_results));
-                        if (search_results.length === 0) {
-                            // document.getElementById("search-failed").style.display = "block"
-                        }
+
                     })
                 } else {
                     q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), limit(9));
@@ -137,9 +135,7 @@ export default function SearchPackages() {
                             search_results.push(doc.data());
                         });
                         setSearchResults(Array.from(search_results));
-                        if (search_results.length === 0) {
-                            // document.getElementById("search-failed").style.display = "block"
-                        }
+
                     })
                 }
             } else {
@@ -243,9 +239,7 @@ export default function SearchPackages() {
                         })
 
                         setSearchResults(Array.from(final_results));
-                        if (search_results.length === 0) {
-                            // document.getElementById("search-failed").style.display = "block"
-                        }
+
                     })
                 } else {
                     q = query(collection(db, "snippets"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), limit(9));
@@ -254,17 +248,18 @@ export default function SearchPackages() {
                             search_results.push(doc.data());
                         });
                         setSearchResults(Array.from(search_results));
-                        if (search_results.length === 0) {
-                            // document.getElementById("search-failed").style.display = "block"
-                        }
+
                     })
                 }
             }
-
+            if (search_results.length === 0) {
+                document.getElementById("search-failed").style.display = "block"
+            }
         } else if (searchInput === "" && e.key === "Enter") {
             document.getElementById("search-input").style.borderColor = "rgba(255, 0, 0, 1)"
             setTimeout(() => document.getElementById("search-input").style.borderColor = "", 2000)
         }
+
     }
 
     useEffect(() => {
@@ -385,8 +380,9 @@ export default function SearchPackages() {
                 </div>
                 <button onClick={() => {
                     if (searchInput === "") {
-                        document.getElementById("search-input").style.borderColor = "rgba(255, 0, 0, 1)"
-                        setTimeout(() => document.getElementById("search-input").style.borderColor = "", 2000)
+                        console.log("working")
+                        document.getElementById("search-input").style.border = "solid 1px red"
+                        // setTimeout(() => document.getElementById("search-input").style.borderColor = "", 2000)
                     } else {
                         search("", true)
                     }
