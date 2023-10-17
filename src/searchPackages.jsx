@@ -129,6 +129,7 @@ export default function SearchPackages() {
 
                     })
                 } else {
+                    console.log("chosen path")
                     q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), limit(9));
                     getDocs(q).then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
