@@ -43,12 +43,14 @@
     font-size: 14px;
 }
 
-.search-btn-group:hover {
-    border: solid 1px rgba(255, 255, 255, 0.6) !important;
-}
+@media (hover: hover) and (pointer: fine) {
+    .search-btn-group:hover {
+        border: solid 1px rgba(255, 255, 255, 0.6) !important;
+    }
 
-.search-btn-group:active {
-    border: solid 1px rgba(255, 255, 255, 1) !important;
+    .search-btn-group:active {
+        border: solid 1px rgba(255, 255, 255, 1) !important;
+    }
 }
 
 .search-group button:hover {
