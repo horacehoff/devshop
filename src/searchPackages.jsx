@@ -134,8 +134,11 @@ export default function SearchPackages() {
                     getDocs(q).then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                             search_results.push(doc.data());
+                            console.log("heyy wassup it's real")
                         });
                         setSearchResults(Array.from(search_results));
+                        console.log("got them inside the array")
+
 
                     })
                 }
