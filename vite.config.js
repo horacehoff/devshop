@@ -34,8 +34,8 @@ export default defineConfig({
     terser({
       compress: {
         passes: 1000,
-        drop_console: true,
-        drop_debugger: true
+        // drop_console: true,
+        // drop_debugger: true
       },
       format: {
         comments: false,
@@ -50,8 +50,8 @@ export default defineConfig({
     cssCodeSplit: true,
     terserOptions: {
       compress: {
-        drop_console: false,
-        drop_debugger: true
+        // drop_console: false,
+        // drop_debugger: true
       },
       format: {
         comments: false,
