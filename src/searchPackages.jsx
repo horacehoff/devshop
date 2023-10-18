@@ -131,10 +131,10 @@ export default function SearchPackages() {
                 } else {
                     console.log("chosen path")
                     console.log(searchInput)
-                    // q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), limit(9));
+                    q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'), limit(9));
                     // const end = searchInput.replace(/.$/, c => String.fromCharCode(c.charCodeAt(0) + 1));
                     // q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', end), limit(9));
-                    q = query(collection(db, "packages"), where('name', '==', searchInput), limit(9));
+                    // q = query(collection(db, "packages"), where('name', '==', searchInput), limit(9));
                     getDocs(q).then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                             search_results.push(doc.data());
