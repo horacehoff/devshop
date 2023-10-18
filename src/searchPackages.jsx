@@ -285,7 +285,7 @@ export default function SearchPackages() {
             <div className="search-group">
                 <input type="text" placeholder="@search_query" value={searchInput}
                        onChange={e => setSearchInput(e.target.value)} onKeyDown={e => search(e, false)}
-                       className="txt-input search-input proto-input" id="search-input"/>
+                       className="txt-input search-input proto-input" id="search-input" autoCapitalize="none"/>
                 {/*<br/>*/}
                 <div className="search-parameters">
                     <div className="search-parameters-type">
