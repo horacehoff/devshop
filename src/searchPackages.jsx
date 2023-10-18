@@ -21,6 +21,11 @@ export default function SearchPackages() {
     const {querystr} = useParams();
 
     async function search(e, forcePass) {
+        const error_check = (search_results) => {
+            if (search_results.length === 0) {
+                document.getElementById("search-failed").style.display = "block"
+            }
+        }
         document.getElementById("search-failed").style.display = "none"
         if ((e.key === "Enter" || forcePass) && searchInput !== "") {
             let search_results = [];
@@ -43,9 +48,7 @@ export default function SearchPackages() {
                             })
 
                             setSearchResults(Array.from(final_results));
-                            if (search_results.length === 0) {
-                                // document.getElementById("search-failed").style.display = "block"
-                            }
+                            error_check(final_results)
                         })
                     } else {
                         q = query(collection(db, "packages"), where('owner_username', '>=', userId), where('owner_username', '<=', userId + '\uf8ff'));
@@ -63,9 +66,7 @@ export default function SearchPackages() {
                             })
 
                             setSearchResults(Array.from(final_results));
-                            if (search_results.length === 0) {
-                                // document.getElementById("search-failed").style.display = "block"
-                            }
+                            error_check(final_results)
                         })
                     }
                 } else if (downloadLimit > 0) {
@@ -85,9 +86,7 @@ export default function SearchPackages() {
                             })
 
                             setSearchResults(Array.from(final_results));
-                            if (search_results.length === 0) {
-                                // document.getElementById("search-failed").style.display = "block"
-                            }
+                            error_check(final_results)
                         })
                     } else {
                         q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'));
@@ -105,9 +104,7 @@ export default function SearchPackages() {
                             })
 
                             setSearchResults(Array.from(final_results));
-                            if (search_results.length === 0) {
-                                // document.getElementById("search-failed").style.display = "block"
-                            }
+                            error_check(final_results)
                         })
                     }
                 } else if (userId) {
@@ -126,6 +123,7 @@ export default function SearchPackages() {
                         })
 
                         setSearchResults(Array.from(final_results));
+                        error_check(final_results)
 
                     })
                 } else {
@@ -138,10 +136,9 @@ export default function SearchPackages() {
                     getDocs(q).then((querySnapshot) => {
                         querySnapshot.forEach((doc) => {
                             search_results.push(doc.data());
-                            console.log("heyy wassup it's real")
                         });
                         setSearchResults(Array.from(search_results));
-                        console.log("got them inside the array")
+                        error_check(search_results)
                     })
                 }
             } else {
@@ -162,9 +159,7 @@ export default function SearchPackages() {
                             })
 
                             setSearchResults(Array.from(final_results));
-                            if (search_results.length === 0) {
-                                // document.getElementById("search-failed").style.display = "block"
-                            }
+                            error_check(final_results)
                         })
                     } else {
                         q = query(collection(db, "snippets"), where('owner_username', '>=', userId), where('owner_username', '<=', userId + '\uf8ff'));
@@ -182,9 +177,7 @@ export default function SearchPackages() {
                             })
 
                             setSearchResults(Array.from(final_results));
-                            if (search_results.length === 0) {
-                                // document.getElementById("search-failed").style.display = "block"
-                            }
+                            error_check(final_results)
                         })
                     }
                 } else if (downloadLimit > 0) {
@@ -204,9 +197,7 @@ export default function SearchPackages() {
                             })
 
                             setSearchResults(Array.from(final_results));
-                            if (search_results.length === 0) {
-                                // document.getElementById("search-failed").style.display = "block"
-                            }
+                            error_check(final_results)
                         })
                     } else {
                         q = query(collection(db, "snippets"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'));
@@ -224,9 +215,7 @@ export default function SearchPackages() {
                             })
 
                             setSearchResults(Array.from(final_results));
-                            if (search_results.length === 0) {
-                                // document.getElementById("search-failed").style.display = "block"
-                            }
+                            error_check(final_results)
                         })
                     }
                 } else if (userId) {
@@ -245,6 +234,7 @@ export default function SearchPackages() {
                         })
 
                         setSearchResults(Array.from(final_results));
+                        error_check(final_results)
 
                     })
                 } else {
@@ -254,13 +244,11 @@ export default function SearchPackages() {
                             search_results.push(doc.data());
                         });
                         setSearchResults(Array.from(search_results));
-
+                        error_check(search_results)
                     })
                 }
             }
-            if (searchResults.length === 0) {
-                document.getElementById("search-failed").style.display = "block"
-            }
+
         } else if (searchInput === "" && e.key === "Enter") {
             document.getElementById("search-input").style.borderColor = "rgba(255, 0, 0, 1)"
             setTimeout(() => document.getElementById("search-input").style.borderColor = "", 2000)
