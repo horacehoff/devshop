@@ -257,7 +257,6 @@ export default function SearchPackages() {
     }
 
     useEffect(() => {
-        // document.getElementById("search-filters-type").style.height = "35px"
         if (querystr && searchResults.length === 0) {
             setSearchInput(querystr);
             search({key: "Enter"}, false).then(() => {
@@ -266,17 +265,6 @@ export default function SearchPackages() {
             });
         }
     }, [searchResults]);
-
-    // function close_button() {
-    //     document.getElementById("search-filters-type-icon").style.rotate = "0deg"
-    //     document.getElementById("search-filters-type-icon").style.opacity = "1"
-    //     document.getElementById("search-filters-pkg").style.right = "0"
-    //     document.getElementById("search-filters-type").style.height = "35px"
-    //     document.getElementById("search-filters-type").classList.add("search-filters-type-hover")
-    //     document.getElementById("search-filters-pkg-hover").classList.remove("search-filters-option")
-    //     document.getElementById("search-filters-snippets").classList.remove("search-filters-option")
-    // }
-
 
     return (
         <>
@@ -311,7 +299,7 @@ export default function SearchPackages() {
                             document.getElementById("search-filters-screen").style.height = "0px"
                             document.getElementById("search-filters-screen").style.display = "block"
                             window.setTimeout(() => {
-                                document.getElementById("search-filters-screen").style.height = "300px"
+                                document.getElementById("search-filters-screen").style.height = "170px"
                                 document.getElementById("search-filters-btn").style.pointerEvents = "none"
                                 document.getElementById("search-filters-btn").style.filter = "brightness(0.75)"
                                 document.getElementById("search-parameters-filters-btn").style.color = "white"
