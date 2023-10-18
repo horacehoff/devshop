@@ -258,7 +258,7 @@ export default function SearchPackages() {
                     })
                 }
             }
-            if (search_results.length === 0) {
+            if (searchResults.length === 0) {
                 document.getElementById("search-failed").style.display = "block"
             }
         } else if (searchInput === "" && e.key === "Enter") {
