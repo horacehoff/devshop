@@ -187,7 +187,7 @@ export default function AccountPage(props) {
                     {usrPackages.map((pkg, index) => (
                         <li key={index} className="packages-card-list-child">
                             <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
-                                <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username}
+                                <PackageCard dwnl={pkg.downloads} author={pkg.owner_username}
                                              name={pkg.name}
                                              catchphrase={pkg.catchphrase} banner={pkg.banner}/>
                             </Link>

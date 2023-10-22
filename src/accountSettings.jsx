@@ -296,6 +296,7 @@ export default function AccountSettings() {
                                                 setTimeout(() => {
                                                     document.getElementById("profile-save-btn").innerHTML = "SAVE";
                                                     navigate("/users/" + fancy_name_to_id(user_data.username))
+                                                    window.location.reload()
                                                 }, 1000);
                                             })
                                         } catch (error) {

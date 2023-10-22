@@ -354,7 +354,7 @@ export default function SearchPackages() {
                             <option value="more">{"MORE THAN"}</option>
                             <option value="less">{"LESS THAN"}</option>
                         </select>
-                        <input type="number" placeholder="N/A"
+                        <input type="number" placeholder="N/A" pattern="\d*"
                                className="txt-input search-input proto-input search-parameters-filters-screen-input search-parameters-filters-screen-input-inline"
                                value={downloadLimit} onChange={e => setDownloadLimit(e.target.value)}
                         />
