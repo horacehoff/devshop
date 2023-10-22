@@ -121,7 +121,7 @@ export default function CreatePackage() {
                 owner_id: uid,
                 owner_username: own_username,
                 current_version: version,
-                downloads: 0,
+                downloads: [],
                 ratings: [],
                 interests: final_interests,
                 banner: bannerUrl,
@@ -237,7 +237,6 @@ export default function CreatePackage() {
                         <input type="text" className="proto-input" id="pkg-version" placeholder="@base_pkg_version"
                                style={{marginTop: "0px"}} value={version}
                                onChange={e => setVersion(e.target.value)}/>
-                        {/*<h2 style={{margin: "0", marginTop: "40px", marginBottom: "0"}}>// PACKAGE</h2>*/}
                         <br/>
                         <input type="file" id="file" style={{display: "none"}} onChange={(event) => {
                             setPkgUpload(event.target.files[0])
@@ -246,7 +245,6 @@ export default function CreatePackage() {
                         }} accept=".zip, application/zip" required/>
 
 
-                        {/*<h2 style={{margin: "0", marginTop: "25px", marginBottom: "-10px"}}>// GALLERY IMAGES (MAX{'=>'}4)</h2>*/}
                         <input type="file" id="img-file" style={{display: "none"}} multiple onChange={(event) => {
                             console.log(event.target.files[0])
                             setImgUploadOne(event.target.files[0])

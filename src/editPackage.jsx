@@ -9,17 +9,20 @@ import React, {useLayoutEffect, useState} from "react";
 import {deleteObject, getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {deleteDoc, doc, getDoc, setDoc} from "firebase/firestore";
 import {BiCloudUpload} from "react-icons/bi";
-import {FcCancel} from "react-icons/fc";
+import Popup from "reactjs-popup";
 
 export default function EditPackage(props) {
     const navigate = useNavigate()
-    if (!useLocation().state) {
-        navigate("/packages")
-    }
+    // if (!useLocation().state) {
+    //     navigate("/packages")
+    // }
     const {state} = useLocation()
+    // if (!state.pkg) {
+    //     navigate("/packages")
+    // }
     const pkg = state.pkg
     const [uid, setUid] = useState("")
-    const [newName, setNewName] = useState()
+    const [newName, setNewName] = useState("")
     const [newDesc, setNewDesc] = useState(pkg.description)
 
     const [bannerUpload, setBannerUpload] = useState(null);
@@ -31,21 +34,26 @@ export default function EditPackage(props) {
 
     const [pkgUpload, setPkgUpload] = useState(null);
 
+    const [authCheck, setAuthCheck] = useState(false)
+
 
     onAuthStateChanged(auth, (user) => {
-        if (user) {
-            // check if user id is the package owner_id
-            if (user.uid === pkg.owner_id) {
-                console.log("user is owner")
-                setUid(user.uid)
-                console.log(uid)
+        if (!authCheck) {
+            if (user) {
+                // check if user id is the package owner_id
+                if (user.uid === pkg.owner_id) {
+                    console.log("user is owner")
+                    setUid(user.uid)
+                    console.log(uid)
+                } else {
+                    console.log("user is not owner")
+                    navigate("/packages/" + fancy_name_to_id(pkg.id))
+                }
             } else {
-                console.log("user is not owner")
+                console.log("user is not logged in")
                 navigate("/packages/" + fancy_name_to_id(pkg.id))
             }
-        } else {
-            console.log("user is not logged in")
-            navigate("/packages/" + fancy_name_to_id(pkg.id))
+            setAuthCheck(true)
         }
     })
 
@@ -55,8 +63,6 @@ export default function EditPackage(props) {
         let screenThreeUrl
         let screenFourUrl
         let bannerUrl
-        let pkgUrl
-        let currentVer
 
         if (bannerUpload !== null) {
             const imgRef = ref(storage, pkg.banner);
@@ -125,33 +131,19 @@ export default function EditPackage(props) {
         } else {
             screenFourUrl = pkg.screenshots[3]
         }
-        if (pkgUpload !== null) {
-            const pkgRef = ref(storage, pkg.package);
-            await deleteObject(pkgRef).then(() => {
-                console.log("deleted pkg")
-            })
-            let pkgUploadRef = ref(storage, "users/" + uid + "/packages/" + pkg.id + "/pkg/" + pkgUpload.name)
-            await uploadBytes(pkgUploadRef, pkgUpload).then(() => {
-                console.log("pkg uploaded")
-            })
-            pkgUrl = await getDownloadURL(pkgUploadRef)
-            currentVer = document.getElementById("pkg-version-input").value
-        } else {
-            pkgUrl = pkg.package
-            currentVer = pkg.current_version
-        }
 
         await setDoc(doc(db, "packages", pkg.id), {
             banner: bannerUrl,
             screenshots: [screenOneUrl, screenTwoUrl, screenThreeUrl, screenFourUrl],
             description: profanityFilter(newDesc),
-            package: pkgUrl,
-            current_version: currentVer,
             name: profanityFilter(newName)
         }, {merge: true})
     }
 
     useLayoutEffect(() => {
+        if (!pkg) {
+            navigate("/packages")
+        }
         document.querySelector('.banner').style.setProperty("--banner_url", `url('${pkg.banner}')`);
         setNewName(pkg.name)
     }, []);
@@ -176,8 +168,8 @@ export default function EditPackage(props) {
                 });
                 document.getElementById("banner-file").click()
             }}></div>
-            <input type="text" className="package-title" placeholder="@NAME"
-                   style={{height: "60px", width: "90%", fontSize: "25px"}} value={newName}
+            <input type="text" className="package-title edit-package-title" placeholder="@NAME"
+                   value={newName}
                    onChange={e => setNewName(e.target.value)}/>
             <h3 className="package-author">by <span
                 style={{color: "#F0EBBA", cursor: "pointer"}}>{pkg.owner_username}</span>
@@ -291,52 +283,122 @@ export default function EditPackage(props) {
             <p className="package-characteristics-label"></p>
             <div className="package-characteristics" id="package-characteristics">
                 <p style={{marginRight: "29px"}} id="package-char-p">
-                    TOTAL SIZE: {Math.round(pkg.sizeMb * 10) / 10}MB<br/><input type='text' id='pkg-version-input'
-                                                                                className='pkg-version-input'
-                                                                                placeholder='NEW VERSION'
-                                                                                style={{display: "none"}}
-                                                                                value={newVer} onChange={e => {
-                    setNewVer(e.target.value);
-                    console.log("yup")
-                }}/><span
-                    id="package-version" className="current-ver">CURRENT VERSION: {pkg.current_version}</span>
+                    DISK SIZE: {Math.round(pkg.sizeMb * 10) / 10}MB
+                    {/*    <br/><input type='text' id='pkg-version-input'*/}
+                    {/*                                                                className='pkg-version-input'*/}
+                    {/*                                                                placeholder='NEW VERSION'*/}
+                    {/*                                                                style={{display: "none"}}*/}
+                    {/*                                                                value={newVer} onChange={e => {*/}
+                    {/*    setNewVer(e.target.value);*/}
+                    {/*    console.log("yup")*/}
+                    {/*}}/>*/}
+                    <br/>
+                    <span
+                        id="package-version" className="current-ver">CURRENT VERSION: {pkg.current_version}</span><br/>
                     <input type="file" id="pkg-new-version" style={{display: "none"}} onChange={(event) => {
                         setPkgUpload(event.target.files[0])
-                        console.log("pkg")
-                        document.getElementById("file-input-icon").style.display = "none"
-                        document.getElementById("upload-new-pkg-btn").innerHTML = document.getElementById("upload-new-pkg-btn").innerHTML.replace("UPLOAD PACKAGE", "✅ UPLOAD PACKAGE")
+                        console.log("package")
+                        document.getElementById("file-upload").innerHTML = "✅ UPLOAD PACKAGE"
+
 
                     }} accept=".zip, application/zip" required/>
-                    <label htmlFor="pkg-new-version" className="upload-new-pkg-btn"
-                           id="upload-new-pkg-btn"><BiCloudUpload
-                        className="file-input-icon" id="file-input-icon"></BiCloudUpload>UPLOAD PACKAGE</label>
-                    <FcCancel className="revert-upload-pkg" id="revert-upload-pkg" onClick={() => {
-                        if (document.getElementById("upload-new-pkg-btn").innerHTML.includes("UPLOAD PACKAGE")) {
-                            document.getElementById("package-version").innerHTML = "CURRENT VERSION: " + pkg.current_version
-                            document.getElementById("upload-new-pkg-btn").style.display = "none"
-                            document.getElementById("new-pkg-version-btn").style.display = "block"
-                            document.getElementById("revert-upload-pkg").style.display = "none"
-                            document.getElementById("package-char-p").style.marginRight = "29px"
-                            document.getElementById("upload-new-pkg-btn").innerHTML = document.getElementById("upload-new-pkg-btn").innerHTML.replace("✅ UPLOAD PACKAGE", "UPLOAD PACKAGE")
-                            // add the icon back
-                            document.getElementById("file-input-icon").style.display = "revert"
-                            document.getElementById("package-version").innerHTML = "CURRENT VERSION: " + pkg.current_version
-                            document.getElementById("pkg-version-input").style.display = "none"
-                            document.getElementById("delete-pkg-btn").style.display = "revert"
-                            document.getElementById("delete-pkg-btn").style.marginTop = "-35px"
-                        }
+                    {/*<label htmlFor="pkg-new-version" className="upload-new-pkg-btn"*/}
+                    {/*       id="upload-new-pkg-btn"><BiCloudUpload*/}
+                    {/*    className="file-input-icon" id="file-input-icon"></BiCloudUpload>UPLOAD PACKAGE</label>*/}
+                    {/*<FcCancel className="revert-upload-pkg" id="revert-upload-pkg" onClick={() => {*/}
+                    {/*    if (document.getElementById("upload-new-pkg-btn").innerHTML.includes("UPLOAD PACKAGE")) {*/}
+                    {/*        document.getElementById("package-version").innerHTML = "CURRENT VERSION: " + pkg.current_version*/}
+                    {/*        document.getElementById("upload-new-pkg-btn").style.display = "none"*/}
+                    {/*        document.getElementById("new-pkg-version-btn").style.display = "block"*/}
+                    {/*        document.getElementById("revert-upload-pkg").style.display = "none"*/}
+                    {/*        document.getElementById("package-char-p").style.marginRight = "29px"*/}
+                    {/*        document.getElementById("upload-new-pkg-btn").innerHTML = document.getElementById("upload-new-pkg-btn").innerHTML.replace("✅ UPLOAD PACKAGE", "UPLOAD PACKAGE")*/}
+                    {/*        // add the icon back*/}
+                    {/*        document.getElementById("file-input-icon").style.display = "revert"*/}
+                    {/*        document.getElementById("package-version").innerHTML = "CURRENT VERSION: " + pkg.current_version*/}
+                    {/*        document.getElementById("pkg-version-input").style.display = "none"*/}
+                    {/*        document.getElementById("delete-pkg-btn").style.display = "revert"*/}
+                    {/*        document.getElementById("delete-pkg-btn").style.marginTop = "-35px"*/}
+                    {/*    }*/}
 
-                    }}></FcCancel><br/>
-                    <button className="new-pkg-version-btn" id="new-pkg-version-btn" onClick={() => {
-                        document.getElementById("package-version").innerHTML = "<br/>"
-                        document.getElementById("pkg-version-input").style.display = "block"
-                        document.getElementById("upload-new-pkg-btn").style.display = "block"
-                        document.getElementById("new-pkg-version-btn").style.display = "none"
-                        document.getElementById("revert-upload-pkg").style.display = "block"
-                        document.getElementById("package-char-p").style.marginRight = "22px"
-                        document.getElementById("delete-pkg-btn").style.display = "none"
-                    }}>+ NEW VERSION
-                    </button>
+                    {/*}}></FcCancel><br/>*/}
+                    <Popup trigger={
+                        <button className="new-pkg-version-btn" id="new-pkg-version-btn" onClick={() => {
+                            // document.getElementById("package-version").innerHTML = "<br/>"
+                            // document.getElementById("pkg-version-input").style.display = "block"
+                            // document.getElementById("upload-new-pkg-btn").style.display = "block"
+                            // document.getElementById("new-pkg-version-btn").style.display = "none"
+                            // document.getElementById("revert-upload-pkg").style.display = "block"
+                            // document.getElementById("package-char-p").style.marginRight = "22px"
+                            // document.getElementById("delete-pkg-btn").style.display = "none"
+                        }}>+ NEW VERSION
+                        </button>
+                    } modal className="new-pkg-version-popup" onClose={() => {
+                        setPkgUpload(null)
+                    }}>
+                        <p style={{textAlign: "center", fontSize: "21px", fontWeight: "700"}}>PUBLISH A NEW VERSION</p>
+                        <label className="name-input-label" htmlFor="pkg-version" id="new-version-label"
+                               style={{transition: "0.2s"}}>NEW VERSION</label><br/>
+                        <label className="name-input-label-desc" htmlFor="pkg-version">The new version of your package
+                            <br/>(e.g. 2.0, BETA, 1.0.0B)</label><br/>
+                        <input type="text" className="proto-input" id="pkg-version" placeholder="@new_pkg_version"
+                               style={{marginTop: "0px", width: "250px"}} value={newVer}
+                               onChange={e => setNewVer(e.target.value)}/>
+                        <br/>
+                        <br/>
+                        <label className="name-input-label" id="upload-label"
+                               style={{transition: "0.2s"}}>UPLOAD</label><br/>
+                        <label className="name-input-label-desc">Upload the package's new version</label><br/>
+                        <div className="upload-section">
+                            <label htmlFor="pkg-new-version" className="file-input" id="file-upload"><BiCloudUpload
+                                className="file-input-icon"></BiCloudUpload>UPLOAD PACKAGE</label>
+                            <br/>
+                        </div>
+                        <br/>
+                        <button className="primary" onClick={async () => {
+                            if (newVer === "") {
+                                document.getElementById("new-version-label").style.color = "red"
+                                setTimeout(() => {
+                                    document.getElementById("new-version-label").style.color = "white"
+                                }, 1000)
+                            }
+                            if (!pkgUpload) {
+                                document.getElementById("upload-label").style.color = "red"
+                                setTimeout(() => {
+                                    document.getElementById("upload-label").style.color = "white"
+                                }, 1000)
+                            }
+                            if (pkgUpload && newVer !== "") {
+                                document.getElementById("publish-new-btn").innerHTML = "PUBLISHING..."
+                                let pkgUrl
+
+                                const pkgRef = ref(storage, pkg.package);
+                                await deleteObject(pkgRef).then(() => {
+                                    console.log("deleted pkg")
+                                })
+                                let pkgUploadRef = ref(storage, "users/" + uid + "/packages/" + pkg.id + "/pkg/" + pkgUpload.name)
+                                await uploadBytes(pkgUploadRef, pkgUpload).then(() => {
+                                    console.log("pkg uploaded")
+                                })
+                                pkgUrl = await getDownloadURL(pkgUploadRef)
+
+                                await setDoc(doc(db, "packages", pkg.id), {
+                                    package: pkgUrl,
+                                    current_version: newVer,
+                                }, {merge: true})
+
+                                document.getElementById("publish-new-btn").innerHTML = "PUBLISHED ✅"
+                                setTimeout(() => {
+                                    navigate("/packages/" + pkg.id)
+                                    window.location.reload()
+                                }, 1000)
+
+
+                            }
+                        }} id="publish-new-btn">PUBLISH
+                        </button>
+                    </Popup>
+
                     <br/>
                     <button className="delete-pkg-btn" id="delete-pkg-btn" onClick={async () => {
                         const delete_btn_content = document.getElementById("delete-pkg-btn").innerHTML

@@ -2,7 +2,7 @@ import "./packagePage.css"
 import "./snippetPage.css"
 import {onAuthStateChanged} from "firebase/auth";
 import {doc, getDoc, updateDoc} from "firebase/firestore";
-import {auth, db} from "./firebase.js";
+import {auth, db, user_data} from "./firebase.js";
 import React, {useEffect, useState} from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import shortNumber from "short-number";
@@ -36,6 +36,17 @@ export default function SnippetPage() {
         element.click();
 
         document.body.removeChild(element);
+
+        if (is_logged_in) {
+            if (!user_data.pkgdownloads.includes(snippet.id)) {
+                updateDoc(doc(db, "snippets", snippet.id), {
+                    downloads: [...snippet.downloads, uid]
+                })
+                updateDoc(doc(db, "users", uid), {
+                    codedownloads: [...user_data.codedownloads, snippet.id]
+                })
+            }
+        }
     }
 
 
@@ -102,6 +113,14 @@ export default function SnippetPage() {
                     }
 
                     document.getElementById("happiness_num").innerHTML = avg
+                }
+            }
+
+            if (user_data) {
+                if (user_data.codedownloads.includes(snippet.id)) {
+                    document.getElementById("package-download-side").style.borderBottomLeftRadius = "0px"
+                    document.getElementById("package-download-side").style.borderBottomRightRadius = "0px"
+                    document.getElementById("package-rate-btn").style.display = "inline-block"
                 }
             }
 
@@ -218,14 +237,71 @@ export default function SnippetPage() {
             }}>{">>"}</button>
             <p className="package-characteristics-label code-characteristics-label"></p>
             <div className="package-characteristics code-characteristics">
-                <p>TOTAL DOWNLOADS: {shortNumber(snippet.downloads)}<br/>{snippet.lines} LINES OF CODE<br/>AVERAGE
+                <p>DOWNLOADS: {shortNumber(snippet.downloads.length)}<br/>{snippet.lines} LINE(S) OF CODE<br/>AVERAGE
                     HAPPINESS: <span
                         id="happiness_num">xx.x</span><br/>↳ <span id="review_num">5</span> <span
                         id="review_num_plural">ratings</span>
 
-                    <span id="rate_btn"><br/>↳<Popup trigger={<span className="rate_btn">{">> RATE THIS <<"}</span>}
-                                                     modal id="rating-popup"
-                                                     ref={popupRef} onOpen={() => {
+                    {/*<span id="rate_btn">*/}
+                    {/*    <br/>↳<Popup trigger={<span className="rate_btn">{">> RATE THIS <<"}</span>}*/}
+                    {/*                                 modal id="rating-popup"*/}
+                    {/*                                 ref={popupRef} onOpen={() => {*/}
+                    {/*    if (!is_logged_in) {*/}
+                    {/*        document.getElementById("popup-root").firstChild.firstChild.innerHTML = '<h4>⚠️</h4><p class="popup-signin-txt">You need to sign in to be able to rate snippets.</p><button class="secondary popup-signin-btn" id="popup-sign-in">SIGN_IN</button>'*/}
+                    {/*        document.getElementById("popup-sign-in").onclick = () => {*/}
+                    {/*            navigate("/sign-in")*/}
+                    {/*        }*/}
+                    {/*        document.getElementById("popup-go-back").onclick = () => {*/}
+                    {/*            popupRef.current.close()*/}
+                    {/*        }*/}
+                    {/*    }*/}
+                    {/*}}>*/}
+                    {/*       <h3 className="rating-popup-title">RATE THIS SNIPPET</h3>*/}
+                    {/*       <span className="rating-popup-input"><input type='number' max='100' min='0'*/}
+                    {/*                                                   maxLength='3' className='rating_input'*/}
+                    {/*                                                   id='rating_input' onInput={() => {*/}
+                    {/*           console.log(is_logged_in)*/}
+                    {/*           if (document.getElementById("rating_input").value > 100) {*/}
+                    {/*               document.getElementById("rating_input").value = 100*/}
+                    {/*           } else if (document.getElementById("rating_input").value < 0) {*/}
+                    {/*               document.getElementById("rating_input").value = 0*/}
+                    {/*           }*/}
+                    {/*       }}/>&nbsp;/100</span>*/}
+                    {/*       <br/>*/}
+                    {/*       <button className='secondary rating-popup-btn' id='rating_done_btn' onClick={async () => {*/}
+                    {/*           // if no map exists on the package firebase doc, create one and add the rating, else add the rating to the map*/}
+                    {/*           await updateDoc(doc(db, "snippets", snippet.id), {*/}
+                    {/*               // get all existing ratings of the package using the pkg object, and add the new rating to the map*/}
+                    {/*               ratings: {*/}
+                    {/*                   ...snippet.ratings,*/}
+                    {/*                   [uid]: document.getElementById("rating_input").value*/}
+                    {/*               }*/}
+                    {/*           }).then(() => {*/}
+                    {/*               // reload the page to update the rating*/}
+                    {/*               window.location.reload();*/}
+                    {/*           })*/}
+                    {/*       }}>SUBMIT</button>*/}
+
+                    {/*   </Popup>*/}
+                    {/*</span>*/}
+
+                    <br/><span className="current-ver">CURRENT
+                        VERSION: {snippet.current_version}</span><br/>
+                    <button className="package-download-side" id="package-download-side"
+                            onClick={() => downloadCode()}>DOWNLOAD
+                    </button>
+                    <Popup trigger={
+                        <button className="secondary package-rate-btn"
+                                onClick={() => {
+                                }} style={{
+                            width: "152px",
+                            borderTopLeftRadius: "0px",
+                            borderTopRightRadius: "0px",
+                            display: "inline-block"
+                        }} id="package-rate-btn">RATE SNIPPET
+                        </button>
+                    } modal id="rating-popup"
+                           ref={popupRef} onOpen={() => {
                         if (!is_logged_in) {
                             document.getElementById("popup-root").firstChild.firstChild.innerHTML = '<h4>⚠️</h4><p class="popup-signin-txt">You need to sign in to be able to rate snippets.</p><button class="secondary popup-signin-btn" id="popup-sign-in">SIGN_IN</button>'
                             document.getElementById("popup-sign-in").onclick = () => {
@@ -236,39 +312,34 @@ export default function SnippetPage() {
                             }
                         }
                     }}>
-                           <h3 className="rating-popup-title">RATE THIS SNIPPET</h3>
-                           <span className="rating-popup-input"><input type='number' max='100' min='0'
-                                                                       maxLength='3' className='rating_input'
-                                                                       id='rating_input' onInput={() => {
-                               console.log(is_logged_in)
-                               if (document.getElementById("rating_input").value > 100) {
-                                   document.getElementById("rating_input").value = 100
-                               } else if (document.getElementById("rating_input").value < 0) {
-                                   document.getElementById("rating_input").value = 0
-                               }
-                           }}/>&nbsp;/100</span>
-                           <br/>
-                           <button className='secondary rating-popup-btn' id='rating_done_btn' onClick={async () => {
-                               // if no map exists on the package firebase doc, create one and add the rating, else add the rating to the map
-                               await updateDoc(doc(db, "snippets", snippet.id), {
-                                   // get all existing ratings of the package using the pkg object, and add the new rating to the map
-                                   ratings: {
-                                       ...snippet.ratings,
-                                       [uid]: document.getElementById("rating_input").value
-                                   }
-                               }).then(() => {
-                                   // reload the page to update the rating
-                                   window.location.reload();
-                               })
-                           }}>SUBMIT</button>
+                        <h3 className="rating-popup-title">RATE THIS SNIPPET</h3>
+                        <span className="rating-popup-input"><input type='number' max='100' min='0'
+                                                                    maxLength='3' className='rating_input'
+                                                                    id='rating_input' onInput={() => {
+                            console.log(is_logged_in)
+                            if (document.getElementById("rating_input").value > 100) {
+                                document.getElementById("rating_input").value = 100
+                            } else if (document.getElementById("rating_input").value < 0) {
+                                document.getElementById("rating_input").value = 0
+                            }
+                        }}/>&nbsp;/100</span>
+                        <br/>
+                        <button className='secondary rating-popup-btn' id='rating_done_btn' onClick={async () => {
+                            // if no map exists on the package firebase doc, create one and add the rating, else add the rating to the map
+                            await updateDoc(doc(db, "snippets", snippet.id), {
+                                // get all existing ratings of the package using the pkg object, and add the new rating to the map
+                                ratings: {
+                                    ...snippet.ratings,
+                                    [uid]: document.getElementById("rating_input").value
+                                }
+                            }).then(() => {
+                                // reload the page to update the rating
+                                window.location.reload();
+                            })
+                        }}>SUBMIT
+                        </button>
 
-                       </Popup></span>
-
-                    <br/><span className="current-ver">CURRENT
-                        VERSION: {snippet.current_version}</span><br/>
-                    <button className="package-download-side" id="package-download-side"
-                            onClick={() => downloadCode()}>DOWNLOAD
-                    </button>
+                    </Popup>
                 </p>
             </div>
             {/*<div className="bottom-block"></div>*/}

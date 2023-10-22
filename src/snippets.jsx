@@ -20,7 +20,7 @@ export default function Snippets() {
 
     function handler(e) {
         const isTouchPad = e.wheelDeltaY ? e.wheelDeltaY === -3 * e.deltaY : e.deltaMode === 0;
-        if (!isTouchPad && !window.mobileCheck()) {
+        if (!isTouchPad && window.mobileCheck()) {
             const packagesCardListChild = document.getElementsByClassName("packages-card-list-child");
             for (let i = 0; i < packagesCardListChild.length; i++) {
                 packagesCardListChild[i].style.marginRight = "15px";

@@ -10,7 +10,7 @@ import MDEditor from "@uiw/react-md-editor";
 import React, {useEffect, useState} from "react";
 import {deleteObject, getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {deleteDoc, doc, getDoc, setDoc} from "firebase/firestore";
-import {FcCancel} from "react-icons/fc";
+import Popup from "reactjs-popup";
 
 export default function EditSnippet(props) {
     const navigate = useNavigate()
@@ -146,7 +146,7 @@ export default function EditSnippet(props) {
 
     return (
         <>
-            <input type="text" className="package-title" placeholder="@NAME"
+            <input type="text" className="package-title edit-package-title" placeholder="@NAME"
                    style={{height: "60px", width: "90%", fontSize: "25px"}} value={newName}
                    onChange={e => setNewName(e.target.value)}/>
 
@@ -174,18 +174,18 @@ export default function EditSnippet(props) {
                     onChange={setNewDesc}
                 />
             }</p>
-            <dialog id="new-ver-dialog">
-                <h4>NEW VERSION</h4>
-                <input type="text" placeholder="VERSION ID"
-                       style={{marginTop: "20px", marginBottom: "30px", fontSize: "20px"}} value={newVer}
-                       onChange={e => setNewVer(e.target.value)}/>
-                <p>// NEW CODE</p>
-                <textarea className="code-editor" placeholder="⚠️ Place your final code here ⚠️" value={newCode}
-                          onChange={e => setNewCode(e.target.value)}></textarea>
-                <button onClick={() => document.getElementById("new-ver-dialog").close()}>OK</button>
-                <p className="dialog-save-reminder">⚠️ DO NOT FORGET TO SAVE ⚠️</p>
+            {/*<dialog id="new-ver-dialog">*/}
+            {/*    <h4>NEW VERSION</h4>*/}
+            {/*    <input type="text" placeholder="VERSION ID"*/}
+            {/*           style={{marginTop: "20px", marginBottom: "30px", fontSize: "20px"}} value={newVer}*/}
+            {/*           onChange={e => setNewVer(e.target.value)}/>*/}
+            {/*    <p>// NEW CODE</p>*/}
+            {/*    <textarea className="code-editor" placeholder="⚠️ Place your final code here ⚠️" value={newCode}*/}
+            {/*              onChange={e => setNewCode(e.target.value)}></textarea>*/}
+            {/*    <button onClick={() => document.getElementById("new-ver-dialog").close()}>OK</button>*/}
+            {/*    <p className="dialog-save-reminder">⚠️ DO NOT FORGET TO SAVE ⚠️</p>*/}
 
-            </dialog>
+            {/*</dialog>*/}
             <div className="package-screenshots code-screenshots" id="package-screenshots">
                 <input type="file" id="img-file-one" style={{display: "none"}}
                        onChange={(event) => setImgUploadOne(event.target.files[0])}
@@ -282,7 +282,7 @@ export default function EditSnippet(props) {
             <p className="package-characteristics-label"></p>
             <div className="package-characteristics" id="package-characteristics">
                 <p style={{marginRight: "29px"}} id="package-char-p">
-                    {snippet.lines} LINES OF CODE<br/><br/><input type='text'
+                    {snippet.lines} LINES OF CODE<br/><input type='text'
                                                                   id='pkg-version-input'
                                                                   className='pkg-version-input'
                                                                   placeholder='NEW VERSION'
@@ -294,28 +294,64 @@ export default function EditSnippet(props) {
                                                                   }}/><span
                     id="package-version"
                     className="current-ver">CURRENT VERSION: {snippet.current_version}</span><br/>
-                    <FcCancel className="revert-upload-pkg" id="revert-upload-pkg" onClick={() => {
-                        if (document.getElementById("upload-new-pkg-btn").innerHTML.includes("UPLOAD PACKAGE")) {
-                            document.getElementById("package-version").innerHTML = "CURRENT VERSION: " + snippet.current_version
-                            document.getElementById("upload-new-pkg-btn").style.display = "none"
-                            document.getElementById("new-pkg-version-btn").style.display = "block"
-                            document.getElementById("revert-upload-pkg").style.display = "none"
-                            document.getElementById("package-char-p").style.marginRight = "29px"
-                            document.getElementById("upload-new-pkg-btn").innerHTML = document.getElementById("upload-new-pkg-btn").innerHTML.replace("✅ UPLOAD PACKAGE", "UPLOAD PACKAGE")
-                            // add the icon back
-                            document.getElementById("file-input-icon").style.display = "revert"
-                            document.getElementById("package-version").innerHTML = "CURRENT VERSION: " + snippet.current_version
-                            document.getElementById("pkg-version-input").style.display = "none"
-                            document.getElementById("delete-pkg-btn").style.display = "revert"
-                            document.getElementById("delete-pkg-btn").style.marginTop = "-35px"
-                        }
 
-                    }}></FcCancel><br/>
-                    <button className="new-pkg-version-btn" id="new-pkg-version-btn" onClick={() => {
-                        let dialog = document.getElementById("new-ver-dialog")
-                        dialog.showModal()
-                    }}>+ NEW VERSION
-                    </button>
+
+                    <Popup trigger={
+                        <button className="new-pkg-version-btn" id="new-pkg-version-btn" onClick={() => {
+                            let dialog = document.getElementById("new-ver-dialog")
+                            dialog.showModal()
+                        }}>+ NEW VERSION
+                        </button>
+                    } modal className="new-pkg-version-popup">
+                        <p style={{textAlign: "center", fontSize: "21px", fontWeight: "700"}}>PUBLISH A NEW VERSION</p>
+                        <label className="name-input-label" htmlFor="pkg-version" id="new-version-label"
+                               style={{transition: "0.2s"}}>NEW VERSION</label><br/>
+                        <label className="name-input-label-desc" htmlFor="pkg-version">The new version of your code
+                            <br/>(e.g. 2.0, BETA, 1.0.0B)</label><br/>
+                        <input type="text" className="proto-input" id="pkg-version" placeholder="@new_code_version"
+                               style={{marginTop: "0px", width: "250px"}} value={newVer}
+                               onChange={e => setNewVer(e.target.value)}/>
+
+                        <br/>
+                        <br/>
+                        <label className="name-input-label" htmlFor="code-editor" id="new-version-label"
+                               style={{transition: "0.2s"}}>NEW CODE</label><br/>
+                        <label className="name-input-label-desc" htmlFor="code-editor">The new code of your
+                            project</label><br/>
+                        <textarea className="code-editor" id="code-editor"
+                                  placeholder="⚠️ Place your final code here ⚠️" value={newCode}
+                                  onChange={e => setNewCode(e.target.value)} style={{width: "293px"}}></textarea><br/>
+                        <button className="primary" onClick={async () => {
+                            document.getElementById("snippet-publish-btn").innerHTML = "PUBLISHING..."
+                            let currentVer
+                            let currentCode
+
+                            if (newVer === "") {
+                                currentVer = snippet.current_version
+                            } else {
+                                currentVer = newVer
+                            }
+                            if (newCode === "") {
+                                currentCode = snippet.code
+                            } else {
+                                currentCode = newCode
+                            }
+
+                            await setDoc(doc(db, "snippets", snippet.id), {
+                                current_version: currentVer,
+                                code: currentCode
+                            }, {merge: true})
+                            document.getElementById("snippet-publish-btn").innerHTML = "PUBLISHED ✅"
+                            setTimeout(() => {
+                                navigate("/snippets/" + snippet.id)
+                                window.location.reload()
+                            }, 1000)
+
+
+                        }} id="snippet-publish-btn">PUBLISH
+                        </button>
+                    </Popup>
+
                     <br/>
                     <button className="delete-pkg-btn" style={{textAlign: "center", paddingLeft: "15px"}}
                             id="delete-pkg-btn" onClick={async () => {

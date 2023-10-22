@@ -47,6 +47,7 @@
     color: #1e1e1e;
     border: 0;
     outline: 0;
+    margin-top: 20px;
 }
 
 .new-pkg-version-btn:hover {
@@ -118,7 +119,7 @@
     border: 0;
     outline: 0;
     max-width: 162px;
-    margin-top: 17px;
+    margin-top: 5px;
     margin-left: 3px;
 }
 
@@ -126,10 +127,25 @@
     background-color: #c70000;
 }
 
+.edit-package-title {
+    border: 0 !important;
+    background: none !important;
+    box-shadow: none !important;
+    font-size: 50px !important;
+    font-weight: 900;
+    position: relative;
+    margin-top: -5px;
+    margin-left: -20px;
+}
+
 /*.package-characteristics {*/
 /*    right: 980px;*/
 /*}*/
 
+/*.new-pkg-version-popup {*/
+/*    width: 900px !important;*/
+/*    background-color: black !important;*/
+/*}*/
 
 @media screen and (max-width: 1060px) {
     .package-description-edit {

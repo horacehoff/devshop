@@ -51,7 +51,9 @@ function SignUpUser(username, email, password, {navigate}) {
                     pfp_path: "",
                     banner_path: "",
                     followers: [],
-                    following: []
+                    following: [],
+                    pkgdownloads: [],
+                    codedownloads: []
                 }).then(r => {
                         console.log("registered+db_created+signed-in");
                         navigate("/");

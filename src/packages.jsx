@@ -2,7 +2,6 @@ import "./packages.css"
 import {collection, getDocs, limit, orderBy, query, startAt, where} from "firebase/firestore";
 import {Link, useNavigate} from "react-router-dom";
 import PackageCard from "./packageCard.jsx";
-import shortNumber from "short-number";
 import {IoMdSearch} from "react-icons/io";
 import {useEffect, useState} from "react";
 import {db, user_data} from "./firebase.js";
@@ -21,7 +20,7 @@ export default function Packages() {
 
     function handler(e) {
         const isTouchPad = e.wheelDeltaY ? e.wheelDeltaY === -3 * e.deltaY : e.deltaMode === 0;
-        if (!isTouchPad && !window.mobileCheck()) {
+        if (!isTouchPad && window.mobileCheck()) {
             const packagesCardListChild = document.getElementsByClassName("packages-card-list-child");
             for (let i = 0; i < packagesCardListChild.length; i++) {
                 packagesCardListChild[i].style.marginRight = "15px";
@@ -139,7 +138,7 @@ export default function Packages() {
                     {similarPackagesData.map((pkg, index) => (
                         <li key={index} className="packages-card-list-child">
                             <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
-                                <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username}
+                                <PackageCard dwnl={pkg.downloads} author={pkg.owner_username}
                                              name={pkg.name}
                                              catchphrase={pkg.catchphrase} banner={pkg.banner}/>
                             </Link>
@@ -181,7 +180,7 @@ export default function Packages() {
                 {trendingPackageData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">
                         <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
-                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
+                            <PackageCard dwnl={pkg.downloads} author={pkg.owner_username} name={pkg.name}
                                          catchphrase={pkg.catchphrase} banner={pkg.banner}/>
                         </Link>
                     </li>
@@ -218,7 +217,7 @@ export default function Packages() {
                         navigate("/packages/" + pkg.id)
                     }}>
                         <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
-                            <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username} name={pkg.name}
+                            <PackageCard dwnl={pkg.downloads} author={pkg.owner_username} name={pkg.name}
                                          catchphrase={pkg.catchphrase} banner={pkg.banner}/>
                         </Link>
                     </li>

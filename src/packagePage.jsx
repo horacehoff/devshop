@@ -30,26 +30,14 @@ export default function PackagePage() {
         getDownloadURL(pkgRef).then((url) => {
             window.location.assign(url);
             if (is_logged_in) {
-                getDoc(doc(db, "packages", pkg.id)).then((doc) => {
-                    if (doc.exists()) {
-                        set_new_downloads(doc.data().downloads);
-                    } else {
-                        set_new_downloads(-1);
-                    }
-                })
-                if (!user_data.downloadpkg.includes(pkg.id)) {
+                if (!user_data.pkgdownloads.includes(pkg.id)) {
+                    updateDoc(doc(db, "packages", pkg.id), {
+                        downloads: [...pkg.downloads, uid]
+                    })
                     updateDoc(doc(db, "users", uid), {
-                        downloadpkg: [...user_data.downloadpkg, pkg.id]
+                        pkgdownloads: [...user_data.pkgdownloads, pkg.id]
                     })
                 }
-                if (new_downloads !== -1) {
-                    updateDoc(doc(db, "packages", pkg.id), {
-                        downloads: new_downloads + 1
-                    }).then(() => {
-                        console.log("updated");
-                    });
-                }
-
             }
         })
     }
@@ -121,6 +109,13 @@ export default function PackagePage() {
                     }
 
                     document.getElementById("happiness_num").innerHTML = avg
+                }
+            }
+            if (user_data) {
+                if (user_data.pkgdownloads.includes(pkg.id)) {
+                    document.getElementById("package-download-side").style.borderBottomLeftRadius = "0px"
+                    document.getElementById("package-download-side").style.borderBottomRightRadius = "0px"
+                    document.getElementById("package-rate-btn").style.display = "inline-block"
                 }
             }
 
@@ -231,63 +226,112 @@ export default function PackagePage() {
             </div>
             <p className="package-characteristics-label"></p>
             <div className="package-characteristics">
-                <p>DOWNLOADS: {shortNumber(pkg.downloads)}<br/>AVERAGE HAPPINESS: <span
+                <p>DOWNLOADS: {shortNumber(pkg.downloads.length)}<br/>AVERAGE HAPPINESS: <span
                     id="happiness_num">xx.x</span><br/>↳ <span id="review_num">5</span> <span
                     id="review_num_plural">ratings</span>
 
-                    <span id="rate_btn"><br/>↳
+                    {/*<span id="rate_btn"><br/>↳*/}
 
-                       <Popup trigger={<span className="rate_btn">{">> RATE THIS <<"}</span>} modal id="rating-popup"
-                              ref={popupRef} onOpen={() => {
-                           if (!is_logged_in) {
-                               document.getElementById("popup-root").firstChild.firstChild.innerHTML = '<h4>⚠️</h4><p class="popup-signin-txt">You need to sign in to be able to rate packages.</p><button class="secondary popup-signin-btn" id="popup-sign-in">SIGN_IN</button>'
-                               document.getElementById("popup-sign-in").onclick = () => {
-                                   navigate("/sign-in")
-                               }
-                               document.getElementById("popup-go-back").onclick = () => {
-                                   popupRef.current.close()
-                               }
-                           }
-                       }}>
-                           <h3 className="rating-popup-title">RATE THIS PACKAGE</h3>
-                           <span className="rating-popup-input"><input type='number' max='100' min='0'
-                                                                       maxLength='3' className='rating_input'
-                                                                       id='rating_input' onInput={() => {
-                               console.log(is_logged_in)
-                               if (document.getElementById("rating_input").value > 100) {
-                                   document.getElementById("rating_input").value = 100
-                               } else if (document.getElementById("rating_input").value < 0) {
-                                   document.getElementById("rating_input").value = 0
-                               }
-                           }}/>&nbsp;/100</span>
-                           <br/>
-                           <button className='secondary rating-popup-btn' id='rating_done_btn' onClick={async () => {
-                               // if no map exists on the package firebase doc, create one and add the rating, else add the rating to the map
-                               await updateDoc(doc(db, "packages", pkg.id), {
-                                   // get all existing ratings of the package using the pkg object, and add the new rating to the map
-                                   ratings: {
-                                       ...pkg.ratings,
-                                       [uid]: document.getElementById("rating_input").value
-                                   }
-                               }).then(() => {
-                                   // reload the page to update the rating
-                                   window.location.reload();
-                               })
-                           }}>SUBMIT</button>
+                    {/*<Popup trigger={<span className="rate_btn">{">> RATE THIS <<"}</span>} modal id="rating-popup"*/}
+                    {/*       ref={popupRef} onOpen={() => {*/}
+                    {/*    if (!is_logged_in) {*/}
+                    {/*        document.getElementById("popup-root").firstChild.firstChild.innerHTML = '<h4>⚠️</h4><p class="popup-signin-txt">You need to sign in to be able to rate packages.</p><button class="secondary popup-signin-btn" id="popup-sign-in">SIGN_IN</button>'*/}
+                    {/*        document.getElementById("popup-sign-in").onclick = () => {*/}
+                    {/*            navigate("/sign-in")*/}
+                    {/*        }*/}
+                    {/*        document.getElementById("popup-go-back").onclick = () => {*/}
+                    {/*            popupRef.current.close()*/}
+                    {/*        }*/}
+                    {/*    }*/}
+                    {/*}}>*/}
+                    {/*    <h3 className="rating-popup-title">RATE THIS PACKAGE</h3>*/}
+                    {/*    <span className="rating-popup-input"><input type='number' max='100' min='0'*/}
+                    {/*                                                maxLength='3' className='rating_input'*/}
+                    {/*                                                id='rating_input' onInput={() => {*/}
+                    {/*        console.log(is_logged_in)*/}
+                    {/*        if (document.getElementById("rating_input").value > 100) {*/}
+                    {/*            document.getElementById("rating_input").value = 100*/}
+                    {/*        } else if (document.getElementById("rating_input").value < 0) {*/}
+                    {/*            document.getElementById("rating_input").value = 0*/}
+                    {/*        }*/}
+                    {/*    }}/>&nbsp;/100</span>*/}
+                    {/*    <br/>*/}
+                    {/*    <button className='secondary rating-popup-btn' id='rating_done_btn' onClick={async () => {*/}
+                    {/*        // if no map exists on the package firebase doc, create one and add the rating, else add the rating to the map*/}
+                    {/*        await updateDoc(doc(db, "packages", pkg.id), {*/}
+                    {/*            // get all existing ratings of the package using the pkg object, and add the new rating to the map*/}
+                    {/*            ratings: {*/}
+                    {/*                ...pkg.ratings,*/}
+                    {/*                [uid]: document.getElementById("rating_input").value*/}
+                    {/*            }*/}
+                    {/*        }).then(() => {*/}
+                    {/*            // reload the page to update the rating*/}
+                    {/*            window.location.reload();*/}
+                    {/*        })*/}
+                    {/*    }}>SUBMIT</button>*/}
 
-                       </Popup>
-
-
+                    {/*</Popup>*/}
 
 
-                    </span>
+                    {/*</span>*/}
 
                     <br/>
                     DISK SIZE: {Math.round(pkg.sizeMb * 10) / 10}MB<br/><span className="current-ver">
                         VERSION: {pkg.current_version}</span><br/>
-                    <button className="package-download-side" id="package-download-side"
+                    <button className="package-download-side pkg-side-dwnl" id="package-download-side"
                             onClick={() => downloadPkg()}>DOWNLOAD
                     </button>
+                    <Popup trigger={
+                        <button className="secondary package-rate-btn"
+                                onClick={() => {
+                                }} style={{
+                            width: "152px",
+                            borderTopLeftRadius: "0px",
+                            borderTopRightRadius: "0px",
+                            display: "none"
+                        }} id="package-rate-btn">RATE PACKAGE
+                        </button>
+                    } modal id="rating-popup"
+                           ref={popupRef} onOpen={() => {
+                        if (!is_logged_in) {
+                            document.getElementById("popup-root").firstChild.firstChild.innerHTML = '<h4>⚠️</h4><p class="popup-signin-txt">You need to sign in to be able to rate packages.</p><button class="secondary popup-signin-btn" id="popup-sign-in">SIGN_IN</button>'
+                            document.getElementById("popup-sign-in").onclick = () => {
+                                navigate("/sign-in")
+                            }
+                            document.getElementById("popup-go-back").onclick = () => {
+                                popupRef.current.close()
+                            }
+                        }
+                    }}>
+                        <h3 className="rating-popup-title">RATE THIS PACKAGE</h3>
+                        <span className="rating-popup-input"><input type='number' max='100' min='0'
+                                                                    maxLength='3' className='rating_input'
+                                                                    id='rating_input' onInput={() => {
+                            console.log(is_logged_in)
+                            if (document.getElementById("rating_input").value > 100) {
+                                document.getElementById("rating_input").value = 100
+                            } else if (document.getElementById("rating_input").value < 0) {
+                                document.getElementById("rating_input").value = 0
+                            }
+                        }}/>&nbsp;/100</span>
+                        <br/>
+                        <button className='secondary rating-popup-btn' id='rating_done_btn' onClick={async () => {
+                            // if no map exists on the package firebase doc, create one and add the rating, else add the rating to the map
+                            await updateDoc(doc(db, "packages", pkg.id), {
+                                // get all existing ratings of the package using the pkg object, and add the new rating to the map
+                                ratings: {
+                                    ...pkg.ratings,
+                                    [uid]: document.getElementById("rating_input").value
+                                }
+                            }).then(() => {
+                                // reload the page to update the rating
+                                window.location.reload();
+                            })
+                        }}>SUBMIT
+                        </button>
+
+                    </Popup>
+
                 </p>
             </div>
             {/*<div className="bottom-block"></div>*/}
