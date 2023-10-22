@@ -1,13 +1,12 @@
 import "./searchPackages.css"
 import {useEffect, useState} from "react";
-import shortNumber from "short-number";
 import {Link, useParams} from "react-router-dom";
 import {collection, getDocs, limit, query, where} from "firebase/firestore";
 import {db} from "./firebase.js";
 import SnippetCard from "./snippetCard.jsx";
 import PackageCard from "./packageCard.jsx";
 
-export default function SearchPackages() {
+export default function Search() {
     const [searchInput, setSearchInput] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [height, setHeight] = useState("35px")
@@ -32,7 +31,7 @@ export default function SearchPackages() {
             let q = null;
             if (pkgType === "PACKAGES") {
                 if (downloadLimit > 0 && userId) {
-                    if (downloadMoreThan) {
+                    if (!downloadMoreThan) {
                         q = query(collection(db, "packages"), where('owner_username', '>=', userId), where('owner_username', '<=', userId + '\uf8ff'));
                         getDocs(q).then((querySnapshot) => {
                             let q_results = []
@@ -70,7 +69,7 @@ export default function SearchPackages() {
                         })
                     }
                 } else if (downloadLimit > 0) {
-                    if (downloadMoreThan) {
+                    if (!downloadMoreThan) {
                         q = query(collection(db, "packages"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'));
                         getDocs(q).then((querySnapshot) => {
                             let q_results = []
@@ -143,7 +142,7 @@ export default function SearchPackages() {
                 }
             } else {
                 if (downloadLimit > 0 && userId) {
-                    if (downloadMoreThan) {
+                    if (!downloadMoreThan) {
                         q = query(collection(db, "snippets"), where('owner_username', '>=', userId), where('owner_username', '<=', userId + '\uf8ff'));
                         getDocs(q).then((querySnapshot) => {
                             let q_results = []
@@ -181,7 +180,7 @@ export default function SearchPackages() {
                         })
                     }
                 } else if (downloadLimit > 0) {
-                    if (downloadMoreThan) {
+                    if (!downloadMoreThan) {
                         q = query(collection(db, "snippets"), where('name', '>=', searchInput), where('name', '<=', searchInput + '\uf8ff'));
                         getDocs(q).then((querySnapshot) => {
                             let q_results = []
@@ -381,7 +380,7 @@ export default function SearchPackages() {
                                 navigate("/packages/" + pkg.id)
                             }}>
                                 <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
-                                    <PackageCard dwnl={shortNumber(pkg.downloads)} author={pkg.owner_username}
+                                    <PackageCard dwnl={pkg.downloads} author={pkg.owner_username}
                                                  name={pkg.name}
                                                  catchphrase={pkg.catchphrase} banner={pkg.banner}/>
                                 </Link>

@@ -17,7 +17,7 @@ import ResetPassword from "./resetPassword.jsx";
 import AccountSettings from "./accountSettings.jsx";
 import AccountPage from "./accountPage.jsx";
 import EditPackage from "./editPackage.jsx";
-import SearchPackages from "./searchPackages.jsx";
+import Search from "./search.jsx";
 import Snippets from "./snippets.jsx";
 import CreateSnippet from "./createSnippet.jsx";
 import SnippetPage from "./snippetPage.jsx";
@@ -44,7 +44,7 @@ function App() {
                 <Route path="/packages" element={
                     <Packages/>
                 }/>
-                <Route path="/search/:query?" element={<SearchPackages/>}/>
+                <Route path="/search/:query?" element={<Search/>}/>
                 {/*<Route path="/snippets/q/:query?" element={<SearchSnippets/>}/>*/}
                 <Route path="/snippets" element={<Snippets/>}/>
                 <Route path="/publish-snippet" element={
