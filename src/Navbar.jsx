@@ -218,11 +218,15 @@ export default function Navbar() {
 
     return (
         <>
+            <div className="nav-blur">
+
+            </div>
             <div className="nav">
                 <h2 onClick={() => navigate("/")} id="nav-title">
                     <span className="nav-txt-title"><img src={navicon} className="nav-icon-title" alt="D"/>
                     EVSHOP
                     </span>
+                    {/*<img src={devshop} className="nav-title" alt="DEVSHOP"/>*/}
                 </h2>
                 <Link id="snippets" to="/snippets" className="nav-link">SNIPPETS</Link>
                 <Link id="packages" to="/packages" className="nav-link">PACKAGES</Link>

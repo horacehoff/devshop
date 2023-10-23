@@ -2,6 +2,29 @@
     right: 20px
 }
 
+.nav {
+    z-index: 500000000;
+}
+
+.nav-blur {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 75px;
+    backdrop-filter: blur(10px);
+    z-index: 49;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000;
+    transform: translate3d(0, 0, 0);
+    transform: translateZ(0);
+    /*background-color: rgba(0, 0, 0, 0.25);*/
+}
+
 #hamburger, .nav h2 {
     cursor: pointer;
     z-index: 50000;
@@ -9,7 +32,8 @@
 }
 
 #full-nav, #full-nav-account, #hamburger, #nav-title, .nav h2, .nav h4, .nav-link {
-    position: fixed
+    position: fixed;
+    z-index: 50000;
 }
 
 #full-nav, #full-nav ul {
@@ -66,7 +90,8 @@
 
 #nav-title {
     top: 8px;
-    text-shadow: 0px 1px 2px rgb(0 0 0 / 80%);
+    /*text-shadow: 0px 1px 2px rgb(0 0 0 / 80%);*/
+    /*backdrop-filter: blur(10px);*/
 }
 
 #snippets {
@@ -151,6 +176,27 @@
 .nav-txt-title {
     color: white !important;
     transition: 0.25s;
+}
+
+.nav-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 900;
+    font-size: 40px;
+    margin: 0;
+    width: 164px;
+    /*left: 20px*/
+    /*scale: 0.138865368;*/
+    /*position: absolute;*/
+    left: -511px;
+    /*top: -144px;*/
+    transition: 0.2s;
+    /*image-resolution: from-image;*/
+    /*image-rendering: pixelated;*/
+    /*display: none;*/
+}
+
+.nav-title:hover {
+    filter: brightness(0.75);
 }
 
 
