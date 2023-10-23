@@ -9,9 +9,10 @@
 .nav-blur {
     position: fixed;
     left: 0;
-    top: 0;
+    top: -90px;
     width: 100%;
-    height: 75px;
+    /*height: 75px;*/
+    height: 165px;
     backdrop-filter: blur(10px);
     z-index: 49;
     -webkit-backface-visibility: hidden;
