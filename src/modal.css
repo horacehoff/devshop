@@ -2,6 +2,7 @@
     margin: auto;
     background: var(--background) !important;
     width: 300px;
+    /*width: fit-content;*/
     padding: 5px;
     height: fit-content !important;
 }
@@ -17,15 +18,15 @@
 }
 
 .popup-content h4 {
-    color: darkorange !important;
+    color: red !important;
     text-align: center;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .popup-signin-txt {
     font-size: 14px;
     text-align: center;
-
+    font-weight: 600;
 }
 
 .popup-signin-btn {

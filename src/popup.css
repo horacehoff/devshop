@@ -1,9 +1,9 @@
 .popup-content {
     width: fit-content;
     height: fit-content;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    /*padding-bottom: 10px;*/
     transition: .2s;
     background: rgba(103, 120, 255, 0.25) !important;
     /*box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;*/

@@ -32,6 +32,8 @@ export default function CreatePackage() {
     let pkg_id = "";
 
     const [warning, setWarning] = useState(false);
+    const [missingFields, setMissingFields] = useState(false);
+    const [missingUploads, setMissingUploads] = useState(false);
 
     let uid = "";
     const navigate = useNavigate()
@@ -173,11 +175,21 @@ export default function CreatePackage() {
                 <button className="secondary popup-signin-btn" onClick={() => navigate("/sign-in")}>SIGN_IN</button>
                 {/*<button className="primary popup-back-btn" onClick={() => navigate("/packages")}>GO BACK</button>*/}
             </span></Popup>
+            <Popup modal open={missingFields}><span>
+                <h4>ERROR</h4>
+                <p className="popup-signin-txt">You need to fill in the required fields.</p>
+                <button className="secondary popup-signin-btn" onClick={() => setMissingFields(false)}>OK</button>
+            </span></Popup>
+            <Popup modal open={missingUploads}><span>
+                <h4>ERROR</h4>
+                <p className="popup-signin-txt">You need to upload the required files.</p>
+                <button className="secondary popup-signin-btn" onClick={() => setMissingUploads(false)}>OK</button>
+            </span></Popup>
             <div className="split">
                 <div className="split-two" id="split-two">
                     <h1 className="about-title about-title-card">PUBLISH A PACKAGE</h1>
                     <div className="split-two-card">
-                        <PackageCard dwnl="0" author={user_data ? user_data.username : "placeholder"}
+                        <PackageCard dwnl={[]} author={user_data ? user_data.username : "placeholder"}
                                      name={name || "placeholder"}
                                      catchphrase={desc || "placeholder"} banner={bannerURL}/>
                     </div>
@@ -281,10 +293,10 @@ export default function CreatePackage() {
                                 document.getElementById("publish-btn").innerHTML = "PUBLISH PACKAGE"
                             }
                         }} onClick={() => {
-                            if (name === "") {
-                                alert("Invalid name")
-                            } else if (pkgUpload == null) {
-                                alert("Please select a file.")
+                            if (name === "" || desc === "" || version === "" || longDesc === "" || !/\S/.test(name) || !/\S/.test(desc) || !/\S/.test(version) || !/\S/.test(longDesc)) {
+                                setMissingFields(true)
+                            } else if (!pkgUpload || !imgUpload0ne || !imgUploadTwo || !imgUploadThree || !imgUploadFour || !banner) {
+                                setMissingUploads(true)
                             } else {
                                 document.getElementById("publish-btn").style.pointerEvents = "none"
                                 document.getElementById("publish-btn").innerHTML = "UPLOADING => ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 0%"
