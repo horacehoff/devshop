@@ -27,6 +27,20 @@
     color: #0058ab;
 }
 
+.about-credits-list {
+    /*position: relative;*/
+    margin-left: 50%;
+    transform: translate(-50%);
+    width: 300px;
+    padding: 0;
+    height: fit-content;
+    list-style-type: none;
+}
+
+.about-credits-list a {
+    color: dodgerblue;
+}
+
 @media screen and (max-width: 510px) {
     .about-banner {
         width: 100%;
