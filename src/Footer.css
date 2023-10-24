@@ -42,4 +42,8 @@
     .footer-about-sep:before {
         content: "‎‎";
     }
+
+    .footer {
+        margin-bottom: 60px;
+    }
 }
