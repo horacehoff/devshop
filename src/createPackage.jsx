@@ -174,12 +174,14 @@ export default function CreatePackage() {
                 <p className="popup-signin-txt">You need to sign in to be able to publish packages.</p>
                 <button className="secondary popup-signin-btn" onClick={() => navigate("/sign-in")}>SIGN_IN</button>
                 {/*<button className="primary popup-back-btn" onClick={() => navigate("/packages")}>GO BACK</button>*/}
-            </span></Popup>
+            </span>
+            </Popup>
             <Popup modal open={missingFields}><span>
                 <h4>ERROR</h4>
                 <p className="popup-signin-txt">You need to fill in the required fields.</p>
                 <button className="secondary popup-signin-btn" onClick={() => setMissingFields(false)}>OK</button>
-            </span></Popup>
+            </span>
+            </Popup>
             <Popup modal open={missingUploads}><span>
                 <h4>ERROR</h4>
                 <p className="popup-signin-txt">You need to upload the required files.</p>

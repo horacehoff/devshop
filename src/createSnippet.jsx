@@ -13,8 +13,6 @@ import SnippetCard from "./snippetCard.jsx";
 import Popup from "reactjs-popup";
 
 export default function CreateSnippet() {
-    const [pkgUpload, setPkgUpload] = useState(null);
-
     const [imgUpload0ne, setImgUploadOne] = useState(null);
 
     const [imgUploadTwo, setImgUploadTwo] = useState(null);
@@ -31,6 +29,8 @@ export default function CreateSnippet() {
     let codeblock_id = "";
 
     const [warning, setWarning] = useState(false);
+    const [missingFields, setMissingFields] = useState(false);
+    const [missingUploads, setMissingUploads] = useState(false);
 
     let uid = "";
     const navigate = useNavigate()
@@ -154,6 +154,17 @@ export default function CreateSnippet() {
                 <p className="popup-signin-txt">You need to sign in to be able to publish snippets.</p>
                 <button className="secondary popup-signin-btn" onClick={() => navigate("/sign-in")}>SIGN_IN</button>
             </span></Popup>
+            <Popup modal open={missingFields}><span>
+                <h4>ERROR</h4>
+                <p className="popup-signin-txt">You need to fill in the required fields.</p>
+                <button className="secondary popup-signin-btn" onClick={() => setMissingFields(false)}>OK</button>
+            </span>
+            </Popup>
+            <Popup modal open={missingUploads}><span>
+                <h4>ERROR</h4>
+                <p className="popup-signin-txt">You need to upload the required files.</p>
+                <button className="secondary popup-signin-btn" onClick={() => setMissingUploads(false)}>OK</button>
+            </span></Popup>
             <div className="split">
                 <div className="split-two split-two-height" id="split-two">
                     <h1 className="about-title about-title-card">PUBLISH A SNIPPET</h1>
@@ -256,8 +267,10 @@ export default function CreateSnippet() {
                                 document.getElementById("publish-btn").innerHTML = "PUBLISH SNIPPET"
                             }
                         }} onClick={() => {
-                            if (name === "") {
-                                alert("Invalid name")
+                            if (name === "" || desc === "" || version === "" || longDesc === "" || code === "" || !/\S/.test(name) || !/\S/.test(desc) || !/\S/.test(version) || !/\S/.test(longDesc) || !/\S/.test(code)) {
+                                setMissingFields(true)
+                            } else if (!imgUpload0ne || !imgUploadTwo || !imgUploadThree || !imgUploadFour || !banner) {
+                                setMissingUploads(true)
                             } else {
                                 document.getElementById("publish-btn").style.pointerEvents = "none"
                                 document.getElementById("publish-btn").innerHTML = "UPLOADING... => ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 0%"
