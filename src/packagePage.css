@@ -340,6 +340,11 @@
     padding-right: 35px;
 }
 
+.package-rate-popup {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+}
+
 @media screen and (max-width: 1250px) {
     .package-characteristics-label {
         top: 1400px;

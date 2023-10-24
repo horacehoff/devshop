@@ -298,8 +298,7 @@ export default function SnippetPage() {
                             borderTopLeftRadius: "0px",
                             borderTopRightRadius: "0px",
                             display: "inline-block"
-                        }} id="package-rate-btn">RATE SNIPPET
-                        </button>
+                        }} id="package-rate-btn">RATE SNIPPET</button>
                     } modal id="rating-popup"
                            ref={popupRef} onOpen={() => {
                         if (!is_logged_in) {
@@ -312,7 +311,7 @@ export default function SnippetPage() {
                             }
                         }
                     }}>
-                        <h3 className="rating-popup-title">RATE THIS SNIPPET</h3>
+                        <h3 className="rating-popup-title">&nbsp;&nbsp;RATE THIS SNIPPET&nbsp;&nbsp;</h3>
                         <span className="rating-popup-input"><input type='number' max='100' min='0'
                                                                     maxLength='3' className='rating_input'
                                                                     id='rating_input' onInput={() => {

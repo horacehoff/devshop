@@ -302,8 +302,8 @@ export default function PackagePage() {
                                 popupRef.current.close()
                             }
                         }
-                    }}>
-                        <h3 className="rating-popup-title">RATE THIS PACKAGE</h3>
+                    }} className="package-rate-popup">
+                        <h3 className="rating-popup-title">&nbsp;&nbsp;RATE THIS PACKAGE&nbsp;&nbsp;</h3>
                         <span className="rating-popup-input"><input type='number' max='100' min='0'
                                                                     maxLength='3' className='rating_input'
                                                                     id='rating_input' onInput={() => {
@@ -329,6 +329,7 @@ export default function PackagePage() {
                             })
                         }}>SUBMIT
                         </button>
+                        <br/>
 
                     </Popup>
 
