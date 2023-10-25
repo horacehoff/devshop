@@ -256,7 +256,7 @@ export default function SnippetPage() {
 
                     <br/><span className="current-ver">CURRENT
                         VERSION: {snippet.current_version}</span><br/>
-                    <button className="package-download-side" id="package-download-side"
+                    <button className="package-download-side pkg-side-dwnl" id="package-download-side"
                             onClick={() => downloadCode()}>DOWNLOAD
                     </button>
                     <Popup trigger={
