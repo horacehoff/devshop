@@ -125,7 +125,19 @@ export default function SnippetPage() {
             }
 
             baseStyle = document.getElementById("screenshot_one").style
+            let screenshots = document.getElementById("package-screenshots")
+            // let screenshots_dist = screenshots.scrollWidth - screenshots.offsetWidth ==> 958
+            let scroll_indicator = document.getElementById("code-forward-btn")
+            screenshots.addEventListener("scrollend", (event) => {
+                // console.log(screenshots_dist)
+                if (screenshots.scrollLeft === 958) {
+                    scroll_indicator.innerText = "<<"
+                } else {
+                    scroll_indicator.innerText = ">>"
+                }
+            })
         }
+
     }, [snippet]);
 
     if (snippet === null) {
@@ -222,9 +234,9 @@ export default function SnippetPage() {
                     }
                     }>{"DOWNLOAD -> 0$"}</button>
             <p className="package-description-label">// 01 - DESCRIPTION</p>
-            <p className="package-description">{
+            <div className="package-description">{
                 <MDEditor.Markdown source={snippet.description} className="package-desc-md"/>
-            }</p>
+            }</div>
 
             <button className="code-forward-btn" id="code-forward-btn" onClick={() => {
                 if (document.getElementById("code-forward-btn").innerText === "<<") {
@@ -241,49 +253,6 @@ export default function SnippetPage() {
                     HAPPINESS: <span
                         id="happiness_num">xx.x</span><br/>↳ <span id="review_num">5</span> <span
                         id="review_num_plural">ratings</span>
-
-                    {/*<span id="rate_btn">*/}
-                    {/*    <br/>↳<Popup trigger={<span className="rate_btn">{">> RATE THIS <<"}</span>}*/}
-                    {/*                                 modal id="rating-popup"*/}
-                    {/*                                 ref={popupRef} onOpen={() => {*/}
-                    {/*    if (!is_logged_in) {*/}
-                    {/*        document.getElementById("popup-root").firstChild.firstChild.innerHTML = '<h4>⚠️</h4><p class="popup-signin-txt">You need to sign in to be able to rate snippets.</p><button class="secondary popup-signin-btn" id="popup-sign-in">SIGN_IN</button>'*/}
-                    {/*        document.getElementById("popup-sign-in").onclick = () => {*/}
-                    {/*            navigate("/sign-in")*/}
-                    {/*        }*/}
-                    {/*        document.getElementById("popup-go-back").onclick = () => {*/}
-                    {/*            popupRef.current.close()*/}
-                    {/*        }*/}
-                    {/*    }*/}
-                    {/*}}>*/}
-                    {/*       <h3 className="rating-popup-title">RATE THIS SNIPPET</h3>*/}
-                    {/*       <span className="rating-popup-input"><input type='number' max='100' min='0'*/}
-                    {/*                                                   maxLength='3' className='rating_input'*/}
-                    {/*                                                   id='rating_input' onInput={() => {*/}
-                    {/*           console.log(is_logged_in)*/}
-                    {/*           if (document.getElementById("rating_input").value > 100) {*/}
-                    {/*               document.getElementById("rating_input").value = 100*/}
-                    {/*           } else if (document.getElementById("rating_input").value < 0) {*/}
-                    {/*               document.getElementById("rating_input").value = 0*/}
-                    {/*           }*/}
-                    {/*       }}/>&nbsp;/100</span>*/}
-                    {/*       <br/>*/}
-                    {/*       <button className='secondary rating-popup-btn' id='rating_done_btn' onClick={async () => {*/}
-                    {/*           // if no map exists on the package firebase doc, create one and add the rating, else add the rating to the map*/}
-                    {/*           await updateDoc(doc(db, "snippets", snippet.id), {*/}
-                    {/*               // get all existing ratings of the package using the pkg object, and add the new rating to the map*/}
-                    {/*               ratings: {*/}
-                    {/*                   ...snippet.ratings,*/}
-                    {/*                   [uid]: document.getElementById("rating_input").value*/}
-                    {/*               }*/}
-                    {/*           }).then(() => {*/}
-                    {/*               // reload the page to update the rating*/}
-                    {/*               window.location.reload();*/}
-                    {/*           })*/}
-                    {/*       }}>SUBMIT</button>*/}
-
-                    {/*   </Popup>*/}
-                    {/*</span>*/}
 
                     <br/><span className="current-ver">CURRENT
                         VERSION: {snippet.current_version}</span><br/>
