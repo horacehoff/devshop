@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-// import "./firebase.js"
 import './index.css'
 
 
@@ -24,6 +23,7 @@ import SnippetPage from "./snippetPage.jsx";
 import EditSnippet from "./editSnippet.jsx";
 import Navbar from "./Navbar.jsx";
 import Feedback from "./Feedback.jsx";
+
 
 function App() {
     window.addEventListener("load", () => {

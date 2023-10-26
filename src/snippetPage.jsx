@@ -126,11 +126,10 @@ export default function SnippetPage() {
 
             baseStyle = document.getElementById("screenshot_one").style
             let screenshots = document.getElementById("package-screenshots")
-            // let screenshots_dist = screenshots.scrollWidth - screenshots.offsetWidth ==> 958
+            let screenshots_dist = screenshots.scrollWidth - screenshots.offsetWidth
             let scroll_indicator = document.getElementById("code-forward-btn")
             screenshots.addEventListener("scrollend", (event) => {
-                // console.log(screenshots_dist)
-                if (screenshots.scrollLeft === 958) {
+                if (screenshots.scrollLeft === screenshots_dist) {
                     scroll_indicator.innerText = "<<"
                 } else {
                     scroll_indicator.innerText = ">>"
