@@ -1,15 +1,4 @@
 /*@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Code+Pro:wght@600;900&display=swap');*/
-
-
-@keyframes blurIn {
-    0% {
-        filter: blur(10px);
-    }
-    100% {
-        filter: blur(0px);
-    }
-}
-
 :root {
     --text: #FAEBD7;
     --btn-text: white;
