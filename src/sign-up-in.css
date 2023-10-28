@@ -11,28 +11,13 @@
 }
 
 .txt-input {
-    /*border: 3px solid transparent;*/
     width: 300px;
     height: 30px;
-    /*border-radius: 4px;*/
-    /*transition: .35s;*/
-    /*background-color: #f8f8ff;*/
-    /*color: #000;*/
-    padding-left: 15px;
     font-family: "JetBrains Mono", monospace;
-    /*font-weight: 400;*/
     padding-top: 3px;
     padding-bottom: 3px;
     padding-right: 6px;
 }
-
-/*.txt-input::placeholder {*/
-/*    color: #000*/
-/*}*/
-
-/*.txt-input:focus {*/
-/*    border: 3px solid #1e90ff*/
-/*}*/
 
 .signup-forgot, .signup-signin {
     left: 50%;
@@ -46,10 +31,6 @@
 .signup-signin {
     top: -30px;
     color: #1e90ff
-}
-
-.signup-forgot:hover, .signup-signin:hover {
-    color: #fff
 }
 
 .signup-error {
@@ -68,4 +49,10 @@
     color: #ff4500;
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .signup-forgot:hover, .signup-signin:hover {
+        color: #fff
+    }
 }
