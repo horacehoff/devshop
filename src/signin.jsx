@@ -27,6 +27,7 @@ function SignInUser({navigate}, email, password) {
                     document.getElementById("error-msg").innerHTML = "// " + error.code;
                     break;
             }
+            document.getElementById("sign-in-btn").innerHTML = "SIGN_IN";
             console.log(error.code, error.message)
         });
 }
