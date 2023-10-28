@@ -60,7 +60,7 @@ export default defineConfig({
     },
       modulePreload: {
           resolveDependencies(url, deps, context) {
-            return deps.filter(item => !item.includes("markdown"));
+            return deps.filter(item => !item.includes("react-md-editor"));
           },
       },
     sourcemap: false,
