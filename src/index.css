@@ -60,11 +60,6 @@ button.primary {
     font-family: "JetBrains Mono", monospace;
 }
 
-button.primary:hover {
-    background-color: #fff;
-    color: #000
-}
-
 .secondary {
     background-color: white;
     transition: 0.2s;
@@ -80,12 +75,6 @@ button.primary:hover {
     cursor: pointer;
     text-decoration: none;
 }
-
-.secondary:hover {
-    background-color: #282828;
-    color: white;
-}
-
 
 input[type="text"], input[type="email"], input[type="password"], .feedback-input {
     border-radius: 4px;
