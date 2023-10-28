@@ -101,8 +101,8 @@ export default function SignUp() {
             setTimeout(() => document.getElementById("email").style.borderColor = "", 2000)
         }
         if (password === "") {
-            document.getElementById("password").style.borderColor = "rgba(255, 0, 0, 1)"
-            setTimeout(() => document.getElementById("password").style.borderColor = "", 2000)
+            document.getElementById("new-password").style.borderColor = "rgba(255, 0, 0, 1)"
+            setTimeout(() => document.getElementById("new-password").style.borderColor = "", 2000)
         }
         if (username !== "" && email !== "" && password !== "") {
             SignUpUser(username, email, password, {navigate})
@@ -124,7 +124,7 @@ export default function SignUp() {
                        onChange={e => setUsername(e.target.value)} autoComplete="username"/><br/><br/>
                 <input type="email" id="email" className="txt-input" placeholder="@EMAIL" value={email}
                        onChange={e => setEmail(e.target.value)} autoComplete="email"/><br/><br/>
-                <input type="password" id="password" className="txt-input" placeholder="@PASSWORD"
+                <input type="password" id="new-password" className="txt-input" placeholder="@PASSWORD"
                        value={password}
                        onChange={e => setPassword(e.target.value)} autoComplete="new-password"/>
                 <button className="primary signup-button" id="signup-button" style={{marginTop: "65px"}}

@@ -44,8 +44,8 @@ export default function SignIn() {
             setTimeout(() => document.getElementById("email").style.borderColor = "", 2000)
         }
         if (password === "") {
-            document.getElementById("password").style.borderColor = "rgba(255, 0, 0, 1)"
-            setTimeout(() => document.getElementById("password").style.borderColor = "", 2000)
+            document.getElementById("current-password").style.borderColor = "rgba(255, 0, 0, 1)"
+            setTimeout(() => document.getElementById("current-password").style.borderColor = "", 2000)
         }
         if (email !== "" && password !== "") {
             SignInUser({navigate}, email, password)
@@ -64,9 +64,9 @@ export default function SignIn() {
             <form>
                 <input type="email" id="email" className="txt-input" placeholder="@EMAIL" value={email}
                        onChange={e => setEmail(e.target.value)} autoComplete="email"/><br/><br/>
-                <input type="password" id="password" className="txt-input" placeholder="@PASSWORD"
+                <input type="password" id="current-password" className="txt-input" placeholder="@PASSWORD"
                        value={password}
-                       onChange={e => setPassword(e.target.value)} autoComplete="password"/>
+                       onChange={e => setPassword(e.target.value)} autoComplete="current-password"/>
                 <p className="signup-forgot" onClick={() => navigate("/reset-password")}>FORGOT PASSWORD?</p>
                 <button className="primary signup-button" id="sign-in-btn" style={{top: "460px"}}
                         onClick={onBtnSubmit} type="submit">SIGN_IN
