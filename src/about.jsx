@@ -28,22 +28,22 @@ export default function About() {
                          onClick={() => window.open("https://linktr.ee/just_a_mango", '_blank').focus()}>@JUST_A_MANGO</span> (horace.hoff@gmail.com),
                 with development starting in February 2023.</p>
             <br/>
-            <h3 style={{textAlign: "center"}}>CREDITS</h3>
+            <h3 className="about-credits">CREDITS</h3>
             <ul className="about-credits-list">
                 <li>
-                    <span style={{fontFamily: "Inter, sans-serif"}}>❤</span>️ Many thanks to <br/>JetBrains for their
+                    <span>❤</span>️ Many thanks to <br/>JetBrains for their
                     awesome font <strong><a href="https://www.jetbrains.com/lp/mono">JetBrains Mono</a></strong>
                 </li>
                 <li>---</li>
                 <li>
-                    <span style={{fontFamily: "Inter, sans-serif"}}>❤</span>️ Much appreciation also to <br/>Adobe
+                    <span>❤</span>️ Much appreciation also to <br/>Adobe
                     for <strong><a href="https://github.com/adobe-fonts/source-code-pro">Source Code Pro</a></strong>
                 </li>
                 <li>---</li>
                 <li>
-                    <span style={{fontFamily: "Inter, sans-serif"}}>🫶</span> ️I would also like to thank the authors of
+                    <span>🫶</span> ️I would also like to thank the authors of
                     the following packages that DEVSHOP uses:<br/>
-                    <ul style={{listStyleType: "'-'"}}>
+                    <ul>
                         <li>
                             uiwjs/wcjiang - <a
                             href="https://www.npmjs.com/package/@uiw/react-md-editor">@uiw/react-md-editor</a>

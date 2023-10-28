@@ -51,6 +51,14 @@
     font-size: 12px;
 }
 
+#sign-in-btn {
+    top: 460px;
+}
+
+#signup-button {
+    top: 65px;
+}
+
 @media (hover: hover) and (pointer: fine) {
     .signup-forgot:hover, .signup-signin:hover {
         color: #fff

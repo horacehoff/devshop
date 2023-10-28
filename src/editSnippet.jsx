@@ -146,9 +146,8 @@ export default function EditSnippet(props) {
 
     return (
         <>
-            <input type="text" className="package-title edit-package-title" placeholder="@NAME"
-                   style={{height: "60px", width: "90%", fontSize: "25px"}} value={newName}
-                   onChange={e => setNewName(e.target.value)}/>
+            <input type="text" className="package-title edit-package-title edit-snippet-title" placeholder="@NAME"
+                   value={newName} onChange={e => setNewName(e.target.value)}/>
 
             <h3 className="package-author">by <Link className="package-author-link"
                                                     to={"/users/" + fancy_name_to_id(snippet.owner_username)}>{snippet.owner_username}</Link>
@@ -187,17 +186,17 @@ export default function EditSnippet(props) {
 
             {/*</dialog>*/}
             <div className="package-screenshots code-screenshots" id="package-screenshots">
-                <input type="file" id="img-file-one" style={{display: "none"}}
+                <input type="file" id="img-file-one" className="file-input"
                        onChange={(event) => setImgUploadOne(event.target.files[0])}
                        required
                        accept=".jpeg,.webp, image/jpeg"/>
-                <input type="file" id="img-file-two" style={{display: "none"}}
+                <input type="file" id="img-file-two" className="file-input"
                        onChange={(event) => setImgUploadTwo(event.target.files[0])} required
                        accept=".jpeg,.webp, image/jpeg"/>
-                <input type="file" id="img-file-three" style={{display: "none"}}
+                <input type="file" id="img-file-three" className="file-input"
                        onChange={(event) => setImgUploadThree(event.target.files[0])} required
                        accept=".jpeg,.webp, image/jpeg"/>
-                <input type="file" id="img-file-four" style={{display: "none"}}
+                <input type="file" id="img-file-four" className="file-input"
                        onChange={(event) => setImgUploadFour(event.target.files[0])} required
                        accept=".jpeg,.webp, image/jpeg"/>
                 <img
@@ -220,7 +219,6 @@ export default function EditSnippet(props) {
                     id="screenshot_two"
                     src={snippet.screenshots[1]}
                     className="package-img package-img-edit"
-                    style={{marginLeft: "5px"}}
                     alt="Second screenshot"
                     onClick={() => {
                         document.getElementById("img-file-two").addEventListener('change', function () {
@@ -255,7 +253,6 @@ export default function EditSnippet(props) {
                     id="screenshot_four"
                     src={snippet.screenshots[3]}
                     className="package-img package-img-edit"
-                    style={{marginLeft: "5px"}}
                     alt="Fourth screenshot"
                     onClick={() => {
                         document.getElementById("img-file-four").addEventListener('change', function () {
@@ -281,20 +278,10 @@ export default function EditSnippet(props) {
             }}>{">>"}</button>
             <p className="package-characteristics-label"></p>
             <div className="package-characteristics" id="package-characteristics">
-                <p style={{marginRight: "29px"}} id="package-char-p">
-                    {snippet.lines} LINES OF CODE<br/><input type='text'
-                                                                  id='pkg-version-input'
-                                                                  className='pkg-version-input'
-                                                                  placeholder='NEW VERSION'
-                                                                  style={{display: "none"}}
-                                                                  value={newVer}
-                                                                  onChange={e => {
-                                                                      setNewVer(e.target.value);
-                                                                      console.log("yup")
-                                                                  }}/><span
-                    id="package-version"
-                    className="current-ver">CURRENT VERSION: {snippet.current_version}</span><br/>
-
+                <p id="package-char-p">
+                    {snippet.lines} LINES OF CODE
+                    <br/>
+                    <span id="package-version" className="current-ver">CURRENT VERSION: {snippet.current_version}</span><br/>
 
                     <Popup trigger={
                         <button className="new-pkg-version-btn" id="new-pkg-version-btn" onClick={() => {
@@ -303,24 +290,24 @@ export default function EditSnippet(props) {
                         }}>+ NEW VERSION
                         </button>
                     } modal className="new-pkg-version-popup">
-                        <p style={{textAlign: "center", fontSize: "21px", fontWeight: "700"}}>PUBLISH A NEW VERSION</p>
-                        <label className="name-input-label" htmlFor="pkg-version" id="new-version-label"
-                               style={{transition: "0.2s"}}>NEW VERSION</label><br/>
+                        <p className="new-pkg-version-title">PUBLISH A NEW VERSION</p>
+                        <label className="name-input-label" htmlFor="pkg-version" id="new-version-label">NEW
+                            VERSION</label><br/>
                         <label className="name-input-label-desc" htmlFor="pkg-version">The new version of your code
                             <br/>(e.g. 2.0, BETA, 1.0.0B)</label><br/>
-                        <input type="text" className="proto-input" id="pkg-version" placeholder="@new_code_version"
-                               style={{marginTop: "0px", width: "250px"}} value={newVer}
-                               onChange={e => setNewVer(e.target.value)}/>
+                        <input type="text" className="proto-input new-pkg-version-input" id="pkg-version"
+                               placeholder="@new_code_version"
+                               value={newVer} onChange={e => setNewVer(e.target.value)}/>
 
                         <br/>
                         <br/>
-                        <label className="name-input-label" htmlFor="code-editor" id="new-version-label"
-                               style={{transition: "0.2s"}}>NEW CODE</label><br/>
+                        <label className="name-input-label" htmlFor="code-editor" id="new-version-label">NEW
+                            CODE</label><br/>
                         <label className="name-input-label-desc" htmlFor="code-editor">The new code of your
                             project</label><br/>
-                        <textarea className="code-editor" id="code-editor"
+                        <textarea className="code-editor edit-code-editor" id="code-editor"
                                   placeholder="⚠️ Place your final code here ⚠️" value={newCode}
-                                  onChange={e => setNewCode(e.target.value)} style={{width: "293px"}}></textarea><br/>
+                                  onChange={e => setNewCode(e.target.value)}></textarea><br/>
                         <button className="primary" onClick={async () => {
                             document.getElementById("snippet-publish-btn").innerHTML = "PUBLISHING..."
                             let currentVer
@@ -353,7 +340,7 @@ export default function EditSnippet(props) {
                     </Popup>
 
                     <br/>
-                    <button className="delete-pkg-btn" style={{textAlign: "center", paddingLeft: "15px"}}
+                    <button className="delete-pkg-btn delete-snippet-btn"
                             id="delete-pkg-btn" onClick={async () => {
                         const delete_btn_content = document.getElementById("delete-pkg-btn").innerHTML
                         if (delete_btn_content === "DELETE SNIPPET") {

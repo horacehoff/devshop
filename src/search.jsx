@@ -1,4 +1,4 @@
-import "./searchPackages.css"
+import "./search.css"
 import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import {collection, getDocs, limit, query, where} from "firebase/firestore";
@@ -284,12 +284,8 @@ export default function Search() {
                             <option value="PACKAGES">PACKAGES</option>
                             <option value="SNIPPETS">CODE SNIPPET</option>
                         </select>
-                        <img style={{
-                            position: "absolute",
-                            scale: "0.6",
-                            top: "6px"
-                        }}
-                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABiSURBVHgB7Y7bDYAwDAMzAiN0dDZhFEZgBEOlIh5S27jNp0/Kp+9iJoT4AGAvl4wkb+59LwA28pKjF0hshN4wg5GH3MNhuUcwLW+JwuSVyFEuRv6LrHjYrlssmiwN+1oINyfgwyAP2XO9oQAAAABJRU5ErkJggg=="
+                        <img
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABiSURBVHgB7Y7bDYAwDAMzAiN0dDZhFEZgBEOlIh5S27jNp0/Kp+9iJoT4AGAvl4wkb+59LwA28pKjF0hshN4wg5GH3MNhuUcwLW+JwuSVyFEuRv6LrHjYrlssmiwN+1oINyfgwyAP2XO9oQAAAABJRU5ErkJggg=="
                              alt=""/>
 
                     </div>
@@ -329,21 +325,7 @@ export default function Search() {
                                value={userId} onChange={e => setUserId(e.target.value)}
                         />
                         <p className="search-parameters-filters-screen-title">-- DOWNLOADS -----------------</p>
-                        {/*<input type="range" className="search-parameters-filters-screen-slider"/>*/}
-                        {/*<input type="range" className="search-parameters-filters-screen-slider"*/}
-                        {/*       style={{position: "absolute"}}/>*/}
-                        <select className="search-parameters-filters-screen-select" style={{
-                            border: "solid 1px #2D2D2D",
-                            paddingLeft: "5px",
-                            paddingRight: "5px",
-                            paddingTop: "7px",
-                            paddingBottom: "7px",
-                            borderRadius: "8px",
-                            top: "-18px",
-                            display: "inline",
-                            appearance: "none",
-                            cursor: "pointer"
-                        }} onChange={e => {
+                        <select className="search-parameters-filters-screen-select" onChange={e => {
                             if (e.target.value === "more") {
                                 setDownloadMoreThan(true)
                             } else if (e.target.value === "less") {
@@ -371,15 +353,14 @@ export default function Search() {
                 </button>
             </div>
             <p className="search-failed" id="search-failed">No search results</p>
-            <ul className="packages-card-list" id="packages-card-list-one"
-                style={{marginTop: "170px", position: "relative", zIndex: "-1"}}>
+            <ul className="packages-card-list search-packages-card-list" id="packages-card-list-one">
                 {pkgType === "PACKAGES" && (
                     <div>
                         {searchResults.map((pkg, index) => (
                             <li key={index} className="packages-card-list-child" onClick={() => {
                                 navigate("/packages/" + pkg.id)
                             }}>
-                                <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                                <Link to={"/packages/" + pkg.id}>
                                     <PackageCard dwnl={pkg.downloads} author={pkg.owner_username}
                                                  name={pkg.name}
                                                  catchphrase={pkg.catchphrase} banner={pkg.banner}/>
@@ -393,7 +374,7 @@ export default function Search() {
                         <div>
                             {searchResults.map((pkg, index) => (
                                 <li key={index} className="packages-card-list-child">
-                                    <Link to={"/snippets/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                                    <Link to={"/snippets/" + pkg.id}>
                                         <SnippetCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
                                                      description={pkg.catchphrase}/>
                                     </Link>

@@ -56,8 +56,7 @@ export default function SnippetCard(props) {
         <div className="card code-card" ref={bannerRef}>
             <h2 className="card-title code-card-title">{props.name}</h2>
             <h4 className="card-author"><span>{props.author}</span></h4>
-            <p className="card-downloads"><span
-                style={{fontSize: "16px"}}>{shortNumber(props.dwnl.length)}</span> downloads</p>
+            <p className="card-downloads"><span>{shortNumber(props.dwnl.length)}</span> downloads</p>
             <p className="card-description code-description">{props.description}</p>
             <p className="card-read-more code-read-more"></p>
         </div>

@@ -168,6 +168,14 @@
     font-size: 21px;
 }
 
+.pro-plan-title {
+    color: mediumpurple;
+}
+
+.pro-plan-price {
+    color: blanchedalmond;
+}
+
 @media screen and (max-width: 770px) {
     .pricing-container {
         flex-direction: column;

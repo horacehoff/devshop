@@ -64,6 +64,8 @@ export default function Packages() {
             setLastTrendingPackageData(querySnapshot.docs.pop())
             if (querySnapshot.docs.length === 9) {
                 document.getElementById("trending-load-more").style.display = "block"
+            } else {
+                document.getElementById("trending-load-more").style.display = "none"
             }
         })
         const q1 = query(collection(db, "packages"), orderBy("created", "desc"), limit(9));
@@ -81,6 +83,8 @@ export default function Packages() {
             }
             if (querySnapshot.docs.length === 9) {
                 document.getElementById("recent-load-more").style.display = "block"
+            } else {
+                document.getElementById("recent-load-more").style.display = "none"
             }
         })
         if (user_data && user_data.interests.length > 0) {
@@ -94,6 +98,8 @@ export default function Packages() {
                 setLastSimilarPackagesData(querySnapshot.docs.pop())
                 if (querySnapshot.docs.length === 9) {
                     document.getElementById("similar-load-more").style.display = "block"
+                } else {
+                    document.getElementById("similar-load-more").style.display = "none"
                 }
             })
         }
@@ -126,25 +132,22 @@ export default function Packages() {
             <Link className="search-btn" id="package-publish-btn"
                   to="/publish-package">+ PUBLISH A PACKAGE
             </Link>
-            <Link className="search-btn" id="package-search-btn"
-                  style={{marginLeft: "10px", maxWidth: "150px"}}
-                  to="/search/">
-                <IoMdSearch
-                    style={{position: "relative", top: "1px"}}/> SEARCH PACKAGES
+            <Link className="search-btn" id="package-search-btn" to="/search/">
+                <IoMdSearch/> SEARCH PACKAGES
             </Link>
-            <div id="for-you-section" style={{display: "none"}}>
+            <div id="for-you-section" className="nodisplay">
                 <h2 className="category-title">// FOR YOU</h2>
                 <ul className="packages-card-list" id="packages-card-list-one">
                     {similarPackagesData.map((pkg, index) => (
                         <li key={index} className="packages-card-list-child">
-                            <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                            <Link to={"/packages/" + pkg.id}>
                                 <PackageCard dwnl={pkg.downloads} author={pkg.owner_username}
                                              name={pkg.name}
                                              catchphrase={pkg.catchphrase} banner={pkg.banner}/>
                             </Link>
                         </li>
                     ))}
-                    <li className="packages-card-list-child" id="similar-load-more" style={{display: "none"}}>
+                    <li className="packages-card-list-child nodisplay" id="similar-load-more">
                         <div className="pkg-load-more" onClick={() => {
                             if (lastSimilarPackagesData) {
                                 const q2 = query(collection(db, "packages"), where("interests", "array-contains-any", Array.from(user_data.interests)), limit(9), startAt(lastSimilarPackagesData));
@@ -156,6 +159,8 @@ export default function Packages() {
                                     })
                                     setLastSimilarPackagesData(querySnapshot.docs.pop())
                                     if (querySnapshot.docs.length === 9) {
+                                        document.getElementById("similar-load-more").style.display = "block"
+                                    } else {
                                         document.getElementById("similar-load-more").style.display = "block"
                                     }
                                 })
@@ -173,19 +178,19 @@ export default function Packages() {
             </div>
             <h2 className="category-title">// MOST DOWNLOADED</h2>
             <ul className="packages-card-list" id="packages-card-list-one">
-                <p id="empty-txt" style={{display: "none"}}>{"NO PACKAGES - PUBLISH THE FIRST ONE ?"}</p>
-                <button className="primary" id="empty-btn" style={{display: "none"}}
-                        onClick={() => navigate("/publish-package")}>MAKE HISTORY
+                <p id="empty-txt" className="nodisplay">{"NO PACKAGES - PUBLISH THE FIRST ONE ?"}</p>
+                <button className="primary nodisplay" id="empty-btn" onClick={() => navigate("/publish-package")}>MAKE
+                    HISTORY
                 </button>
                 {trendingPackageData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">
-                        <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                        <Link to={"/packages/" + pkg.id}>
                             <PackageCard dwnl={pkg.downloads} author={pkg.owner_username} name={pkg.name}
                                          catchphrase={pkg.catchphrase} banner={pkg.banner}/>
                         </Link>
                     </li>
                 ))}
-                <li className="packages-card-list-child" id="trending-load-more" style={{display: "none"}}>
+                <li className="packages-card-list-child nodisplay" id="trending-load-more">
                     <div className="pkg-load-more" onClick={() => {
                         if (lastTrendingPackageData) {
                             console.log("eh yep")
@@ -197,6 +202,8 @@ export default function Packages() {
                                 setLastTrendingPackageData(querySnapshot.docs.pop())
                                 if (querySnapshot.docs.length === 9) {
                                     document.getElementById("trending-load-more").style.display = "block"
+                                } else {
+                                    document.getElementById("trending-load-more").style.display = "none"
                                 }
                             })
                         }
@@ -216,13 +223,13 @@ export default function Packages() {
                     <li key={index} className="packages-card-list-child" onClick={() => {
                         navigate("/packages/" + pkg.id)
                     }}>
-                        <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                        <Link to={"/packages/" + pkg.id}>
                             <PackageCard dwnl={pkg.downloads} author={pkg.owner_username} name={pkg.name}
                                          catchphrase={pkg.catchphrase} banner={pkg.banner}/>
                         </Link>
                     </li>
                 ))}
-                <li className="packages-card-list-child" id="recent-load-more" style={{display: "none"}}>
+                <li className="packages-card-list-child nodisplay" id="recent-load-more">
                     <div className="pkg-load-more" onClick={() => {
                         if (lastLastPackageData) {
                             const q1 = query(collection(db, "packages"), orderBy("created", "desc"), limit(9), startAt(lastLastPackageData));
@@ -240,6 +247,8 @@ export default function Packages() {
                                 }
                                 if (querySnapshot.docs.length === 9) {
                                     document.getElementById("recent-load-more").style.display = "block"
+                                } else {
+                                    document.getElementById("recent-load-more").style.display = "none"
                                 }
                             })
                         }

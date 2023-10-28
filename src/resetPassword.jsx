@@ -10,7 +10,7 @@ export default function ResetPassword() {
 
     return (
         <>
-            <h1 className="signup-title reset-pwd-title" style={{marginTop: "200px"}}>RESET_PASSWORD</h1>
+            <h1 className="signup-title reset-pwd-title">RESET_PASSWORD</h1>
             <p className="signup-signin" onClick={() => navigate("/sign-in")}>SIGN_IN INSTEAD</p>
             <p className="signup-error" id="error-msg">// AN ERROR OCCURED</p>
             <input type="email" id="email" className="txt-input" placeholder="@EMAIL" value={email}

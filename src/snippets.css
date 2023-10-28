@@ -3,6 +3,12 @@
     margin-bottom: 15px;
 }
 
+.snippets-load-more {
+    position: relative;
+    top: 13px;
+    display: none;
+}
+
 @media screen and (max-width: 1000px) {
     .snippets-title {
         line-height: 60px;

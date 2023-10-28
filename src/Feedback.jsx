@@ -49,15 +49,13 @@ export default function Feedback() {
             </Helmet>
             <Popup ref={emailpopupref}>
                 <h3 className="rating-popup-title">ERROR</h3>
-                <h5 className="popup-signin-txt"
-                    style={{fontWeight: "400", fontSize: "16px", margin: "0", marginBottom: "10px"}}>INVALID EMAIL</h5>
+                <h5 className="popup-signin-txt feedback-popup-signin-txt">INVALID EMAIL</h5>
             </Popup>
             <Popup ref={successpopupref} onClose={() => {
                 navigate("/")
             }}>
                 <h3 className="rating-popup-title">SUBMITTED</h3>
-                <h5 className="popup-signin-txt"
-                    style={{fontWeight: "400", fontSize: "16px", margin: "0", marginBottom: "10px"}}>Your feedback is
+                <h5 className="popup-signin-txt feedback-popup-signin-txt">Your feedback is
                     greatly appreciated. It helps improve the site. Thank you!</h5>
             </Popup>
             <h1 className="pricing-title">Feedback</h1>
@@ -65,9 +63,9 @@ export default function Feedback() {
             <br/>
             <div className="feedback-container">
                 <input type="email" placeholder="@EMAIL" id="email" className="txt-input" value={email}
-                       onChange={e => setEmail(e.target.value)} style={{margin: "0"}}/>
+                       onChange={e => setEmail(e.target.value)}/>
                 <textarea placeholder="@FEEDBACK" id="feedback" className="txt-input feedback-input" value={feedback}
-                          onChange={e => setFeedback(e.target.value)} style={{marginLeft: "0"}}></textarea>
+                          onChange={e => setFeedback(e.target.value)}></textarea>
                 <button className="primary feedback-submit" onClick={() => {
                     if (email === "") {
                         document.getElementById("email").style.borderColor = "rgba(255, 0, 0, 1)"

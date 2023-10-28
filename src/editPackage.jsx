@@ -151,7 +151,7 @@ export default function EditPackage(props) {
 
     return (
         <>
-            <input type="file" id="banner-file" style={{display: "none"}}
+            <input type="file" id="banner-file" className="file-input"
                    onChange={(event) => setBannerUpload(event.target.files[0])}
                    required
                    accept=".jpeg,.webp, image/jpeg"
@@ -171,8 +171,7 @@ export default function EditPackage(props) {
             <input type="text" className="package-title edit-package-title" placeholder="@NAME"
                    value={newName}
                    onChange={e => setNewName(e.target.value)}/>
-            <h3 className="package-author">by <span
-                style={{color: "#F0EBBA", cursor: "pointer"}}>{pkg.owner_username}</span>
+            <h3 className="package-author">by <span>{pkg.owner_username}</span>
             </h3>
             <button className="package-download-btn" id="package-download-btn" onClick={async () => {
                 document.getElementById("package-download-btn").innerHTML = "SAVING.."
@@ -197,17 +196,17 @@ export default function EditPackage(props) {
             }</p>
             <p className="package-screenshots-label"></p>
             <div className="package-screenshots" id="package-screenshots">
-                <input type="file" id="img-file-one" style={{display: "none"}}
+                <input type="file" id="img-file-one" className="file-input"
                        onChange={(event) => setImgUploadOne(event.target.files[0])}
                        required
                        accept=".jpeg,.webp, image/jpeg"/>
-                <input type="file" id="img-file-two" style={{display: "none"}}
+                <input type="file" id="img-file-two" className="file-input"
                        onChange={(event) => setImgUploadTwo(event.target.files[0])} required
                        accept=".jpeg,.webp, image/jpeg"/>
-                <input type="file" id="img-file-three" style={{display: "none"}}
+                <input type="file" id="img-file-three" className="file-input"
                        onChange={(event) => setImgUploadThree(event.target.files[0])} required
                        accept=".jpeg,.webp, image/jpeg"/>
-                <input type="file" id="img-file-four" style={{display: "none"}}
+                <input type="file" id="img-file-four" className="file-input"
                        onChange={(event) => setImgUploadFour(event.target.files[0])} required
                        accept=".jpeg,.webp, image/jpeg"/>
                 <img
@@ -230,7 +229,6 @@ export default function EditPackage(props) {
                     id="screenshot_two"
                     src={pkg.screenshots[1]}
                     className="package-img package-img-edit"
-                    style={{marginLeft: "5px"}}
                     alt="Second screenshot"
                     onClick={() => {
                         document.getElementById("img-file-two").addEventListener('change', function () {
@@ -265,7 +263,6 @@ export default function EditPackage(props) {
                     id="screenshot_four"
                     src={pkg.screenshots[3]}
                     className="package-img package-img-edit"
-                    style={{marginLeft: "5px"}}
                     alt="Fourth screenshot"
                     onClick={() => {
                         document.getElementById("img-file-four").addEventListener('change', function () {
@@ -282,7 +279,7 @@ export default function EditPackage(props) {
             </div>
             <p className="package-characteristics-label"></p>
             <div className="package-characteristics" id="package-characteristics">
-                <p style={{marginRight: "29px"}} id="package-char-p">
+                <p id="package-char-p">
                     DISK SIZE: {Math.round(pkg.sizeMb * 10) / 10}MB
                     {/*    <br/><input type='text' id='pkg-version-input'*/}
                     {/*                                                                className='pkg-version-input'*/}
@@ -295,7 +292,7 @@ export default function EditPackage(props) {
                     <br/>
                     <span
                         id="package-version" className="current-ver">CURRENT VERSION: {pkg.current_version}</span><br/>
-                    <input type="file" id="pkg-new-version" style={{display: "none"}} onChange={(event) => {
+                    <input type="file" id="pkg-new-version" className="file-input" onChange={(event) => {
                         setPkgUpload(event.target.files[0])
                         console.log("package")
                         document.getElementById("file-upload").innerHTML = "✅ UPLOAD PACKAGE"
@@ -336,21 +333,22 @@ export default function EditPackage(props) {
                     } modal className="new-pkg-version-popup" onClose={() => {
                         setPkgUpload(null)
                     }}>
-                        <p style={{textAlign: "center", fontSize: "21px", fontWeight: "700"}}>PUBLISH A NEW VERSION</p>
-                        <label className="name-input-label" htmlFor="pkg-version" id="new-version-label"
-                               style={{transition: "0.2s"}}>NEW VERSION</label><br/>
+                        <p className="new-pkg-version-title">PUBLISH A NEW VERSION</p>
+                        <label className="name-input-label" htmlFor="pkg-version" id="new-version-label">NEW
+                            VERSION</label><br/>
                         <label className="name-input-label-desc" htmlFor="pkg-version">The new version of your package
                             <br/>(e.g. 2.0, BETA, 1.0.0B)</label><br/>
-                        <input type="text" className="proto-input" id="pkg-version" placeholder="@new_pkg_version"
-                               style={{marginTop: "0px", width: "250px"}} value={newVer}
+                        <input type="text" className="proto-input new-pkg-version-input" id="pkg-version"
+                               placeholder="@new_pkg_version"
+                               value={newVer}
                                onChange={e => setNewVer(e.target.value)}/>
                         <br/>
                         <br/>
-                        <label className="name-input-label" id="upload-label"
-                               style={{transition: "0.2s"}}>UPLOAD</label><br/>
+                        <label className="name-input-label" id="upload-label">UPLOAD</label><br/>
                         <label className="name-input-label-desc">Upload the package's new version</label><br/>
                         <div className="upload-section">
-                            <label htmlFor="pkg-new-version" className="file-input" id="file-upload"><BiCloudUpload
+                            <label htmlFor="pkg-new-version" className="file-input-label"
+                                   id="file-upload"><BiCloudUpload
                                 className="file-input-icon"></BiCloudUpload>UPLOAD PACKAGE</label>
                             <br/>
                         </div>

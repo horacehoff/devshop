@@ -53,8 +53,8 @@ export default function Pricing() {
                 </div>
 
                 <div className="pro-plan">
-                    <h1 className="plan-title" style={{color: "mediumpurple"}}>PRO</h1>
-                    <p className="plan-price" style={{color: "blanchedalmond"}}>1.99€/month</p>
+                    <h1 className="plan-title pro-plan-title">PRO</h1>
+                    <p className="plan-price pro-plan-price">1.99€/month</p>
                     <ul className="plan-features">
                         <li>✅ Full access to the website</li>
                         <li>✅ No ads</li>

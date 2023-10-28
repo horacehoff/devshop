@@ -73,6 +73,11 @@
     color: #b9b9b9
 }
 
+.package-author span {
+    color: #F0EBBA;
+    cursor: pointer;
+}
+
 .package-description-label {
     top: 467px;
     color: #b9b9b9;
@@ -106,6 +111,10 @@
     overflow: scroll;
     white-space: nowrap;
     scroll-snap-type: x mandatory
+}
+
+#screenshot_two, #screenshot_four {
+    margin-left: 5px;
 }
 
 .package-img {
@@ -188,6 +197,12 @@
     right: 32px;
 }
 
+.package-rate-btn {
+    width: 152px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    display: none;
+}
 
 .rate_btn {
     cursor: pointer;

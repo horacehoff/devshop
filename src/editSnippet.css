@@ -75,6 +75,21 @@ dialog button:hover {
     font-size: 14px;
 }
 
+.edit-snippet-title {
+    height: 60px;
+    width: 90%;
+    font-size: 25px;
+}
+
+.edit-code-editor {
+    width: 293px;
+}
+
+/*.delete-snippet-btn {*/
+/*    text-align: center;*/
+/*    padding-left: 25px;*/
+/*}*/
+
 @media screen and (max-width: 800px) {
     dialog {
         width: 95%;

@@ -1,3 +1,7 @@
+.about-credits {
+    text-align: center;
+}
+
 .about-banner {
     width: 500px;
     padding: 0;
@@ -39,6 +43,14 @@
 
 .about-credits-list a {
     color: dodgerblue;
+}
+
+.about-credits-list li span {
+    font-family: Inter, sans-serif;
+}
+
+.about-credits-list li ul {
+    list-style-type: '- ';
 }
 
 @media screen and (max-width: 510px) {

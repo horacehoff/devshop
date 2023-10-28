@@ -31,6 +31,13 @@
     width: fit-content;
 }
 
+
+.centered h2 {
+    margin: 0;
+    font-weight: 400;
+    font-size: 18px;
+}
+
 .about-title-card {
     display: none;
 }
@@ -171,6 +178,10 @@
     color: rgba(255, 255, 255, 0.25) !important;
 }
 
+#catch-input {
+    margin-bottom: 10px;
+}
+
 .desc-input {
     font-size: 35px !important;
     font-weight: bold !important;
@@ -220,7 +231,7 @@
 }
 
 
-.file-input {
+.file-input-label {
     background-color: #1e1e1e;
     padding: 10px 25px;
     border-radius: 5px;
@@ -278,6 +289,12 @@
     padding-right: 10px;
 }
 
+.md-editor {
+    border-radius: 4px;
+    border: none;
+    outline: none;
+}
+
 @media screen and (min-width: 800px) {
     .md-editor-container {
         width: 750px;
@@ -330,6 +347,10 @@
     margin-top: -15px;
 }
 
+#pkg-version, #snippet-version {
+    margin-top: 0;
+}
+
 .interestpkg {
     display: inline-block;
     /*background-color: #282828;*/
@@ -363,7 +384,7 @@
         color: #000;
     }
 
-    .file-input:hover {
+    .file-input-label:hover {
         background-color: white;
         color: #1e1e1e;
     }

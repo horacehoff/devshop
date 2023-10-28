@@ -199,7 +199,7 @@ export default function CreatePackage() {
                 <div className="split-one">
                     <h1 className="about-title">PUBLISH A PACKAGE</h1>
                     <div className="centered">
-                        <h2 style={{margin: "0", fontWeight: "400", fontSize: "18px"}}>// GENERAL INFO</h2>
+                        <h2>// GENERAL INFO</h2>
                         <br/>
                         <label htmlFor="name-input" className="name-input-label">NAME</label><br/>
                         <label htmlFor="name-input" className="name-input-label-desc">A good, and preferably short name
@@ -212,7 +212,7 @@ export default function CreatePackage() {
                         <label htmlFor="catch-input" className="name-input-label-desc">A quick, short, and concise
                             description for your package</label><br/>
                         <input type="text" className="proto-input" id="catch-input" placeholder="@awesome_catchphrase"
-                               style={{marginBottom: "10px"}} value={desc} onChange={e => setDesc(e.target.value)}/>
+                               value={desc} onChange={e => setDesc(e.target.value)}/>
 
                         <br/><br/>
                         <label className="name-input-label">DESCRIPTION</label><br/>
@@ -223,24 +223,24 @@ export default function CreatePackage() {
                                 value={longDesc}
                                 onChange={setLongDesc}
                                 height={350}
-                                style={{borderRadius: "4px", border: "none", outline: "none"}}
+                                className="md-editor"
                             />
                         </div>
 
                         <br/>
                         <label className="name-input-label">UPLOADS</label><br/>
                         <label className="name-input-label-desc">Upload the needed files for your package</label><br/>
-                        <input type="file" id="banner-file" style={{display: "none"}} onChange={(event) => {
+                        <input type="file" id="banner-file" className="file-input" onChange={(event) => {
                             setBanner(event.target.files[0])
                             setBannerURL(URL.createObjectURL(event.target.files[0]))
                             document.getElementById("banner-upload").innerHTML = "✅ UPLOAD BANNER"
                         }} accept=".jpeg,.webp, image/jpeg" required/>
                         <div className="upload-section">
-                            <label htmlFor="banner-file" className="file-input" id="banner-upload"><BiCloudUpload
+                            <label htmlFor="banner-file" className="file-input-label" id="banner-upload"><BiCloudUpload
                                 className="file-input-icon"></BiCloudUpload>UPLOAD BANNER</label>
-                            <label htmlFor="file" className="file-input" id="file-upload"><BiCloudUpload
+                            <label htmlFor="file" className="file-input-label" id="file-upload"><BiCloudUpload
                                 className="file-input-icon"></BiCloudUpload>UPLOAD PACKAGE</label>
-                            <label htmlFor="img-file" className="file-input" id="gallery-upload"><BiCloudUpload
+                            <label htmlFor="img-file" className="file-input-label" id="gallery-upload"><BiCloudUpload
                                 className="file-input-icon"></BiCloudUpload>UPLOAD IMAGES(4)</label>
                             <br/>
                         </div>
@@ -249,17 +249,17 @@ export default function CreatePackage() {
                         <label className="name-input-label-desc" htmlFor="pkg-version">The base version of your package
                             (e.g. 1.0, ALPHA, 1.0.0A)</label><br/>
                         <input type="text" className="proto-input" id="pkg-version" placeholder="@base_pkg_version"
-                               style={{marginTop: "0px"}} value={version}
+                               value={version}
                                onChange={e => setVersion(e.target.value)}/>
                         <br/>
-                        <input type="file" id="file" style={{display: "none"}} onChange={(event) => {
+                        <input type="file" id="file" className="file-input" onChange={(event) => {
                             setPkgUpload(event.target.files[0])
                             console.log("pkg")
                             document.getElementById("file-upload").innerHTML = "✅ UPLOAD PACKAGE"
                         }} accept=".zip, application/zip" required/>
 
 
-                        <input type="file" id="img-file" style={{display: "none"}} multiple onChange={(event) => {
+                        <input type="file" id="img-file" className="file-input" multiple onChange={(event) => {
                             console.log(event.target.files[0])
                             setImgUploadOne(event.target.files[0])
                             setImgUploadTwo(event.target.files[1])

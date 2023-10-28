@@ -7,8 +7,7 @@ export default function Home() {
         <>
             <h1 className="buy-code-sell">CODE.<br/>BUY.<br/>SELL.</h1>
             <p className="one-catchphrase">// 01 - CATCHPHRASE</p>
-            <p className="one-desc"
-               style={{color: "white"}}>{"DEVSHOP allows anyone to buy, use, or sell code. Wether it be full programs/projects (" + '"packages"' + ") or code snippets, DEVSHOP has it all."}</p>
+            <p className="one-desc">{"DEVSHOP allows anyone to buy, use, or sell code. Wether it be full programs/projects (" + '"packages"' + ") or code snippets, DEVSHOP has it all."}</p>
             <p className="one-catchphrase">// 02 - WHY USE DEVSHOP ?</p>
             <p className="one-desc"></p>
             <ul className="one-desc">

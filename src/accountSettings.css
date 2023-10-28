@@ -27,6 +27,15 @@
     margin: 0;
 }
 
+.file-input {
+    display: none;
+}
+
+#banner-img {
+    width: 100px;
+    border-radius: 6px;
+}
+
 .avatar-text {
     display: inline-block;
     font-family: "JetBrains Mono", monospace;
@@ -137,6 +146,9 @@
     color: #000 !important;
 }
 
+.pwd-section-title {
+    margin-bottom: -15px;
+}
 
 @media screen and (min-width: 780px) {
     .acc-side-one {

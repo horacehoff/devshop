@@ -158,11 +158,11 @@ export default function AccountPage(props) {
                 id="follow_num_1">...</span></span>
             </button>
             <div className="user_following" id="user_following">
-                <button className="search-btn" id="following_btn" style={{cursor: "pointer"}}><BiUserCheck
+                <button className="search-btn" id="following_btn"><BiUserCheck
                     className="user_follow_btn_icon"/>FOLLOWING <span className="user_follow_btn_num">· <span
                     id="follow_num_2">...</span></span>
                 </button>
-                <button className="user_unfollow_btn search-btn" id="usr_unfollow_btn" style={{cursor: "pointer"}}
+                <button className="user_unfollow_btn search-btn" id="usr_unfollow_btn"
                         onClick={async () => {
                             if (usr.followers.includes(user_data.uid) && user_data.following.includes(usr.uid) && user_data.following.length > 0 && usr.followers.length > 0) {
                                 let new_following = user_data.following;
@@ -177,16 +177,16 @@ export default function AccountPage(props) {
                                 })
                                 window.location.reload()
                             }
-                        }}><BiUserMinus className="user_follow_btn_icon" style={{marginRight: "0"}}/> UNFOLLOW
+                        }}><BiUserMinus className="user_follow_btn_icon user_follow_btn_icon_nomargin"/> UNFOLLOW
                 </button>
             </div>
             <p className="user_followers" id="user_followers">405 followers</p>
             <div id="user-pkgss">
                 <h2 className="user_packages_title" id="user-pkgs">PACKAGES</h2>
-                <ul className="packages-card-list" id="packages-card-list" style={{marginTop: "460px"}}>
+                <ul className="packages-card-list" id="packages-card-list">
                     {usrPackages.map((pkg, index) => (
                         <li key={index} className="packages-card-list-child">
-                            <Link to={"/packages/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                            <Link to={"/packages/" + pkg.id}>
                                 <PackageCard dwnl={pkg.downloads} author={pkg.owner_username}
                                              name={pkg.name}
                                              catchphrase={pkg.catchphrase} banner={pkg.banner}/>
@@ -197,17 +197,11 @@ export default function AccountPage(props) {
             </div>
             <div id="user-snippets">
                 <br/>
-                <h2 style={{
-                    marginLeft: "35px",
-                    fontSize: "27px",
-                    width: "calc(100% - 50px)",
-                    marginBottom: "10px",
-                    paddingRight: "15px"
-                }} id="user-snippets-title">SNIPPETS</h2>
+                <h2 id="user-snippets-title">SNIPPETS</h2>
                 <ul className="packages-card-list" id="packages-card-list">
                     {usrCodeBlocks.map((pkg, index) => (
                         <li key={index} className="packages-card-list-child">
-                            <Link to={"/snippets/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                            <Link to={"/snippets/" + pkg.id}>
                                 <SnippetCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
                                              description={pkg.catchphrase}/>
                             </Link>

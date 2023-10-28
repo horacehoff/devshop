@@ -88,6 +88,12 @@
     text-decoration: none;
 }
 
+.nav-acc-link {
+    position: absolute;
+    display: none;
+    color: #ababab;
+}
+
 
 #nav-title {
     top: 8px;

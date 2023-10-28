@@ -102,6 +102,7 @@
     position: relative;
     top: 0;
     left: 0;
+    cursor: pointer;
 }
 
 .user_unfollow_btn {
@@ -120,6 +121,10 @@
     font-size: 15px;
     color: #a8a8a8;
     width: fit-content;
+}
+
+#user-pkgss ul {
+    margin-top: 460px;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -144,6 +149,10 @@
     margin-right: 7px;
 }
 
+.user_follow_btn_icon_nomargin {
+    margin-right: 0;
+}
+
 .user_follow_btn_num {
     color: #bbbbbb;
 }
@@ -158,6 +167,14 @@
     font-weight: 700;
     padding: 0 15px 0 0;
     width: calc(100% - 50px);
+}
+
+#user-snippets-title {
+    margin-left: 35px;
+    font-size: 27px;
+    width: calc(100% - 50px);
+    margin-bottom: 10px;
+    padding-right: 15px;
 }
 
 

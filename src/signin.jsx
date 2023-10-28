@@ -68,7 +68,7 @@ export default function SignIn() {
                        value={password}
                        onChange={e => setPassword(e.target.value)} autoComplete="current-password"/>
                 <p className="signup-forgot" onClick={() => navigate("/reset-password")}>FORGOT PASSWORD?</p>
-                <button className="primary signup-button" id="sign-in-btn" style={{top: "460px"}}
+                <button className="primary signup-button" id="sign-in-btn"
                         onClick={onBtnSubmit} type="submit">SIGN_IN
                 </button>
             </form>

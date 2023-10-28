@@ -138,6 +138,24 @@
     margin-left: -20px;
 }
 
+
+#package-char-p {
+    margin-right: 29px;
+}
+
+#new-version-label, #upload-label {
+    transition: 0.2s;
+}
+
+.new-pkg-version-title {
+    text-align: center;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.new-pkg-version-input {
+    width: 250px;
+}
 /*.package-characteristics {*/
 /*    right: 980px;*/
 /*}*/

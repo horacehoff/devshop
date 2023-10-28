@@ -64,6 +64,8 @@ export default function Snippets() {
             setLastTrendingCodeBlockData(querySnapshot.docs.pop())
             if (querySnapshot.docs.length === 9) {
                 document.getElementById("trending-load-more").style.display = "block"
+            } else {
+                document.getElementById("trending-load-more").style.display = "none"
             }
         })
         const q1 = query(collection(db, "snippets"), orderBy("created", "desc"), limit(9));
@@ -81,6 +83,8 @@ export default function Snippets() {
             }
             if (querySnapshot.docs.length === 9) {
                 document.getElementById("recent-load-more").style.display = "block"
+            } else {
+                document.getElementById("recent-load-more").style.display = "none"
             }
         })
         if (user_data && user_data.interests.length > 0) {
@@ -94,6 +98,8 @@ export default function Snippets() {
                 setLastSimilarCodeBlockData(querySnapshot.docs.pop())
                 if (querySnapshot.docs.length === 9) {
                     document.getElementById("similar-load-more").style.display = "block"
+                } else {
+                    document.getElementById("similar-load-more").style.display = "none"
                 }
             })
         }
@@ -125,24 +131,22 @@ export default function Snippets() {
             <Link className="secondary search-btn" id="package-publish-btn"
                   to="/publish-snippet">+ PUBLISH A SNIPPET
             </Link>
-            <Link className="secondary search-btn" id="package-search-btn"
-                  style={{marginLeft: "10px", maxWidth: "173px"}}
-                  to="/search/"><IoMdSearch
-                style={{position: "relative", top: "1px"}}/> SEARCH SNIPPETS
+            <Link className="secondary search-btn" id="package-search-btn" to="/search/">
+                <IoMdSearch/> SEARCH SNIPPETS
             </Link>
-            <div id="for-you-section" style={{display: "none"}}>
+            <div id="for-you-section" className="nodisplay">
                 <h2 className="category-title">// FOR YOU</h2>
                 <ul className="packages-card-list">
                     {similarCodeBlockData.map((pkg, index) => (
                         <li key={index} className="packages-card-list-child">
-                            <Link to={"/snippets/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                            <Link to={"/snippets/" + pkg.id}>
                                 <SnippetCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
                                              description={pkg.catchphrase}/>
                             </Link>
                         </li>
                     ))}
-                    <li className="packages-card-list-child" id="similar-load-more" style={{display: "none"}}>
-                        <div className="pkg-load-more" style={{position: "relative", top: "13px", display: "none"}}
+                    <li className="packages-card-list-child nodisplay" id="similar-load-more">
+                        <div className="pkg-load-more snippets-load-more"
                              onClick={() => {
                                  if (lastSimilarCodeBlockData) {
                                      const q2 = query(collection(db, "snippets"), where("interests", "array-contains-any", Array.from(user_data.interests)), limit(9), startAt(lastSimilarCodeBlockData));
@@ -155,6 +159,8 @@ export default function Snippets() {
                                          setLastSimilarCodeBlockData(querySnapshot.docs.pop())
                                          if (querySnapshot.docs.length === 9) {
                                              document.getElementById("similar-load-more").style.display = "block"
+                                         } else {
+                                             document.getElementById("similar-load-more").style.display = "none"
                                          }
                                      })
                                  }
@@ -176,14 +182,14 @@ export default function Snippets() {
                 </button>
                 {trendingCodeBlockData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">
-                        <Link to={"/snippets/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                        <Link to={"/snippets/" + pkg.id}>
                             <SnippetCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
                                          description={pkg.catchphrase}/>
                         </Link>
                     </li>
                 ))}
-                <li className="packages-card-list-child" id="trending-load-more" style={{display: "none"}}>
-                    <div className="pkg-load-more" style={{position: "relative", top: "13px", display: "none"}}
+                <li className="packages-card-list-child nodisplay" id="trending-load-more">
+                    <div className="pkg-load-more snippets-load-more"
                          onClick={() => {
                              if (lastSimilarCodeBlockData) {
                                  const q = query(collection(db, "snippets"), orderBy("downloads", "desc"), limit(9), startAt(lastTrendingCodeBlockData));
@@ -194,6 +200,8 @@ export default function Snippets() {
                                      setLastTrendingCodeBlockData(querySnapshot.docs.pop())
                                      if (querySnapshot.docs.length === 9) {
                                          document.getElementById("trending-load-more").style.display = "block"
+                                     } else {
+                                         document.getElementById("trending-load-more").style.display = "none"
                                      }
                                  })
                              }
@@ -211,14 +219,14 @@ export default function Snippets() {
             <ul className="packages-card-list">
                 {lastCodeBlockData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">
-                        <Link to={"/snippets/" + pkg.id} style={{textDecoration: "none", color: "white"}}>
+                        <Link to={"/snippets/" + pkg.id}>
                             <SnippetCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
                                          description={pkg.catchphrase}/>
                         </Link>
                     </li>
                 ))}
-                <li className="packages-card-list-child" id="recent-load-more" style={{display: "none"}}>
-                    <div className="pkg-load-more" style={{position: "relative", top: "13px"}} onClick={() => {
+                <li className="packages-card-list-child nodisplay" id="recent-load-more">
+                    <div className="pkg-load-more snippets-load-more" onClick={() => {
                         if (lastSimilarCodeBlockData) {
                             const q1 = query(collection(db, "snippets"), orderBy("created", "desc"), limit(9), startAt(lastLastCodeBlockData));
                             getDocs(q1).then((querySnapshot) => {
@@ -235,6 +243,8 @@ export default function Snippets() {
                                 }
                                 if (querySnapshot.docs.length === 9) {
                                     document.getElementById("recent-load-more").style.display = "block"
+                                } else {
+                                    document.getElementById("recent-load-more").style.display = "none"
                                 }
                             })
                         }

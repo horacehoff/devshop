@@ -251,7 +251,7 @@ export default function AccountSettings() {
                 <div className="acc-side-two">
                     <h4 className="section-title">PROFILE</h4>
                     <div className="avatar-section">
-                        <input type="file" id="img-file" style={{display: "none"}} onChange={(event) => {
+                        <input type="file" id="img-file" className="file-input" onChange={(event) => {
                             setPfpUpload(event.target.files[0])
                             document.getElementById("profile-picture").style.backgroundImage = "url('" + URL.createObjectURL(event.target.files[0]) + "')";
                         }} required accept="image/png, image/jpeg, image/jpg, image/webp"/>
@@ -260,11 +260,11 @@ export default function AccountSettings() {
                             AVATAR<br/><span className="avatar-size">.PNG/.JPG/.WEBP</span>
                         </div>
                         <br/>
-                        <input type="file" id="banner-file" style={{display: "none"}} onChange={(event) => {
+                        <input type="file" id="banner-file" className="file-input" onChange={(event) => {
                             setBannerUpload(event.target.files[0])
                             document.getElementById("banner-img").style.backgroundImage = "url('" + URL.createObjectURL(event.target.files[0]) + "')";
                         }} required accept="image/png, image/jpeg, image/jpg, image/webp"/>
-                        <label className="profile-picture" style={{width: "100px", borderRadius: "6px"}} id="banner-img"
+                        <label className="profile-picture" id="banner-img"
                                htmlFor="banner-file"/>
                         <div className="avatar-text">
                             BANNER<br/><span className="avatar-size">.PNG/.JPG/.WEBP</span>
@@ -311,7 +311,7 @@ export default function AccountSettings() {
                     <br/><br/>
                 </div>
 
-                <h4 className="section-title" style={{marginBottom: "-15px"}}>PASSWORD</h4>
+                <h4 className="section-title pwd-section-title">PASSWORD</h4>
                 <div className="avatar-section">
                     <div className="section-inputs">
                         {/*<p className="section-input-name">OLD PASSWORD</p>*/}

@@ -180,7 +180,6 @@ export default function PackagePage() {
                     id="screenshot_two"
                     src={pkg.screenshots[1]}
                     className="package-img"
-                    style={{marginLeft: "5px"}}
                     alt="Second screenshot" onMouseEnter={() => {
                     document.getElementById("full-screen-img").src = pkg.screenshots[1]
                 }} onClick={() => {
@@ -211,7 +210,6 @@ export default function PackagePage() {
                     id="screenshot_four"
                     src={pkg.screenshots[3]}
                     className="package-img"
-                    style={{marginLeft: "5px"}}
                     alt="Fourth screenshot" onMouseEnter={() => {
                     document.getElementById("full-screen-img").src = pkg.screenshots[3]
                 }} onClick={() => {
@@ -284,12 +282,7 @@ export default function PackagePage() {
                     <Popup trigger={
                         <button className="secondary package-rate-btn"
                                 onClick={() => {
-                                }} style={{
-                            width: "152px",
-                            borderTopLeftRadius: "0px",
-                            borderTopRightRadius: "0px",
-                            display: "none"
-                        }} id="package-rate-btn">RATE PACKAGE
+                                }} id="package-rate-btn">RATE PACKAGE
                         </button>
                     } modal id="rating-popup"
                            ref={popupRef} onOpen={() => {

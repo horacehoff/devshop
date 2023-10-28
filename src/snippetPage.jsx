@@ -174,7 +174,6 @@ export default function SnippetPage() {
                     id="screenshot_two"
                     src={snippet.screenshots[1]}
                     className="package-img code-img"
-                    style={{marginLeft: "5px"}}
                     alt="Second screenshot" onMouseEnter={() => {
                     document.getElementById("full-screen-img").src = snippet.screenshots[1]
                 }} onClick={() => {
@@ -205,7 +204,6 @@ export default function SnippetPage() {
                     id="screenshot_four"
                     src={snippet.screenshots[3]}
                     className="package-img code-img"
-                    style={{marginLeft: "5px"}}
                     alt="Fourth screenshot" onMouseEnter={() => {
                     document.getElementById("full-screen-img").src = snippet.screenshots[3]
                 }} onClick={() => {
@@ -261,12 +259,7 @@ export default function SnippetPage() {
                     <Popup trigger={
                         <button className="secondary package-rate-btn"
                                 onClick={() => {
-                                }} style={{
-                            width: "152px",
-                            borderTopLeftRadius: "0px",
-                            borderTopRightRadius: "0px",
-                            display: "inline-block"
-                        }} id="package-rate-btn">RATE SNIPPET</button>
+                                }} id="package-rate-btn">RATE SNIPPET</button>
                     } modal id="rating-popup"
                            ref={popupRef} onOpen={() => {
                         if (!is_logged_in) {

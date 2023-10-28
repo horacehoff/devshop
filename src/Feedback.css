@@ -1,6 +1,7 @@
 .feedback-input {
     font-size: 14px !important;
     margin-top: 50px !important;
+    margin-left: 0;
     resize: none;
     height: 215px !important;
     padding: 9px !important;
@@ -18,4 +19,14 @@
     width: fit-content;
     margin-left: 50%;
     transform: translate(-50%);
+}
+
+.feedback-container input {
+    margin: 0;
+}
+
+.feedback-popup-signin-txt {
+    font-weight: 400;
+    font-size: 16px;
+    margin: 0 0 10px;
 }

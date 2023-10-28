@@ -177,7 +177,7 @@ export default function CreateSnippet() {
                 <div className="split-one">
                     <h1 className="about-title">PUBLISH A SNIPPET</h1>
                     <div className="centered">
-                        <h2 style={{margin: "0", fontWeight: "400", fontSize: "18px"}}>// GENERAL INFO</h2>
+                        <h2>// GENERAL INFO</h2>
                         <br/>
                         <label htmlFor="pkg-name" className="name-input-label">NAME</label><br/>
                         <label htmlFor="pkg-name" className="name-input-label-desc">A good, and preferably short name
@@ -190,7 +190,7 @@ export default function CreateSnippet() {
                         <label htmlFor="catch-input" className="name-input-label-desc">A quick, short, and concise
                             description for your code snippet</label><br/>
                         <input type="text" className="proto-input" id="catch-input" placeholder="@awesome_catchphrase"
-                               style={{marginBottom: "10px"}} value={desc} onChange={e => setDesc(e.target.value)}/>
+                               value={desc} onChange={e => setDesc(e.target.value)}/>
 
                         <br/><br/>
                         <label className="name-input-label">DESCRIPTION</label><br/>
@@ -201,7 +201,7 @@ export default function CreateSnippet() {
                                 value={longDesc}
                                 onChange={setLongDesc}
                                 height={350}
-                                style={{borderRadius: "4px", border: "none", outline: "none"}}
+                                className="md-editor"
                             />
                         </div>
                         <br/>
@@ -215,11 +215,10 @@ export default function CreateSnippet() {
                         <label className="name-input-label">IMAGES</label><br/>
                         <label className="name-input-label-desc">Upload the gallery images for your code snippet</label><br/>
                         <div className="upload-section snippet-upload-section">
-                            <label htmlFor="img-file" className="file-input" id="gallery-upload"><BiCloudUpload
+                            <label htmlFor="img-file" className="file-input-label" id="gallery-upload"><BiCloudUpload
                                 className="file-input-icon"></BiCloudUpload>UPLOAD IMAGES(4)</label>
                             <br/>
                         </div>
-
 
                         <br/><br/>
                         <label className="name-input-label" htmlFor="snippet-version">BASE VERSION</label><br/>
@@ -227,11 +226,10 @@ export default function CreateSnippet() {
                             snippet
                             (e.g. 1.0, ALPHA, 1.0.0A)</label><br/>
                         <input type="text" className="proto-input" id="snippet-version" placeholder="@base_code_version"
-                               style={{marginTop: "0px"}} value={version}
+                               value={version}
                                onChange={e => setVersion(e.target.value)}/>
 
-
-                        <input type="file" id="img-file" style={{display: "none"}} multiple onChange={(event) => {
+                        <input type="file" id="img-file" className="file-input" multiple onChange={(event) => {
                             console.log(event.target.files[0])
                             setImgUploadOne(event.target.files[0])
                             setImgUploadTwo(event.target.files[1])

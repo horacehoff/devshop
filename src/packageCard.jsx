@@ -13,8 +13,7 @@ export default function PackageCard(props) {
         <div className="card" ref={bannerRef}>
             <h2 className="card-title">{props.name}</h2>
             <h4 className="card-author"><span>{props.author}</span></h4>
-            <p className="card-downloads"><span
-                style={{fontSize: "16px"}}>{shortNumber(Number(props.dwnl.length))}</span> downloads</p>
+            <p className="card-downloads"><span>{shortNumber(Number(props.dwnl.length))}</span> downloads</p>
             <p className="card-description">{props.catchphrase}</p>
             <p className="card-read-more"></p>
         </div>

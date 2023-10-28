@@ -234,12 +234,9 @@ export default function Navbar() {
                 <Link id="pricing" to="/pricing" className="nav-link">PRICING</Link>
                 <Link id="about" to="/feedback" className="nav-link">FEEDBACK</Link>
                 <h4 id="account" className="nav-link">LOADING</h4>
-                <h4 id="profile" style={{position: "absolute", display: "none", color: "#ababab"}}
-                    className="nav-link">PROFILE</h4>
-                <h4 id="settings" style={{position: "absolute", display: "none", color: "#ababab"}}
-                    className="nav-link">SETTINGS</h4>
-                <h4 id="sign-out" style={{position: "absolute", display: "none", color: "#ababab"}}
-                    className="nav-link">SIGN OUT</h4>
+                <h4 id="profile" className="nav-link nav-acc-link">PROFILE</h4>
+                <h4 id="settings" className="nav-link nav-acc-link">SETTINGS</h4>
+                <h4 id="sign-out" className="nav-link nav-acc-link">SIGN OUT</h4>
                 <h4 id="hamburger" onClick={() => {
                     if (document.getElementById("hamburger").innerHTML === "||") {
                         document.getElementById("hamburger").innerHTML = "//"
