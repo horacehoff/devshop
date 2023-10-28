@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://dev-shop.vercel.app/</loc>
+        <loc>https://dev-shop-prototype-vercel.vercel.app/</loc>
     </url>
     <url>
-        <loc>https://dev-shop.vercel.app/publish-package</loc>
+        <loc>https://dev-shop-prototype-vercel.vercel.app/publish-package</loc>
     </url>
     <url>
-        <loc>https://dev-shop.vercel.app/packages</loc>
+        <loc>https://dev-shop-prototype-vercel.vercel.app/packages</loc>
     </url>
     <url>
-        <loc>https://dev-shop.vercel.app/packages/q/query</loc>
+        <loc>https://dev-shop-prototype-vercel.vercel.app/packages/q/query</loc>
     </url>
     <url>
-        <loc>https://dev-shop.vercel.app/snippets/q/query</loc>
+        <loc>https://dev-shop-prototype-vercel.vercel.app/snippets/q/query</loc>
     </url>
     <url>
-        <loc>https://dev-shop.vercel.app/snippets</loc>
+        <loc>https://dev-shop-prototype-vercel.vercel.app/snippets</loc>
     </url>
     <url>
-        <loc>https://dev-shop.vercel.app/publish-snippet</loc>
+        <loc>https://dev-shop-prototype-vercel.vercel.app/publish-snippet</loc>
     </url>
     <url>
-        <loc>https://dev-shop.vercel.app/sign-up</loc>
+        <loc>https://dev-shop-prototype-vercel.vercel.app/sign-up</loc>
     </url>
     <url>
-        <loc>https://dev-shop.vercel.app/sign-in</loc>
+        <loc>https://dev-shop-prototype-vercel.vercel.app/sign-in</loc>
     </url>
     <url>
-        <loc>https://dev-shop.vercel.app/account</loc>
+        <loc>https://dev-shop-prototype-vercel.vercel.app/account</loc>
     </url>
     <url>
-        <loc>https://dev-shop.vercel.app/reset-password</loc>
+        <loc>https://dev-shop-prototype-vercel.vercel.app/reset-password</loc>
     </url>
     <url>
-        <loc>https://dev-shop.vercel.app/pricing</loc>
+        <loc>https://dev-shop-prototype-vercel.vercel.app/pricing</loc>
     </url>
     <url>
-        <loc>https://dev-shop.vercel.app/feedback</loc>
+        <loc>https://dev-shop-prototype-vercel.vercel.app/feedback</loc>
     </url>
 </urlset>

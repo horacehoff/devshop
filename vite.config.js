@@ -58,6 +58,11 @@ export default defineConfig({
         source_map: false,
       },
     },
+      modulePreload: {
+          resolveDependencies(url, deps, context) {
+              return ['react', 'react-dom', 'react-router-dom', 'react-helmet', 'firebase/app', "firebase/auth", "firebase/firestore", "firebase/storage"] // Your list of preloaded deps.
+          },
+      },
     sourcemap: false,
     rollupOptions: {
       output: {
