@@ -60,7 +60,7 @@ export default defineConfig({
     },
       modulePreload: {
           resolveDependencies(url, deps, context) {
-            return ["main", "db"] // Your list of preloaded deps.
+            return deps.filter(item => !item.includes("markdown"));
           },
       },
     sourcemap: false,
