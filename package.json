@@ -25,6 +25,7 @@
     "@types/react-dom": "^18.2.7",
     "@vitejs/plugin-react-swc": "^3.3.2",
     "esbuild": "^0.18.18",
+    "lightningcss": "^1.22.0",
     "terser": "^5.19.2",
     "vite": "^4.4.8",
     "vite-plugin-compression": "^0.5.1"
