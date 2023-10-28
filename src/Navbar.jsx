@@ -158,6 +158,7 @@ export default function Navbar() {
                 document.getElementById("nav-sign-out").onclick = () => {
                     auth.signOut().then(() => {
                         navigate("/");
+                        window.location.reload()
                     }).catch((error) => {
                         console.log(error);
                     });
