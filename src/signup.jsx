@@ -116,7 +116,7 @@ export default function SignUp() {
             <br/>
             <br/>
             <h1 className="signup-title">SIGN_UP</h1>
-            <p className="signup-signin" onClick={() => navigate("/sign-in")}>// SIGN_IN INSTEAD</p>
+            <p className="signup-signin" onClick={() => navigate("/sign-in")}>SIGN_IN INSTEAD</p>
             <p className="signup-error" id="error-msg">// AN ERROR OCCURED</p>
             <form>
                 <input type="text" id="username" className="txt-input" placeholder="@USERNAME"
