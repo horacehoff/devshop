@@ -4,11 +4,21 @@ import {Link, useNavigate} from "react-router-dom";
 import PackageCard from "./packageCard.jsx";
 import {IoMdSearch} from "react-icons/io";
 import {useEffect, useState} from "react";
-import {db, user_data} from "./firebase.js";
+import {auth, db, user_data} from "./firebase.js";
 import {Helmet} from "react-helmet";
+import data from "./packages.json"
+import card from "./packageSnippetCard.json"
+import i18n from "i18next";
+import {Translation, useTranslation} from "react-i18next";
 
 
 export default function Packages() {
+    i18n.addResourceBundle("en", "pkg", data.en)
+    i18n.addResourceBundle("fr", "pkg", data.fr)
+    i18n.addResourceBundle("en", "pkg", card.en)
+    i18n.addResourceBundle("fr", "pkg", card.fr)
+    const {t} = useTranslation("pkg");
+
     const navigate = useNavigate();
     window.mobileCheck = function () {
         let check = false;
@@ -53,57 +63,66 @@ export default function Packages() {
     const [similarPackagesData, setSimilarPackagesData] = useState([]);
     const [lastSimilarPackagesData, setLastSimilarPackagesData] = useState([]);
     useEffect(() => {
-        setTrendingPackageData([])
-        setLastPackagesData([])
-        setSimilarPackagesData([])
-        const q = query(collection(db, "packages"), orderBy("downloads", "desc"), limit(9));
-        getDocs(q).then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                setTrendingPackageData(prevState => [...prevState, doc.data()]);
-            })
-            setLastTrendingPackageData(querySnapshot.docs.pop())
-            if (querySnapshot.docs.length === 9) {
-                document.getElementById("trending-load-more").style.display = "block"
-            } else {
-                document.getElementById("trending-load-more").style.display = "none"
-            }
-        })
-        const q1 = query(collection(db, "packages"), orderBy("created", "desc"), limit(9));
-        getDocs(q1).then((querySnapshot) => {
-            let run = false
-            querySnapshot.forEach((doc) => {
-                setLastPackagesData(prevState => [...prevState, doc.data()]);
-                run = true
-            })
-            setLastLastPackageData(querySnapshot.docs.pop())
-            if (!run) {
-                document.getElementById("category-title").style.display = "none"
-                document.getElementById("empty-txt").style.display = "block"
-                document.getElementById("empty-btn").style.display = "block"
-            }
-            if (querySnapshot.docs.length === 9) {
-                document.getElementById("recent-load-more").style.display = "block"
-            } else {
-                document.getElementById("recent-load-more").style.display = "none"
-            }
-        })
-        if (user_data && user_data.interests.length > 0) {
-            const q2 = query(collection(db, "packages"), where("interests", "array-contains-any", Array.from(user_data.interests)), limit(9));
-            getDocs(q2).then((querySnapshot) => {
+        try {
+            console.log(t("card.downloads"))
+            setTrendingPackageData([])
+            setLastPackagesData([])
+            setSimilarPackagesData([])
+            const q = query(collection(db, "packages"), orderBy("downloads", "desc"), limit(9));
+            getDocs(q).then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
-                    console.log("fuck yeah")
-                    setSimilarPackagesData(prevState => [...prevState, doc.data()]);
-                    document.getElementById("for-you-section").style.display = "block"
+                    setTrendingPackageData(prevState => [...prevState, doc.data()]);
                 })
-                setLastSimilarPackagesData(querySnapshot.docs.pop())
+                setLastTrendingPackageData(querySnapshot.docs.pop())
                 if (querySnapshot.docs.length === 9) {
-                    document.getElementById("similar-load-more").style.display = "block"
+                    document.getElementById("trending-load-more").style.display = "block"
                 } else {
-                    document.getElementById("similar-load-more").style.display = "none"
+                    document.getElementById("trending-load-more").style.display = "none"
                 }
             })
+            const q1 = query(collection(db, "packages"), orderBy("created", "desc"), limit(9));
+            getDocs(q1).then((querySnapshot) => {
+                let run = false
+                querySnapshot.forEach((doc) => {
+                    setLastPackagesData(prevState => [...prevState, doc.data()]);
+                    run = true
+                })
+                setLastLastPackageData(querySnapshot.docs.pop())
+                if (!run) {
+                    document.getElementById("category-title").style.display = "none"
+                    document.getElementById("empty-txt").style.display = "block"
+                    document.getElementById("empty-btn").style.display = "block"
+                }
+                if (querySnapshot.docs.length === 9) {
+                    document.getElementById("recent-load-more").style.display = "block"
+                } else {
+                    document.getElementById("recent-load-more").style.display = "none"
+                }
+            })
+            // if (auth.currentUser) {
+            //     console.log("yeh")
+            // }
+            // console.log(user_data.interests)
+            if (user_data && user_data.interests.length > 0) {
+                console.log("yeah")
+                const q2 = query(collection(db, "packages"), where("interests", "array-contains-any", Array.from(user_data.interests)), limit(9));
+                getDocs(q2).then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        console.log("fuck yeah")
+                        setSimilarPackagesData(prevState => [...prevState, doc.data()]);
+                        document.getElementById("for-you-section").style.display = "block"
+                    })
+                    setLastSimilarPackagesData(querySnapshot.docs.pop())
+                    if (querySnapshot.docs.length === 9) {
+                        document.getElementById("similar-load-more").style.display = "block"
+                    } else {
+                        document.getElementById("similar-load-more").style.display = "none"
+                    }
+                })
+            }
+        } catch {
+            window.location.reload()
         }
-
     }, [user_data]);
 
 
@@ -128,20 +147,21 @@ export default function Packages() {
                       property="og:description"/>
             </Helmet>
             <h1 className="packages-title snippets-title">PACKAGES</h1>
-            <h4 className="packages-subtitle snippets-subtitle">FIND AND PUBLISH COMPLETE PROJECTS/PROGRAMS</h4>
+            <h4 className="packages-subtitle snippets-subtitle">{t('pkg.pkgsub')}</h4>
             <Link className="search-btn" id="package-publish-btn"
-                  to="/publish-package">+ PUBLISH A PACKAGE
+                  to="/publish-package">+ {t('pkg.publish')}
             </Link>
             <Link className="search-btn" id="package-search-btn" to="/search/">
-                <IoMdSearch/> SEARCH PACKAGES
+                <IoMdSearch/> {t('pkg.search')}
             </Link>
             <div id="for-you-section" className="nodisplay">
-                <h2 className="category-title">// FOR YOU</h2>
+                <h2 className="category-title">{t('pkg.for_you')}</h2>
                 <ul className="packages-card-list" id="packages-card-list-one">
                     {similarPackagesData.map((pkg, index) => (
                         <li key={index} className="packages-card-list-child">
                             <Link to={"/packages/" + pkg.id}>
-                                <PackageCard dwnl={pkg.downloads} author={pkg.owner_username}
+                                <PackageCard readmore={t("card.readmore")} dwnl_local={t("card.downloads")}
+                                             dwnl={pkg.downloads} author={pkg.owner_username}
                                              name={pkg.name}
                                              catchphrase={pkg.catchphrase} banner={pkg.banner}/>
                             </Link>
@@ -176,7 +196,7 @@ export default function Packages() {
                     </li>
                 </ul>
             </div>
-            <h2 className="category-title">// MOST DOWNLOADED</h2>
+            <h2 className="category-title">{t('pkg.most_downloaded')}</h2>
             <ul className="packages-card-list" id="packages-card-list-one">
                 <p id="empty-txt" className="nodisplay">{"NO PACKAGES - PUBLISH THE FIRST ONE ?"}</p>
                 <button className="primary nodisplay" id="empty-btn" onClick={() => navigate("/publish-package")}>MAKE
@@ -185,7 +205,8 @@ export default function Packages() {
                 {trendingPackageData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">
                         <Link to={"/packages/" + pkg.id}>
-                            <PackageCard dwnl={pkg.downloads} author={pkg.owner_username} name={pkg.name}
+                            <PackageCard readmore={t("card.readmore")} dwnl_local={t("card.downloads")}
+                                         dwnl={pkg.downloads} author={pkg.owner_username} name={pkg.name}
                                          catchphrase={pkg.catchphrase} banner={pkg.banner}/>
                         </Link>
                     </li>
@@ -217,14 +238,15 @@ export default function Packages() {
                     </div>
                 </li>
             </ul>
-            <h2 className="category-title" id="category-title">// RECENTLY CREATED</h2>
+            <h2 className="category-title" id="category-title">{t('pkg.recent')}</h2>
             <ul className="packages-card-list" id="packages-card-list">
                 {lastPackagesData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child" onClick={() => {
                         navigate("/packages/" + pkg.id)
                     }}>
                         <Link to={"/packages/" + pkg.id}>
-                            <PackageCard dwnl={pkg.downloads} author={pkg.owner_username} name={pkg.name}
+                            <PackageCard readmore={t("card.readmore")} dwnl_local={t("card.downloads")}
+                                         dwnl={pkg.downloads} author={pkg.owner_username} name={pkg.name}
                                          catchphrase={pkg.catchphrase} banner={pkg.banner}/>
                         </Link>
                     </li>

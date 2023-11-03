@@ -1,0 +1,18 @@
+{
+  "en": {
+    "pkg.pkgsub": "FIND AND PUBLISH COMPLETE PROJECTS/PROGRAMS",
+    "pkg.publish": "PUBLISH A PACKAGE",
+    "pkg.search": "SEARCH PACKAGES",
+    "pkg.for_you": "// FOR YOU",
+    "pkg.most_downloaded": "// MOST DOWNLOADED",
+    "pkg.recent": "// RECENTLY CREATED"
+  },
+  "fr": {
+    "pkg.pkgsub": "TROUVEZ ET PUBLIEZ DES PROJETS/PROGRAMMES COMPLETS",
+    "pkg.publish": "PUBLIER UN PACKAGE",
+    "pkg.search": "RECHERCHER DES PACKAGES",
+    "pkg.for_you": "// POUR VOUS",
+    "pkg.most_downloaded": "// LES PLUS TÉLECHARGÉS",
+    "pkg.recent": "// RÉCEMMENT CRÉES"
+  }
+}

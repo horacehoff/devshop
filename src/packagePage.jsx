@@ -10,8 +10,16 @@ import fancy_name_to_id from "./utility.js";
 import MDEditor from '@uiw/react-md-editor';
 import Popup from "reactjs-popup";
 import "./popup.css"
+import data from "./packageSnippet.json"
+import i18n from "i18next";
+import {useTranslation} from "react-i18next";
 
 export default function PackagePage() {
+    i18n.addResourceBundle("en", "pkgcode", data.en)
+    i18n.addResourceBundle("fr", "pkgcode", data.fr)
+    const {t} = useTranslation("pkgcode");
+
+
     const [pkg, setPkg] = useState(null);
 
     const [uid, set_uid] = useState("");
@@ -50,7 +58,7 @@ export default function PackagePage() {
             console.log("PKG: " + pkg.owner_id)
             console.log("UID: " + uid)
             if (uid === pkg.owner_id) {
-                document.getElementById("package-download-btn").innerHTML = "EDIT"
+                document.getElementById("package-download-btn").innerHTML = t("pkgcode.edit")
                 document.getElementById("package-download-btn").classList.add("package-edit-btn")
                 document.getElementById("package-download-btn").onclick = () => {
                     navigate("/packages/" + pkg.id + "/edit", {state: {pkg: pkg}})
@@ -78,6 +86,11 @@ export default function PackagePage() {
         if (pkg !== null) {
             setMobile(window.matchMedia("(pointer: fine) and (hover: hover)").matches)
 
+            if (window.matchMedia("(max-width: 1250px)").matches) {
+                document.getElementById("gallery-label").innerHTML = document.getElementById("gallery-label").innerHTML.replace("03", "02")
+                document.getElementById("characteristics-label").innerHTML = document.getElementById("characteristics-label").innerHTML.replace("02", "03")
+            }
+
             console.log("use effect is run")
             document.title = pkg.name + " - DEVSHOP"
             console.log("package banner load: " + pkg.banner)
@@ -90,7 +103,7 @@ export default function PackagePage() {
                 document.getElementById("review_num").innerHTML = "0"
             } else {
                 if (ratings_length === 1) {
-                    document.getElementById("review_num_plural").innerHTML = "rating"
+                    document.getElementById("review_num_plural").innerHTML = t("pkgcode.rating")
                 }
                 document.getElementById("review_num").innerHTML = ratings_length
                 let ratings = pkg.ratings;
@@ -150,16 +163,16 @@ export default function PackagePage() {
             }}></div>
             {/*<div className="banner-blur"></div>*/}
             <h2 className="package-title">{pkg.name}</h2>
-            <h3 className="package-author">by <Link className="package-author-link"
+            <h3 className="package-author">{t("pkgcode.by")} <Link className="package-author-link"
                                                     to={"/users/" + fancy_name_to_id(pkg.owner_username)}>{pkg.owner_username}</Link>
             </h3>
             <button className="package-download-btn" id="package-download-btn"
-                    onClick={() => downloadPkg()}>{"DOWNLOAD -> 0$"}</button>
-            <p className="package-description-label">// 01 - DESCRIPTION</p>
+                    onClick={() => downloadPkg()}>{t("pkgcode.downloads") + " -> 0$"}</button>
+            <p className="package-description-label">// 01 - {t("pkgcode.desc")}</p>
             <div className="package-description">{
                 <MDEditor.Markdown source={pkg.description} className="package-desc-md"/>
             }</div>
-            <p className="package-screenshots-label"></p>
+            <p className="package-screenshots-label" id="gallery-label">// 03 - {t("pkgcode.imgs")}</p>
             <div className="package-screenshots" id="package-screenshots">
                 <img
                     id="screenshot_one"
@@ -222,72 +235,26 @@ export default function PackagePage() {
                 }}
                 />
             </div>
-            <p className="package-characteristics-label"></p>
+            <p className="package-characteristics-label" id="characteristics-label">// 02 - {t("pkgcode.ch")}</p>
             <div className="package-characteristics">
-                <p>DOWNLOADS: {shortNumber(pkg.downloads.length)}<br/>AVERAGE HAPPINESS: <span
-                    id="happiness_num">xx.x</span><br/>↳ <span id="review_num">5</span> <span
-                    id="review_num_plural">ratings</span>
-
-                    {/*<span id="rate_btn"><br/>↳*/}
-
-                    {/*<Popup trigger={<span className="rate_btn">{">> RATE THIS <<"}</span>} modal id="rating-popup"*/}
-                    {/*       ref={popupRef} onOpen={() => {*/}
-                    {/*    if (!is_logged_in) {*/}
-                    {/*        document.getElementById("popup-root").firstChild.firstChild.innerHTML = '<h4>⚠️</h4><p class="popup-signin-txt">You need to sign in to be able to rate packages.</p><button class="secondary popup-signin-btn" id="popup-sign-in">SIGN_IN</button>'*/}
-                    {/*        document.getElementById("popup-sign-in").onclick = () => {*/}
-                    {/*            navigate("/sign-in")*/}
-                    {/*        }*/}
-                    {/*        document.getElementById("popup-go-back").onclick = () => {*/}
-                    {/*            popupRef.current.close()*/}
-                    {/*        }*/}
-                    {/*    }*/}
-                    {/*}}>*/}
-                    {/*    <h3 className="rating-popup-title">RATE THIS PACKAGE</h3>*/}
-                    {/*    <span className="rating-popup-input"><input type='number' max='100' min='0'*/}
-                    {/*                                                maxLength='3' className='rating_input'*/}
-                    {/*                                                id='rating_input' onInput={() => {*/}
-                    {/*        console.log(is_logged_in)*/}
-                    {/*        if (document.getElementById("rating_input").value > 100) {*/}
-                    {/*            document.getElementById("rating_input").value = 100*/}
-                    {/*        } else if (document.getElementById("rating_input").value < 0) {*/}
-                    {/*            document.getElementById("rating_input").value = 0*/}
-                    {/*        }*/}
-                    {/*    }}/>&nbsp;/100</span>*/}
-                    {/*    <br/>*/}
-                    {/*    <button className='secondary rating-popup-btn' id='rating_done_btn' onClick={async () => {*/}
-                    {/*        // if no map exists on the package firebase doc, create one and add the rating, else add the rating to the map*/}
-                    {/*        await updateDoc(doc(db, "packages", pkg.id), {*/}
-                    {/*            // get all existing ratings of the package using the pkg object, and add the new rating to the map*/}
-                    {/*            ratings: {*/}
-                    {/*                ...pkg.ratings,*/}
-                    {/*                [uid]: document.getElementById("rating_input").value*/}
-                    {/*            }*/}
-                    {/*        }).then(() => {*/}
-                    {/*            // reload the page to update the rating*/}
-                    {/*            window.location.reload();*/}
-                    {/*        })*/}
-                    {/*    }}>SUBMIT</button>*/}
-
-                    {/*</Popup>*/}
-
-
-                    {/*</span>*/}
-
+                <p>{t("pkgcode.downloads")}: {shortNumber(pkg.downloads.length)}<br/>
+                    {t("pkgcode.happiness")}: <span id="happiness_num">xx.x</span><br/>
+                    ↳ <span id="review_num">5</span> <span id="review_num_plural">{t("pkgcode.ratings")}</span>
                     <br/>
-                    DISK SIZE: {Math.round(pkg.sizeMb * 10) / 10}MB<br/><span className="current-ver">
-                        VERSION: {pkg.current_version}</span><br/>
+                    {t("pkgcode.disk_size")}: {Math.round(pkg.sizeMb * 10) / 10}MB<br/><span className="current-ver">
+                        {t("pkgcode.version")}: {pkg.current_version}</span><br/>
                     <button className="package-download-side pkg-side-dwnl" id="package-download-side"
-                            onClick={() => downloadPkg()}>DOWNLOAD
+                            onClick={() => downloadPkg()}>{t("pkgcode.download")}
                     </button>
                     <Popup trigger={
                         <button className="secondary package-rate-btn"
                                 onClick={() => {
-                                }} id="package-rate-btn">RATE PACKAGE
+                                }} id="package-rate-btn">{t("pkgcode.ratepkg")}
                         </button>
                     } modal id="rating-popup"
                            ref={popupRef} onOpen={() => {
                         if (!is_logged_in) {
-                            document.getElementById("popup-root").firstChild.firstChild.innerHTML = '<h4>⚠️</h4><p class="popup-signin-txt">You need to sign in to be able to rate packages.</p><button class="secondary popup-signin-btn" id="popup-sign-in">SIGN_IN</button>'
+                            document.getElementById("popup-root").firstChild.firstChild.innerHTML = '<h4>⚠️</h4><p class="popup-signin-txt">' + t("pkgcode.ratepkg_error") + '.</p><button class="secondary popup-signin-btn" id="popup-sign-in">' + t("pkgcode.rate_error_btn") + '</button>'
                             document.getElementById("popup-sign-in").onclick = () => {
                                 navigate("/sign-in")
                             }
@@ -296,7 +263,7 @@ export default function PackagePage() {
                             }
                         }
                     }} className="package-rate-popup">
-                        <h3 className="rating-popup-title">&nbsp;&nbsp;RATE THIS PACKAGE&nbsp;&nbsp;</h3>
+                        <h3 className="rating-popup-title">&nbsp;&nbsp;{t("pkgcode.ratepkg_title")}&nbsp;&nbsp;</h3>
                         <span className="rating-popup-input"><input type='number' max='100' min='0'
                                                                     maxLength='3' className='rating_input'
                                                                     id='rating_input' onInput={() => {
@@ -320,7 +287,7 @@ export default function PackagePage() {
                                 // reload the page to update the rating
                                 window.location.reload();
                             })
-                        }}>SUBMIT
+                        }}>{t("pkgcode.submit")}
                         </button>
                         <br/>
 

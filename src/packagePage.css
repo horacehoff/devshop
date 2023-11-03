@@ -99,9 +99,9 @@
     color: #b9b9b9
 }
 
-.package-screenshots-label:after {
-    content: '// 03 - GALLERY'
-}
+/*.package-screenshots-label:after {*/
+/*    content: '// 03 - GALLERY'*/
+/*}*/
 
 .package-screenshots {
     top: 855px;
@@ -135,9 +135,9 @@
     padding: 0
 }
 
-.package-characteristics-label:after {
-    content: '// 02 - CHARACTERISTICS'
-}
+/*.package-characteristics-label:after {*/
+/*    content: '// 02 - CHARACTERISTICS'*/
+/*}*/
 
 .package-characteristics {
     width: fit-content;
@@ -202,6 +202,9 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     display: none;
+    text-align: center;
+    height: 37px;
+    padding: 0;
 }
 
 .rate_btn {
@@ -279,7 +282,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    backdrop-filter: brightness(0.5) blur(5px);
+    backdrop-filter: brightness(0.5) blur(5px) !important;
     -webkit-backdrop-filter: brightness(0.5) blur(5px);
     z-index: -1;
     opacity: 0;
@@ -312,7 +315,7 @@
 
 .package-download-side {
     background-color: #1e1e1e;
-    padding: 10px 40px;
+    /*padding: 10px 40px;*/
     border-radius: 5px;
     transition: 0.2s;
     cursor: pointer;
@@ -324,6 +327,9 @@
     border: 0;
     display: none;
     margin-top: 10px;
+    width: 152px;
+    height: 40px;
+    text-align: center;
 }
 
 .package-download-side:hover {
@@ -366,13 +372,12 @@
         left: 15px;
     }
 
-    .package-characteristics-label:after {
-        content: '// 03 - CHARACTERISTICS'
-    }
-
-    .package-screenshots-label:after {
-        content: '// 02 - GALLERY'
-    }
+    /*.package-characteristics-label:after {*/
+    /*    content: '// 03 - CHARACTERISTICS'*/
+    /*}*/
+    /*.package-screenshots-label:after {*/
+    /*    content: '// 02 - GALLERY'*/
+    /*}*/
 
     .package-characteristics {
         top: 1410px;

@@ -7,8 +7,16 @@ import fancy_name_to_id, {interests_data, profanityFilter} from "./utility.js";
 import {doc, setDoc} from "firebase/firestore";
 import {getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {checkIfUsernameExists} from "./signup.jsx";
+import data from "./accountSettings.json"
+import i18n from "i18next";
+import {useTranslation} from "react-i18next";
 
 export default function AccountSettings() {
+    i18n.addResourceBundle("en", "accsettings", data.en)
+    i18n.addResourceBundle("fr", "accsettings", data.fr)
+    const {t} = useTranslation("accsettings");
+
+
     const [NewUserName, setNewUserName] = useState("");
     const [baseUserName, setBaseUserName] = useState("");
     const [NewPassword, setNewPassword] = useState("");
@@ -207,12 +215,12 @@ export default function AccountSettings() {
 
     return (
         <>
-            <h1 className="title">ACCOUNT</h1>
-            <h2 className="subtitle">MODIFY YOUR ACCOUNT SETTINGS BELOW</h2>
+            <h1 className="title">{t('accsettings.account')}</h1>
+            <h2 className="subtitle">{t('accsettings.accountsub')}</h2>
             <div id="acc-settings" className="acc-settings">
                 <div className="acc-side-one">
-                    <h4 className="section-title">INTERESTS</h4>
-                    <p className="section-subtitle">What do you like ?</p>
+                    <h4 className="section-title">{t('accsettings.interests')}</h4>
+                    <p className="section-subtitle">{t('accsettings.interestssub')}</p>
                     <div className="interest-center">
                         {
                             interests_data.map((interest, index) => {
@@ -236,20 +244,20 @@ export default function AccountSettings() {
                                         }
                                     }
                                     await updateInterests(final_interests).then(() => {
-                                        document.getElementById("interests-save-btn").innerHTML = "SAVED ✅";
+                                        document.getElementById("interests-save-btn").innerHTML = t('accsettings.saved') + " ✅";
                                         // wait 1 second
                                         setTimeout(() => {
-                                            document.getElementById("interests-save-btn").innerHTML = "SAVE";
+                                            document.getElementById("interests-save-btn").innerHTML = t('accsettings.save');
                                             window.location.reload();
                                         }, 1000);
                                     })
-                                }}>SAVE
+                                }}>{t('accsettings.save')}
                         </button>
                     </div>
                     <br/><br/>
                 </div>
                 <div className="acc-side-two">
-                    <h4 className="section-title">PROFILE</h4>
+                    <h4 className="section-title">{t('accsettings.profile')}</h4>
                     <div className="avatar-section">
                         <input type="file" id="img-file" className="file-input" onChange={(event) => {
                             setPfpUpload(event.target.files[0])
@@ -267,23 +275,25 @@ export default function AccountSettings() {
                         <label className="profile-picture" id="banner-img"
                                htmlFor="banner-file"/>
                         <div className="avatar-text">
-                            BANNER<br/><span className="avatar-size">.PNG/.JPG/.WEBP</span>
+                            {t('accsettings.banner')}<br/><span className="avatar-size">.PNG/.JPG/.WEBP</span>
                         </div>
                         <br/>
                         <div className="section-inputs">
-                            <p className="profile-error-txt" id="profile-error-txt">// USERNAME ALREADY EXISTS</p>
-                            <p className="section-input-name">USERNAME</p>
+                            <p className="profile-error-txt"
+                               id="profile-error-txt">{t('accsettings.username_already_exists')}</p>
+                            <p className="section-input-name">{t('accsettings.username')}</p>
                             <input type="text" className="txt-input section-input" placeholder={baseUserName}
                                    value={NewUserName} onChange={e => setNewUserName(e.target.value)}/>
                             <br/>
-                            <p className="section-input-name" data-name-content="bio">BIO</p>
+                            <p className="section-input-name" data-name-content="bio">{t('accsettings.bio')}</p>
                             <input type="text" className="txt-input section-input"
-                                   placeholder="Hi, I'm new to DEVSHOP!"
+                                   placeholder={t('accsettings.bioplaceholder')}
                                    value={NewBio} onChange={e => setNewBio(e.target.value)}/>
                             <br/>
-                            <p className="section-input-name" data-name-content="github">GITHUB USERNAME</p>
+                            <p className="section-input-name"
+                               data-name-content="github">{t('accsettings.gitusername')}</p>
                             <input type="text" className="txt-input section-input"
-                                   placeholder="your-github-username"
+                                   placeholder={t('accsettings.gitplaceholder')}
                                    value={NewGithub} onChange={e => setNewGithub(e.target.value)}/>
                             <br/>
                             {/*<p className="profile-error-txt" id="profile-error-txt">// USERNAME ALREADY EXISTS</p>*/}
@@ -291,10 +301,10 @@ export default function AccountSettings() {
                                     onClick={async () => {
                                         try {
                                             await updateProfile().then(() => {
-                                                document.getElementById("profile-save-btn").innerHTML = "SAVED ✅";
+                                                document.getElementById("profile-save-btn").innerHTML = t('accsettings.saved') + " ✅";
                                                 // wait 1 second
                                                 setTimeout(() => {
-                                                    document.getElementById("profile-save-btn").innerHTML = "SAVE";
+                                                    document.getElementById("profile-save-btn").innerHTML = t('accsettings.save');
                                                     navigate("/users/" + fancy_name_to_id(user_data.username))
                                                     window.location.reload()
                                                 }, 1000);
@@ -304,14 +314,14 @@ export default function AccountSettings() {
                                                 document.getElementById("profile-error-txt").style.display = "none";
                                             }, 5000);
                                         }
-                                    }}>SAVE
+                                    }}>{t('accsettings.save')}
                             </button>
                         </div>
                     </div>
                     <br/><br/>
                 </div>
 
-                <h4 className="section-title pwd-section-title">PASSWORD</h4>
+                <h4 className="section-title pwd-section-title">{t('accsettings.password')}</h4>
                 <div className="avatar-section">
                     <div className="section-inputs">
                         {/*<p className="section-input-name">OLD PASSWORD</p>*/}
@@ -331,8 +341,8 @@ export default function AccountSettings() {
                         {/*            }, 1500);*/}
                         {/*        })}>SAVE*/}
                         {/*</button>*/}
-                        <button className="primary save-btn" onClick={() => navigate("/reset-password")}>RESET
-                            PASSWORD
+                        <button className="primary save-btn" onClick={() => navigate("/reset-password")}>
+                            {t('accsettings.reset_password')}
                         </button>
                     </div>
                 </div>

@@ -5,8 +5,16 @@ import {collection, getDocs, limit, query, where} from "firebase/firestore";
 import {db} from "./firebase.js";
 import SnippetCard from "./snippetCard.jsx";
 import PackageCard from "./packageCard.jsx";
+import data from "./search.json"
+import i18n from "i18next";
+import {useTranslation} from "react-i18next";
 
 export default function Search() {
+    i18n.addResourceBundle("en", "search", data.en)
+    i18n.addResourceBundle("fr", "search", data.fr)
+    const {t} = useTranslation("search");
+
+
     const [searchInput, setSearchInput] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [height, setHeight] = useState("35px")
@@ -268,9 +276,9 @@ export default function Search() {
     return (
         <>
             <br/><br/>
-            <h1 className="search-title">SEARCH</h1>
+            <h1 className="search-title">{t('search.search')}</h1>
             <div className="search-group">
-                <input type="text" placeholder="@search_query" value={searchInput}
+                <input type="text" placeholder={t('search.queryholder')} value={searchInput}
                        onChange={e => setSearchInput(e.target.value)} onKeyDown={e => search(e, false)}
                        className="txt-input search-input proto-input" id="search-input" autoCapitalize="none"/>
                 {/*<br/>*/}
@@ -279,10 +287,11 @@ export default function Search() {
                         <select id="search-parameters-type-select" onChange={e => {
                             setPkgType(e.target.value)
                             setSearchResults([])
+                            document.getElementById("search-failed").style.display = "none"
                             console.log(e.target.value)
                         }}>
                             <option value="PACKAGES">PACKAGES</option>
-                            <option value="SNIPPETS">CODE SNIPPET</option>
+                            <option value="SNIPPETS">{t('search.code_snippet')}</option>
                         </select>
                         <img
                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABiSURBVHgB7Y7bDYAwDAMzAiN0dDZhFEZgBEOlIh5S27jNp0/Kp+9iJoT4AGAvl4wkb+59LwA28pKjF0hshN4wg5GH3MNhuUcwLW+JwuSVyFEuRv6LrHjYrlssmiwN+1oINyfgwyAP2XO9oQAAAABJRU5ErkJggg=="
@@ -319,12 +328,12 @@ export default function Search() {
                                                                                                   strokeWidth="2"></circle></svg> FILTERS</span>
                     </div>
                     <div className="search-parameters-filters-screen" id="search-filters-screen">
-                        <p className="search-parameters-filters-screen-title">-- AUTHOR --------------------</p>
-                        <input type="text" placeholder="@user_id"
+                        <p className="search-parameters-filters-screen-title">-- {t('search.author')} --------------------</p>
+                        <input type="text" placeholder={t('search.authorholder')}
                                className="txt-input search-input proto-input search-parameters-filters-screen-input"
                                value={userId} onChange={e => setUserId(e.target.value)}
                         />
-                        <p className="search-parameters-filters-screen-title">-- DOWNLOADS -----------------</p>
+                        <p className="search-parameters-filters-screen-title">-- {t('search.downloads')} -----------------</p>
                         <select className="search-parameters-filters-screen-select" onChange={e => {
                             if (e.target.value === "more") {
                                 setDownloadMoreThan(true)
@@ -332,8 +341,8 @@ export default function Search() {
                                 setDownloadMoreThan(false)
                             }
                         }}>
-                            <option value="more">{"MORE THAN"}</option>
-                            <option value="less">{"LESS THAN"}</option>
+                            <option value="more">{t('search.more')}</option>
+                            <option value="less">{t('search.less')}</option>
                         </select>
                         <input type="number" placeholder="N/A" pattern="\d*"
                                className="txt-input search-input proto-input search-parameters-filters-screen-input search-parameters-filters-screen-input-inline"
@@ -349,10 +358,10 @@ export default function Search() {
                     } else {
                         search("", true)
                     }
-                }} className="search-btn-group" id="search-filters-btn">SEARCH 🔍
+                }} className="search-btn-group" id="search-filters-btn">{t("search.btn")} 🔍
                 </button>
             </div>
-            <p className="search-failed" id="search-failed">No search results</p>
+            <p className="search-failed" id="search-failed">{t('search.no_results')}</p>
             <ul className="packages-card-list search-packages-card-list" id="packages-card-list-one">
                 {pkgType === "PACKAGES" && (
                     <div>

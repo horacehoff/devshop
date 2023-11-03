@@ -1,4 +1,7 @@
 import badwords from "./badwords.txt?raw"
+import i18n from "i18next";
+import data from "./interests.json";
+import {useTranslation} from "react-i18next";
 
 
 export default function fancy_name_to_id(name) {
@@ -50,4 +53,7 @@ export function profanityFilter(str) {
     return output;
 }
 
-export const interests_data = ["🤖AI", "🌎WEB", "👨‍💻PROGRAMMING", "📱MOBILE APPS", "🎮GAME DEV", "📊DATA", "🔒SECURITY", "🎨DESIGN", "⚙️ENGINEERING"];
+i18n.addResourceBundle("en", "interests", data.en)
+i18n.addResourceBundle("fr", "interests", data.fr)
+
+export const interests_data = ["🤖" + i18n.t('ai', {ns: "interests"}), "🌎" + i18n.t('web', {ns: "interests"}), "👨‍💻" + i18n.t('programming', {ns: "interests"}), "📱" + i18n.t('mobile', {ns: "interests"}), "🎮" + i18n.t('gaming', {ns: "interests"}), "📊" + i18n.t('data', {ns: "interests"}), "🔒" + i18n.t('security', {ns: "interests"}), "🎨" + i18n.t('design', {ns: "interests"}), "🛠" + i18n.t('build', {ns: "interests"})];

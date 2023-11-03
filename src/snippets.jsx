@@ -7,8 +7,18 @@ import {collection, getDocs, limit, orderBy, query, startAt, where} from "fireba
 import {useEffect, useState} from "react";
 import {db, user_data} from "./firebase.js";
 import {Helmet} from "react-helmet";
+import data from "./snippets.json"
+import card from "./packageSnippetCard.json"
+import i18n from "i18next";
+import {useTranslation} from "react-i18next";
 
 export default function Snippets() {
+    i18n.addResourceBundle("en", "snippets", data.en)
+    i18n.addResourceBundle("en", "snippets", card.en)
+    i18n.addResourceBundle("fr", "snippets", data.fr)
+    i18n.addResourceBundle("fr", "snippets", card.fr)
+    const {t} = useTranslation("snippets");
+
     const navigate = useNavigate();
     window.mobileCheck = function () {
         let check = false;
@@ -53,56 +63,61 @@ export default function Snippets() {
     const [similarCodeBlockData, setSimilarCodeBlockData] = useState([]);
     const [lastSimilarCodeBlockData, setLastSimilarCodeBlockData] = useState([]);
     useEffect(() => {
-        setTrendingCodeBlockData([])
-        setLastCodeBlockData([])
-        setSimilarCodeBlockData([])
-        const q = query(collection(db, "snippets"), orderBy("downloads", "desc"), limit(9));
-        getDocs(q).then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                setTrendingCodeBlockData(prevState => [...prevState, doc.data()]);
-            })
-            setLastTrendingCodeBlockData(querySnapshot.docs.pop())
-            if (querySnapshot.docs.length === 9) {
-                document.getElementById("trending-load-more").style.display = "block"
-            } else {
-                document.getElementById("trending-load-more").style.display = "none"
-            }
-        })
-        const q1 = query(collection(db, "snippets"), orderBy("created", "desc"), limit(9));
-        getDocs(q1).then((querySnapshot) => {
-            let run = false
-            querySnapshot.forEach((doc) => {
-                setLastCodeBlockData(prevState => [...prevState, doc.data()]);
-                run = true
-            })
-            setLastLastCodeBlockData(querySnapshot.docs.pop())
-            if (!run) {
-                document.getElementById("category-title").style.display = "none"
-                document.getElementById("empty-txt").style.display = "block"
-                document.getElementById("empty-btn").style.display = "block"
-            }
-            if (querySnapshot.docs.length === 9) {
-                document.getElementById("recent-load-more").style.display = "block"
-            } else {
-                document.getElementById("recent-load-more").style.display = "none"
-            }
-        })
-        if (user_data && user_data.interests.length > 0) {
-            const q2 = query(collection(db, "snippets"), where("interests", "array-contains-any", Array.from(user_data.interests)), limit(9));
-            getDocs(q2).then((querySnapshot) => {
+        try {
+            setTrendingCodeBlockData([])
+            setLastCodeBlockData([])
+            setSimilarCodeBlockData([])
+            const q = query(collection(db, "snippets"), orderBy("downloads", "desc"), limit(9));
+            getDocs(q).then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
-                    console.log("fuck yeah")
-                    setSimilarCodeBlockData(prevState => [...prevState, doc.data()]);
-                    document.getElementById("for-you-section").style.display = "block"
+                    setTrendingCodeBlockData(prevState => [...prevState, doc.data()]);
                 })
-                setLastSimilarCodeBlockData(querySnapshot.docs.pop())
+                setLastTrendingCodeBlockData(querySnapshot.docs.pop())
                 if (querySnapshot.docs.length === 9) {
-                    document.getElementById("similar-load-more").style.display = "block"
+                    document.getElementById("trending-load-more").style.display = "block"
                 } else {
-                    document.getElementById("similar-load-more").style.display = "none"
+                    document.getElementById("trending-load-more").style.display = "none"
                 }
             })
+            const q1 = query(collection(db, "snippets"), orderBy("created", "desc"), limit(9));
+            getDocs(q1).then((querySnapshot) => {
+                let run = false
+                querySnapshot.forEach((doc) => {
+                    setLastCodeBlockData(prevState => [...prevState, doc.data()]);
+                    run = true
+                })
+                setLastLastCodeBlockData(querySnapshot.docs.pop())
+                if (!run) {
+                    document.getElementById("category-title").style.display = "none"
+                    document.getElementById("empty-txt").style.display = "block"
+                    document.getElementById("empty-btn").style.display = "block"
+                }
+                if (querySnapshot.docs.length === 9) {
+                    document.getElementById("recent-load-more").style.display = "block"
+                } else {
+                    document.getElementById("recent-load-more").style.display = "none"
+                }
+            })
+            if (user_data && user_data.interests.length > 0) {
+                const q2 = query(collection(db, "snippets"), where("interests", "array-contains-any", Array.from(user_data.interests)), limit(9));
+                getDocs(q2).then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        console.log("fuck yeah")
+                        setSimilarCodeBlockData(prevState => [...prevState, doc.data()]);
+                        document.getElementById("for-you-section").style.display = "block"
+                    })
+                    setLastSimilarCodeBlockData(querySnapshot.docs.pop())
+                    if (querySnapshot.docs.length === 9) {
+                        document.getElementById("similar-load-more").style.display = "block"
+                    } else {
+                        document.getElementById("similar-load-more").style.display = "none"
+                    }
+                })
+            }
+        } catch {
+            window.location.reload()
         }
+
     }, [user_data]);
 
 
@@ -127,20 +142,21 @@ export default function Snippets() {
                       property="og:description"/>
             </Helmet>
             <h1 className="packages-title snippets-title">SNIPPETS</h1>
-            <h4 className="packages-subtitle">FIND AND PUBLISH CODE SNIPPETS</h4>
+            <h4 className="packages-subtitle">{t('snippets.sub')}</h4>
             <Link className="secondary search-btn" id="package-publish-btn"
-                  to="/publish-snippet">+ PUBLISH A SNIPPET
+                  to="/publish-snippet">+ {t('snippets.publish')}
             </Link>
             <Link className="secondary search-btn" id="package-search-btn" to="/search/">
-                <IoMdSearch/> SEARCH SNIPPETS
+                <IoMdSearch/> {t('snippets.search')}
             </Link>
             <div id="for-you-section" className="nodisplay">
-                <h2 className="category-title">// FOR YOU</h2>
+                <h2 className="category-title">{t('snippets.for_you')}</h2>
                 <ul className="packages-card-list">
                     {similarCodeBlockData.map((pkg, index) => (
                         <li key={index} className="packages-card-list-child">
                             <Link to={"/snippets/" + pkg.id}>
-                                <SnippetCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
+                                <SnippetCard readmore={t("card.readmore")} dwnl_local={t("card.downloads")}
+                                             name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
                                              description={pkg.catchphrase}/>
                             </Link>
                         </li>
@@ -175,7 +191,7 @@ export default function Snippets() {
                     </li>
                 </ul>
             </div>
-            <h2 className="category-title">// CURRENTLY TRENDING</h2>
+            <h2 className="category-title">{t('snippets.most_downloaded')}</h2>
             <ul className="packages-card-list">
                 <p id="empty-txt">{"NO SNIPPETS - PUBLISH THE FIRST ONE ?"}</p>
                 <button className="primary" id="empty-btn" onClick={() => navigate("/publish-snippet")}>MAKE HISTORY
@@ -183,7 +199,8 @@ export default function Snippets() {
                 {trendingCodeBlockData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">
                         <Link to={"/snippets/" + pkg.id}>
-                            <SnippetCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
+                            <SnippetCard readmore={t("card.readmore")} dwnl_local={t("card.downloads")} name={pkg.name}
+                                         dwnl={pkg.downloads} author={pkg.owner_username}
                                          description={pkg.catchphrase}/>
                         </Link>
                     </li>
@@ -215,12 +232,13 @@ export default function Snippets() {
                     </div>
                 </li>
             </ul>
-            <h2 className="category-title" id="category-title">// RECENTLY CREATED</h2>
+            <h2 className="category-title" id="category-title">{t('snippets.recent')}</h2>
             <ul className="packages-card-list">
                 {lastCodeBlockData.map((pkg, index) => (
                     <li key={index} className="packages-card-list-child">
                         <Link to={"/snippets/" + pkg.id}>
-                            <SnippetCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
+                            <SnippetCard readmore={t("card.readmore")} dwnl_local={t("card.downloads")} name={pkg.name}
+                                         dwnl={pkg.downloads} author={pkg.owner_username}
                                          description={pkg.catchphrase}/>
                         </Link>
                     </li>

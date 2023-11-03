@@ -206,7 +206,7 @@
     }
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 475px) {
     #package-publish-btn {
         top: -16px;
     }

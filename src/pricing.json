@@ -1,0 +1,28 @@
+{
+  "en": {
+    "pricing.pricing": "PRICING",
+    "pricing.soon": "COMING SOON; AS OF NOW THE WEBSITE IS 100% FREE TO USE",
+    "pricing.sub": "You can use DEVSHOP for free, or you can pay a small amount of money each month to get rid of all inconvenients and get the full experience",
+    "pricing.basic": "BASIC",
+    "pricing.basicprice": "FREE",
+    "pricing.adv1": "Full access to the website",
+    "pricing.adv2-1": "Ads",
+    "pricing.adv2-2": "No ads",
+    "pricing.adv3": "Set categories for packages/snippets",
+    "pricing.pro": "PRO",
+    "pricing.proprice": "1.99€/month"
+  },
+  "fr": {
+    "pricing.pricing": "TARFIS",
+    "pricing.soon": "BIENTÔT; POUR L'INSTANT DEVSHOP EST 100% GRATUIT",
+    "pricing.sub": "Vous pouvez utiliser DEVSHOP gratuitement, ou vous pouvez payer une petite somme chaque mois pour vous débarasser de tout inconvénient et avoir la meilleur expérience possible",
+    "pricing.basic": "BASIQUE",
+    "pricing.basicprice": "GRATUIT",
+    "pricing.adv1": "Accès complet au site",
+    "pricing.adv2-1": "Publicités",
+    "pricing.adv2-2": "Sans publicités",
+    "pricing.adv3": "Définir des catégories pour vos packages/snippets",
+    "pricing.pro": "PRO",
+    "pricing.proprice": "1.99€/mois"
+  }
+}

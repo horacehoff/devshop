@@ -11,8 +11,21 @@ import {BiCloudUpload} from "react-icons/bi";
 import PackageCard from "./packageCard.jsx";
 import Popup from "reactjs-popup";
 import "./modal.css"
+import "./createPackage.json"
+import i18n from "i18next";
+import data from "./createPackage.json";
+import card from "./packageSnippetCard.json"
+import {useTranslation} from "react-i18next";
 
 export default function CreatePackage() {
+    i18n.addResourceBundle("en", "createpkg", data.en)
+    i18n.addResourceBundle("en", "createpkg", card.en)
+    i18n.addResourceBundle("fr", "createpkg", data.fr)
+    i18n.addResourceBundle("fr", "createpkg", card.fr)
+    const {t} = useTranslation("createpkg");
+
+
+
     const [pkgUpload, setPkgUpload] = useState(null);
 
     const [imgUpload0ne, setImgUploadOne] = useState(null);
@@ -28,7 +41,7 @@ export default function CreatePackage() {
     const [name, setName] = useState("");
     const [desc, setDesc] = useState("");
     const [version, setVersion] = useState("");
-    const [longDesc, setLongDesc] = useState("**This is the detailed description of my awesome package!**");
+    const [longDesc, setLongDesc] = useState("**" + t('createpkg.descholder') + "**");
     let pkg_id = "";
 
     const [warning, setWarning] = useState(false);
@@ -40,6 +53,8 @@ export default function CreatePackage() {
     onAuthStateChanged(auth, (user) => {
         if (user) {
             uid = user.uid;
+            document.evaluate("/html/body/div/div[3]/div[2]/div/div[1]/div/div[1]/ul[2]/li[4]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.remove();
+            document.evaluate("/html/body/div/div[3]/div[2]/div/div[1]/div/div[1]/ul[2]/li[4]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.remove();
         } else {
             setWarning(true)
         }
@@ -50,49 +65,49 @@ export default function CreatePackage() {
         let extension = pkgUpload.type.replace(/(.*)\//g, '')
         let pkgRef = ref(storage, "users/" + uid + "/packages/" + name_id + "/pkg/" + fancy_name_to_id(name) + "." + extension)
         await uploadBytes(pkgRef, pkgUpload).then(() => {
-            document.getElementById("publish-btn").innerHTML = "UPLOADING => █▒▒▒▒▒▒▒▒▒▒▒▒▒ 7%"
+            document.getElementById("publish-btn").innerHTML = t('createpkg.uploading') + " => █▒▒▒▒▒▒▒▒▒▒▒▒▒ 7%"
         });
 
         let bannerRef = ref(storage, "users/" + uid + "/packages/" + name_id + "/img/banner/" + banner.name)
         await uploadBytes(bannerRef, banner).then(() => {
-            document.getElementById("publish-btn").innerHTML = "UPLOADING => ██▒▒▒▒▒▒▒▒▒▒▒▒ 14%"
+            document.getElementById("publish-btn").innerHTML = t('createpkg.uploading') + " => ██▒▒▒▒▒▒▒▒▒▒▒▒ 14%"
         })
 
         let imgRefOne = ref(storage, "users/" + uid + "/packages/" + name_id + "/img/one/" + (imgUpload0ne.name ?? ("screenone" + imgUpload0ne.type)))
         await uploadBytes(imgRefOne, imgUpload0ne).then(() => {
-            document.getElementById("publish-btn").innerHTML = "UPLOADING => ███▒▒▒▒▒▒▒▒▒▒▒ 21%"
+            document.getElementById("publish-btn").innerHTML = t('createpkg.uploading') + " => ███▒▒▒▒▒▒▒▒▒▒▒ 21%"
         })
 
         let imgRefTwo = ref(storage, "users/" + uid + "/packages/" + name_id + "/img/two/" + imgUploadTwo.name ?? ("screentwo" + imgUpload0ne.type))
         await uploadBytes(imgRefTwo, imgUploadTwo).then(() => {
-            document.getElementById("publish-btn").innerHTML = "UPLOADING => ████▒▒▒▒▒▒▒▒▒▒ 28%"
+            document.getElementById("publish-btn").innerHTML = t('createpkg.uploading') + " => ████▒▒▒▒▒▒▒▒▒▒ 28%"
         })
 
         let imgRefThree = ref(storage, "users/" + uid + "/packages/" + name_id + "/img/three/" + imgUploadThree.name ?? ("screenthree" + imgUpload0ne.type))
         await uploadBytes(imgRefThree, imgUploadThree).then(() => {
-            document.getElementById("publish-btn").innerHTML = "UPLOADING => █████▒▒▒▒▒▒▒▒▒ 35%"
+            document.getElementById("publish-btn").innerHTML = t('createpkg.uploading') + " => █████▒▒▒▒▒▒▒▒▒ 35%"
         })
 
         let imgRefFour = ref(storage, "users/" + uid + "/packages/" + name_id + "/img/four/" + imgUploadFour.name ?? ("screenfour" + imgUpload0ne.type))
         await uploadBytes(imgRefFour, imgUploadFour).then(() => {
-            document.getElementById("publish-btn").innerHTML = "UPLOADING => ██████▒▒▒▒▒▒▒▒ 42%"
+            document.getElementById("publish-btn").innerHTML = t('createpkg.uploading') + " => ██████▒▒▒▒▒▒▒▒ 42%"
         })
 
         let bannerUrl = await getDownloadURL(bannerRef);
         console.log("uploaded banner")
-        document.getElementById("publish-btn").innerHTML = "UPLOADING => ███████▒▒▒▒▒▒▒ 49%"
+        document.getElementById("publish-btn").innerHTML = t('createpkg.uploading') + " => ███████▒▒▒▒▒▒▒ 49%"
         let screenOneUrl = await getDownloadURL(imgRefOne);
         console.log("uploaded screen one")
-        document.getElementById("publish-btn").innerHTML = "UPLOADING => ████████▒▒▒▒▒▒ 56%"
+        document.getElementById("publish-btn").innerHTML = t('createpkg.uploading') + " => ████████▒▒▒▒▒▒ 56%"
         let screenTwoUrl = await getDownloadURL(imgRefTwo);
         console.log("uploaded screen two")
-        document.getElementById("publish-btn").innerHTML = "UPLOADING => █████████▒▒▒▒▒ 63%"
+        document.getElementById("publish-btn").innerHTML = t('createpkg.uploading') + " => █████████▒▒▒▒▒ 63%"
         let screenThreeUrl = await getDownloadURL(imgRefThree);
         console.log("uploaded screen three")
-        document.getElementById("publish-btn").innerHTML = "UPLOADING => ██████████▒▒▒▒ 70%"
+        document.getElementById("publish-btn").innerHTML = t('createpkg.uploading') + " => ██████████▒▒▒▒ 70%"
         let screenFourUrl = await getDownloadURL(imgRefFour);
         console.log("uploaded screen four")
-        document.getElementById("publish-btn").innerHTML = "UPLOADING => ███████████▒▒▒ 77%"
+        document.getElementById("publish-btn").innerHTML = t('createpkg.uploading') + " => ███████████▒▒▒ 77%"
 
 
         let own_username = "";
@@ -100,7 +115,7 @@ export default function CreatePackage() {
         await getDoc(userRef).then((doc) => {
             if (doc.exists()) {
                 own_username = doc.data().username;
-                document.getElementById("publish-btn").innerHTML = "UPLOADING => ████████████▒▒ 84%"
+                document.getElementById("publish-btn").innerHTML = t('createpkg.uploading') + " => ████████████▒▒ 84%"
 
             } else {
                 console.log("No such document!");
@@ -133,7 +148,7 @@ export default function CreatePackage() {
                 created: new Date().getTime(),
                 id: name_id
             }).then(async r => {
-                document.getElementById("publish-btn").innerHTML = "UPLOADING => █████████████▒ 91%"
+                document.getElementById("publish-btn").innerHTML = t('createpkg.uploading') + " => █████████████▒ 91%"
                 // update user packages array with the new package
                 const userRef = doc(db, "users", uid);
                 await getDoc(userRef).then(async (doc) => {
@@ -143,7 +158,7 @@ export default function CreatePackage() {
                         await setDoc(userRef, {
                             owned_packages: packages
                         }, {merge: true}).then(r => {
-                            document.getElementById("publish-btn").innerHTML = "UPLOADING => ██████████████ 100%"
+                            document.getElementById("publish-btn").innerHTML = t('createpkg.uploading') + " => ██████████████ 100%"
                             return name_id
                         })
                     } else {
@@ -170,28 +185,30 @@ export default function CreatePackage() {
             <Popup modal open={warning} onClose={() => {
                 navigate("/packages")
             }}><span>
-                <h4>⚠️</h4>
-                <p className="popup-signin-txt">You need to sign in to be able to publish packages.</p>
-                <button className="secondary popup-signin-btn" onClick={() => navigate("/sign-in")}>SIGN_IN</button>
+                <h4>{t('createpkg.error')}</h4>
+                <p className="popup-signin-txt">{t('createpkg.sign_in_warning')}.</p>
+                <button className="secondary popup-signin-btn"
+                        onClick={() => navigate("/sign-in")}>{t('createpkg.sign_in_warning_btn')}</button>
                 {/*<button className="primary popup-back-btn" onClick={() => navigate("/packages")}>GO BACK</button>*/}
             </span>
             </Popup>
             <Popup modal open={missingFields}><span>
-                <h4>ERROR</h4>
-                <p className="popup-signin-txt">You need to fill in the required fields.</p>
+                <h4>{t('createpkg.error')}</h4>
+                <p className="popup-signin-txt">{t('createpkg.fields_error')}.</p>
                 <button className="secondary popup-signin-btn" onClick={() => setMissingFields(false)}>OK</button>
             </span>
             </Popup>
             <Popup modal open={missingUploads}><span>
-                <h4>ERROR</h4>
-                <p className="popup-signin-txt">You need to upload the required files.</p>
+                <h4>{t('createpkg.error')}</h4>
+                <p className="popup-signin-txt">{t('createpkg.uploads_error')}.</p>
                 <button className="secondary popup-signin-btn" onClick={() => setMissingUploads(false)}>OK</button>
             </span></Popup>
             <div className="split">
                 <div className="split-two" id="split-two">
-                    <h1 className="about-title about-title-card">PUBLISH A PACKAGE</h1>
+                    <h1 className="about-title about-title-card">{t('createpkg.publish_pkg')}</h1>
                     <div className="split-two-card">
-                        <PackageCard dwnl={[]} author={user_data ? user_data.username : "placeholder"}
+                        <PackageCard readmore={t("card.readmore")} dwnl_local={t("card.downloads")} dwnl={[]}
+                                     author={user_data ? user_data.username : "placeholder"}
                                      name={name || "placeholder"}
                                      catchphrase={desc || "placeholder"} banner={bannerURL}/>
                     </div>
@@ -199,25 +216,25 @@ export default function CreatePackage() {
                 <div className="split-one">
                     <h1 className="about-title">PUBLISH A PACKAGE</h1>
                     <div className="centered">
-                        <h2>// GENERAL INFO</h2>
+                        <h2>{t('createpkg.general_info')}</h2>
                         <br/>
-                        <label htmlFor="name-input" className="name-input-label">NAME</label><br/>
-                        <label htmlFor="name-input" className="name-input-label-desc">A good, and preferably short name
-                            for your package</label><br/>
-                        <input type="text" className="proto-input" id="name-input" placeholder="@awesome_name"
+                        <label htmlFor="name-input" className="name-input-label">{t('createpkg.name')}</label><br/>
+                        <label htmlFor="name-input"
+                               className="name-input-label-desc">{t('createpkg.namesub')}</label><br/>
+                        <input type="text" className="proto-input" id="name-input"
+                               placeholder={t('createpkg.nameholder')}
                                value={name}
                                onChange={e => setName(e.target.value)}/>
                         <br/><br/>
-                        <label htmlFor="catch-input" className="name-input-label">CATCHPHRASE</label><br/>
-                        <label htmlFor="catch-input" className="name-input-label-desc">A quick, short, and concise
-                            description for your package</label><br/>
-                        <input type="text" className="proto-input" id="catch-input" placeholder="@awesome_catchphrase"
+                        <label htmlFor="catch-input" className="name-input-label">{t('createpkg.catch')}</label><br/>
+                        <label htmlFor="catch-input" className="name-input-label-desc">{t('createpkg.catchsub')}</label><br/>
+                        <input type="text" className="proto-input" id="catch-input"
+                               placeholder={t('createpkg.catch_holder')}
                                value={desc} onChange={e => setDesc(e.target.value)}/>
 
                         <br/><br/>
-                        <label className="name-input-label">DESCRIPTION</label><br/>
-                        <label className="name-input-label-desc">A longer, more precise description for your
-                            package</label><br/>
+                        <label className="name-input-label">{t('createpkg.desc')}</label><br/>
+                        <label className="name-input-label-desc">{t('createpkg.descsub')}</label><br/>
                         <div className="md-editor-container">
                             <MDEditor
                                 value={longDesc}
@@ -228,34 +245,36 @@ export default function CreatePackage() {
                         </div>
 
                         <br/>
-                        <label className="name-input-label">UPLOADS</label><br/>
-                        <label className="name-input-label-desc">Upload the needed files for your package</label><br/>
+                        <label className="name-input-label">{t('createpkg.uploads')}</label><br/>
+                        <label className="name-input-label-desc">{t('createpkg.uploads_sub')}</label><br/>
                         <input type="file" id="banner-file" className="file-input" onChange={(event) => {
                             setBanner(event.target.files[0])
                             setBannerURL(URL.createObjectURL(event.target.files[0]))
-                            document.getElementById("banner-upload").innerHTML = "✅ UPLOAD BANNER"
+                            document.getElementById("banner-upload").innerHTML = "✅ " + t('createpkg.upload_banner')
                         }} accept=".jpeg,.webp, image/jpeg" required/>
                         <div className="upload-section">
                             <label htmlFor="banner-file" className="file-input-label" id="banner-upload"><BiCloudUpload
-                                className="file-input-icon"></BiCloudUpload>UPLOAD BANNER</label>
+                                className="file-input-icon"></BiCloudUpload>{t('createpkg.upload_banner')}</label>
                             <label htmlFor="file" className="file-input-label" id="file-upload"><BiCloudUpload
-                                className="file-input-icon"></BiCloudUpload>UPLOAD PACKAGE</label>
+                                className="file-input-icon"></BiCloudUpload>{t('createpkg.upload_pkg')}</label>
                             <label htmlFor="img-file" className="file-input-label" id="gallery-upload"><BiCloudUpload
-                                className="file-input-icon"></BiCloudUpload>UPLOAD IMAGES(4)</label>
+                                className="file-input-icon"></BiCloudUpload>{t('createpkg.upload_imgs')}</label>
                             <br/>
                         </div>
                         <br/><br/>
-                        <label className="name-input-label" htmlFor="pkg-version">BASE VERSION</label><br/>
-                        <label className="name-input-label-desc" htmlFor="pkg-version">The base version of your package
-                            (e.g. 1.0, ALPHA, 1.0.0A)</label><br/>
-                        <input type="text" className="proto-input" id="pkg-version" placeholder="@base_pkg_version"
+                        <label className="name-input-label"
+                               htmlFor="pkg-version">{t('createpkg.base_version')}</label><br/>
+                        <label className="name-input-label-desc"
+                               htmlFor="pkg-version">{t('createpkg.base_version_sub')}</label><br/>
+                        <input type="text" className="proto-input" id="pkg-version"
+                               placeholder={t('createpkg.base_version_holder')}
                                value={version}
                                onChange={e => setVersion(e.target.value)}/>
                         <br/>
                         <input type="file" id="file" className="file-input" onChange={(event) => {
                             setPkgUpload(event.target.files[0])
                             console.log("pkg")
-                            document.getElementById("file-upload").innerHTML = "✅ UPLOAD PACKAGE"
+                            document.getElementById("file-upload").innerHTML = "✅ " + t('createpkg.upload_pkg')
                         }} accept=".zip, application/zip" required/>
 
 
@@ -267,11 +286,11 @@ export default function CreatePackage() {
                             setImgUploadFour(event.target.files[3])
                             console.log("img")
                             if (event.target.files.length === 4) {
-                                document.getElementById("gallery-upload").innerHTML = "✅ UPLOAD IMAGES(4)"
+                                document.getElementById("gallery-upload").innerHTML = "✅ " + t('createpkg.upload_imgs')
                             }
                         }} required accept=".png,.jpeg,.webp, image/jpeg, image/png"/>
                         <br/><br/>
-                        <p className="create-package-interest-data">// CATEGORIES</p>
+                        <p className="create-package-interest-data">{t('createpkg.categories')}</p>
                         <div className="create-package-interest-div">
                             {
                                 interests_data.map((interest, index) => {
@@ -288,11 +307,11 @@ export default function CreatePackage() {
                         <br/>
                         <button onMouseEnter={() => {
                             if (document.getElementById("publish-btn").style.pointerEvents !== "none") {
-                                document.getElementById("publish-btn").innerHTML = ">> PUBLISH PACKAGE <<"
+                                document.getElementById("publish-btn").innerHTML = ">> " + t('createpkg.publish_pkg_btn') + " <<"
                             }
                         }} onMouseLeave={() => {
                             if (document.getElementById("publish-btn").style.pointerEvents !== "none") {
-                                document.getElementById("publish-btn").innerHTML = "PUBLISH PACKAGE"
+                                document.getElementById("publish-btn").innerHTML = t('createpkg.publish_pkg_btn')
                             }
                         }} onClick={() => {
                             if (name === "" || desc === "" || version === "" || longDesc === "" || !/\S/.test(name) || !/\S/.test(desc) || !/\S/.test(version) || !/\S/.test(longDesc)) {
@@ -301,14 +320,15 @@ export default function CreatePackage() {
                                 setMissingUploads(true)
                             } else {
                                 document.getElementById("publish-btn").style.pointerEvents = "none"
-                                document.getElementById("publish-btn").innerHTML = "UPLOADING => ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 0%"
+                                document.getElementById("publish-btn").innerHTML = t('createpkg.uploading') + " => ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 0%"
+                                document.getElementById("publish-btn").innerHTML = t('createpkg.uploading') + " => ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 0%"
                                 upload().then(name_id => {
                                     navigate("/packages/" + pkg_id)
                                     window.location.reload()
                                 })
                             }
                         }} className="primary publish-btn" id="publish-btn">
-                            PUBLISH PACKAGE
+                            {t('createpkg.publish_pkg_btn')}
                         </button>
                     </div>
                     <br/>

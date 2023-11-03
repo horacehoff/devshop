@@ -1,0 +1,28 @@
+{
+  "en": {
+    "feedback.error": "ERROR",
+    "feedback.invalid_email": "INVALID EMAIL",
+    "feedback.submitted": "SUBMITTED",
+    "feedback.submitted_txt_1": "Your feedback is greatly appreciated. It helps improve the site.",
+    "feedback.submitted_txt_2": "Thank you!",
+    "feedback.feedback": "FEEDBACK",
+    "feedback.feedbacksub": "HELP BUILD THE SITE BY SHARING YOUR FEEDBACK",
+    "feedback.emailholder": "@EMAIL",
+    "feedback.feedbackholder": "@FEEDBACK",
+    "feedback.submit": "SUBMIT",
+    "feedback.submitting": "SUBMITTING"
+  },
+  "fr": {
+    "feedback.error": "ERROR",
+    "feedback.invalid_email": "INVALID EMAIL,",
+    "feedback.submitted": "ENVOYÉ",
+    "feedback.submitted_txt_1": "Votre retour est grandement apprécié. Il permet d'améliorer le site.",
+    "feedback.submitted_txt_2": "Merci!",
+    "feedback.feedback": "FEEDBACK",
+    "feedback.feedbacksub": "AIDEZ LE SITE EN PARTAGEANT VOTRE FEEDBACK",
+    "feedback.emailholder": "@EMAIL",
+    "feedback.feedbackholder": "@FEEDBACK",
+    "feedback.submit": "ENVOYER",
+    "feedback.submitting": "ENVOI"
+  }
+}

@@ -9,8 +9,16 @@ import shortNumber from "short-number";
 import fancy_name_to_id from "./utility.js";
 import MDEditor from '@uiw/react-md-editor';
 import Popup from "reactjs-popup";
+import data from "./packageSnippet.json"
+import i18n from "i18next";
+import {useTranslation} from "react-i18next";
 
 export default function SnippetPage() {
+    i18n.addResourceBundle("en", "pkgcode", data.en)
+    i18n.addResourceBundle("fr", "pkgcode", data.fr)
+    const {t} = useTranslation("pkgcode");
+
+
     const [snippet, setCodeBlock] = useState(null);
     const [uid, set_uid] = useState("");
     const [is_logged_in, set_is_logged_in] = useState(false);
@@ -55,7 +63,7 @@ export default function SnippetPage() {
             set_uid(user.uid)
             set_is_logged_in(true)
             if (uid === snippet.owner_id) {
-                document.getElementById("package-download-btn").innerHTML = "EDIT"
+                document.getElementById("package-download-btn").innerHTML = t("pkgcode.edit")
                 document.getElementById("package-download-btn").classList.add("package-edit-btn")
                 document.getElementById("package-download-side").style.display = "block"
             }
@@ -94,7 +102,7 @@ export default function SnippetPage() {
                 document.getElementById("review_num").innerHTML = "0"
             } else {
                 if (ratings_length === 1) {
-                    document.getElementById("review_num_plural").innerHTML = "rating"
+                    document.getElementById("review_num_plural").innerHTML = t("pkgcode.rating")
                 }
                 document.getElementById("review_num").innerHTML = ratings_length
                 let ratings = snippet.ratings;
@@ -218,7 +226,7 @@ export default function SnippetPage() {
                 <br/>
             </div>
             <h2 className="package-title snippet-title">{snippet.name}</h2>
-            <h3 className="package-author">by <Link className="package-author-link"
+            <h3 className="package-author">{t("pkgcode.by")} <Link className="package-author-link"
                                                     to={"/users/" + fancy_name_to_id(snippet.owner_username)}>{snippet.owner_username}</Link>
             </h3>
             <button className="package-download-btn" id="package-download-btn"
@@ -230,7 +238,7 @@ export default function SnippetPage() {
                         }
                     }
                     }>{"DOWNLOAD -> 0$"}</button>
-            <p className="package-description-label">// 01 - DESCRIPTION</p>
+            <p className="package-description-label">// 01 - {t("pkgcode.desc")}</p>
             <div className="package-description">{
                 <MDEditor.Markdown source={snippet.description} className="package-desc-md"/>
             }</div>
@@ -244,26 +252,27 @@ export default function SnippetPage() {
                     document.getElementById("code-forward-btn").innerText = "<<"
                 }
             }}>{">>"}</button>
-            <p className="package-characteristics-label code-characteristics-label"></p>
+            <p className="package-characteristics-label code-characteristics-label">// 02 - {t("pkgcode.ch")}</p>
             <div className="package-characteristics code-characteristics">
-                <p>DOWNLOADS: {shortNumber(snippet.downloads.length)}<br/>{snippet.lines} LINE(S) OF CODE<br/>AVERAGE
-                    HAPPINESS: <span
-                        id="happiness_num">xx.x</span><br/>↳ <span id="review_num">5</span> <span
-                        id="review_num_plural">ratings</span>
+                <p>{t("pkgcode.downloads")}: {shortNumber(snippet.downloads.length)}
+                    <br/>
+                    {snippet.lines} {t("pkgcode.code_lines")}<br/>
+                    {t("pkgcode.happiness")}: <span id="happiness_num">xx.x</span><br/>
+                    ↳ <span id="review_num">5</span> <span id="review_num_plural">{t("pkgcode.ratings")}</span>
 
-                    <br/><span className="current-ver">CURRENT
-                        VERSION: {snippet.current_version}</span><br/>
+                    <br/>
+                    <span className="current-ver">{t("pkgcode.version")}: {snippet.current_version}</span><br/>
                     <button className="package-download-side pkg-side-dwnl" id="package-download-side"
-                            onClick={() => downloadCode()}>DOWNLOAD
+                            onClick={() => downloadCode()}>{t("pkgcode.download")}
                     </button>
                     <Popup trigger={
                         <button className="secondary package-rate-btn"
                                 onClick={() => {
-                                }} id="package-rate-btn">RATE SNIPPET</button>
+                                }} id="package-rate-btn">{t("pkgcode.ratesnippet")}</button>
                     } modal id="rating-popup"
                            ref={popupRef} onOpen={() => {
                         if (!is_logged_in) {
-                            document.getElementById("popup-root").firstChild.firstChild.innerHTML = '<h4>⚠️</h4><p class="popup-signin-txt">You need to sign in to be able to rate snippets.</p><button class="secondary popup-signin-btn" id="popup-sign-in">SIGN_IN</button>'
+                            document.getElementById("popup-root").firstChild.firstChild.innerHTML = '<h4>⚠️</h4><p class="popup-signin-txt">' + t("pkgcode.ratesnippet_error") + '.</p><button class="secondary popup-signin-btn" id="popup-sign-in">' + t("pkgcode.rate_error_btn") + '</button>'
                             document.getElementById("popup-sign-in").onclick = () => {
                                 navigate("/sign-in")
                             }
@@ -272,7 +281,7 @@ export default function SnippetPage() {
                             }
                         }
                     }}>
-                        <h3 className="rating-popup-title">&nbsp;&nbsp;RATE THIS SNIPPET&nbsp;&nbsp;</h3>
+                        <h3 className="rating-popup-title">&nbsp;&nbsp;{t("pkgcode.ratesnippet_title")}&nbsp;&nbsp;</h3>
                         <span className="rating-popup-input"><input type='number' max='100' min='0'
                                                                     maxLength='3' className='rating_input'
                                                                     id='rating_input' onInput={() => {
@@ -296,7 +305,7 @@ export default function SnippetPage() {
                                 // reload the page to update the rating
                                 window.location.reload();
                             })
-                        }}>SUBMIT
+                        }}>{t("pkgcode.submit")}
                         </button>
 
                     </Popup>

@@ -1,0 +1,22 @@
+{
+  "en": {
+    "nav.pricing": "PRICING",
+    "nav.feedback": "FEEDBACK",
+    "nav.account": "ACCOUNT",
+    "nav.profile": "PROFILE",
+    "nav.settings": "SETTINGS",
+    "nav.about": "ABOUT",
+    "nav.sign_up": "SIGN_UP",
+    "nav.sign_out": "SIGN OUT"
+  },
+  "fr": {
+    "nav.pricing": "TARIFS",
+    "nav.feedback": "FEEDBACK",
+    "nav.account": "COMPTE",
+    "nav.profile": "PROFILE",
+    "nav.settings": "RÉGLAGES",
+    "nav.about": "ABOUT",
+    "nav.sign_up": "SIGN_UP",
+    "nav.sign_out": "DÉCONNEXION"
+  }
+}

@@ -1,11 +1,13 @@
 import "./Feedback.css"
-import {createRef, useState} from "react";
+import {createRef, useEffect, useState} from "react";
 import Popup from "reactjs-popup";
 import {doc, setDoc} from "firebase/firestore";
 import {db} from "./firebase.js";
 import {useNavigate} from "react-router-dom";
 import {Helmet} from "react-helmet";
-import Footer from "./Footer.jsx";
+import data from "./Feedback.json"
+import i18n from "i18next";
+import {useTranslation} from "react-i18next";
 
 function validateEmail(input) {
     const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -25,6 +27,10 @@ export default function Feedback() {
     const [feedback, setFeedback] = useState("");
     let emailpopupref = createRef();
     let successpopupref = createRef();
+
+    i18n.addResourceBundle("en", "feedback", data.en)
+    i18n.addResourceBundle("fr", "feedback", data.fr)
+    const {t} = useTranslation("feedback");
 
     const navigate = useNavigate();
     return (
@@ -48,23 +54,25 @@ export default function Feedback() {
                       property="og:description"/>
             </Helmet>
             <Popup ref={emailpopupref}>
-                <h3 className="rating-popup-title">ERROR</h3>
-                <h5 className="popup-signin-txt feedback-popup-signin-txt">INVALID EMAIL</h5>
+                <h3 className="rating-popup-title">{t('feedback.error')}</h3>
+                <h5 className="popup-signin-txt feedback-popup-signin-txt">{t('feedback.invalid_email')}</h5>
             </Popup>
             <Popup ref={successpopupref} onClose={() => {
                 navigate("/")
             }}>
-                <h3 className="rating-popup-title">SUBMITTED</h3>
-                <h5 className="popup-signin-txt feedback-popup-signin-txt">Your feedback is
-                    greatly appreciated. It helps improve the site. Thank you!</h5>
+                <h3 className="rating-popup-title">{t('feedback.submitted')}</h3>
+                <h5 className="popup-signin-txt feedback-popup-signin-txt">{t('feedback.submitted_txt_1')}<br/>{t('feedback.submitted_txt_2')}
+                </h5>
             </Popup>
-            <h1 className="pricing-title">Feedback</h1>
-            <h3 className="pricing-parentsubtitle">HELP BUILD THE SITE BY SHARING YOUR FEEDBACK</h3>
+            <h1 className="pricing-title">{t('feedback.feedback')}</h1>
+            <h3 className="pricing-parentsubtitle">{t('feedback.feedbacksub')}</h3>
             <br/>
             <div className="feedback-container">
-                <input type="email" placeholder="@EMAIL" id="email" className="txt-input" value={email}
+                <input type="email" placeholder={t('feedback.emailholder')} id="email" className="txt-input"
+                       value={email}
                        onChange={e => setEmail(e.target.value)}/>
-                <textarea placeholder="@FEEDBACK" id="feedback" className="txt-input feedback-input" value={feedback}
+                <textarea placeholder={t('feedback.feedbackholder')} id="feedback" className="txt-input feedback-input"
+                          value={feedback}
                           onChange={e => setFeedback(e.target.value)}></textarea>
                 <button className="primary feedback-submit" onClick={() => {
                     if (email === "") {
@@ -77,7 +85,7 @@ export default function Feedback() {
                     }
                     if (email !== "" && feedback !== "") {
                         if (validateEmail(email)) {
-                            document.getElementById("feedback-submit-btn").innerHTML = "SUBMITTING...";
+                            document.getElementById("feedback-submit-btn").innerHTML = t('feedback.submitting') + "...";
                             submitFeedback(email, feedback).then(() => {
                                 successpopupref.current.open();
                                 setTimeout(() => {
@@ -88,11 +96,10 @@ export default function Feedback() {
                             emailpopupref.current.open();
                         }
                     }
-                }} id="feedback-submit-btn">SUBMIT
+                }} id="feedback-submit-btn">{t('feedback.submit')}
                 </button>
             </div>
             <br/><br/>
-            <Footer/>
         </>
     )
 }

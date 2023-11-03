@@ -1,0 +1,18 @@
+{
+  "en": {
+    "accpage.follow": "FOLLOW",
+    "accpage.following": "FOLLOWING",
+    "accpage.unfollow": "UNFOLLOW",
+    "accpage.followers": "followers",
+    "accpage.packages": "PACKAGES",
+    "accpage.snippets": "SNIPPETS"
+  },
+  "fr": {
+    "accpage.follow": "SUIVRE",
+    "accpage.following": "ABONNÉ",
+    "accpage.unfollow": "NE PLUS SUIVRE",
+    "accpage.followers": "followers",
+    "accpage.packages": "PACKAGES",
+    "accpage.snippets": "SNIPPETS"
+  }
+}

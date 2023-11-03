@@ -6,6 +6,7 @@
     height: 20px;
     text-align: center;
     margin: 0;
+    z-index: -1;
 }
 
 .footer-sep {
@@ -28,13 +29,29 @@
     transition: 0.2s;
 }
 
-.footer-about-link:hover {
-    color: #ffffff !important;
+.footer-about-sep:before {
+    content: "|"
+}
+
+.footer-lang {
+    color: rgba(171, 171, 171, 0.5);
+    transition: 0.25s;
+    cursor: pointer;
 }
 
 
-.footer-about-sep:before {
-    content: "|"
+.footer-lang-active {
+    color: white;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .footer-about-link:hover {
+        color: #ffffff !important;
+    }
+
+    .footer-lang:hover {
+        color: white;
+    }
 }
 
 

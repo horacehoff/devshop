@@ -1,3 +1,7 @@
+.sign-form {
+    margin-bottom: 150px;
+}
+
 .signup-button, .txt-input {
     outline: 0;
     font-family: 'JetBrains Mono', monospace;
@@ -56,7 +60,7 @@
 }
 
 #signup-button {
-    top: 65px;
+    top: 490px;
 }
 
 @media (hover: hover) and (pointer: fine) {

@@ -1,6 +1,9 @@
 import "./pricing.css"
 import Footer from "./Footer.jsx";
 import {Helmet} from "react-helmet";
+import data from "./pricing.json"
+import i18n from "i18next";
+import {useTranslation} from "react-i18next";
 
 export default function Pricing() {
     // const navigate = useNavigate()
@@ -10,6 +13,10 @@ export default function Pricing() {
     //         document.getElementById("plan-sign-up").innerHTML = "CURRENT"
     //     }
     // }, [])
+
+    i18n.addResourceBundle("en", "pricing", data.en)
+    i18n.addResourceBundle("fr", "pricing", data.fr)
+    const {t} = useTranslation("pricing");
 
 
     return (
@@ -32,19 +39,18 @@ export default function Pricing() {
                 <meta content="The soon-to-be pricing of DEVSHOP"
                       property="og:description"/>
             </Helmet>
-            <h1 className="pricing-title">PRICING</h1>
-            <h3 className="pricing-parentsubtitle">(COMING SOON; AS OF NOW THE WEBSITE IS 100% FREE TO USE)</h3>
-            <p className="pricing-subtitle">You can use DEVSHOP for free, or you can pay a small amount of money each
-                month to get rid of all inconvenients and get the full experience</p>
+            <h1 className="pricing-title">{t('pricing.pricing')}</h1>
+            <h3 className="pricing-parentsubtitle">({t('pricing.soon')})</h3>
+            <p className="pricing-subtitle">{t('pricing.sub')}</p>
 
             <div className="pricing-container">
                 <div className="basic-plan">
-                    <h1 className="plan-title">BASIC</h1>
-                    <p className="plan-price">FREE</p>
+                    <h1 className="plan-title">{t('pricing.basic')}</h1>
+                    <p className="plan-price">{t('pricing.basicprice')}</p>
                     <ul className="plan-features">
-                        <li>✅ Full access to the website</li>
-                        <li>❌ Ads</li>
-                        <li>❌ Set categories for packages/snippets</li>
+                        <li>✅ {t('pricing.adv1')}</li>
+                        <li>❌ {t('pricing.adv2-1')}</li>
+                        <li>❌ {t('pricing.adv3')}</li>
                     </ul>
                     {/*<button className="plan-sign-up" id="plan-sign-up" onClick={() => {*/}
                     {/*    navigate("/sign-up")*/}
@@ -53,12 +59,12 @@ export default function Pricing() {
                 </div>
 
                 <div className="pro-plan">
-                    <h1 className="plan-title pro-plan-title">PRO</h1>
-                    <p className="plan-price pro-plan-price">1.99€/month</p>
+                    <h1 className="plan-title pro-plan-title">{t('pricing.pro')}</h1>
+                    <p className="plan-price pro-plan-price">{t('pricing.proprice')}</p>
                     <ul className="plan-features">
-                        <li>✅ Full access to the website</li>
-                        <li>✅ No ads</li>
-                        <li>✅ Set categories for packages/snippets</li>
+                        <li>✅ {t('pricing.adv1')}</li>
+                        <li>✅ {t('pricing.adv2-2')}</li>
+                        <li>✅ {t('pricing.adv3')}</li>
                     </ul>
                     {/*<button className="plan-subscribe" id="plan-subscribe">coming soon</button>*/}
                 </div>
@@ -79,7 +85,6 @@ export default function Pricing() {
             {/*    <br/><br/>*/}
             {/*    <span style={{position: "relative", marginTop: "10px"}}><span className="pricing-exp-plan-characteristics-title">SET CATEGORIES FOR PACKAGES/SNIPPETS</span>, this means, for each package/snippet that you publish, you can set custom "categories" for each one of them, to better target your user base.</span>*/}
             {/*</span>*/}
-            <Footer/>
         </>
     )
 }

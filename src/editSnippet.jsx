@@ -11,8 +11,16 @@ import React, {useEffect, useState} from "react";
 import {deleteObject, getDownloadURL, ref, uploadBytes} from "firebase/storage";
 import {deleteDoc, doc, getDoc, setDoc} from "firebase/firestore";
 import Popup from "reactjs-popup";
+import data from "./packageSnippet.json"
+import i18n from "i18next";
+import {useTranslation} from "react-i18next";
 
 export default function EditSnippet(props) {
+    i18n.addResourceBundle("en", "pkgcode", data.en)
+    i18n.addResourceBundle("fr", "pkgcode", data.fr)
+    const {t} = useTranslation("pkgcode");
+
+
     const navigate = useNavigate()
     if (!useLocation().state) {
         navigate("/snippets")
@@ -146,24 +154,25 @@ export default function EditSnippet(props) {
 
     return (
         <>
-            <input type="text" className="package-title edit-package-title edit-snippet-title" placeholder="@NAME"
+            <input type="text" className="package-title edit-package-title edit-snippet-title"
+                   placeholder={t("pkgcode.nameholder")}
                    value={newName} onChange={e => setNewName(e.target.value)}/>
 
-            <h3 className="package-author">by <Link className="package-author-link"
+            <h3 className="package-author">{t("pkgcode.by")} <Link className="package-author-link"
                                                     to={"/users/" + fancy_name_to_id(snippet.owner_username)}>{snippet.owner_username}</Link>
             </h3>
             <button className="package-download-btn" id="package-download-btn" onClick={async () => {
-                document.getElementById("package-download-btn").innerHTML = "SAVING.."
+                document.getElementById("package-download-btn").innerHTML = t("pkgcode.saving") + ".."
                 await saveChanges().then(() => {
-                    document.getElementById("package-download-btn").innerHTML = "SAVED ✅"
+                    document.getElementById("package-download-btn").innerHTML = t("pkgcode.saved") + " ✅"
                     setTimeout(() => {
                         navigate("/snippets/" + snippet.id)
                         window.location.reload()
                     }, 1000)
                 })
 
-            }}>{"SAVE"}</button>
-            <p className="package-description-label">// 01 - DESCRIPTION</p>
+            }}>{t("pkgcode.save")}</button>
+            <p className="package-description-label">// 01 - {t("pkgcode.desc")}</p>
             <p className="package-description package-description-edit">{
                 <MDEditor
                     className="package-desc-editor-edit"
@@ -173,18 +182,6 @@ export default function EditSnippet(props) {
                     onChange={setNewDesc}
                 />
             }</p>
-            {/*<dialog id="new-ver-dialog">*/}
-            {/*    <h4>NEW VERSION</h4>*/}
-            {/*    <input type="text" placeholder="VERSION ID"*/}
-            {/*           style={{marginTop: "20px", marginBottom: "30px", fontSize: "20px"}} value={newVer}*/}
-            {/*           onChange={e => setNewVer(e.target.value)}/>*/}
-            {/*    <p>// NEW CODE</p>*/}
-            {/*    <textarea className="code-editor" placeholder="⚠️ Place your final code here ⚠️" value={newCode}*/}
-            {/*              onChange={e => setNewCode(e.target.value)}></textarea>*/}
-            {/*    <button onClick={() => document.getElementById("new-ver-dialog").close()}>OK</button>*/}
-            {/*    <p className="dialog-save-reminder">⚠️ DO NOT FORGET TO SAVE ⚠️</p>*/}
-
-            {/*</dialog>*/}
             <div className="package-screenshots code-screenshots" id="package-screenshots">
                 <input type="file" id="img-file-one" className="file-input"
                        onChange={(event) => setImgUploadOne(event.target.files[0])}
@@ -279,37 +276,39 @@ export default function EditSnippet(props) {
             <p className="package-characteristics-label"></p>
             <div className="package-characteristics" id="package-characteristics">
                 <p id="package-char-p">
-                    {snippet.lines} LINES OF CODE
+                    {snippet.lines} {t("pkgcode.code_lines")}
                     <br/>
-                    <span id="package-version" className="current-ver">CURRENT VERSION: {snippet.current_version}</span><br/>
+                    <span id="package-version"
+                          className="current-ver">{t("pkgcode.version")}: {snippet.current_version}</span><br/>
 
                     <Popup trigger={
                         <button className="new-pkg-version-btn" id="new-pkg-version-btn" onClick={() => {
                             let dialog = document.getElementById("new-ver-dialog")
                             dialog.showModal()
-                        }}>+ NEW VERSION
+                        }}>+ {t("pkgcode.new_version")}
                         </button>
                     } modal className="new-pkg-version-popup">
-                        <p className="new-pkg-version-title">PUBLISH A NEW VERSION</p>
-                        <label className="name-input-label" htmlFor="pkg-version" id="new-version-label">NEW
-                            VERSION</label><br/>
-                        <label className="name-input-label-desc" htmlFor="pkg-version">The new version of your code
-                            <br/>(e.g. 2.0, BETA, 1.0.0B)</label><br/>
+                        <p className="new-pkg-version-title">{t("pkgcode.publish_new_version")}</p>
+                        <label className="name-input-label" htmlFor="pkg-version"
+                               id="new-version-label">{t("pkgcode.new_version")}</label><br/>
+                        <label className="name-input-label-desc"
+                               htmlFor="pkg-version">{t("pkgcode.new_version_code_sub_1")}
+                            <br/>{t("pkgcode.new_version_sub_2")}</label><br/>
                         <input type="text" className="proto-input new-pkg-version-input" id="pkg-version"
-                               placeholder="@new_code_version"
+                               placeholder={t("pkgcode.new_version_code_holder")}
                                value={newVer} onChange={e => setNewVer(e.target.value)}/>
 
                         <br/>
                         <br/>
-                        <label className="name-input-label" htmlFor="code-editor" id="new-version-label">NEW
-                            CODE</label><br/>
-                        <label className="name-input-label-desc" htmlFor="code-editor">The new code of your
-                            project</label><br/>
+                        <label className="name-input-label" htmlFor="code-editor"
+                               id="new-version-label">{t("pkgcode.new_version_code_title")}</label><br/>
+                        <label className="name-input-label-desc"
+                               htmlFor="code-editor">{t("pkgcode.new_version_code_sub")}</label><br/>
                         <textarea className="code-editor edit-code-editor" id="code-editor"
-                                  placeholder="⚠️ Place your final code here ⚠️" value={newCode}
+                                  placeholder={"⚠️ " + t("pkgcode.final_code_holder") + " ⚠️"} value={newCode}
                                   onChange={e => setNewCode(e.target.value)}></textarea><br/>
                         <button className="primary" onClick={async () => {
-                            document.getElementById("snippet-publish-btn").innerHTML = "PUBLISHING..."
+                            document.getElementById("snippet-publish-btn").innerHTML = t("pkgcode.publishing") + "..."
                             let currentVer
                             let currentCode
 
@@ -328,14 +327,14 @@ export default function EditSnippet(props) {
                                 current_version: currentVer,
                                 code: currentCode
                             }, {merge: true})
-                            document.getElementById("snippet-publish-btn").innerHTML = "PUBLISHED ✅"
+                            document.getElementById("snippet-publish-btn").innerHTML = t("pkgcode.published") + " ✅"
                             setTimeout(() => {
                                 navigate("/snippets/" + snippet.id)
                                 window.location.reload()
                             }, 1000)
 
 
-                        }} id="snippet-publish-btn">PUBLISH
+                        }} id="snippet-publish-btn">{t("pkgcode.publish")}
                         </button>
                     </Popup>
 
@@ -344,16 +343,16 @@ export default function EditSnippet(props) {
                             id="delete-pkg-btn" onClick={async () => {
                         const delete_btn_content = document.getElementById("delete-pkg-btn").innerHTML
                         if (delete_btn_content === "DELETE SNIPPET") {
-                            document.getElementById("delete-pkg-btn").innerHTML = "CONFIRM (3)"
+                            document.getElementById("delete-pkg-btn").innerHTML = t("pkgcode.deleteconfirm") + " (3)"
                             document.getElementById("delete-pkg-btn").style.paddingLeft = "25px"
                         } else if (delete_btn_content === "CONFIRM (3)") {
-                            document.getElementById("delete-pkg-btn").innerHTML = "CONFIRM (2)"
+                            document.getElementById("delete-pkg-btn").innerHTML = t("pkgcode.deleteconfirm") + " (2)"
                         } else if (delete_btn_content === "CONFIRM (2)") {
-                            document.getElementById("delete-pkg-btn").innerHTML = "CONFIRM (1)"
+                            document.getElementById("delete-pkg-btn").innerHTML = t("pkgcode.deleteconfirm") + " (1)"
                         } else if (delete_btn_content === "CONFIRM (1)") {
-                            document.getElementById("delete-pkg-btn").innerHTML = "CONFIRM (!)"
+                            document.getElementById("delete-pkg-btn").innerHTML = t("pkgcode.deleteconfirm") + " (!)"
                         } else if (delete_btn_content === "CONFIRM (!)") {
-                            document.getElementById("delete-pkg-btn").innerHTML = "DELETING..."
+                            document.getElementById("delete-pkg-btn").innerHTML = t("pkgcode.deleting") + "..."
                             console.log("DELETING IMAGES")
                             // get the ref of every package screenshot and the ref of the package itself
                             const imgOneRef = ref(storage, snippet.screenshots[0]);
@@ -403,7 +402,7 @@ export default function EditSnippet(props) {
                             })
 
                         }
-                    }}>DELETE SNIPPET
+                    }}>{t("pkgcode.deletesnippet")}
                     </button>
                 </p>
             </div>

@@ -1,0 +1,18 @@
+{
+  "en": {
+    "snippets.sub": "FIND AND PUBLISH CODE SNIPPETS",
+    "snippets.publish": "PUBLISH A SNIPPET",
+    "snippets.search": "SEARCH SNIPPETS",
+    "snippets.for_you": "// FOR YOU",
+    "snippets.most_downloaded": "// MOST DOWNLOADED",
+    "snippets.recent": "// RECENTLY CREATED"
+  },
+  "fr": {
+    "snippets.sub": "TROUVEZ ET PUBLIEZ DES EXTRAITS DE CODE",
+    "snippets.publish": "PUBLIER UN SNIPPET",
+    "snippets.search": "RECHERCHER DES SNIPPETS",
+    "snippets.for_you": "// POUR VOUS",
+    "snippets.most_downloaded": "// LES PLUS TÉLECHARGÉS",
+    "snippets.recent": "// RÉCEMMENT CRÉES"
+  }
+}

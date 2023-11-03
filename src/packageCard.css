@@ -42,9 +42,9 @@
     color: #fff
 }
 
-.card:hover > .card-read-more:after {
-    content: '> READ MORE'
-}
+/*.card:hover > .card-read-more:after {*/
+/*    content: '> READ MORE'*/
+/*}*/
 
 .card-title {
     font-size: 32px;
@@ -114,9 +114,9 @@
     width: fit-content;
 }
 
-.card-read-more:after {
-    content: '+ READ MORE'
-}
+/*.card-read-more:after {*/
+/*    content: '+ READ MORE'*/
+/*}*/
 
 @media screen and (max-width: 560px) {
     .card {

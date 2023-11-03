@@ -11,8 +11,19 @@ import MDEditor from '@uiw/react-md-editor';
 import {BiCloudUpload} from "react-icons/bi";
 import SnippetCard from "./snippetCard.jsx";
 import Popup from "reactjs-popup";
+import i18n from "i18next";
+import data from "./createSnippet.json";
+import card from "./packageSnippetCard.json"
+import {useTranslation} from "react-i18next";
 
 export default function CreateSnippet() {
+    i18n.addResourceBundle("en", "createsnippet", data.en)
+    i18n.addResourceBundle("en", "createsnippet", card.en)
+    i18n.addResourceBundle("fr", "createsnippet", data.fr)
+    i18n.addResourceBundle("fr", "createsnippet", card.fr)
+    const {t} = useTranslation("createsnippet");
+
+
     const [imgUpload0ne, setImgUploadOne] = useState(null);
 
     const [imgUploadTwo, setImgUploadTwo] = useState(null);
@@ -24,7 +35,7 @@ export default function CreateSnippet() {
     const [name, setName] = useState("");
     const [desc, setDesc] = useState("");
     const [version, setVersion] = useState("");
-    const [longDesc, setLongDesc] = useState("**This is the detailed description of my awesome snippet!**");
+    const [longDesc, setLongDesc] = useState("**" + t('createsnippet.descholder') + "**");
     const [code, setCode] = useState("");
     let codeblock_id = "";
 
@@ -47,37 +58,37 @@ export default function CreateSnippet() {
 
         let imgRefOne = ref(storage, "users/" + uid + "/snippets/" + name_id + "/img/one/" + (imgUpload0ne.name ?? ("screenone" + imgUpload0ne.type)))
         await uploadBytes(imgRefOne, imgUpload0ne).then(() => {
-            document.getElementById("publish-btn").innerHTML = "UPLOADING... => ███▒▒▒▒▒▒▒▒▒▒▒ 21%"
+            document.getElementById("publish-btn").innerHTML = t('createsnippet.uploading') + "... => ███▒▒▒▒▒▒▒▒▒▒▒ 21%"
         })
 
         let imgRefTwo = ref(storage, "users/" + uid + "/snippets/" + name_id + "/img/two/" + imgUploadTwo.name ?? ("screentwo" + imgUpload0ne.type))
         await uploadBytes(imgRefTwo, imgUploadTwo).then(() => {
-            document.getElementById("publish-btn").innerHTML = "UPLOADING... => ████▒▒▒▒▒▒▒▒▒▒ 28%"
+            document.getElementById("publish-btn").innerHTML = t('createsnippet.uploading') + "... => ████▒▒▒▒▒▒▒▒▒▒ 28%"
         })
 
         let imgRefThree = ref(storage, "users/" + uid + "/snippets/" + name_id + "/img/three/" + imgUploadThree.name ?? ("screenthree" + imgUpload0ne.type))
         await uploadBytes(imgRefThree, imgUploadThree).then(() => {
-            document.getElementById("publish-btn").innerHTML = "UPLOADING... => █████▒▒▒▒▒▒▒▒▒ 35%"
+            document.getElementById("publish-btn").innerHTML = t('createsnippet.uploading') + "... => █████▒▒▒▒▒▒▒▒▒ 35%"
         })
 
         let imgRefFour = ref(storage, "users/" + uid + "/snippets/" + name_id + "/img/four/" + imgUploadFour.name ?? ("screenfour" + imgUpload0ne.type))
         await uploadBytes(imgRefFour, imgUploadFour).then(() => {
-            document.getElementById("publish-btn").innerHTML = "UPLOADING... => ██████▒▒▒▒▒▒▒▒ 42%"
+            document.getElementById("publish-btn").innerHTML = t('createsnippet.uploading') + "... => ██████▒▒▒▒▒▒▒▒ 42%"
         })
 
-        document.getElementById("publish-btn").innerHTML = "UPLOADING... => ███████▒▒▒▒▒▒▒ 49%"
+        document.getElementById("publish-btn").innerHTML = t('createsnippet.uploading') + "... => ███████▒▒▒▒▒▒▒ 49%"
         let screenOneUrl = await getDownloadURL(imgRefOne);
         console.log("uploaded screen one")
-        document.getElementById("publish-btn").innerHTML = "UPLOADING... => ████████▒▒▒▒▒▒ 56%"
+        document.getElementById("publish-btn").innerHTML = t('createsnippet.uploading') + "... => ████████▒▒▒▒▒▒ 56%"
         let screenTwoUrl = await getDownloadURL(imgRefTwo);
         console.log("uploaded screen two")
-        document.getElementById("publish-btn").innerHTML = "UPLOADING... => █████████▒▒▒▒▒ 63%"
+        document.getElementById("publish-btn").innerHTML = t('createsnippet.uploading') + "... => █████████▒▒▒▒▒ 63%"
         let screenThreeUrl = await getDownloadURL(imgRefThree);
         console.log("uploaded screen three")
-        document.getElementById("publish-btn").innerHTML = "UPLOADING... => ██████████▒▒▒▒ 70%"
+        document.getElementById("publish-btn").innerHTML = t('createsnippet.uploading') + "... => ██████████▒▒▒▒ 70%"
         let screenFourUrl = await getDownloadURL(imgRefFour);
         console.log("uploaded screen four")
-        document.getElementById("publish-btn").innerHTML = "UPLOADING... => ███████████▒▒▒ 77%"
+        document.getElementById("publish-btn").innerHTML = t('createsnippet.uploading') + "... => ███████████▒▒▒ 77%"
 
 
         let own_username = "";
@@ -85,7 +96,7 @@ export default function CreateSnippet() {
         await getDoc(userRef).then((doc) => {
             if (doc.exists()) {
                 own_username = doc.data().username;
-                document.getElementById("publish-btn").innerHTML = "UPLOADING... => ████████████▒▒ 84%"
+                document.getElementById("publish-btn").innerHTML = t('createsnippet.uploading') + "... => ████████████▒▒ 84%"
 
             } else {
                 console.log("No such document!");
@@ -116,7 +127,7 @@ export default function CreateSnippet() {
             created: new Date().getTime(),
             id: name_id
         }).then(async r => {
-            document.getElementById("publish-btn").innerHTML = "UPLOADING... => █████████████▒ 91%"
+            document.getElementById("publish-btn").innerHTML = t('createsnippet.uploading') + "... => █████████████▒ 91%"
             // update user packages array with the new package
             const userRef = doc(db, "users", uid);
             await getDoc(userRef).then(async (doc) => {
@@ -126,7 +137,7 @@ export default function CreateSnippet() {
                     await setDoc(userRef, {
                         owned_snippets: snippets
                     }, {merge: true}).then(r => {
-                        document.getElementById("publish-btn").innerHTML = "UPLOADING... => ██████████████ 100%"
+                        document.getElementById("publish-btn").innerHTML = t('createsnippet.uploading') + "... => ██████████████ 100%"
                         return name_id
                     })
                 } else {
@@ -150,52 +161,55 @@ export default function CreateSnippet() {
             <Popup modal open={warning} onClose={() => {
                 navigate("/snippets")
             }}><span>
-                <h4>⚠️</h4>
-                <p className="popup-signin-txt">You need to sign in to be able to publish snippets.</p>
-                <button className="secondary popup-signin-btn" onClick={() => navigate("/sign-in")}>SIGN_IN</button>
+                <h4>{t('createsnippet.error')}</h4>
+                <p className="popup-signin-txt">{t('createsnippet.sign_in_warning')}.</p>
+                <button className="secondary popup-signin-btn"
+                        onClick={() => navigate("/sign-in")}>{t('createsnippet.sign_in_warning_btn')}</button>
             </span></Popup>
             <Popup modal open={missingFields}><span>
-                <h4>ERROR</h4>
-                <p className="popup-signin-txt">You need to fill in the required fields.</p>
+                <h4>{t('createsnippet.error')}</h4>
+                <p className="popup-signin-txt">{t('createsnippet.fields_error')}.</p>
                 <button className="secondary popup-signin-btn" onClick={() => setMissingFields(false)}>OK</button>
             </span>
             </Popup>
             <Popup modal open={missingUploads}><span>
-                <h4>ERROR</h4>
-                <p className="popup-signin-txt">You need to upload the required files.</p>
+                <h4>{t('createsnippet.error')}</h4>
+                <p className="popup-signin-txt">{t('createsnippet.uploads_error')}</p>
                 <button className="secondary popup-signin-btn" onClick={() => setMissingUploads(false)}>OK</button>
             </span></Popup>
             <div className="split">
                 <div className="split-two split-two-height" id="split-two">
-                    <h1 className="about-title about-title-card">PUBLISH A SNIPPET</h1>
+                    <h1 className="about-title about-title-card">{t('createsnippet.publish_snippet')}</h1>
                     <div className="split-two-card">
-                        <SnippetCard dwnl="0" author={user_data ? user_data.username : "placeholder"}
+                        <SnippetCard readmore={t("card.readmore")} dwnl_local={t("card.downloads")} dwnl="0"
+                                     author={user_data ? user_data.username : "placeholder"}
                                      name={name || "placeholder"}
                                      description={desc || "placeholder"}/>
                     </div>
                 </div>
                 <div className="split-one">
-                    <h1 className="about-title">PUBLISH A SNIPPET</h1>
+                    <h1 className="about-title">{t('createsnippet.publish_snippet')}</h1>
                     <div className="centered">
-                        <h2>// GENERAL INFO</h2>
+                        <h2>{t('createsnippet.general_info')}</h2>
                         <br/>
-                        <label htmlFor="pkg-name" className="name-input-label">NAME</label><br/>
-                        <label htmlFor="pkg-name" className="name-input-label-desc">A good, and preferably short name
-                            for your code snippet</label><br/>
-                        <input type="text" className="proto-input" placeholder="@awesome_name" id="pkg-name"
+                        <label htmlFor="pkg-name" className="name-input-label">{t('createsnippet.name')}</label><br/>
+                        <label htmlFor="pkg-name" className="name-input-label-desc">{t('createsnippet.namesub')}</label><br/>
+                        <input type="text" className="proto-input" placeholder={t('createsnippet.nameholder')}
+                               id="pkg-name"
                                value={name}
                                onChange={e => setName(e.target.value)}/>
                         <br/><br/>
-                        <label htmlFor="catch-input" className="name-input-label">CATCHPHRASE</label><br/>
-                        <label htmlFor="catch-input" className="name-input-label-desc">A quick, short, and concise
-                            description for your code snippet</label><br/>
-                        <input type="text" className="proto-input" id="catch-input" placeholder="@awesome_catchphrase"
+                        <label htmlFor="catch-input"
+                               className="name-input-label">{t('createsnippet.catch')}</label><br/>
+                        <label htmlFor="catch-input"
+                               className="name-input-label-desc">{t('createsnippet.catchsub')}</label><br/>
+                        <input type="text" className="proto-input" id="catch-input"
+                               placeholder={t('createsnippet.catch_holder')}
                                value={desc} onChange={e => setDesc(e.target.value)}/>
 
                         <br/><br/>
-                        <label className="name-input-label">DESCRIPTION</label><br/>
-                        <label className="name-input-label-desc">A longer, more precise description for your
-                            code snippet</label><br/>
+                        <label className="name-input-label">{t('createsnippet.desc')}</label><br/>
+                        <label className="name-input-label-desc">{t('createsnippet.descsub')}</label><br/>
                         <div className="md-editor-container">
                             <MDEditor
                                 value={longDesc}
@@ -205,27 +219,28 @@ export default function CreateSnippet() {
                             />
                         </div>
                         <br/>
-                        <label className="name-input-label">SNIPPET CODE</label><br/>
-                        <label className="name-input-label-desc">The code of your code snippet, this is the one that
-                            will be downloaded by other users</label><br/>
-                        <textarea className="code-editor" placeholder="⚠️ FINAL SNIPPET CODE HERE ⚠️" value={code}
+                        <label className="name-input-label">{t('createsnippet.code')}</label><br/>
+                        <label className="name-input-label-desc">{t('createsnippet.codesub')}</label><br/>
+                        <textarea className="code-editor" placeholder={"⚠️ " + t('createsnippet.codeholder') + " ⚠️"}
+                                  value={code}
                                   onChange={e => setCode(e.target.value)}></textarea>
 
                         <br/>
-                        <label className="name-input-label">IMAGES</label><br/>
-                        <label className="name-input-label-desc">Upload the gallery images for your code snippet</label><br/>
+                        <label className="name-input-label">{t('createsnippet.imgs')}</label><br/>
+                        <label className="name-input-label-desc">{t('createsnippet.imgs_sub')}</label><br/>
                         <div className="upload-section snippet-upload-section">
                             <label htmlFor="img-file" className="file-input-label" id="gallery-upload"><BiCloudUpload
-                                className="file-input-icon"></BiCloudUpload>UPLOAD IMAGES(4)</label>
+                                className="file-input-icon"></BiCloudUpload>{t('createsnippet.upload_imgs')}</label>
                             <br/>
                         </div>
 
                         <br/><br/>
-                        <label className="name-input-label" htmlFor="snippet-version">BASE VERSION</label><br/>
-                        <label className="name-input-label-desc" htmlFor="snippet-version">The base version of your code
-                            snippet
-                            (e.g. 1.0, ALPHA, 1.0.0A)</label><br/>
-                        <input type="text" className="proto-input" id="snippet-version" placeholder="@base_code_version"
+                        <label className="name-input-label"
+                               htmlFor="snippet-version">{t('createsnippet.base_version')}</label><br/>
+                        <label className="name-input-label-desc"
+                               htmlFor="snippet-version">{t('createsnippet.base_version_sub')}</label><br/>
+                        <input type="text" className="proto-input" id="snippet-version"
+                               placeholder={t('createsnippet.base_version_holder')}
                                value={version}
                                onChange={e => setVersion(e.target.value)}/>
 
@@ -237,11 +252,11 @@ export default function CreateSnippet() {
                             setImgUploadFour(event.target.files[3])
                             console.log("img")
                             if (event.target.files.length === 4) {
-                                document.getElementById("gallery-upload").innerHTML = "✅ UPLOAD IMAGES(4)"
+                                document.getElementById("gallery-upload").innerHTML = "✅ " + t('createsnippet.upload_imgs')
                             }
                         }} required accept=".png,.jpeg,.webp, image/jpeg, image/png"/>
                         <br/><br/><br/>
-                        <p className="create-package-interest-data">// CATEGORIES</p>
+                        <p className="create-package-interest-data">{t('createsnippet.categories')}</p>
                         <div className="create-package-interest-div">
                             {
                                 interests_data.map((interest, index) => {
@@ -258,11 +273,11 @@ export default function CreateSnippet() {
                         <br/>
                         <button onMouseEnter={() => {
                             if (document.getElementById("publish-btn").style.pointerEvents !== "none") {
-                                document.getElementById("publish-btn").innerHTML = ">> PUBLISH SNIPPET <<"
+                                document.getElementById("publish-btn").innerHTML = ">> " + t('createsnippet.publish_snippet_btn') + " <<"
                             }
                         }} onMouseLeave={() => {
                             if (document.getElementById("publish-btn").style.pointerEvents !== "none") {
-                                document.getElementById("publish-btn").innerHTML = "PUBLISH SNIPPET"
+                                document.getElementById("publish-btn").innerHTML = t('createsnippet.publish_snippet_btn')
                             }
                         }} onClick={() => {
                             if (name === "" || desc === "" || version === "" || longDesc === "" || code === "" || !/\S/.test(name) || !/\S/.test(desc) || !/\S/.test(version) || !/\S/.test(longDesc) || !/\S/.test(code)) {
@@ -271,14 +286,14 @@ export default function CreateSnippet() {
                                 setMissingUploads(true)
                             } else {
                                 document.getElementById("publish-btn").style.pointerEvents = "none"
-                                document.getElementById("publish-btn").innerHTML = "UPLOADING... => ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 0%"
+                                document.getElementById("publish-btn").innerHTML = t('createsnippet.uploading') + "... => ▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 0%"
                                 upload().then(name_id => {
                                     navigate("/snippets/" + codeblock_id)
                                     window.location.reload()
                                 })
                             }
                         }} className="primary publish-btn publish-snippet" id="publish-btn">
-                            PUBLISH SNIPPET
+                            {t('createsnippet.publish_snippet_btn')}
                         </button>
                         <br/>
                     </div>

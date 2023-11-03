@@ -1,0 +1,22 @@
+{
+  "en": {
+    "about.devshop_initial_name": "initially called Publish My Package, was created by",
+    "about.devshop_dev_begin": "with development starting in February 2023",
+    "about.credits": "CREDITS",
+    "about.credits.jetbrains1": "Many thanks to",
+    "about.credits.jetbrains2": "JetBrains for their awesome font",
+    "about.credits.adobe1": "Much appreciation also to",
+    "about.credits.adobe2": "Adobe for",
+    "about.credits.thanks": "I would also like to thank the authors of the following packages that DEVSHOP uses"
+  },
+  "fr": {
+    "about.devshop_initial_name": "initialement appelé Publish My Package, a été créé par",
+    "about.devshop_dev_begin": "avec le développement ayant commencé en Février 2023",
+    "about.credits": "REMERCIEMENTS",
+    "about.credits.jetbrains1": "Un grand merci à",
+    "about.credits.jetbrains2": "JetBrains pour sa police",
+    "about.credits.adobe1": "Merci aussi à",
+    "about.credits.adobe2": "Adobe pour",
+    "about.credits.thanks": "Je tiens également à remercier les auteurs des modules suivants que DEVSHOP utilise"
+  }
+}

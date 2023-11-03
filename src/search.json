@@ -1,0 +1,26 @@
+{
+  "en": {
+    "search.search": "SEARCH",
+    "search.queryholder": "@search_query",
+    "search.code_snippet": "CODE SNIPPET",
+    "search.author": "AUTHOR",
+    "search.authorholder": "@user_id",
+    "search.downloads": "DOWNLOADS",
+    "search.more": "MORE THAN",
+    "search.less": "LESS THAN",
+    "search.btn": "SEARCH",
+    "search.no_results": "No search results"
+  },
+  "fr": {
+    "search.search": "RECHERCHE",
+    "search.queryholder": "@recherche",
+    "search.code_snippet": "SNIPPETS",
+    "search.author": "AUTEUR",
+    "search.authorholder": "@auteur",
+    "search.downloads": "TÉLÉCHARGEMENTS",
+    "search.more": "PLUS QUE",
+    "search.less": "MOINS QUE",
+    "search.btn": "RECHERCHER",
+    "search.no_results": "Aucun résultat de recherche"
+  }
+}

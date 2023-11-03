@@ -1,7 +1,16 @@
 import "./about.css";
 import {Helmet} from "react-helmet";
+import {useTranslation} from "react-i18next";
+import data from "./about.json"
+import i18n from "i18next";
+
+
 
 export default function About() {
+    i18n.addResourceBundle("en", "about", data.en)
+    i18n.addResourceBundle("fr", "about", data.fr)
+    const {t} = useTranslation("about");
+
     return (
         <>
             <Helmet>
@@ -23,26 +32,25 @@ export default function About() {
                       property="og:description"/>
             </Helmet>
             <img src="/banner.png" loading="lazy" className="about-banner"/>
-            <p className="about-desc"><strong>DEVSHOP</strong>, initially called Publish My Package, was created
-                By <span className="about-linktree"
-                         onClick={() => window.open("https://linktr.ee/just_a_mango", '_blank').focus()}>@JUST_A_MANGO</span> (horace.hoff@gmail.com),
-                with development starting in February 2023.</p>
+            <p className="about-desc"><strong>DEVSHOP</strong>, {t('about.devshop_initial_name')}
+                <span className="about-linktree"
+                      onClick={() => window.open("https://linktr.ee/just_a_mango", '_blank').focus()}> @JUST_A_MANGO</span> (horace.hoff@gmail.com),
+                {t('about.devshop_dev_begin')}</p>
             <br/>
-            <h3 className="about-credits">CREDITS</h3>
+            <h3 className="about-credits">{t('about.credits')}</h3>
             <ul className="about-credits-list">
                 <li>
-                    <span>❤</span>️ Many thanks to <br/>JetBrains for their
-                    awesome font <strong><a href="https://www.jetbrains.com/lp/mono">JetBrains Mono</a></strong>
+                    <span>❤</span>️ {t('about.credits.jetbrains1')} <br/>{t('about.credits.jetbrains2')} <strong><a
+                    href="https://www.jetbrains.com/lp/mono">JetBrains Mono</a></strong>
                 </li>
                 <li>---</li>
                 <li>
-                    <span>❤</span>️ Much appreciation also to <br/>Adobe
-                    for <strong><a href="https://github.com/adobe-fonts/source-code-pro">Source Code Pro</a></strong>
+                    <span>❤</span>️ {t('about.credits.adobe1')} <br/>{t('about.credits.adobe2')} <strong><a
+                    href="https://github.com/adobe-fonts/source-code-pro">Source Code Pro</a></strong>
                 </li>
                 <li>---</li>
                 <li>
-                    <span>🫶</span> ️I would also like to thank the authors of
-                    the following packages that DEVSHOP uses:<br/>
+                    <span>🫶</span> ️{t('about.credits.thanks')}:<br/>
                     <ul>
                         <li>
                             uiwjs/wcjiang - <a

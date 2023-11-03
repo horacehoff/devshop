@@ -1,0 +1,24 @@
+{
+  "en": {
+    "ai": "AI",
+    "web": "WEB",
+    "programming": "PROGRAMMING",
+    "mobile": "MOBILE APPS",
+    "gaming": "GAME DEV",
+    "data": "DATA",
+    "security": "SECURITY",
+    "design": "DESIGN",
+    "build": "ENGINEERING"
+  },
+  "fr": {
+    "ai": "IA",
+    "web": "WEB",
+    "programming": "PROGRAMMATION",
+    "mobile": "MOBILE",
+    "gaming": "JEUX",
+    "data": "DONNÉES",
+    "security": "SÉCURITÉ",
+    "design": "CONCEPTION",
+    "build": "INGÉNIERIE"
+  }
+}

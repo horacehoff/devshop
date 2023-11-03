@@ -1,0 +1,24 @@
+{
+  "en": {
+    "home.code": "CODE",
+    "home.buy": "BUY",
+    "home.sell": "SELL",
+    "home.catchphrase_title": "// 01 - CATCHPHRASE",
+    "home.catchphrase": "DEVSHOP allows anyone to buy, use, or sell code. Whether it be full programs/projects (packages) or code snippets, DEVSHOP has it all.",
+    "home.why_title": "// 02 - WHY USE DEVSHOP ?",
+    "home.why1": "DEVSHOP is, for now, free to use",
+    "home.why2": "DEVSHOP is developer-friendly",
+    "home.why3": "DEVSHOP will never sell your personal information"
+  },
+  "fr": {
+    "home.code": "CODE",
+    "home.buy": "ACHÈTE",
+    "home.sell": "VENDS",
+    "home.catchphrase_title": "// 01 - PHRASE D'ACCROCHE",
+    "home.catchphrase": "DEVSHOP permet à n'importe qui d'acheter ou de vendre du code. Que ça soit des projets complets (appelés packages) ou des extraits de code (appelés snippets), DEVSHOP a tout ce qu'il vous faut.",
+    "home.why_title": "// 02 - POURQUOI CHOISIR DEVSHOP ?",
+    "home.why1": "DEVSHOP est 100% gratuit pour l'instant",
+    "home.why2": "DEVSHOP est conçu pour les développeurs",
+    "home.why3": "DEVSHOP ne vendra jamais vos informations personnelles"
+  }
+}

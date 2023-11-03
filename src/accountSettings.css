@@ -169,15 +169,14 @@
 }
 
 @media (hover: hover) {
-    .interest:hover {
-        background-color: #fff;
-        color: #000;
-    }
-
-    .interest-toggled:hover {
-        background: rgba(255, 255, 255, 0) !important;
-        color: #fff !important;
-    }
+    /*.interest:hover {*/
+    /*    background-color: #fff;*/
+    /*    color: #000;*/
+    /*}*/
+    /*.interest-toggled:hover {*/
+    /*    background: rgba(255, 255, 255, 0) !important;*/
+    /*    color: #fff !important;*/
+    /*}*/
 }
 
 .section-subtitle {

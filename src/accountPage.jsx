@@ -9,8 +9,20 @@ import {db, user_data} from "./firebase.js";
 import SnippetCard from "./snippetCard.jsx";
 import shortNumber from "short-number";
 import {BiUserCheck, BiUserMinus, BiUserPlus} from "react-icons/bi";
+import data from "./accountPage.json"
+import card from "./packageSnippetCard.json"
+import i18n from "i18next";
+import {useTranslation} from "react-i18next";
 
 export default function AccountPage(props) {
+    i18n.addResourceBundle("en", "accpage", data.en)
+    i18n.addResourceBundle("en", "accpage", card.en)
+    i18n.addResourceBundle("fr", "accpage", data.fr)
+    i18n.addResourceBundle("fr", "accpage", card.fr)
+
+    const {t} = useTranslation("accpage");
+
+
     const [usr, setUsr] = useState(null)
     const [usrPackages, setUsrPackages] = useState([])
     const [usrCodeBlocks, setUsrCodeBlocks] = useState([])
@@ -47,7 +59,7 @@ export default function AccountPage(props) {
                     }
                     document.getElementById("user_following").style.display = "none"
                     document.getElementById("user_followers").style.display = "block"
-                    document.getElementById("user_followers").innerText = user_data.followers.length + " followers"
+                    document.getElementById("user_followers").innerText = user_data.followers.length + " " + t('accpage.followers')
                     document.getElementById("user_bio").style.top = "412px"
                 } else {
                     if (usr.followers.includes(user_data.uid) && user_data.following.includes(usr.uid)) {
@@ -68,7 +80,7 @@ export default function AccountPage(props) {
                 }
                 document.getElementById("user_following").style.display = "none"
                 document.getElementById("user_followers").style.display = "block"
-                document.getElementById("user_followers").innerText = usr.followers.length + " followers"
+                document.getElementById("user_followers").innerText = usr.followers.length + " " + t('accpage.followers')
                 document.getElementById("user_bio").style.top = "412px"
             }
 
@@ -154,12 +166,14 @@ export default function AccountPage(props) {
                 window.location.reload()
                 // document.getElementById("follow_btn").style.display = "none"
                 // document.getElementById("user_following").style.display = "block"
-            }}><BiUserPlus className="user_follow_btn_icon"/>FOLLOW <span className="user_follow_btn_num">· <span
+            }}><BiUserPlus className="user_follow_btn_icon"/>{t('accpage.follow')} <span
+                className="user_follow_btn_num">· <span
                 id="follow_num_1">...</span></span>
             </button>
             <div className="user_following" id="user_following">
                 <button className="search-btn" id="following_btn"><BiUserCheck
-                    className="user_follow_btn_icon"/>FOLLOWING <span className="user_follow_btn_num">· <span
+                    className="user_follow_btn_icon"/>{t('accpage.following')} <span
+                    className="user_follow_btn_num">· <span
                     id="follow_num_2">...</span></span>
                 </button>
                 <button className="user_unfollow_btn search-btn" id="usr_unfollow_btn"
@@ -177,17 +191,18 @@ export default function AccountPage(props) {
                                 })
                                 window.location.reload()
                             }
-                        }}><BiUserMinus className="user_follow_btn_icon user_follow_btn_icon_nomargin"/> UNFOLLOW
-                </button>
+                        }}><BiUserMinus
+                    className="user_follow_btn_icon user_follow_btn_icon_nomargin"/> {t('accpage.unfollow')}</button>
             </div>
             <p className="user_followers" id="user_followers">405 followers</p>
             <div id="user-pkgss">
-                <h2 className="user_packages_title" id="user-pkgs">PACKAGES</h2>
+                <h2 className="user_packages_title" id="user-pkgs">{t('accpage.packages')}</h2>
                 <ul className="packages-card-list" id="packages-card-list">
                     {usrPackages.map((pkg, index) => (
                         <li key={index} className="packages-card-list-child">
                             <Link to={"/packages/" + pkg.id}>
-                                <PackageCard dwnl={pkg.downloads} author={pkg.owner_username}
+                                <PackageCard readmore={t("card.readmore")} dwnl_local={t("card.downloads")}
+                                             dwnl={pkg.downloads} author={pkg.owner_username}
                                              name={pkg.name}
                                              catchphrase={pkg.catchphrase} banner={pkg.banner}/>
                             </Link>
@@ -197,12 +212,13 @@ export default function AccountPage(props) {
             </div>
             <div id="user-snippets">
                 <br/>
-                <h2 id="user-snippets-title">SNIPPETS</h2>
+                <h2 id="user-snippets-title">{t('accpage.snippets')}</h2>
                 <ul className="packages-card-list" id="packages-card-list">
                     {usrCodeBlocks.map((pkg, index) => (
                         <li key={index} className="packages-card-list-child">
                             <Link to={"/snippets/" + pkg.id}>
-                                <SnippetCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
+                                <SnippetCard readmore={t("card.readmore")} dwnl_local={t("card.downloads")}
+                                             name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
                                              description={pkg.catchphrase}/>
                             </Link>
                         </li>

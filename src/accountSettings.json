@@ -1,0 +1,38 @@
+{
+  "en": {
+    "accsettings.account": "ACCOUNT",
+    "accsettings.accountsub": "MODIFY YOUR ACCOUNT SETTINGS BELOW",
+    "accsettings.interests": "INTERESTS",
+    "accsettings.interestssub": "What do you like ?",
+    "accsettings.profile": "PROFILE",
+    "accsettings.banner": "BANNER",
+    "accsettings.username_already_exists": "USERNAME ALREADY EXISTS",
+    "accsettings.username": "USERNAME",
+    "accsettings.bio": "BIO",
+    "accsettings.bioplaceholder": "Hi, I'm new to DEVSHOP!",
+    "accsettings.gitusername": "GITHUB USERNAME",
+    "accsettings.gitplaceholder": "your-github-username",
+    "accsettings.save": "SAVE",
+    "accsettings.saved": "SAVED",
+    "accsettings.password": "PASSWORD",
+    "accsettings.reset_password": "RESET PASSWORD"
+  },
+  "fr": {
+    "accsettings.account": "COMPTE",
+    "accsettings.accountsub": "MODIFIEZ LES PARAMÈTRES DE VOTRE COMPTE CI-DESSOUS",
+    "accsettings.interests": "CENTRES D'INTERÊT",
+    "accsettings.interestssub": "Qu'aimez-vous ?",
+    "accsettings.profile": "PROFIL",
+    "accsettings.banner": "BANNIÈRE",
+    "accsettings.username_already_exists": "CE NOM D'UTILISATEUR EXISTE DÉJÀ",
+    "accsettings.username": "NOM D'UTILISATEUR",
+    "accsettings.bio": "BIO",
+    "accsettings.bioplaceholder": "Je suis nouveau sur DEVSHOP!",
+    "accsettings.gitusername": "NOM D'UTILISATEUR GITHUB",
+    "accsettings.gitplaceholder": "votre-nom-github",
+    "accsettings.save": "ENREGISTRER",
+    "accsettings.saved": "ENREGISTRÉ",
+    "accsettings.password": "MOT DE PASSE",
+    "accsettings.reset_password": "RÉINITIALISER MON MOT DE PASSE"
+  }
+}

@@ -379,10 +379,10 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-    .interestpkg:hover {
-        background-color: #fff;
-        color: #000;
-    }
+    /*.interestpkg:hover {*/
+    /*    background-color: #fff;*/
+    /*    color: #000;*/
+    /*}*/
 
     .file-input-label:hover {
         background-color: white;

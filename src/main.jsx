@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import './index.css'
+import "./translate.js"
 
 
 import Home from "./Home.jsx";
@@ -23,6 +24,7 @@ import SnippetPage from "./snippetPage.jsx";
 import EditSnippet from "./editSnippet.jsx";
 import Navbar from "./Navbar.jsx";
 import Feedback from "./Feedback.jsx";
+import Footer from "./Footer.jsx";
 
 
 function App() {
@@ -67,7 +69,9 @@ function App() {
                 <Route path="/snippets/:id/edit" element={<EditSnippet/>}/>
                 <Route path="/users/:id" element={<AccountPage/>}/>
                 <Route path="*" element={<Home/>}/>
+
             </Routes>
+            <Footer/>
         </BrowserRouter>
     )
 }

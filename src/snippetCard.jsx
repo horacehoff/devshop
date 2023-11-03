@@ -6,6 +6,7 @@ import React, {useEffect} from "react";
 export default function SnippetCard(props) {
     const navigate = useNavigate();
     let bannerRef = React.createRef();
+    let textRef = React.createRef()
 
     function generateRandom(min = 50, max = 100) {
 
@@ -53,12 +54,14 @@ export default function SnippetCard(props) {
     }, []);
 
     return (
-        <div className="card code-card" ref={bannerRef}>
+        <div className="card code-card" ref={bannerRef}
+             onMouseEnter={() => textRef.current.innerHTML = ("> " + props.readmore)}
+             onMouseLeave={() => textRef.current.innerHTML = ("+ " + props.readmore)}>
             <h2 className="card-title code-card-title">{props.name}</h2>
             <h4 className="card-author"><span>{props.author}</span></h4>
-            <p className="card-downloads"><span>{shortNumber(props.dwnl.length)}</span> downloads</p>
+            <p className="card-downloads"><span>{shortNumber(props.dwnl.length)}</span> {props.dwnl_local}</p>
             <p className="card-description code-description">{props.description}</p>
-            <p className="card-read-more code-read-more"></p>
+            <p className="card-read-more code-read-more" ref={textRef}>+ {props.readmore}</p>
         </div>
     )
 }
