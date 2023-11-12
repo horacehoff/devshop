@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import './index.css'
 import "./translate.js"
+import "./utility.js"
 
 
 import Home from "./Home.jsx";
