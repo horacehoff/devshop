@@ -1,11 +1,23 @@
 /*@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Code+Pro:wght@600;900&display=swap');*/
 :root {
-    --text: #FAEBD7;
-    --btn-text: white;
+    /* color palette */
+    --text: white;
+    --text-accent: #FAEBD7;
+    --text-label: #bbbbbb;
+    --text-label-accent: #575757;
+
     --background: #161C5B;
+
+    --btn-text: white;
     --primary: #282828;
     --secondary: #ebf1ff;
-    --accent: #faebd7;
+
+    --link: dodgerblue;
+    --link-hover: #0058ab;
+
+    --btn-red: rgba(255, 0, 0, 0.8);
+    --btn-red-hover: darkred;
+
     font-family: 'JetBrains Mono', 'Source Code Pro', monospace;
     line-height: 1.5;
     font-weight: 400;
@@ -25,13 +37,6 @@
     z-index: -9999;
 }
 
-/*p, span {*/
-/*    color: var(--text);*/
-/*}*/
-
-/*h1, h2, h3, h4, h5, h6 {*/
-/*    color: white !important;*/
-/*}*/
 
 button.primary {
     width: 325px;

@@ -17,7 +17,7 @@
 .split-two {
     float: right;
     width: 35%;
-    background-color: #161C5B;
+    background-color: var(--background);
     height: 113%;
     right: 0;
     top: 0;

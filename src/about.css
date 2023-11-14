@@ -21,14 +21,14 @@
 }
 
 .about-linktree, .about-email {
-    color: dodgerblue;
+    color: var(--link);
     font-weight: bold;
     transition: 0.2s;
     cursor: pointer;
 }
 
 .about-linktree:hover, .about-email:hover {
-    color: #0058ab;
+    color: var(--link-hover);
 }
 
 .about-credits-list {
@@ -42,7 +42,7 @@
 }
 
 .about-credits-list a {
-    color: dodgerblue;
+    color: var(--link);
 }
 
 .about-credits-list li span {

@@ -80,7 +80,7 @@
 }
 
 .section-input::placeholder {
-    color: #575757 !important;
+    color: var(--text-label-accent) !important;
 }
 
 .section-input-name {
@@ -111,7 +111,7 @@
 }
 
 .profile-error-txt {
-    color: red;
+    color: var(--btn-red);
     font-size: 15px;
     font-weight: 600;
     display: none;

@@ -107,7 +107,7 @@
 }
 
 .delete-pkg-btn {
-    background-color: darkred;
+    background-color: var(--btn-red);
     padding: 10px 25px;
     border-radius: 5px;
     transition: 0.2s;
@@ -124,7 +124,7 @@
 }
 
 .delete-pkg-btn:hover {
-    background-color: #c70000;
+    background-color: var(--btn-red-hover)
 }
 
 .edit-package-title {

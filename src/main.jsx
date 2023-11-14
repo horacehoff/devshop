@@ -80,3 +80,8 @@ function App() {
 ReactDOM.createRoot(document.getElementById('root')).render(
     <App/>
 )
+
+let userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+if (["Europe/Paris", "Europe/Luxembourg", "Europe/Monaco", "America/Guyana", "Africa/Porto-Novo", "Africa/Ouagadougou", "Africa/Kinshasa", "Africa/Lubumbashi", "Africa/Brazzaville", "Africa/Abidjan", "Africa/Libreville", "Africa/Conakry", "Africa/Niame", "Africa/Dakar", "Africa/Lome"].includes(userTimeZone)) {
+    console.log("yep he's french")
+}
