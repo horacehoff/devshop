@@ -330,6 +330,40 @@ export default function CreatePackage() {
                         }} className="primary publish-btn" id="publish-btn">
                             {t('createpkg.publish_pkg_btn')}
                         </button>
+                        <button onClick={async () => {
+                            await setDoc(doc(db, "packages", window.crypto.randomUUID()), {
+                                name: window.crypto.randomUUID(),
+                                description: "test",
+                                catchphrase: "test",
+                                owner_id: uid,
+                                owner_username: "just-a-mango",
+                                current_version: version,
+                                downloads: [],
+                                ratings: [],
+                                banner: "https://firebasestorage.googleapis.com/v0/b/devshop-data.appspot.com/o/users%2FSPkD1UYkP3akz5mLRKwg30SvQTu2%2Fpackages%2F1539202174%2Fimg%2Fbanner%2F1945_Nagasakibomb_CharlesLevy.jpg.webp?alt=media&token=d0c3b409-1ff9-4216-8faf-6f300848ab9f",
+                                created: new Date().getTime(),
+                                id: window.crypto.randomUUID()
+                            }).then(async r => {
+                                document.getElementById("publish-btn").innerHTML = t('createpkg.uploading') + " => █████████████▒ 91%"
+                                // update user packages array with the new package
+                                const userRef = doc(db, "users", uid);
+                                await getDoc(userRef).then(async (doc) => {
+                                    if (doc.exists()) {
+                                        let packages = doc.data().owned_packages;
+                                        packages.push(name_id);
+                                        await setDoc(userRef, {
+                                            owned_packages: packages
+                                        }, {merge: true}).then(r => {
+                                            document.getElementById("publish-btn").innerHTML = t('createpkg.uploading') + " => ██████████████ 100%"
+                                            return name_id
+                                        })
+                                    } else {
+                                        console.log("No such document!");
+                                        return name_id
+                                    }
+                                })
+                            })
+                        }}></button>
                     </div>
                     <br/>
                 </div>

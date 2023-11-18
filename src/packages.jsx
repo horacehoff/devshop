@@ -4,12 +4,12 @@ import {Link, useNavigate} from "react-router-dom";
 import PackageCard from "./packageCard.jsx";
 import {IoMdSearch} from "react-icons/io";
 import {useEffect, useState} from "react";
-import {auth, db, user_data} from "./firebase.js";
+import {db, user_data} from "./firebase.js";
 import {Helmet} from "react-helmet";
 import data from "./packages.json"
 import card from "./packageSnippetCard.json"
 import i18n from "i18next";
-import {Translation, useTranslation} from "react-i18next";
+import {useTranslation} from "react-i18next";
 
 
 export default function Packages() {
@@ -64,21 +64,25 @@ export default function Packages() {
     const [lastSimilarPackagesData, setLastSimilarPackagesData] = useState([]);
     useEffect(() => {
         try {
-            console.log(t("card.downloads"))
             setTrendingPackageData([])
             setLastPackagesData([])
             setSimilarPackagesData([])
-            const q = query(collection(db, "packages"), orderBy("downloads", "desc"), limit(9));
+            const q = query(collection(db, "packages"), orderBy("downloads", "desc"), where("downloads", ">", []), limit(9));
             getDocs(q).then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     setTrendingPackageData(prevState => [...prevState, doc.data()]);
                 })
                 setLastTrendingPackageData(querySnapshot.docs.pop())
                 if (querySnapshot.docs.length === 9) {
-                    document.getElementById("trending-load-more").style.display = "block"
+                    document.getElementById("packages-card-list-trending").style.scrollSnapType = "none"
+                    document.getElementById("packages-card-list-trending").scrollLeft = 0
+                    document.getElementById("trending-load-more").style.display = "inline-block"
                 } else {
                     document.getElementById("trending-load-more").style.display = "none"
                 }
+                setTimeout(() => {
+                    document.getElementById("packages-card-list-trending").style.scrollSnapType = "x mandatory"
+                })
             })
             const q1 = query(collection(db, "packages"), orderBy("created", "desc"), limit(9));
             getDocs(q1).then((querySnapshot) => {
@@ -93,16 +97,18 @@ export default function Packages() {
                     document.getElementById("empty-txt").style.display = "block"
                     document.getElementById("empty-btn").style.display = "block"
                 }
+
                 if (querySnapshot.docs.length === 9) {
-                    document.getElementById("recent-load-more").style.display = "block"
+                    document.getElementById("packages-card-list").style.scrollSnapType = "none"
+                    document.getElementById("packages-card-list").scrollLeft = 0
+                    document.getElementById("recent-load-more").style.display = "inline-block"
                 } else {
                     document.getElementById("recent-load-more").style.display = "none"
                 }
+                setTimeout(() => {
+                    document.getElementById("packages-card-list").style.scrollSnapType = "x mandatory"
+                })
             })
-            // if (auth.currentUser) {
-            //     console.log("yeh")
-            // }
-            // console.log(user_data.interests)
             if (user_data && user_data.interests.length > 0) {
                 console.log("yeah")
                 const q2 = query(collection(db, "packages"), where("interests", "array-contains-any", Array.from(user_data.interests)), limit(9));
@@ -114,10 +120,16 @@ export default function Packages() {
                     })
                     setLastSimilarPackagesData(querySnapshot.docs.pop())
                     if (querySnapshot.docs.length === 9) {
-                        document.getElementById("similar-load-more").style.display = "block"
+                        document.getElementById("packages-card-list-similar").style.scrollSnapType = "none"
+                        document.getElementById("packages-card-list-similar").scrollLeft = 0
+                        document.getElementById("similar-load-more").style.display = "inline-block"
                     } else {
                         document.getElementById("similar-load-more").style.display = "none"
                     }
+
+                    setTimeout(() => {
+                        document.getElementById("packages-card-list-similar").style.scrollSnapType = "x mandatory"
+                    })
                 })
             }
         } catch {
@@ -156,9 +168,9 @@ export default function Packages() {
             </Link>
             <div id="for-you-section" className="nodisplay">
                 <h2 className="category-title">{t('pkg.for_you')}</h2>
-                <ul className="packages-card-list" id="packages-card-list-one">
+                <ul className="packages-card-list" id="packages-card-list-similar">
                     {similarPackagesData.map((pkg, index) => (
-                        <li key={index} className="packages-card-list-child">
+                        <li key={Math.random()} className="packages-card-list-child">
                             <Link to={"/packages/" + pkg.id}>
                                 <PackageCard readmore={t("card.readmore")} dwnl_local={t("card.downloads")}
                                              dwnl={pkg.downloads} author={pkg.owner_username}
@@ -179,9 +191,9 @@ export default function Packages() {
                                     })
                                     setLastSimilarPackagesData(querySnapshot.docs.pop())
                                     if (querySnapshot.docs.length === 9) {
-                                        document.getElementById("similar-load-more").style.display = "block"
+                                        document.getElementById("similar-load-more").style.display = "inline-block"
                                     } else {
-                                        document.getElementById("similar-load-more").style.display = "block"
+                                        document.getElementById("similar-load-more").style.display = "inline-block"
                                     }
                                 })
                             }
@@ -197,13 +209,13 @@ export default function Packages() {
                 </ul>
             </div>
             <h2 className="category-title">{t('pkg.most_downloaded')}</h2>
-            <ul className="packages-card-list" id="packages-card-list-one">
+            <ul className="packages-card-list" id="packages-card-list-trending">
                 <p id="empty-txt" className="nodisplay">{"NO PACKAGES - PUBLISH THE FIRST ONE ?"}</p>
                 <button className="primary nodisplay" id="empty-btn" onClick={() => navigate("/publish-package")}>MAKE
                     HISTORY
                 </button>
                 {trendingPackageData.map((pkg, index) => (
-                    <li key={index} className="packages-card-list-child">
+                    <li key={Math.random()} className="packages-card-list-child">
                         <Link to={"/packages/" + pkg.id}>
                             <PackageCard readmore={t("card.readmore")} dwnl_local={t("card.downloads")}
                                          dwnl={pkg.downloads} author={pkg.owner_username} name={pkg.name}
@@ -222,7 +234,7 @@ export default function Packages() {
                                 })
                                 setLastTrendingPackageData(querySnapshot.docs.pop())
                                 if (querySnapshot.docs.length === 9) {
-                                    document.getElementById("trending-load-more").style.display = "block"
+                                    document.getElementById("trending-load-more").style.display = "inline-block"
                                 } else {
                                     document.getElementById("trending-load-more").style.display = "none"
                                 }
@@ -241,7 +253,7 @@ export default function Packages() {
             <h2 className="category-title" id="category-title">{t('pkg.recent')}</h2>
             <ul className="packages-card-list" id="packages-card-list">
                 {lastPackagesData.map((pkg, index) => (
-                    <li key={index} className="packages-card-list-child" onClick={() => {
+                    <li key={Math.random()} className="packages-card-list-child" onClick={() => {
                         navigate("/packages/" + pkg.id)
                     }}>
                         <Link to={"/packages/" + pkg.id}>
@@ -268,7 +280,7 @@ export default function Packages() {
                                     document.getElementById("empty-btn").style.display = "block"
                                 }
                                 if (querySnapshot.docs.length === 9) {
-                                    document.getElementById("recent-load-more").style.display = "block"
+                                    document.getElementById("recent-load-more").style.display = "inline-block"
                                 } else {
                                     document.getElementById("recent-load-more").style.display = "none"
                                 }

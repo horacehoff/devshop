@@ -99,14 +99,13 @@ export default function Navbar() {
             if (user) {
                 document.getElementById("account-nav").innerHTML = t('nav.account')
                 document.getElementById("nav-account").innerHTML = t('nav.account')
-                // let condition = effectlocation.pathname.includes("/users/") && effectlocation.pathname.replace("/users/","") !== fancy_name_to_id(user_data.username)
                 document.getElementById("profile-nav").onclick = async () => {
                     if (user_data) {
                         let username = fancy_name_to_id(user_data.username);
                         navigate("/users/" + username);
-                        // if (condition) {
-                        window.location.reload()
-                        // }
+                        if (effectlocation.pathname.includes("/users/") && effectlocation.pathname.replace("/users/", "") !== fancy_name_to_id(user_data.username)) {
+                            window.location.reload()
+                        }
                     }
                 }
                 document.getElementById("nav-profile").onclick = async () => {

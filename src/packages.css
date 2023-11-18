@@ -24,12 +24,13 @@
     scrollbar-width: none;
     scroll-snap-type: x mandatory;
     white-space: nowrap;
-    overflow-x: scroll
+    overflow-x: scroll;
 }
 
 .packages-card-list-child a {
     text-decoration: none;
     color: white;
+
 }
 
 .packages-card-list > li {
