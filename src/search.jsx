@@ -8,6 +8,12 @@ import PackageCard from "./packageCard.jsx";
 import data from "./search.json"
 import i18n from "i18next";
 import {useTranslation} from "react-i18next";
+//
+// import DatePicker from 'react-date-picker';
+//
+// type ValuePiece = Date | null;
+//
+// type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export default function Search() {
     i18n.addResourceBundle("en", "search", data.en)
@@ -17,12 +23,19 @@ export default function Search() {
 
     const [searchInput, setSearchInput] = useState("");
     const [searchResults, setSearchResults] = useState([]);
+
     const [height, setHeight] = useState("35px")
+
     const [pkgType, setPkgType] = useState("PACKAGES")
+
     const [isFiltersOpen, setIsFiltersOpen] = useState(false)
     const [userId, setUserId] = useState("")
+
+
     const [downloadMoreThan, setDownloadMoreThan] = useState(true)
     const [downloadLimit, setDownloadLimit] = useState(0);
+
+    const [dateBefore, setDateBefore] = useState(false)
 
 
     const {querystr} = useParams();
@@ -303,7 +316,7 @@ export default function Search() {
                             document.getElementById("search-filters-screen").style.height = "0px"
                             document.getElementById("search-filters-screen").style.display = "block"
                             window.setTimeout(() => {
-                                document.getElementById("search-filters-screen").style.height = "170px"
+                                document.getElementById("search-filters-screen").style.height = "250px"
                                 document.getElementById("search-filters-btn").style.pointerEvents = "none"
                                 document.getElementById("search-filters-btn").style.filter = "brightness(0.75)"
                                 document.getElementById("search-parameters-filters-btn").style.color = "white"
@@ -347,6 +360,22 @@ export default function Search() {
                         <input type="number" placeholder="N/A" pattern="\d*"
                                className="txt-input search-input proto-input search-parameters-filters-screen-input search-parameters-filters-screen-input-inline"
                                value={downloadLimit} onChange={e => setDownloadLimit(e.target.value)}
+                        />
+                        <p className="search-parameters-filters-screen-title" style={{marginTop: "0"}}>-- CREATION DATE
+                            -------------</p>
+                        <select className="search-parameters-filters-screen-select" onChange={e => {
+                            if (e.target.value === "before") {
+                                setDateBefore(true)
+                            } else if (e.target.value === "after") {
+                                setDateBefore(false)
+                            }
+                        }}>
+                            <option value="before">{t('search.before')}</option>
+                            <option value="after">{t('search.after')}</option>
+                        </select>
+                        <input type="date"
+                               className="txt-input search-input proto-input search-parameters-filters-screen-input search-parameters-filters-screen-input-inline search-parameters-filters-screen-datepick"
+                            // value={downloadLimit} onChange={e => setDownloadLimit(e.target.value)}
                         />
                     </div>
                 </div>

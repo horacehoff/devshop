@@ -8,6 +8,8 @@
     "search.downloads": "DOWNLOADS",
     "search.more": "MORE THAN",
     "search.less": "LESS THAN",
+    "search.before": "BEFORE",
+    "search.after": "AFTER",
     "search.btn": "SEARCH",
     "search.no_results": "No search results"
   },
@@ -20,6 +22,8 @@
     "search.downloads": "TÉLÉCHARGEMENTS",
     "search.more": "PLUS QUE",
     "search.less": "MOINS QUE",
+    "search.before": "AVANT",
+    "search.after": "APRÈS",
     "search.btn": "RECHERCHER",
     "search.no_results": "Aucun résultat de recherche"
   }

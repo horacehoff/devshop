@@ -245,6 +245,7 @@ export default function Packages() {
                             <path
                                 d="M12 5V3m0 18v-2m-7-7H3m18 0h-2m-.5-6.5L17 7M7 17l-1.5 1.5M17 17l1.5 1.5M7 7L5.5 5.5"
                                 stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path>
+                            {/*<p>LOAD MORE</p>*/}
                         </svg>
                         <p>LOAD MORE</p>
                     </div>
