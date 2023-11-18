@@ -7,6 +7,7 @@
     --text-label-accent: #575757;
 
     --background: #161C5B;
+    --background-dark: #080d2b;
 
     --btn-text: white;
     --primary: #282828;
@@ -14,6 +15,7 @@
 
     --link: dodgerblue;
     --link-hover: #0058ab;
+    --link-accent: #b9c9ff;
 
     --btn-red: rgba(255, 0, 0, 0.8);
     --btn-red-hover: darkred;

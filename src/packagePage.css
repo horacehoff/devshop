@@ -70,7 +70,7 @@
     top: 405px;
     margin: 0;
     padding: 0;
-    color: #b9b9b9
+    color: var(--text-label)
 }
 
 .package-author span {
@@ -80,7 +80,7 @@
 
 .package-description-label {
     top: 467px;
-    color: #b9b9b9;
+    color: var(--text-label);
     margin: 0;
     padding: 0
 }
@@ -96,7 +96,7 @@
 
 .package-screenshots-label {
     top: 810px;
-    color: #b9b9b9
+    color: var(--text-label)
 }
 
 /*.package-screenshots-label:after {*/
@@ -130,7 +130,7 @@
     position: absolute;
     top: 467px;
     left: 77.778vw;
-    color: #b9b9b9;
+    color: var(--text-label);
     margin: 0;
     padding: 0
 }

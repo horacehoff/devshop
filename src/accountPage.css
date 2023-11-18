@@ -177,6 +177,11 @@
     padding-right: 15px;
 }
 
+.breakblock {
+    display: block;
+    height: 650px;
+}
+
 
 @media screen and (max-width: 500px) {
     .user_bio, .user_follow_btn, .user_following, .user_id, .user_name, .user_packages_title, .user_pfp, .user_followers {

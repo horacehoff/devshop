@@ -108,6 +108,8 @@ export default function AccountPage(props) {
                     if (final_packages.length === 0) {
                         document.getElementById("user-pkgss").style.display = "none";
                         document.getElementById("user-snippets").style.marginTop = "400px"
+                    } else {
+                        document.getElementById("breakblock").style.display = "none"
                     }
                 })
             }
@@ -121,7 +123,6 @@ export default function AccountPage(props) {
                     setUsrCodeBlocks(final_packages)
                     if (final_packages.length === 0) {
                         document.getElementById("user-snippets").style.display = "none";
-                        // document.getElementById("user-pkgss").style.marginTop = "400px"
                     }
                 })
             }
@@ -225,7 +226,7 @@ export default function AccountPage(props) {
                     ))}
                 </ul>
             </div>
-
+            <div id="breakblock" className="breakblock"></div>
         </>
     )
 
