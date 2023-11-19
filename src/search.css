@@ -266,6 +266,17 @@
     filter: invert();
 }
 
+.search-parameters-filters-screen-datepick::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+    height: 10px !important;
+    position: absolute;
+    top: 7px;
+}
+
+.search-parameters-filters-screen-datepick {
+    top: -23px !important;
+}
+
 
 @media screen and (max-width: 490px) {
     .search-title {

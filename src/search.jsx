@@ -375,6 +375,7 @@ export default function Search() {
                         </select>
                         <input type="date"
                                className="txt-input search-input proto-input search-parameters-filters-screen-input search-parameters-filters-screen-input-inline search-parameters-filters-screen-datepick"
+                               value="2023-01-18"
                             // value={downloadLimit} onChange={e => setDownloadLimit(e.target.value)}
                         />
                     </div>
