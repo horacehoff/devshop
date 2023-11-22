@@ -6,6 +6,7 @@ import {db} from "./firebase.js";
 import SnippetCard from "./snippetCard.jsx";
 import PackageCard from "./packageCard.jsx";
 import data from "./search.json"
+import card from "./packageSnippetCard.json"
 import i18n from "i18next";
 import {useTranslation} from "react-i18next";
 //
@@ -17,7 +18,9 @@ import {useTranslation} from "react-i18next";
 
 export default function Search() {
     i18n.addResourceBundle("en", "search", data.en)
+    i18n.addResourceBundle("en", "search", card.en)
     i18n.addResourceBundle("fr", "search", data.fr)
+    i18n.addResourceBundle("fr", "search", card.fr)
     const {t} = useTranslation("search");
 
 
@@ -36,6 +39,7 @@ export default function Search() {
     const [downloadLimit, setDownloadLimit] = useState(0);
 
     const [dateBefore, setDateBefore] = useState(false)
+    const [dateMarker, setDateMarker] = useState("2023-01-18")
 
 
     const {querystr} = useParams();
@@ -47,6 +51,7 @@ export default function Search() {
             }
         }
         document.getElementById("search-failed").style.display = "none"
+        setSearchResults([])
         if ((e.key === "Enter" || forcePass) && searchInput !== "") {
             let search_results = [];
             let q = null;
@@ -268,12 +273,11 @@ export default function Search() {
                     })
                 }
             }
-
+            console.log(searchResults)
         } else if (searchInput === "" && e.key === "Enter") {
             document.getElementById("search-input").style.borderColor = "rgba(255, 0, 0, 1)"
             setTimeout(() => document.getElementById("search-input").style.borderColor = "", 2000)
         }
-
     }
 
     useEffect(() => {
@@ -283,6 +287,41 @@ export default function Search() {
                 console.log("searched");
                 setSearchResults([]);
             });
+        }
+        if (searchResults.length > 0) {
+            let filtered_results = searchResults
+            let should_update = false
+            console.log(filtered_results)
+            let dateObj = new Date(dateMarker).valueOf()
+            if (dateBefore === true) {
+                searchResults.forEach(e => {
+                    if (dateObj < e.created) {
+                        filtered_results.splice(filtered_results.indexOf(e), 1)
+                        should_update = true
+                    }
+                })
+            } else {
+                searchResults.forEach(e => {
+                    if (dateObj > e.created) {
+                        filtered_results.splice(filtered_results.indexOf(e), 1)
+                        should_update = true
+                    }
+                })
+            }
+            if (should_update) {
+                console.log("yes")
+                setSearchResults(filtered_results)
+                setSearchResults(searchResults)
+                if (filtered_results.length === 0) {
+                    document.getElementById("search-failed").style.display = "block"
+                }
+                setTimeout(() => {
+                    setIsFiltersOpen(true)
+                })
+                setTimeout(() => {
+                    setIsFiltersOpen(false)
+                })
+            }
         }
     }, [searchResults]);
 
@@ -369,14 +408,16 @@ export default function Search() {
                             } else if (e.target.value === "after") {
                                 setDateBefore(false)
                             }
+                            console.log(e.target.value)
                         }}>
-                            <option value="before">{t('search.before')}</option>
                             <option value="after">{t('search.after')}</option>
+                            <option value="before">{t('search.before')}</option>
                         </select>
                         <input type="date"
                                className="txt-input search-input proto-input search-parameters-filters-screen-input search-parameters-filters-screen-input-inline search-parameters-filters-screen-datepick"
-                               value="2023-01-18"
-                            // value={downloadLimit} onChange={e => setDownloadLimit(e.target.value)}
+                               value={dateMarker} onChange={e => {
+                            setDateMarker(e.target.value)
+                        }}
                         />
                     </div>
                 </div>
@@ -392,15 +433,15 @@ export default function Search() {
                 </button>
             </div>
             <p className="search-failed" id="search-failed">{t('search.no_results')}</p>
-            <ul className="packages-card-list search-packages-card-list" id="packages-card-list-one">
+            <ul className="packages-card-list search-packages-card-list" id="packages-card-list-one"
+                style={{zIndex: "1000"}}>
                 {pkgType === "PACKAGES" && (
                     <div>
                         {searchResults.map((pkg, index) => (
-                            <li key={index} className="packages-card-list-child" onClick={() => {
-                                navigate("/packages/" + pkg.id)
-                            }}>
+                            <li key={Math.random()} className="packages-card-list-child">
                                 <Link to={"/packages/" + pkg.id}>
-                                    <PackageCard dwnl={pkg.downloads} author={pkg.owner_username}
+                                    <PackageCard readmore={t("card.readmore")} dwnl_local={t("card.downloads")}
+                                                 dwnl={pkg.downloads} author={pkg.owner_username}
                                                  name={pkg.name}
                                                  catchphrase={pkg.catchphrase} banner={pkg.banner}/>
                                 </Link>
@@ -412,9 +453,10 @@ export default function Search() {
                     pkgType === "SNIPPETS" && (
                         <div>
                             {searchResults.map((pkg, index) => (
-                                <li key={index} className="packages-card-list-child">
+                                <li key={Math.random()} className="packages-card-list-child">
                                     <Link to={"/snippets/" + pkg.id}>
-                                        <SnippetCard name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
+                                        <SnippetCard readmore={t("card.readmore")} dwnl_local={t("card.downloads")}
+                                                     name={pkg.name} dwnl={pkg.downloads} author={pkg.owner_username}
                                                      description={pkg.catchphrase}/>
                                     </Link>
                                 </li>

@@ -254,9 +254,7 @@ export default function Packages() {
             <h2 className="category-title" id="category-title">{t('pkg.recent')}</h2>
             <ul className="packages-card-list" id="packages-card-list">
                 {lastPackagesData.map((pkg, index) => (
-                    <li key={Math.random()} className="packages-card-list-child" onClick={() => {
-                        navigate("/packages/" + pkg.id)
-                    }}>
+                    <li key={Math.random()} className="packages-card-list-child">
                         <Link to={"/packages/" + pkg.id}>
                             <PackageCard readmore={t("card.readmore")} dwnl_local={t("card.downloads")}
                                          dwnl={pkg.downloads} author={pkg.owner_username} name={pkg.name}

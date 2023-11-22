@@ -11,7 +11,7 @@
     "search.before": "BEFORE",
     "search.after": "AFTER",
     "search.btn": "SEARCH",
-    "search.no_results": "No search results"
+    "search.no_results": "NO SEARCH RESULTS"
   },
   "fr": {
     "search.search": "RECHERCHE",
@@ -25,6 +25,6 @@
     "search.before": "AVANT",
     "search.after": "APRÈS",
     "search.btn": "RECHERCHER",
-    "search.no_results": "Aucun résultat de recherche"
+    "search.no_results": "AUCUN RÉSULTAT DE RECHERCHE"
   }
 }
