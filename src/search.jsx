@@ -315,12 +315,6 @@ export default function Search() {
                 if (filtered_results.length === 0) {
                     document.getElementById("search-failed").style.display = "block"
                 }
-                setTimeout(() => {
-                    setIsFiltersOpen(true)
-                })
-                setTimeout(() => {
-                    setIsFiltersOpen(false)
-                })
             }
         }
     }, [searchResults]);
